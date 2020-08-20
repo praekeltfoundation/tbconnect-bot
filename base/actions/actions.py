@@ -93,32 +93,6 @@ class BaseFormAction(FormAction):
             "/"
         )
 
-    @staticmethod
-    def fix_location_format(text: Text) -> Text:
-        """
-        Previously there was a bug that caused the location to not be stored in
-        proper ISO6709 format. This function extracts the latitude and longitude from
-        either the incorrect or correct format, and then returns a properly formatted
-        ISO6709 string
-        """
-        if not text:
-            return ""
-        regex = re.compile(
-            r"""
-            ^
-            (?P<latitude>[\+|-]\d+\.?\d*)
-            (?P<longitude>[\+|-]\d+\.?\d*)
-            """,
-            flags=re.VERBOSE,
-        )
-        match = regex.match(text)
-        if not match:
-            raise ValueError(f"Invalid location {text}")
-        data = match.groupdict()
-        return BaseFormAction.format_location(
-            float(data["latitude"]), float(data["longitude"])
-        )
-
 
 class TBCheckTermsForm(BaseFormAction):
     """TBCheck form action"""
