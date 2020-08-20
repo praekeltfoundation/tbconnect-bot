@@ -1,0 +1,266 @@
+## intent:address
+- LYNDHURST
+- 1345b machaba drive, mofolo village
+- Potchfstroom
+- Soweto,protea south
+- 5337 selosesha ext3 thaba nchu
+- joburg cbd
+- Bergview
+- Scottsville
+- Blouberg
+- Soweto ,tladi
+- Tladi soweto
+- Simon's town
+- Molapo ext,  soweto
+- Sir lowrys pass
+- Imbali bb3
+- Allemansdrift
+- Masilo
+- River club
+- Soulsville
+- Lyhndurst
+- Bothsig
+- I'm staying at vosloorus Sotho section
+- Dodsonvill
+- Chlookop ext2 farraday st
+- Brixton
+- Sibeko,  no 11 mshumi street. Mount Ayliff 4835
+- Soshanguvhe
+- Scottville
+- Ladybranf
+- Tshiawelo
+- Rondebosch east
+- Tshiwelo
+- Buffalo city
+- Sir lowry pass
+- Sea cow lake
+- Norwood , elsies river
+- Cedarville
+- No 69 Weko str
+- Clayville
+- numbi trust
+- Cuyler street town
+- Soweto
+- 📍Soweto
+- Sibasa
+- Zebediela
+- Soweto, zola
+- TEMBIDS
+- Mfekayi
+- 239 phadima section; katlehong next to kathorus college
+- +MALBORO
+- Akobe
+- Ivory
+- Johannesbhsg
+- Lebowakgomo
+- Mamelodi east sns.
+- Magogoe koikoi
+- SHAKADZA
+- BRITSTOWN
+- Port st Johns
+- Vall
+- Haddon
+- Tigane
+- Lochnerhof
+- Moloto block 20
+- Soweto naledi
+- Toti
+- Zola2
+- Klerksdorp,
+jouberton -
+ext6 
+sebotha street house no:586
+- whitecity soweto
+- Umthambeka,tembisa
+- Rustenburg at lefaragatlhe
+- Botriver
+- Soweto naledi ext
+- Soweto (tshiawelo)
+- Letlhabile block b 0264
+- Ibika
+- Soweto at naledi
+- Nkalokazi
+- Bhuga siligane at mbombela
+- Bots
+- Soweto at Zola
+- Bhizana at clarkville village
+- Namahadi
+- Ixopk
+- Umlazi bb138
+- chrishani park
+- Dodsonville
+- Thulamahashi
+- bridgetown
+- No 55 fitter road Cresslawn
+- Witbank,ackerville ,ferro flat
+- Goqwana a/a, lusikisiki
+- No 17828 mogu boys vosloorus ext 25
+- Eldorado's park  jhb
+- Umbilo Berea
+- NCAMBELE
+- Tygerberg
+- Luthuli
+- motsoseng village
+- New castle
+- Villieria
+- Umasizakhe
+- Nkosi ,umlazi durban
+- KRUGERSDORB
+- 📎nongoma
+- Pretoria at soshanguve block dd
+- Ruimsig
+- Brown's farm
+- Suncity
+- PMB,Boom street
+- Ga molepo
+- Rooderpoot
+- Orlando ekhaya flats soweto
+- Soweto protia soth
+- Mokopane,at mzombane next to moruleng liguor rest
+- kgomotso village at Taung
+- Doornkop  , soweto
+- Doornkop, soweto
+- Mt fere
+- Graaff-Reinet
+- Betelsdorp
+- Alveda
+- De vrede ga kibi
+- nylpark
+- Tshepiso
+- Kokstad, st johns street
+- George at Asazani
+- Tembis
+- Sekororo
+- Grootvlie
+- Makhado town
+- One of us is at leratong
+- Camps bay
+- Beacon valley
+- Orlando East soweto room
+- Rocklands
+- Vrededorp
+- Top city
+- Soshannguve
+- Chief Albert luthuli
+- Green arces
+- Alexander township no 118
+- Grey town
+- Tileba
+- Doesn't allow me but I'm at Nelspruit
+- Garies-Kheis
+- Bezvally
+- ESIKHALENI
+- Bafflesdraai
+- Risiville
+- Brandwag flats
+- Estcourt
+- Phalaborwa, namakgale . Score zone c
+- Esikhawn
+- Saxsonsea
+- Zone2 no3 Rhodes street 7455
+- Thubelitsha
+- I am at no 606 Paledi village
+- 1808dona road evaton
+- Mlazi
+- 📎uitenhage
+- Dobosnvill
+- Ldtlhabile
+- Kjayelitsha
+- Blue downs
+- Soshanguve south
+- Rabie ridge house no 810 uil crescent street
+- Kransdraai
+- Rolivhut
+- Lahoff
+- Susan brandfort
+- Makhado, siloam
+- + Tembisa
+- Tembisa
+- Tembisa,
+- Akasia
+- Vincent east london
+- East rand
+- Durban cbd victoria street
+- Ikhwezi, Mthatha
+- Umthobe
+- Bedelia,welkom
+- South costs
+- Olifanshoek
+- Pongolo
+- Scottburgh
+- Elsie's river
+- st faiths
+- Emtshezi
+- Bugersfort
+- Mlazi kwa b
+- Umlazi k section
+- mbahela
+- Doringkloof
+- Mafikeng
+- 3e
+- Ngangelizwe location
+- KEW
+- Mkuze
+- Knysna in Concordia
+- Hanover
+- Henly
+- Mabvete
+- mamre
+- Du noon
+- Danny dale
+- Pmb at sweetwaters near by Henley primary school
+- Ĺecolnmead
+- Putfontein
+- Orchard
+- KUNI
+- Ireagh A
+- Nx ngfuna imali
+- Danoon
+- Elukwatini
+- Thekwini
+- Tuwn
+- Ngodin
+- mqhekezweni
+- Mathole
+- Matz
+- New eeasterus
+- China gate
+- Tarlton
+- Mutititi
+- Virginia Freestate South Africa
+- Somersetwest
+- iNANDA DAM
+- Meerensee
+- (+
+- (+)
+- +
+- +📎
+- Saaol
+- 909b
+- Sasol burg
+- Manenburg
+- Manenberg
+- Saron
+- Walmer
+- Motherwell nu10
+- Nearest to jane furse
+- Mankweng
+- Restenbug
+- +Piet retief
+- Sundowner
+- Giyani F
+- West bank near delft
+- Thema
+- Marister
+- Pleet
+- Delft The Hague
+- KEMPTON PARK, TERENURE
+- Lօċatɨօռ?
+- Heather Park
+- Aquadene
+- N2
+- MITCHELL PLAIN EASTRIDGE
+- Sarepta
+- Pie Retief
+- Tokoza  everest
+- Ubongo

@@ -1,0 +1,9 @@
+ec
+fs
+gt
+nl
+lp
+mp
+nw
+nc
+wc

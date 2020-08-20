@@ -1,0 +1,31 @@
+#### This file contains tests to evaluate that your bot behaves as expected.
+#### If you want to learn more, please see the docs: https://rasa.com/docs/rasa/user-guide/testing-your-assistant/
+
+## happy path tbcheck
+* request_tbcheck: check
+  - slot{"terms": null}
+  - utter_welcome
+  - tbcheck_terms_form
+  - form{"name": "tbcheck_terms_form"}
+  - form{"name": null}
+  - tbcheck_profile_form
+  - form{"name": "tbcheck_profile_form"}
+  - form{"name": null}
+  - utter_start_tb_check
+  - tbcheck_form
+  - form{"name": "tbcheck_form"}
+  - form{"name": null}
+  - action_session_start
+
+## happy path tbcheck returning user
+* request_tbcheck: check
+  - slot{"terms": "yes"}
+  - utter_welcome_back
+  - tbcheck_profile_form
+  - form{"name": "tbcheck_profile_form"}
+  - form{"name": null}
+  - utter_start_tb_check
+  - tbcheck_form
+  - form{"name": "tbcheck_form"}
+  - form{"name": null}
+  - action_session_start
