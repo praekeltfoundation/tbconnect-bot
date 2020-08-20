@@ -1,0 +1,264 @@
+intents:
+  - request_tbcheck
+  - affirm
+  - deny
+  - inform
+  - maybe
+  - more
+  - chitchat
+  - address
+  - exit:
+      triggers: action_exit
+
+entities:
+  - province
+  - number
+
+actions:
+  - action_session_start
+  - action_exit
+  - utter_ask_terms
+  - utter_start_tb_check
+  - utter_ask_age
+  - utter_ask_gender
+  - utter_ask_location
+  - utter_ask_location_confirm
+  - utter_ask_symptoms_cough
+  - utter_ask_symptoms_fever
+  - utter_ask_symptoms_sweat
+  - utter_ask_symptoms_weight
+  - utter_ask_exposure
+  - utter_ask_tracing
+  - utter_risk_high
+
+slots:
+  terms:
+    type: categorical
+    values:
+      - yes
+  age:
+    type: unfeaturized
+    auto_fill: false
+  gender:
+    type: unfeaturized
+    auto_fill: false
+  province:
+    type: unfeaturized
+    auto_fill: false
+  location:
+    type: unfeaturized
+    auto_fill: false
+  location_confirm:
+    type: unfeaturized
+    auto_fill: false
+  location_coords:
+    type: unfeaturized
+    auto_fill: false
+  city_location_coords:
+    type: unfeaturized
+    auto_fill: false
+  symptoms_cough:
+    type: unfeaturized
+    auto_fill: false
+  symptoms_fever:
+    type: unfeaturized
+    auto_fill: false
+  symptoms_sweat:
+    type: unfeaturized
+    auto_fill: false
+  symptoms_weight:
+    type: unfeaturized
+    auto_fill: false
+  exposure:
+    type: unfeaturized
+    auto_fill: false
+  tracing:
+    type: unfeaturized
+    auto_fill: false
+
+forms:
+  - tbcheck_form
+  - tbcheck_terms_form
+  - tbcheck_profile_form
+
+responses:
+  utter_welcome:
+      - text: |
+          TODO: Welcome, to replace content
+
+  utter_welcome_back:
+      - text: |
+          TODO: Welcome back, to replace content
+
+  utter_ask_terms:
+      - text: |
+          *TB HealthCheck* is your TB screening tool.
+
+          TB is a curable disease that mainly affects the lungs. Please help us by answering a few questions about your health. You will receive advice on what actions to take. Thank you for taking control of your health.
+
+          Reply with one of the words in BOLD to continue
+
+          *ACCEPT* ✅ - _to accept the terms and conditions_
+          *MORE* 📄 - _to read the terms and conditions_
+
+          (or Reply MENU 📌 _to return to the main menu_)
+
+  utter_more_terms:
+      - text: |
+          You confirm that you are responsible for your medical care & treatment. This service only provides info.
+
+          This service is not a substitute for professional medical advice/diagnosis/treatment. Get a qualified health provider's advice about your medical condition/care, especially if you develop severe symptoms.
+
+          You confirm that you shouldn't disregard/delay seeking medical advice about treatment/care because of this service. Rely on info at your own risk.
+
+          Reply with one of the words in *BOLD* to continue
+          *ACCEPT* ✅ to accept the terms and conditions
+          (or Reply 📌 *MENU* to return to the main menu)
+
+  utter_ask_province:
+    - text: |
+        In which Province are you currently residing?
+
+        Reply:
+        *1.* EASTERN CAPE
+        *2.* FREE STATE
+        *3.* GAUTENG
+        *4.* KWAZULU NATAL
+        *5.* LIMPOPO
+        *6.* MPUMALANGA
+        *7.* NORTH WEST
+        *8.* NORTHERN CAPE
+        *9.* WESTERN CAPE
+
+  utter_incorrect_selection:
+    - text: |
+        This service works best when you use the options provided in *BOLD*.
+        📌Reply *MENU* to return to the main menu
+
+  utter_incorrect_location:
+    - text: |
+        If you have typed your address incorrectly, please try again. If you are unable to provide your address, please TYPE the name of your Suburb, Township, Town or Village (or nearest)
+
+  utter_ask_age:
+    - text: |
+        How old are you?
+
+        *1.* <18
+        *2.* 18-39
+        *3.* 40-65
+        *4.* >65
+
+  utter_ask_gender:
+    - text: |
+        Please provide us with the gender you identify as:
+
+        Reply
+        *1.* MALE
+        *2.* FEMALE
+        *3.* OTHER
+        *4.* RATHER NOT SAY
+
+  utter_ask_location:
+    - text: |
+        We need to collect your location.
+
+        Please share your location 📍 using WhatsApp by following these steps:
+        - Tap the attach icon (+ or  📎) on the bottom of WhatsApp.
+        - Select location
+        - This will bring up a map with a pin showing your current location. Tap *Send Your Current Location* if this is your address.
+        - You can also choose from various other nearby locations if you think that the GPS is a bit off.
+
+
+        Or TYPE the name of your Suburb, Township, Town or Village (or nearest)?
+
+  utter_ask_location_confirm:
+    - text: |
+        We use Google Location Services to verify locations. Please confirm that the address below is correct based on the information you have shared:
+        ----------------------------
+        {location}
+        ----------------------------
+        Reply:
+        *1.* YES
+        *2.* NO
+
+  utter_start_tb_check:
+    - text: "Let's see how you are feeling today 💟"
+
+  utter_ask_symptoms_cough:
+    - text: |
+        ⬛⬜⬜⬜⬜⬜
+
+        Do you have a cough?
+
+        Reply
+        *1.* NO
+        *2.* YES - started in last two weeks
+        *3.* YES - for more than two weeks
+
+  utter_ask_symptoms_fever:
+    - text: |
+        ⬛⬛⬜⬜⬜⬜
+
+        Do you have a fever / when you touch your forehead, does it feel hot?
+
+        Reply
+        *1.* YES
+        *2.* NO
+
+  utter_ask_symptoms_sweat:
+    - text: |
+        ⬛⬛⬛⬜⬜⬜
+
+        Are you sweating more than usual at night?
+
+        Reply
+        *1.* YES
+        *2.* NO
+
+  utter_ask_symptoms_weight:
+    - text: |
+        ⬛⬛⬛⬛⬜⬜
+
+        Have you been losing weight without trying?
+
+        Reply
+        *1.* YES
+        *2.* NO
+
+  utter_ask_exposure:
+    - text: |
+        ⬛⬛⬛⬛⬛⬜
+
+        Are you at high risk of TB?
+
+        _You are at high risk for TB if:
+        You live with someone who has/had TB in the last year OR you have had TB in the last 2 years OR you are living with HIV._
+
+        Reply
+        *1.* I am at high risk of TB
+        *2.* I am not at high risk of TB
+        *3.* I don't know if I am at high risk
+
+  utter_ask_tracing:
+    - text: |
+        ⬛⬛⬛⬛⬛⬛
+
+        Finally, please confirm that the information you shared is *accurate* to the best of your knowledge and that you give the National Department of Health permission to contact you if necessary?
+
+        Reply
+        *1.* YES
+        *2.* NO
+
+  utter_risk_high:
+    - text: "TODO: risk templates"
+      claim: release
+
+# claim: revert will ignore the message text, and reevaluate this message using
+# turn automation
+  utter_exit:
+    - text: "You can do your TB Check anytime by typing the word *TB*."
+      claim: revert
+
+session_config:
+  session_expiration_time: 5
+  carry_over_slots_to_new_session: true

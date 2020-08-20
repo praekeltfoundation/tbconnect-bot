@@ -1,0 +1,17 @@
+## intent:request_tbcheck
+- Hi! I want to do health check for myself
+- I want to do a test for myself
+- tb
+- tbcheck
+- tb check
+- Please check if I have tb
+- Please check if I'm sick
+- Please check if I have to get tested
+- I want to get tested
+- Please test
+- Test me
+- Do I have tb?
+- Do I need to get tested?
+- Check my symptoms
+- I have a fever! Do I have covid?
+- check

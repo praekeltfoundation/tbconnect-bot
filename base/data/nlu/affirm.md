@@ -1,0 +1,38 @@
+## intent:affirm
+- accept
+- ✅
+- i accept
+- correct
+- ye
+- uh yes
+- let's do it
+- yeah
+- um yes
+- that's correct
+- yes yes
+- right
+- yea
+- yes
+- yes right
+- i do
+- Yes but it has been like this since I was a child
+- I will be
+- She’d be
+- A c c e p t
+- Bit hot
+- Real
+- Ouky
+- Yes cold and shivering
+- AĆĆɛקŧ
+- AςςҽԹԵ
+- ☑️
+- ☑️☑️
+- ✓
+- ✔
+- ✔️
+- ya
+- Ohh ohk
+- ja
+- e
+- ewe
+- yebo
