@@ -1,4 +1,4 @@
-name: Build docker image and model
+name: Build docker image and Rasa model
 
 on:
   push:
@@ -6,6 +6,32 @@ on:
       - develop
 
 jobs:
+  build-model:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        bot: ['base']
+        lang: ['eng']
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.7.7
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Build model
+        run: |
+          rasa train --data ${{ matrix.bot }}/data -d ${{ matrix.bot }}/domain-${{ matrix.lang }}.yml -c ${{ matrix.bot }}/config.yml --fixed-model-name `date "+%Y%m%d-%H%M%S"`-${{ matrix.bot }}-${{ matrix.lang }}
+      - name: Push model
+        uses: jakejarvis/s3-sync-action@master
+        env:
+          AWS_S3_BUCKET: "tbcheck-rasa-models"
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: "af-south-1"
+          SOURCE_DIR: "models"
   build-docker:
     runs-on: ubuntu-latest
     steps:
