@@ -373,31 +373,6 @@ class TBCheckForm(BaseFormAction):
         "tracing",
     ]
 
-    GENDER_MAPPING = {
-        "MALE": "male",
-        "FEMALE": "female",
-        "OTHER": "other",
-        "RATHER NOT SAY": "not_say",
-    }
-
-    AGE_MAPPING = {
-        "<18": "<18",
-        "18-39": "18-40",
-        "40-65": "40-65",
-        ">65": ">65",
-    }
-
-    YES_NO_MAYBE_MAPPING = {
-        "yes": "yes",
-        "no": "no",
-        "not sure": "not_sure",
-    }
-
-    YES_NO_MAPPING = {
-        "yes": True,
-        "no": False,
-    }
-
     def name(self) -> Text:
         """Unique identifier of the form"""
 
@@ -446,7 +421,12 @@ class TBCheckForm(BaseFormAction):
                 self.from_intent(intent="maybe", value="not sure"),
                 self.from_text(),
             ],
-            "tracing": [self.from_entity(entity="number"), self.from_text()],
+            "tracing": [
+                self.from_entity(entity="number"),
+                self.from_intent(intent="affirm", value="yes"),
+                self.from_intent(intent="deny", value="no"),
+                self.from_text(),
+            ],
         }
 
     def validate_symptoms_cough(
