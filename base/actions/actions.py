@@ -1,6 +1,7 @@
 import logging
+import uuid
 from typing import Any, Dict, List, Optional, Text, Union
-from urllib.parse import urlencode
+from urllib.parse import urlencode, urljoin
 
 import httpx
 import sentry_sdk
@@ -373,6 +374,31 @@ class TBCheckForm(BaseFormAction):
         "tracing",
     ]
 
+    GENDER_MAPPING = {
+        "MALE": "male",
+        "FEMALE": "female",
+        "OTHER": "other",
+        "RATHER NOT SAY": "not_say",
+    }
+
+    AGE_MAPPING = {
+        "<18": "<18",
+        "18-39": "18-40",
+        "40-65": "40-65",
+        ">65": ">65",
+    }
+
+    YES_NO_MAYBE_MAPPING = {
+        "yes": "yes",
+        "no": "no",
+        "not sure": "not_sure",
+    }
+
+    YES_NO_MAPPING = {
+        "yes": True,
+        "no": False,
+    }
+
     def name(self) -> Text:
         """Unique identifier of the form"""
 
@@ -493,6 +519,25 @@ class TBCheckForm(BaseFormAction):
     ) -> Dict[Text, Optional[Text]]:
         return self.validate_generic("tracing", dispatcher, value, self.yes_no_data)
 
+    def get_healthcheck_data(self, tracker: Tracker, risk: Text) -> Dict[Text, Any]:
+        return {
+            "deduplication_id": uuid.uuid4().hex,
+            "msisdn": f'+{tracker.sender_id.lstrip("+")}',
+            "source": "WhatsApp",
+            "province": f'ZA-{tracker.get_slot("province").upper()}',
+            "city": tracker.get_slot("location"),
+            "age": self.AGE_MAPPING[tracker.get_slot("age")],
+            "gender": self.GENDER_MAPPING[tracker.get_slot("gender")],
+            "cough": tracker.get_slot("symptoms_cough").replace(" ", "_"),
+            "fever": self.YES_NO_MAPPING[tracker.get_slot("symptoms_fever")],
+            "sweat": self.YES_NO_MAPPING[tracker.get_slot("symptoms_sweat")],
+            "weight": self.YES_NO_MAPPING[tracker.get_slot("symptoms_weight")],
+            "exposure": self.YES_NO_MAYBE_MAPPING[tracker.get_slot("exposure")],
+            "tracing": self.YES_NO_MAPPING[tracker.get_slot("tracing")],
+            "risk": risk,
+            "location": tracker.get_slot("location_coords"),
+        }
+
     async def submit(
         self,
         dispatcher: CollectingDispatcher,
@@ -511,6 +556,31 @@ class TBCheckForm(BaseFormAction):
         )
 
         risk = utils.get_risk_level(data)
+
+        if config.HEALTHCONNECT_URL and config.HEALTHCONNECT_TOKEN:
+            url = urljoin(config.HEALTHCONNECT_URL, "/api/v2/tbcheck/")
+
+            post_data = self.get_healthcheck_data(tracker, risk)
+            headers = {
+                "Authorization": f"Token {config.HEALTHCONNECT_TOKEN}",
+                "User-Agent": "rasa/tbconnect-bot",
+            }
+
+            if hasattr(httpx, "AsyncClient"):
+                # from httpx>=0.11.0, the async client is a different class
+                HTTPXClient = getattr(httpx, "AsyncClient")
+            else:
+                HTTPXClient = getattr(httpx, "Client")
+
+            for i in range(config.HTTP_RETRIES):
+                try:
+                    async with HTTPXClient() as client:
+                        resp = await client.post(url, json=post_data, headers=headers)
+                        resp.raise_for_status()
+                        break
+                except httpx.HTTPError as e:
+                    if i == config.HTTP_RETRIES - 1:
+                        raise e
 
         dispatcher.utter_message(template=f"utter_risk_{risk}")
         return []

@@ -261,3 +261,61 @@ class TestTBCheckForm:
             SlotSet("symptoms_cough", "yes gt 2weeks"),
             SlotSet("requested_slot", "symptoms_fever"),
         ]
+
+    @respx.mock
+    @pytest.mark.asyncio
+    async def test_submit_to_healthconnect(self):
+        """
+        Submits the data to the eventstore in the correct format
+        """
+        base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
+        base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
+
+        request = respx.post("https://healthconnect/api/v2/tbcheck/")
+
+        form = TBCheckForm()
+        dispatcher = CollectingDispatcher()
+        tracker = utils.get_tracker_for_slot_from_intent(
+            form,
+            "tracing",
+            "affirm",
+            {
+                "province": "wc",
+                "age": "18-39",
+                "symptoms_fever": "no",
+                "symptoms_cough": "yes lt 2weeks",
+                "symptoms_sweat": "yes",
+                "symptoms_weight": "yes",
+                "exposure": "not sure",
+                "tracing": "yes",
+                "gender": "RATHER NOT SAY",
+                "city_location_coords": "+1.2-3.4",
+                "location_coords": "+3.4-1.2",
+                "location": "Cape Town, South Africa",
+            },
+        )
+        await form.submit(dispatcher, tracker, {})
+
+        assert request.called
+        [(request, response)] = request.calls
+        data = json.loads(request.stream.body)
+        assert data.pop("deduplication_id")
+        assert data == {
+            "msisdn": "+default",
+            "source": "WhatsApp",
+            "province": "ZA-WC",
+            "city": "Cape Town, South Africa",
+            "age": "18-40",
+            "gender": "not_say",
+            "cough": "yes_lt_2weeks",
+            "fever": False,
+            "sweat": True,
+            "weight": True,
+            "exposure": "not_sure",
+            "tracing": True,
+            "risk": "high",
+            "location": "+3.4-1.2",
+        }
+
+        base.actions.actions.config.HEALTHCONNECT_URL = None
+        base.actions.actions.config.HEALTHCONNECT_TOKEN = None
