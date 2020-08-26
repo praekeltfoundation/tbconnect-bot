@@ -87,18 +87,16 @@ forms:
 responses:
   utter_welcome:
       - text: |
-          TODO: Welcome, to replace content
+          *TB HealthCheck* is your TB screening tool.
+
+          TB is a curable disease that mainly affects the lungs. Please help us by answering a few questions about your health. You will receive advice on what actions to take, and the data you enter will help us plan our response to TB. Thank you for taking control of your health.
 
   utter_welcome_back:
       - text: |
-          TODO: Welcome back, to replace content
+          Welcome back to *TB HealthCheck*,  your TB screening tool. Thank you for coming forward and taking control of your health.
 
   utter_ask_terms:
       - text: |
-          *TB HealthCheck* is your TB screening tool.
-
-          TB is a curable disease that mainly affects the lungs. Please help us by answering a few questions about your health. You will receive advice on what actions to take. Thank you for taking control of your health.
-
           Reply with one of the words in BOLD to continue
 
           *ACCEPT* ✅ - _to accept the terms and conditions_
@@ -234,8 +232,8 @@ responses:
 
         Are you at high risk of TB?
 
-        _You are at high risk for TB if:
-        You live with someone who has/had TB in the last year OR you have had TB in the last 2 years OR you are living with HIV._
+        _You are at high risk for TB if:_
+        _You live with someone who has/had TB in the last year OR you have had TB in the last 2 years OR you are living with HIV._
 
         Reply
         *1.* I am at high risk of TB
