@@ -522,7 +522,7 @@ class TBCheckForm(BaseFormAction):
     def get_healthcheck_data(self, tracker: Tracker, risk: Text) -> Dict[Text, Any]:
         return {
             "deduplication_id": uuid.uuid4().hex,
-            "msisdn": f'{tracker.sender_id.lstrip("+")}',
+            "msisdn": f'+{tracker.sender_id.lstrip("+")}',
             "source": "WhatsApp",
             "province": f'ZA-{tracker.get_slot("province").upper()}',
             "city": tracker.get_slot("location"),

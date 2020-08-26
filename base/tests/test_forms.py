@@ -301,7 +301,7 @@ class TestTBCheckForm:
         data = json.loads(request.stream.body)
         assert data.pop("deduplication_id")
         assert data == {
-            "msisdn": "default",
+            "msisdn": "+default",
             "source": "WhatsApp",
             "province": "ZA-WC",
             "city": "Cape Town, South Africa",
