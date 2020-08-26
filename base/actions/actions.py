@@ -558,7 +558,7 @@ class TBCheckForm(BaseFormAction):
         risk = utils.get_risk_level(data)
 
         if config.HEALTHCONNECT_URL and config.HEALTHCONNECT_TOKEN:
-            url = urljoin(config.HEALTHCONNECT_URL, "/api/v2/tbcheck/")
+            url = urljoin(config.HEALTHCONNECT_URL, "/v2/tbcheck/")
 
             post_data = self.get_healthcheck_data(tracker, risk)
             headers = {

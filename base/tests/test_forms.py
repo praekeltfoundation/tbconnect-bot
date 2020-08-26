@@ -271,7 +271,7 @@ class TestTBCheckForm:
         base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
         base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
 
-        request = respx.post("https://healthconnect/api/v2/tbcheck/")
+        request = respx.post("https://healthconnect/v2/tbcheck/")
 
         form = TBCheckForm()
         dispatcher = CollectingDispatcher()
