@@ -1,5 +1,4 @@
 import logging
-import re
 import uuid
 from typing import Any, Dict, List, Optional, Text, Union
 from urllib.parse import urlencode, urljoin
@@ -92,32 +91,6 @@ class BaseFormAction(FormAction):
             f"{int(longitude):+04d}"
             f"{fractional_part(longitude)}"
             "/"
-        )
-
-    @staticmethod
-    def fix_location_format(text: Text) -> Text:
-        """
-        Previously there was a bug that caused the location to not be stored in
-        proper ISO6709 format. This function extracts the latitude and longitude from
-        either the incorrect or correct format, and then returns a properly formatted
-        ISO6709 string
-        """
-        if not text:
-            return ""
-        regex = re.compile(
-            r"""
-            ^
-            (?P<latitude>[\+|-]\d+\.?\d*)
-            (?P<longitude>[\+|-]\d+\.?\d*)
-            """,
-            flags=re.VERBOSE,
-        )
-        match = regex.match(text)
-        if not match:
-            raise ValueError(f"Invalid location {text}")
-        data = match.groupdict()
-        return BaseFormAction.format_location(
-            float(data["latitude"]), float(data["longitude"])
         )
 
 
