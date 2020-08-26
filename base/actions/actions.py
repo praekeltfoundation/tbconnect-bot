@@ -536,6 +536,7 @@ class TBCheckForm(BaseFormAction):
             "tracing": self.YES_NO_MAPPING[tracker.get_slot("tracing")],
             "risk": risk,
             "location": tracker.get_slot("location_coords"),
+            "city_location": tracker.get_slot("city_location_coords"),
         }
 
     async def submit(
@@ -561,6 +562,8 @@ class TBCheckForm(BaseFormAction):
             url = urljoin(config.HEALTHCONNECT_URL, "/v2/tbcheck/")
 
             post_data = self.get_healthcheck_data(tracker, risk)
+            # TODO: remove print
+            print(post_data)
             headers = {
                 "Authorization": f"Token {config.HEALTHCONNECT_TOKEN}",
                 "User-Agent": "rasa/tbconnect-bot",
@@ -576,6 +579,8 @@ class TBCheckForm(BaseFormAction):
                 try:
                     async with HTTPXClient() as client:
                         resp = await client.post(url, json=post_data, headers=headers)
+                        # TODO: remove print
+                        print(resp.content)
                         resp.raise_for_status()
                         break
                 except httpx.HTTPError as e:
