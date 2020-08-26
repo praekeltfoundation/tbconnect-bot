@@ -315,6 +315,7 @@ class TestTBCheckForm:
             "tracing": True,
             "risk": "high",
             "location": "+3.4-1.2",
+            "city_location": "+1.2-3.4",
         }
 
         base.actions.actions.config.HEALTHCONNECT_URL = None
