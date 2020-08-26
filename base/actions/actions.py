@@ -562,7 +562,7 @@ class TBCheckForm(BaseFormAction):
             "exposure": self.YES_NO_MAYBE_MAPPING[tracker.get_slot("exposure")],
             "tracing": self.YES_NO_MAPPING[tracker.get_slot("tracing")],
             "risk": risk,
-            "location": self.fix_location_format(tracker.get_slot("location_coords")),
+            "location": tracker.get_slot("location_coords"),
         }
 
     async def submit(
@@ -588,7 +588,6 @@ class TBCheckForm(BaseFormAction):
             url = urljoin(config.HEALTHCONNECT_URL, "/api/v2/tbcheck/")
 
             post_data = self.get_healthcheck_data(tracker, risk)
-            print(post_data)
             headers = {
                 "Authorization": f"Token {config.HEALTHCONNECT_TOKEN}",
                 "User-Agent": "rasa/tbconnect-bot",

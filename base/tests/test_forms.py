@@ -283,7 +283,7 @@ class TestTBCheckForm:
                 "province": "wc",
                 "age": "18-39",
                 "symptoms_fever": "no",
-                "symptoms_cough": "no",
+                "symptoms_cough": "yes lt 2weeks",
                 "symptoms_sweat": "yes",
                 "symptoms_weight": "yes",
                 "exposure": "not sure",
@@ -307,14 +307,14 @@ class TestTBCheckForm:
             "city": "Cape Town, South Africa",
             "age": "18-40",
             "gender": "not_say",
-            "cough": "no",
+            "cough": "yes_lt_2weeks",
             "fever": False,
             "sweat": True,
             "weight": True,
             "exposure": "not_sure",
             "tracing": True,
             "risk": "high",
-            "location": "+03.4-001.2/",
+            "location": "+3.4-1.2",
         }
 
         base.actions.actions.config.HEALTHCONNECT_URL = None
