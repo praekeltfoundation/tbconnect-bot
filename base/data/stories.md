@@ -29,6 +29,10 @@
     - form{"name": null}
     - action_session_start
 
+## do optin
+* opt_in
+    - action_opt_in
+
 ## session start new
     - action_session_start
     - slot{"terms": null}

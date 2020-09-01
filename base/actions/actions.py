@@ -591,6 +591,49 @@ class TBCheckForm(BaseFormAction):
         return []
 
 
+class OptInForm(Action):
+    def name(self) -> Text:
+        return "action_opt_in"
+
+    async def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        if config.HEALTHCONNECT_URL and config.HEALTHCONNECT_TOKEN:
+            msisdn = f'+{tracker.sender_id.lstrip("+")}'
+            url = urljoin(
+                config.HEALTHCONNECT_URL, f"/v2/healthcheckuserprofile/{msisdn}/"
+            )
+
+            patch_data = {"data": {"follow_up_optin": True}}
+            headers = {
+                "Authorization": f"Token {config.HEALTHCONNECT_TOKEN}",
+                "User-Agent": "rasa/tbconnect-bot",
+            }
+
+            if hasattr(httpx, "AsyncClient"):
+                # from httpx>=0.11.0, the async client is a different class
+                HTTPXClient = getattr(httpx, "AsyncClient")
+            else:
+                HTTPXClient = getattr(httpx, "Client")
+
+            for i in range(config.HTTP_RETRIES):
+                try:
+                    async with HTTPXClient() as client:
+                        resp = await client.patch(url, json=patch_data, headers=headers)
+                        # TODO: remove print
+                        print(resp.content)
+                        resp.raise_for_status()
+                        break
+                except httpx.HTTPError as e:
+                    if i == config.HTTP_RETRIES - 1:
+                        raise e
+        dispatcher.utter_message(template="utter_opt_in_yes")
+        return []
+
+
 class ActionExit(Action):
     def name(self) -> Text:
         return "action_exit"
