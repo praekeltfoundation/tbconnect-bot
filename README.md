@@ -3,7 +3,7 @@
 ## Running locally
 ```bash
 ~ export BOT=base
-~ export LANG=en
+~ export LANG=eng
 ~ pip install -r requirements.txt -r requirements-dev.txt -r requirements-actions.txt
 ~ ./shell.sh $BOT $LANG
 ```

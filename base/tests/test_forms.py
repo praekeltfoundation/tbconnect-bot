@@ -9,7 +9,12 @@ from rasa_sdk.events import Form, SlotSet
 from rasa_sdk.executor import CollectingDispatcher
 
 import base.actions.actions
-from base.actions.actions import TBCheckForm, TBCheckProfileForm, TBCheckTermsForm
+from base.actions.actions import (
+    OptInForm,
+    TBCheckForm,
+    TBCheckProfileForm,
+    TBCheckTermsForm,
+)
 from base.tests import utils
 
 
@@ -317,6 +322,34 @@ class TestTBCheckForm:
             "location": "+3.4-1.2",
             "city_location": "+1.2-3.4",
         }
+
+        base.actions.actions.config.HEALTHCONNECT_URL = None
+        base.actions.actions.config.HEALTHCONNECT_TOKEN = None
+
+
+class TestOptInForm:
+    @respx.mock
+    @pytest.mark.asyncio
+    async def test_submit_to_healthconnect(self):
+        """
+        Submits the data to the eventstore in the correct format
+        """
+        base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
+        base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
+
+        request = respx.patch(
+            "https://healthconnect/v2/healthcheckuserprofile/+default/"
+        )
+
+        form = OptInForm()
+        dispatcher = CollectingDispatcher()
+        tracker = utils.get_tracker_for_slot_from_intent(form, "terms", "opt_in", {},)
+        await form.run(dispatcher, tracker, {})
+
+        assert request.called
+        [(request, response)] = request.calls
+        data = json.loads(request.stream.body)
+        assert data == {"data": {"follow_up_optin": True}}
 
         base.actions.actions.config.HEALTHCONNECT_URL = None
         base.actions.actions.config.HEALTHCONNECT_TOKEN = None
