@@ -321,6 +321,44 @@ class TestTBCheckForm:
 class TestOptInForm:
     @respx.mock
     @pytest.mark.asyncio
+    async def test_submit_to_healthconnect_low_risk(self):
+        """
+        Submits the data to the eventstore in the correct format
+        """
+        base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
+        base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
+
+        request = respx.patch(
+            "https://healthconnect/v2/healthcheckuserprofile/+default/"
+        )
+
+        form = OptInForm()
+        dispatcher = CollectingDispatcher()
+        tracker = utils.get_tracker_for_slot_from_intent(
+            form,
+            "terms",
+            "opt_in",
+            {
+                "symptoms_fever": "no",
+                "symptoms_cough": "no",
+                "symptoms_sweat": "no",
+                "symptoms_weight": "no",
+                "exposure": "no",
+                "tracing": "yes",
+            },
+        )
+        await form.run(dispatcher, tracker, {})
+
+        assert request.called
+        [(request, response)] = request.calls
+        data = json.loads(request.stream.body)
+        assert data == {"data": {"follow_up_optin": True}}
+
+        base.actions.actions.config.HEALTHCONNECT_URL = None
+        base.actions.actions.config.HEALTHCONNECT_TOKEN = None
+
+    @respx.mock
+    @pytest.mark.asyncio
     async def test_submit_to_healthconnect(self):
         """
         Submits the data to the eventstore in the correct format
@@ -340,7 +378,9 @@ class TestOptInForm:
         assert request.called
         [(request, response)] = request.calls
         data = json.loads(request.stream.body)
-        assert data == {"data": {"follow_up_optin": True}}
+        assert data == {
+            "data": {"follow_up_optin": True, "synced_to_tb_rapidpro": False}
+        }
 
         base.actions.actions.config.HEALTHCONNECT_URL = None
         base.actions.actions.config.HEALTHCONNECT_TOKEN = None

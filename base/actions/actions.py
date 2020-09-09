@@ -593,6 +593,16 @@ class TBCheckForm(BaseFormAction):
 
 
 class OptInForm(Action):
+
+    SLOTS = [
+        "symptoms_cough",
+        "symptoms_fever",
+        "symptoms_sweat",
+        "symptoms_weight",
+        "exposure",
+        "tracing",
+    ]
+
     def name(self) -> Text:
         return "action_opt_in"
 
@@ -608,7 +618,20 @@ class OptInForm(Action):
                 config.HEALTHCONNECT_URL, f"/v2/healthcheckuserprofile/{msisdn}/"
             )
 
+            data = {
+                slot: tracker.get_slot(slot)
+                for slot in self.SLOTS
+                if slot.startswith("symptoms_")
+            }
+            data.update({"exposure": tracker.get_slot("exposure")})
+
+            risk = utils.get_risk_level(data)
+
             patch_data = {"data": {"follow_up_optin": True}}
+
+            if risk != "low":
+                patch_data["data"]["synced_to_tb_rapidpro"] = False
+
             headers = {
                 "Authorization": f"Token {config.HEALTHCONNECT_TOKEN}",
                 "User-Agent": "rasa/tbconnect-bot",
