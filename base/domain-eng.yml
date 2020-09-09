@@ -32,8 +32,7 @@ actions:
   - utter_ask_exposure
   - utter_ask_tracing
   - utter_risk_high
-  - utter_risk_moderate_with_cough
-  - utter_risk_moderate_without_cough
+  - utter_risk_moderate
   - utter_risk_low
   - utter_opt_in_yes
 
