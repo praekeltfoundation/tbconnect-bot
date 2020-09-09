@@ -37,10 +37,6 @@ class BaseFormAction(FormAction):
     def yes_no_maybe_data(self) -> Dict[int, Text]:
         return {1: "yes", 2: "no", 3: "not sure"}
 
-    @property
-    def no_yeslt_yesgt_data(self) -> Dict[int, Text]:
-        return {1: "no", 2: "yes lt 2weeks", 3: "yes gt 2weeks"}
-
     @staticmethod
     def is_int(value: Text) -> bool:
         if not isinstance(value, str):
@@ -421,7 +417,12 @@ class TBCheckForm(BaseFormAction):
 
     def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
         return {
-            "symptoms_cough": [self.from_entity(entity="number"), self.from_text()],
+            "symptoms_cough": [
+                self.from_entity(entity="number"),
+                self.from_intent(intent="affirm", value="yes"),
+                self.from_intent(intent="deny", value="no"),
+                self.from_text(),
+            ],
             "symptoms_fever": [
                 self.from_entity(entity="number"),
                 self.from_intent(intent="affirm", value="yes"),
@@ -463,7 +464,7 @@ class TBCheckForm(BaseFormAction):
         domain: Dict[Text, Any],
     ) -> Dict[Text, Optional[Text]]:
         return self.validate_generic(
-            "symptoms_cough", dispatcher, value, self.no_yeslt_yesgt_data
+            "symptoms_cough", dispatcher, value, self.yes_no_data
         )
 
     def validate_symptoms_fever(
@@ -528,7 +529,7 @@ class TBCheckForm(BaseFormAction):
             "city": tracker.get_slot("location"),
             "age": self.AGE_MAPPING[tracker.get_slot("age")],
             "gender": self.GENDER_MAPPING[tracker.get_slot("gender")],
-            "cough": tracker.get_slot("symptoms_cough").replace(" ", "_"),
+            "cough": self.YES_NO_MAPPING[tracker.get_slot("symptoms_cough")],
             "fever": self.YES_NO_MAPPING[tracker.get_slot("symptoms_fever")],
             "sweat": self.YES_NO_MAPPING[tracker.get_slot("symptoms_sweat")],
             "weight": self.YES_NO_MAPPING[tracker.get_slot("symptoms_weight")],

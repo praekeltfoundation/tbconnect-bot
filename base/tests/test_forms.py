@@ -245,7 +245,7 @@ class TestTBCheckForm:
         )
         events = await form.run(dispatcher=dispatcher, tracker=tracker, domain=None)
         assert events == [
-            SlotSet("symptoms_cough", "no"),
+            SlotSet("symptoms_cough", "yes"),
             SlotSet("requested_slot", "symptoms_fever"),
         ]
 
@@ -254,16 +254,7 @@ class TestTBCheckForm:
         )
         events = await form.run(dispatcher=dispatcher, tracker=tracker, domain=None)
         assert events == [
-            SlotSet("symptoms_cough", "yes lt 2weeks"),
-            SlotSet("requested_slot", "symptoms_fever"),
-        ]
-
-        tracker = utils.get_tracker_for_number_slot_with_value(
-            form, "symptoms_cough", "3", {}
-        )
-        events = await form.run(dispatcher=dispatcher, tracker=tracker, domain=None)
-        assert events == [
-            SlotSet("symptoms_cough", "yes gt 2weeks"),
+            SlotSet("symptoms_cough", "no"),
             SlotSet("requested_slot", "symptoms_fever"),
         ]
 
@@ -288,7 +279,7 @@ class TestTBCheckForm:
                 "province": "wc",
                 "age": "18-39",
                 "symptoms_fever": "no",
-                "symptoms_cough": "yes lt 2weeks",
+                "symptoms_cough": "yes",
                 "symptoms_sweat": "yes",
                 "symptoms_weight": "yes",
                 "exposure": "not sure",
@@ -312,7 +303,7 @@ class TestTBCheckForm:
             "city": "Cape Town, South Africa",
             "age": "18-40",
             "gender": "not_say",
-            "cough": "yes_lt_2weeks",
+            "cough": True,
             "fever": False,
             "sweat": True,
             "weight": True,
