@@ -32,8 +32,7 @@ actions:
   - utter_ask_exposure
   - utter_ask_tracing
   - utter_risk_high
-  - utter_risk_moderate_with_cough
-  - utter_risk_moderate_without_cough
+  - utter_risk_moderate
   - utter_risk_low
   - utter_opt_in_yes
 
@@ -195,9 +194,8 @@ responses:
         Do you have a cough?
 
         Reply
-        *1.* NO
-        *2.* YES - started in last two weeks
-        *3.* YES - for more than two weeks
+        *1.* YES
+        *2.* NO
 
   utter_ask_symptoms_fever:
     - text: |
@@ -267,24 +265,14 @@ responses:
         📌Reply *MENU* to return to the main menu
       claim: release
 
-  utter_risk_moderate_with_cough:
+  utter_risk_moderate:
     - text: |
-        *You are at risk of getting TB and your cough should be monitored.*
+        *Based on your responses, you need to have a TB test urgently*
 
-        You don't need a TB test at present. If you still have a cough next week or if you develop fever, weight loss or nigt sweats, go to your local clinic for a free TB test
+        - Go to your local clinic for a free TB test.
+        - Please put on a face mask before you enter the clinic.
 
-        To opt-in for follow up messages, reply *IN*
-
-        💊Reply *CURE* for information about treatment
-        📗Reply *RESOURCES* for information about symptoms and TB testing
-        📌Reply *MENU* to return to the main menu
-      claim: release
-
-  utter_risk_moderate_without_cough:
-    - text: |
-        *You don’t need a TB test at present. If you develop cough, fever, weight loss or night sweats go to your local clinic for a free TB test*
-
-        To opt-in for follow up messages, reply *IN*
+        📲To opt-in for follow up messages, reply *IN*
 
         💊Reply *CURE* for information about treatment
         📗Reply *RESOURCES* for information about symptoms and TB testing
