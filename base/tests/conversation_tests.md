@@ -11,7 +11,6 @@
   - tbcheck_profile_form
   - form{"name": "tbcheck_profile_form"}
   - form{"name": null}
-  - utter_start_tb_check
   - tbcheck_form
   - form{"name": "tbcheck_form"}
   - form{"name": null}
@@ -24,7 +23,6 @@
   - tbcheck_profile_form
   - form{"name": "tbcheck_profile_form"}
   - form{"name": null}
-  - utter_start_tb_check
   - tbcheck_form
   - form{"name": "tbcheck_form"}
   - form{"name": null}
