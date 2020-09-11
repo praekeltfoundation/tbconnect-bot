@@ -20,7 +20,6 @@ actions:
   - action_exit
   - action_opt_in
   - utter_ask_terms
-  - utter_start_tb_check
   - utter_ask_age
   - utter_ask_gender
   - utter_ask_location
@@ -89,9 +88,12 @@ forms:
 responses:
   utter_welcome:
       - text: |
-          *TB HealthCheck* is your TB screening tool.
+          *TB HealthCheck* is your TB checking tool. This can tell you if you need a TB test.
 
-          TB is a curable disease that mainly affects the lungs. Please help us by answering a few questions about your health. You will receive advice on what actions to take, and the data you enter will help us plan our response to TB. Thank you for taking control of your health.
+          A TB test will tell you if you have TB or not. TB is a curable disease. It usually affects the lungs. Please answer a few questions to get advice on what to do next.
+
+
+          Thank you for taking control of your health.
 
   utter_welcome_back:
       - text: |
@@ -108,21 +110,17 @@ responses:
 
   utter_more_terms:
       - text: |
-          You confirm that you are responsible for your medical care & treatment. This service only provides info.
+          This service provides info only and does not replace professional medical advice/diagnosis/treatment. Get a qualified health provider's advice about your medical condition/care, especially if you develop severe symptoms.
 
-          This service is not a substitute for professional medical advice/diagnosis/treatment. Get a qualified health provider's advice about your medical condition/care, especially if you develop severe symptoms.
+          You rely on this info at your own risk. You agree that you are responsible for your medical care & treatment. You agree that you should not ignore/delay getting medical advice about treatment/care because of this service.
 
-          You confirm that you shouldn't disregard/delay seeking medical advice about treatment/care because of this service. Rely on info at your own risk.
-
-          Reply with one of the words in *BOLD* to continue
-          *ACCEPT* ✅ to accept the terms and conditions
+          Reply *ACCEPT* ✅ to accept the terms and conditions
           (or Reply 📌 *MENU* to return to the main menu)
 
   utter_ask_province:
     - text: |
-        In which Province are you currently residing?
+        In which province are you living now? Reply with a number from the list:
 
-        Reply:
         *1.* EASTERN CAPE
         *2.* FREE STATE
         *3.* GAUTENG
@@ -136,6 +134,7 @@ responses:
   utter_incorrect_selection:
     - text: |
         This service works best when you use the options provided in *BOLD*.
+
         📌Reply *MENU* to return to the main menu
 
   utter_incorrect_location:
@@ -153,7 +152,7 @@ responses:
 
   utter_ask_gender:
     - text: |
-        Please provide us with the gender you identify as:
+        Which gender do you identify as?
 
         Reply
         *1.* MALE
@@ -163,37 +162,26 @@ responses:
 
   utter_ask_location:
     - text: |
-        We need to collect your location.
+        Thanks. Now we need your location.
 
-        Please share your location 📍 using WhatsApp by following these steps:
-        - Tap the attach icon (+ or  📎) on the bottom of WhatsApp.
-        - Select location
-        - This will bring up a map with a pin showing your current location. Tap *Send Your Current Location* if this is your address.
-        - You can also choose from various other nearby locations if you think that the GPS is a bit off.
-
-
-        Or TYPE the name of your Suburb, Township, Town or Village (or nearest)?
+        Please TYPE your home address (or the address where you are currently staying). Give the street number, street name, suburb/township/town/village
 
   utter_ask_location_confirm:
     - text: |
-        We use Google Location Services to verify locations. Please confirm that the address below is correct based on the information you have shared:
-        ----------------------------
+        We use Google Location Services to confirm your location. Please check that the address below is correct and matches the information you gave:
         {location}
-        ----------------------------
-        Reply:
-        *1.* YES
-        *2.* NO
 
-  utter_start_tb_check:
-    - text: "Let's see how you are feeling today 💟"
+        Reply
+        *1.* YES
+        *2.* NO"
 
   utter_ask_symptoms_cough:
     - text: |
         ⬛⬜⬜⬜⬜⬜
 
-        Do you have a cough?
+        Let's see how you're feeling today. Do you have a cough?
 
-        Reply
+        Reply 1 or 2
         *1.* YES
         *2.* NO
 
@@ -201,9 +189,9 @@ responses:
     - text: |
         ⬛⬛⬜⬜⬜⬜
 
-        Do you have a fever / when you touch your forehead, does it feel hot?
+        Do you have a fever? (when you touch your forehead, does it feel hot?)
 
-        Reply
+        Reply 1 or 2
         *1.* YES
         *2.* NO
 
@@ -233,10 +221,10 @@ responses:
 
         Are you at high risk of TB?
 
-        _You are at high risk for TB if:_
-        _You live with someone who has/had TB in the last year OR you have had TB in the last 2 years OR you are living with HIV._
+        _You are at high risk for TB if:
+        You live with someone who has/had TB in the last year, OR you have had TB in the last 2 years, OR you are living with HIV._
 
-        Reply
+        Reply 1, 2 or 3
         *1.* I am at high risk of TB
         *2.* I am not at high risk of TB
         *3.* I don't know if I am at high risk
@@ -245,20 +233,20 @@ responses:
     - text: |
         ⬛⬛⬛⬛⬛⬛
 
-        Finally, please confirm that the information you shared is *accurate* to the best of your knowledge and that you give the National Department of Health permission to contact you if necessary?
+        Finally, please agree that the information you shared is *correct* to the best of your knowledge and that you give the National Department of Health permission to contact you if needed?
 
-        Reply
+        Reply 1 or 2
         *1.* YES
         *2.* NO
 
   utter_risk_high:
     - text: |
-        *Based on your responses, you need to have a TB test urgently*
+        *Your replies to the questions show that you need a TB test urgently*
 
         - Go to your local clinic for a free TB test.
         - Please put on a face mask before you enter the clinic.
 
-        To opt-in for follow up messages, reply *IN*
+        📲To get follow-up messages, reply *IN*
 
         💊Reply *CURE* for information about treatment
         📗Reply *RESOURCES* for information about symptoms and TB testing
@@ -267,12 +255,12 @@ responses:
 
   utter_risk_moderate:
     - text: |
-        *Based on your responses, you need to have a TB test urgently*
+        *Your replies to the questions show that you need a TB test urgently*
 
         - Go to your local clinic for a free TB test.
         - Please put on a face mask before you enter the clinic.
 
-        📲To opt-in for follow up messages, reply *IN*
+        📲To get follow-up messages, reply *IN*
 
         💊Reply *CURE* for information about treatment
         📗Reply *RESOURCES* for information about symptoms and TB testing
@@ -281,9 +269,9 @@ responses:
 
   utter_risk_low:
     - text: |
-        *Based on your responses, you don't need a TB test at present.*
+        *You don't need a TB test at this time.*
 
-        - If you develop cough, fever, weight loss or night sweats visit your nearest clinic.
+        - If you develop cough, fever, weight loss or night sweats, visit your nearest clinic.
 
         💊Reply *CURE* for information about treatment
         📗Reply with *RESOURCES* for information about symptoms and TB testing
@@ -292,7 +280,7 @@ responses:
 
   utter_opt_in_yes:
     - text: |
-        Thank you for opting in for our follow up messages.
+        Thank you for choosing to receive follow-up messages.
 
         📌 Reply with *MENU* to return to the main menu
       claim: release
