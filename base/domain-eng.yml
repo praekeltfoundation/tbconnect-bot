@@ -114,9 +114,6 @@ responses:
 
           You rely on this info at your own risk. You agree that you are responsible for your medical care & treatment. You agree that you should not ignore/delay getting medical advice about treatment/care because of this service.
 
-          Reply *ACCEPT* ✅ to accept the terms and conditions
-          (or Reply 📌 *MENU* to return to the main menu)
-
   utter_ask_province:
     - text: |
         In which province are you living now? Reply with a number from the list:
@@ -173,7 +170,7 @@ responses:
 
         Reply
         *1.* YES
-        *2.* NO"
+        *2.* NO
 
   utter_ask_symptoms_cough:
     - text: |
