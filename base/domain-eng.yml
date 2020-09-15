@@ -198,7 +198,7 @@ responses:
 
         Are you sweating more than usual at night?
 
-        Reply
+        Reply 1 or 2
         *1.* YES
         *2.* NO
 
@@ -208,7 +208,7 @@ responses:
 
         Have you been losing weight without trying?
 
-        Reply
+        Reply 1 or 2
         *1.* YES
         *2.* NO
 
@@ -218,8 +218,8 @@ responses:
 
         Are you at high risk of TB?
 
-        _You are at high risk for TB if:
-        You live with someone who has/had TB in the last year, OR you have had TB in the last 2 years, OR you are living with HIV._
+        _You are at high risk for TB if:_
+        _You live with someone who has/had TB in the last year, OR you have had TB in the last 2 years, OR you are living with HIV._
 
         Reply 1, 2 or 3
         *1.* I am at high risk of TB
