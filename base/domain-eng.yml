@@ -34,6 +34,8 @@ actions:
   - utter_risk_moderate
   - utter_risk_low
   - utter_risk_low_unknown_exposure
+  - utter_follow_up_request
+  - utter_keywords
   - utter_opt_in_yes
 
 slots:
@@ -239,42 +241,23 @@ responses:
 
   utter_risk_high:
     - text: |
-        *Your replies to the questions show that you need a TB test urgently*
+        *Your replies to the questions show that you need a TB test within the next week*
 
         - Go to your local clinic for a free TB test.
         - Please put on a face mask before you enter the clinic.
-
-        📲To get follow-up messages, reply *IN*
-
-        💊Reply *CURE* for information about treatment
-        📗Reply *RESOURCES* for information about symptoms and TB testing
-        📌Reply *MENU* to return to the main menu
-      claim: release
 
   utter_risk_moderate:
     - text: |
-        *Your replies to the questions show that you need a TB test urgently*
+        *Your replies to the questions show that you need a TB test within the next week*
 
         - Go to your local clinic for a free TB test.
         - Please put on a face mask before you enter the clinic.
-
-        📲To get follow-up messages, reply *IN*
-
-        💊Reply *CURE* for information about treatment
-        📗Reply *RESOURCES* for information about symptoms and TB testing
-        📌Reply *MENU* to return to the main menu
-      claim: release
 
   utter_risk_low:
     - text: |
         *You don't need a TB test at this time.*
 
         - If you develop cough, fever, weight loss or night sweats, visit your nearest clinic.
-
-        💊Reply *CURE* for information about treatment
-        📗Reply with *RESOURCES* for information about symptoms and TB testing
-        📌Reply *MENU* to return to the main menu
-      claim: release
 
   utter_risk_low_unknown_exposure:
     - text: |
@@ -284,10 +267,18 @@ responses:
 
         Come back and do the TB check again when you have this information.
 
+  utter_follow_up_request:
+    - text: |
+        📲To get follow-up messages, reply *IN*
+      claim: release
+
+  utter_keywords:
+    - text: |
         💊Reply *CURE* for information about treatment
-        📗Reply with *RESOURCES* for information about symptoms and TB testing
+        📗Reply *RESOURCES* for information about symptoms and TB testing
         📌Reply *MENU* to return to the main menu
       claim: release
+
 
   utter_opt_in_yes:
     - text: |
