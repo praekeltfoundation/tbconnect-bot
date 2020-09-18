@@ -309,7 +309,7 @@ class TestTBCheckForm:
             "weight": True,
             "exposure": "not_sure",
             "tracing": True,
-            "risk": "high",
+            "risk": "moderate",
             "location": "+3.4-1.2",
             "city_location": "+1.2-3.4",
         }
@@ -372,7 +372,9 @@ class TestOptInForm:
 
         form = OptInForm()
         dispatcher = CollectingDispatcher()
-        tracker = utils.get_tracker_for_slot_from_intent(form, "terms", "opt_in", {},)
+        tracker = utils.get_tracker_for_slot_from_intent(
+            form, "terms", "opt_in", {"symptoms_cough": "yes"},
+        )
         await form.run(dispatcher, tracker, {})
 
         assert request.called

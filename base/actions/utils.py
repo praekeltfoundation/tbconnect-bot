@@ -2,7 +2,7 @@ from typing import Any, Dict, Text
 
 
 def get_risk_level(data: Dict[Any, Any]) -> Text:
-    if data.get("exposure") != "no":
+    if data.get("exposure") == "yes":
         return "high"
 
     symptoms = 0
@@ -19,3 +19,10 @@ def get_risk_level(data: Dict[Any, Any]) -> Text:
         return "moderate"
 
     return "low"
+
+
+def get_risk_template(risk: Text, data: Dict[Any, Any]) -> Text:
+    if data.get("exposure") == "not sure" and risk == "low":
+        return "utter_risk_low_unknown_exposure"
+
+    return f"utter_risk_{risk}"
