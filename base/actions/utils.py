@@ -28,9 +28,9 @@ def get_risk_templates(risk: Text, data: Dict[Any, Any]) -> List:
     else:
         templates.append(f"utter_risk_{risk}")
 
+    templates.append("utter_keywords")
+
     if risk != "low":
         templates.append("utter_follow_up_request")
-
-    templates.append("utter_keywords")
 
     return templates
