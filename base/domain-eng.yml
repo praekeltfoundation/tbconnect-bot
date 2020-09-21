@@ -241,14 +241,14 @@ responses:
 
   utter_risk_high:
     - text: |
-        *Your replies to the questions show that you need a TB test within the next week*
+        *Your replies to the questions show that you need a TB test this week*
 
         - Go to your local clinic for a free TB test.
         - Please put on a face mask before you enter the clinic.
 
   utter_risk_moderate:
     - text: |
-        *Your replies to the questions show that you need a TB test within the next week*
+        *Your replies to the questions show that you need a TB test this week*
 
         - Go to your local clinic for a free TB test.
         - Please put on a face mask before you enter the clinic.
