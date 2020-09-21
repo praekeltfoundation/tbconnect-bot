@@ -1,4 +1,4 @@
-from typing import Any, Dict, Text
+from typing import Any, Dict, List, Text
 
 
 def get_risk_level(data: Dict[Any, Any]) -> Text:
@@ -21,8 +21,16 @@ def get_risk_level(data: Dict[Any, Any]) -> Text:
     return "low"
 
 
-def get_risk_template(risk: Text, data: Dict[Any, Any]) -> Text:
+def get_risk_templates(risk: Text, data: Dict[Any, Any]) -> List:
+    templates = []
     if data.get("exposure") == "not sure" and risk == "low":
-        return "utter_risk_low_unknown_exposure"
+        templates.append("utter_risk_low_unknown_exposure")
+    else:
+        templates.append(f"utter_risk_{risk}")
 
-    return f"utter_risk_{risk}"
+    if risk != "low":
+        templates.append("utter_follow_up_request")
+
+    templates.append("utter_keywords")
+
+    return templates

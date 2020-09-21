@@ -558,7 +558,7 @@ class TBCheckForm(BaseFormAction):
         )
 
         risk = utils.get_risk_level(data)
-        template = utils.get_risk_template(risk, data)
+        templates = utils.get_risk_templates(risk, data)
 
         if config.HEALTHCONNECT_URL and config.HEALTHCONNECT_TOKEN:
             url = urljoin(config.HEALTHCONNECT_URL, "/v2/tbcheck/")
@@ -589,7 +589,9 @@ class TBCheckForm(BaseFormAction):
                     if i == config.HTTP_RETRIES - 1:
                         raise e
 
-        dispatcher.utter_message(template=template)
+        for template in templates:
+            dispatcher.utter_message(template=template)
+
         return []
 
 

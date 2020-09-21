@@ -50,13 +50,13 @@ def test_risk_level():
 
 def test_risk_template():
     data = {"exposure": "not sure"}
-    template = utils.get_risk_template("low", data)
-    assert template == "utter_risk_low_unknown_exposure"
+    templates = utils.get_risk_templates("low", data)
+    assert templates == ["utter_risk_low_unknown_exposure", "utter_keywords"]
 
     data = {"exposure": "no"}
-    template = utils.get_risk_template("low", data)
-    assert template == "utter_risk_low"
+    templates = utils.get_risk_templates("low", data)
+    assert templates == ["utter_risk_low", "utter_keywords"]
 
     data = {"exposure": "not sure"}
-    template = utils.get_risk_template("high", data)
-    assert template == "utter_risk_high"
+    templates = utils.get_risk_templates("high", data)
+    assert templates == ["utter_risk_high", "utter_follow_up_request", "utter_keywords"]
