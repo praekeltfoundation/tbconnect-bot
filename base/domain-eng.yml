@@ -275,7 +275,7 @@ responses:
   utter_keywords:
     - text: |
         💊Reply *CURE* for information about treatment
-        📗Reply *RESOURCES* for information about symptoms and TB testing
+        📗Reply *INFO* for information about symptoms and TB testing
         📌Reply *MENU* to return to the main menu
       claim: release
 

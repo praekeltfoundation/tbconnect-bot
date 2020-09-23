@@ -1,4 +1,4 @@
 ## intent:exit
 - menu
 - cure
-- resources
+- info
