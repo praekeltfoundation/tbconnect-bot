@@ -1,3 +1,4 @@
+from json.decoder import JSONDecodeError
 from typing import Any, Dict, List, Text
 
 
@@ -37,10 +38,8 @@ def get_risk_templates(risk: Text, data: Dict[Any, Any]) -> List:
 
 
 def is_duplicate_error(response):
-    duplicate = False
     error = "tb check with this deduplication id already exists."
-
-    if response.content:
-        duplicate = error in response.json().get("deduplication_id", [])
-
-    return duplicate
+    try:
+        return error in response.json().get("deduplication_id", [])
+    except JSONDecodeError:
+        return False

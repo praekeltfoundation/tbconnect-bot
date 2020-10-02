@@ -321,7 +321,7 @@ class TestTBCheckForm:
     @pytest.mark.asyncio
     async def test_submit_to_healthconnect_duplicate_check(self):
         """
-        Submits the data to the eventstore in the correct format
+        Should ignore a duplicate contact error from healthconnect
         """
         base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
         base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
@@ -441,7 +441,7 @@ class TestOptInForm:
     @pytest.mark.asyncio
     async def test_submit_to_healthconnect_unknown_contact(self):
         """
-        Submits the data to the eventstore in the correct format
+        should not submit data if user has not completed a screening
         """
         base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
         base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
