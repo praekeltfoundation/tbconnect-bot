@@ -34,3 +34,13 @@ def get_risk_templates(risk: Text, data: Dict[Any, Any]) -> List:
         templates.append("utter_follow_up_request")
 
     return templates
+
+
+def is_duplicate_error(response):
+    duplicate = False
+    error = "tb check with this deduplication id already exists."
+
+    if response.content:
+        duplicate = error in response.json().get("deduplication_id", [])
+
+    return duplicate

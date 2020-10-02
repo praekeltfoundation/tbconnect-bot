@@ -583,9 +583,11 @@ class TBCheckForm(BaseFormAction):
                         resp = await client.post(url, json=post_data, headers=headers)
                         # TODO: remove print
                         print(resp.content)
-                        resp.raise_for_status()
+                        if not utils.is_duplicate_error(resp):
+                            resp.raise_for_status()
                         break
                 except httpx.HTTPError as e:
+                    print(e)
                     if i == config.HTTP_RETRIES - 1:
                         raise e
 
@@ -620,6 +622,10 @@ class OptInForm(Action):
             url = urljoin(
                 config.HEALTHCONNECT_URL, f"/v2/healthcheckuserprofile/{msisdn}/"
             )
+
+            if not tracker.get_slot("terms"):
+                dispatcher.utter_message(template="utter_do_tb_screening")
+                return []
 
             data = {
                 slot: tracker.get_slot(slot)
