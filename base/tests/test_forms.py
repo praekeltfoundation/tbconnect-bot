@@ -317,6 +317,55 @@ class TestTBCheckForm:
         base.actions.actions.config.HEALTHCONNECT_URL = None
         base.actions.actions.config.HEALTHCONNECT_TOKEN = None
 
+    @respx.mock
+    @pytest.mark.asyncio
+    async def test_submit_to_healthconnect_duplicate_check(self):
+        """
+        Should ignore a duplicate contact error from healthconnect
+        """
+        base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
+        base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
+
+        request = respx.post(
+            "https://healthconnect/v2/tbcheck/",
+            status_code=400,
+            content={
+                "deduplication_id": [
+                    "tb check with this deduplication id already exists."
+                ]
+            },
+        )
+
+        form = TBCheckForm()
+        dispatcher = CollectingDispatcher()
+        tracker = utils.get_tracker_for_slot_from_intent(
+            form,
+            "tracing",
+            "affirm",
+            {
+                "province": "wc",
+                "age": "18-39",
+                "symptoms_fever": "no",
+                "symptoms_cough": "yes",
+                "symptoms_sweat": "yes",
+                "symptoms_weight": "yes",
+                "exposure": "not sure",
+                "tracing": "yes",
+                "gender": "RATHER NOT SAY",
+                "city_location_coords": "+1.2-3.4",
+                "location_coords": "+3.4-1.2",
+                "location": "Cape Town, South Africa",
+            },
+        )
+        await form.submit(dispatcher, tracker, {})
+
+        assert request.called
+        # [(request, response)] = request.calls
+        # data = json.loads(request.stream.body)
+
+        base.actions.actions.config.HEALTHCONNECT_URL = None
+        base.actions.actions.config.HEALTHCONNECT_TOKEN = None
+
 
 class TestOptInForm:
     @respx.mock
@@ -339,6 +388,7 @@ class TestOptInForm:
             "terms",
             "opt_in",
             {
+                "terms": "yes",
                 "symptoms_fever": "no",
                 "symptoms_cough": "no",
                 "symptoms_sweat": "no",
@@ -373,7 +423,7 @@ class TestOptInForm:
         form = OptInForm()
         dispatcher = CollectingDispatcher()
         tracker = utils.get_tracker_for_slot_from_intent(
-            form, "terms", "opt_in", {"symptoms_cough": "yes"},
+            form, "terms", "opt_in", {"terms": "yes", "symptoms_cough": "yes"},
         )
         await form.run(dispatcher, tracker, {})
 
@@ -383,6 +433,29 @@ class TestOptInForm:
         assert data == {
             "data": {"follow_up_optin": True, "synced_to_tb_rapidpro": False}
         }
+
+        base.actions.actions.config.HEALTHCONNECT_URL = None
+        base.actions.actions.config.HEALTHCONNECT_TOKEN = None
+
+    @respx.mock
+    @pytest.mark.asyncio
+    async def test_submit_to_healthconnect_unknown_contact(self):
+        """
+        should not submit data if user has not completed a screening
+        """
+        base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
+        base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
+
+        request = respx.patch(
+            "https://healthconnect/v2/healthcheckuserprofile/+default/"
+        )
+
+        form = OptInForm()
+        dispatcher = CollectingDispatcher()
+        tracker = utils.get_tracker_for_slot_from_intent(form, "terms", "opt_in", {},)
+        await form.run(dispatcher, tracker, {})
+
+        assert not request.called
 
         base.actions.actions.config.HEALTHCONNECT_URL = None
         base.actions.actions.config.HEALTHCONNECT_TOKEN = None

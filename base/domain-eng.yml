@@ -37,6 +37,7 @@ actions:
   - utter_follow_up_request
   - utter_keywords
   - utter_opt_in_yes
+  - utter_do_tb_screening
 
 slots:
   terms:
@@ -279,12 +280,16 @@ responses:
         📌Reply *MENU* to return to the main menu
       claim: release
 
-
   utter_opt_in_yes:
     - text: |
         Thank you for choosing to receive follow-up messages.
 
         📌 Reply with *MENU* to return to the main menu
+      claim: release
+
+  utter_do_tb_screening:
+    - text: |
+        Please reply with *TB* to start your TB check.
       claim: release
 
 # claim: revert will ignore the message text, and reevaluate this message using
