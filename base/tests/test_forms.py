@@ -376,7 +376,6 @@ class TestOptInForm:
         """
         base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
         base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
-        base.actions.actions.config.LANGUAGE = "eng"
 
         request = respx.patch(
             "https://healthconnect/v2/healthcheckuserprofile/+default/"
@@ -416,7 +415,6 @@ class TestOptInForm:
         """
         base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
         base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
-        base.actions.actions.config.LANGUAGE = "eng"
 
         request = respx.patch(
             "https://healthconnect/v2/healthcheckuserprofile/+default/"
