@@ -36,3 +36,5 @@
 - e
 - ewe
 - yebo
+- aanvaar
+- anvaar

@@ -16,3 +16,4 @@
 - okuninzi
 - tse ding tse ngata
 - meer
+- lees

@@ -18,3 +18,4 @@ This is the main, public TBConnect bot.
 It has the following languages:
 
 `eng`: English
+`afr`: Afrikaans
