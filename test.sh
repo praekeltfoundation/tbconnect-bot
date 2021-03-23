@@ -14,7 +14,7 @@ fi
 
 black --check .
 isort -rc -c .
-mypy "$1"
+# mypy "$1"
 flake8 .
 py.test
 rasa data validate --data "$1/data" -d "$1/domain-$2.yml"

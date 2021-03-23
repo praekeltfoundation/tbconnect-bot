@@ -376,6 +376,7 @@ class TestOptInForm:
         """
         base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
         base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
+        base.actions.actions.config.LANGUAGE = "eng"
 
         request = respx.patch(
             "https://healthconnect/v2/healthcheckuserprofile/+default/"
@@ -402,7 +403,7 @@ class TestOptInForm:
         assert request.called
         [(request, response)] = request.calls
         data = json.loads(request.stream.body)
-        assert data == {"data": {"follow_up_optin": True}}
+        assert data == {"data": {"follow_up_optin": True}, "language": "eng"}
 
         base.actions.actions.config.HEALTHCONNECT_URL = None
         base.actions.actions.config.HEALTHCONNECT_TOKEN = None
@@ -415,6 +416,7 @@ class TestOptInForm:
         """
         base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
         base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
+        base.actions.actions.config.LANGUAGE = "eng"
 
         request = respx.patch(
             "https://healthconnect/v2/healthcheckuserprofile/+default/"
@@ -431,7 +433,8 @@ class TestOptInForm:
         [(request, response)] = request.calls
         data = json.loads(request.stream.body)
         assert data == {
-            "data": {"follow_up_optin": True, "synced_to_tb_rapidpro": False}
+            "data": {"follow_up_optin": True, "synced_to_tb_rapidpro": False},
+            "language": "eng",
         }
 
         base.actions.actions.config.HEALTHCONNECT_URL = None
