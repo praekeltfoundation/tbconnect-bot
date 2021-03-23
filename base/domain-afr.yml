@@ -1,0 +1,305 @@
+intents:
+  - request_tbcheck
+  - affirm
+  - deny
+  - inform
+  - maybe
+  - more
+  - chitchat
+  - address
+  - opt_in
+  - exit:
+      triggers: action_exit
+
+entities:
+  - province
+  - number
+
+actions:
+  - action_session_start
+  - action_exit
+  - action_opt_in
+  - utter_ask_terms
+  - utter_ask_age
+  - utter_ask_gender
+  - utter_ask_location
+  - utter_ask_location_confirm
+  - utter_ask_symptoms_cough
+  - utter_ask_symptoms_fever
+  - utter_ask_symptoms_sweat
+  - utter_ask_symptoms_weight
+  - utter_ask_exposure
+  - utter_ask_tracing
+  - utter_risk_high
+  - utter_risk_moderate
+  - utter_risk_low
+  - utter_risk_low_unknown_exposure
+  - utter_follow_up_request
+  - utter_keywords
+  - utter_opt_in_yes
+  - utter_do_tb_screening
+
+slots:
+  terms:
+    type: categorical
+    values:
+      - yes
+  age:
+    type: unfeaturized
+    auto_fill: false
+  gender:
+    type: unfeaturized
+    auto_fill: false
+  province:
+    type: unfeaturized
+    auto_fill: false
+  location:
+    type: unfeaturized
+    auto_fill: false
+  location_confirm:
+    type: unfeaturized
+    auto_fill: false
+  location_coords:
+    type: unfeaturized
+    auto_fill: false
+  city_location_coords:
+    type: unfeaturized
+    auto_fill: false
+  symptoms_cough:
+    type: unfeaturized
+    auto_fill: false
+  symptoms_fever:
+    type: unfeaturized
+    auto_fill: false
+  symptoms_sweat:
+    type: unfeaturized
+    auto_fill: false
+  symptoms_weight:
+    type: unfeaturized
+    auto_fill: false
+  exposure:
+    type: unfeaturized
+    auto_fill: false
+  tracing:
+    type: unfeaturized
+    auto_fill: false
+
+forms:
+  - tbcheck_form
+  - tbcheck_terms_form
+  - tbcheck_profile_form
+
+responses:
+  utter_welcome:
+      - text: |
+          *TB GesondheidsVraelys* is jou TB-kontrole vraelys. Dit kan aandui of jy getoets moet word vir TB.
+
+          ‘n TB-toets sal bevestig of jy TB het of nie. TB kan genees word. Dit tas gewoonlik die longe aan. Antwoord asseblief 'n paar vrae om raad te kry oor wat om volgende te doen.
+
+
+          Dankie dat jy beheer neem van jou gesondheid.
+
+  utter_welcome_back:
+      - text: |
+          Welkom terug by *TB GesondheidsVraelys*, jou TB-kontrole vraelys. Dankie dat jy beheer neem van jou gesondheid.
+
+  utter_ask_terms:
+      - text: |
+          Antwoord met een van die VETGEDRUKTE woorde om voort te gaan
+
+          *AANVAAR* ✅ - _om die bepalings en voorwaardes te aanvaar_
+          *LEES* 📄 - _om die bepalings en voorwaardes te lees_
+
+          (of Kies KIESLYS 📌 _om terug te gaan na die hoof-kieslys_)
+
+  utter_more_terms:
+      - text: |
+          Hierdie diens verskaf slegs inligting en is nie 'n plaasvervanger vir professionele mediese advies/diagnose/behandeling nie. Kry advies van 'n gekwalifiseerde gesondheidsdiens-verskaffer vir jou mediese toestand en -behandeling, veral as jy erge simptome ontwikkel.
+
+          Jy maak op eie risiko staat op hierdie inligting. Jy stem saam dat jy self verantwoordelik is vir jou mediese sorg en behandeling. Jy stem saam dat jy nie mediese advies sal ignoreer of behandeling sal uitstel as gevolg van hierdie diens nie.
+
+  utter_ask_province:
+    - text: |
+        In watter provinsie woon jy tans? Antwoord met 'n nommer van die lys:
+
+        *1.* OOSKAAP
+        *2.* VRYSTAAT
+        *3.* GAUTENG
+        *4.* KWAZULU-NATAL
+        *5.* LIMPOPO
+        *6.* MPUMALANGA
+        *7.* NOORDWES
+        *8.* NOORDKAAP
+        *9.* WESKAAP
+
+  utter_incorrect_selection:
+    - text: |
+        Hierdie diens werk die beste wanneer jy gebruik maak van die *VETGEDRUKTE* opsies.
+
+        📌 Antwoord met *KIESLYS* om na die hoof-kieslys terug te keer
+
+  # TODO: add translation
+  utter_incorrect_location:
+    - text: |
+        If you have typed your address incorrectly, please try again. If you are unable to provide your address, please TYPE the name of your Suburb, Township, Town or Village (or nearest)
+
+  utter_ask_age:
+    - text: |
+        Hoe oud is jy?
+
+        *1.* onder 18
+        *2.* 18-39
+        *3.* 40-65
+        *4.* oor 65
+
+  utter_ask_gender:
+    - text: |
+        As watter geslag identifiseer jy?
+
+        Antwoord met
+        *1.* MANLIK
+        *2.* VROULIK
+        *3.* ANDER
+        *4.* WIL LIEWER NIE SÊ NIE
+
+  utter_ask_location:
+    - text: |
+        Dankie. Nou benodig ons jou ligging.
+
+        TIK asseblief jou woonadres (of die adres waar jy tans woon) in. Gee die straatnommer, straatnaam, woonbuurt/township/stad/dorp
+
+  utter_ask_location_confirm:
+    - text: |
+        Ons gebruik Google Location Services om jou ligging te bevestig. Maak asseblief seker dat onderstaande adres korrek is en ooreenstem met die inligting wat jy vir ons gegee het:
+        {location}
+
+        Antwoord met
+        *1.* JA
+        *2.* NEE
+
+  utter_ask_symptoms_cough:
+    - text: |
+        ⬛⬜⬜⬜⬜⬜
+
+        Kom ons kyk hoe jy vandag voel. Hoes jy?
+
+        Antwoord 1 of 2
+        *1.* JA
+        *2.* NEE
+
+  utter_ask_symptoms_fever:
+    - text: |
+        ⬛⬛⬜⬜⬜⬜
+
+        Het jy koors? (wanneer jy aan jou voorkop raak, voel dit warm?)
+
+        Antwoord 1 of 2
+        *1.* JA
+        *2.* NEE
+
+  utter_ask_symptoms_sweat:
+    - text: |
+        ⬛⬛⬛⬜⬜⬜
+
+        Sweet jy snags meer as gewoonlik?
+
+        Antwoord met
+        *1.* JA
+        *2.* NEE
+
+  utter_ask_symptoms_weight:
+    - text: |
+        ⬛⬛⬛⬛⬜⬜
+
+        Verloor jy gewig sonder dat jy probeer?
+
+        Antwoord met
+        *1.* JA
+        *2.* NEE
+
+  utter_ask_exposure:
+    - text: |
+        ⬛⬛⬛⬛⬛⬜
+
+        Het jy 'n hoë risiko vir TB?
+
+        _Die kanse dat jy TB het is hoog indien:_
+        _Jy saam met iemand woon wat TB het/gehad het die afgelope jaar, OF as jy TB gehad die afgelope 2 jaar, OF as jy MIV-positief is._
+
+        Antwoord 1, 2 of 3
+        *1.* My risiko om TB te hê, is hoog
+        *2.* My risiko om TB te hê, is nie hoog nie
+        *3.* Ek weet nie of my risiko hoog is nie
+
+  utter_ask_tracing:
+    - text: |
+        ⬛⬛⬛⬛⬛⬛
+
+        Laastens, bevestig asseblief dat, sover jy weet, die inligting wat jy gegee het *korrek* is en dat jy die Nasionale Departement van Gesondheid toestemming gee om jou te kontak indien nodig?
+
+        Antwoord 1 of 2
+        *1.* JA
+        *2.* NEE
+
+  utter_risk_high:
+    - text: |
+        *Jou antwoorde op die vrae toon dat jy binne die volgende week vir 'n TB-toets moet gaan*
+
+        - Gaan na jou plaaslike kliniek vir 'n gratis TB-toets.
+        - Sit asseblief jou gesigmasker op voordat jy by die kliniek ingaan.
+
+  utter_risk_moderate:
+    - text: |
+        *Jou antwoorde op die vrae toon dat jy binne die volgende week vir 'n TB-toets moet gaan*
+
+        - Gaan na jou plaaslike kliniek vir 'n gratis TB-toets.
+        - Sit asseblief jou gesigmasker op voordat jy by die kliniek ingaan.
+
+  utter_risk_low:
+    - text: |
+        *Jou antwoorde op die vrae toon dat jy binne die volgende week vir 'n TB-toets moet gaan*
+
+        - Gaan na jou plaaslike kliniek vir 'n gratis TB-toets.
+        - Sit asseblief jou gesigmasker op voordat jy by die kliniek ingaan.
+
+  utter_risk_low_unknown_exposure:
+    - text: |
+        *Jy benodig nie tans 'n TB-toets nie.*
+
+        - Indien jy begin hoes, koors kry, gewig verloor of snags sweet, besoek jou naaste kliniek.
+
+  utter_follow_up_request:
+    - text: |
+        📲 Om opvolg-boodskappe te ontvang, antwoord *IN*
+      claim: release
+
+  utter_keywords:
+    - text: |
+        💊 Antwoord *GENESING* vir inligting oor behandeling
+        📗 Antwoord *BRONNE* vir inligting oor simptome en TB-toetsing
+        📌 Antwoord met *KIESLYS* om na die hoof-kieslys terug te keer"
+      claim: release
+
+  utter_opt_in_yes:
+    - text: |
+        Dankie dat jy gekies het om opvolg-boodskappe te ontvang.
+
+        📌 Antwoord met *KIESLYS* om na die hoof-kieslys terug te keer
+      claim: release
+
+  # TODO: add translation
+  utter_do_tb_screening:
+    - text: |
+        Please reply with *TB* to start your TB check.
+      claim: release
+
+  # claim: revert will ignore the message text, and reevaluate this message using
+  # turn automation
+  # TODO: add translation
+  utter_exit:
+    - text: "You can do your TB Check anytime by typing the word *TB*."
+      claim: revert
+
+session_config:
+  session_expiration_time: 5
+  carry_over_slots_to_new_session: true
