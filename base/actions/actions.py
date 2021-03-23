@@ -636,7 +636,10 @@ class OptInForm(Action):
 
             risk = utils.get_risk_level(data)
 
-            patch_data = {"data": {"follow_up_optin": True}}
+            patch_data: dict = {
+                "language": config.LANGUAGE,
+                "data": {"follow_up_optin": True},
+            }
 
             if risk != "low":
                 patch_data["data"]["synced_to_tb_rapidpro"] = False

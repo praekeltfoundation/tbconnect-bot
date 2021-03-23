@@ -402,7 +402,7 @@ class TestOptInForm:
         assert request.called
         [(request, response)] = request.calls
         data = json.loads(request.stream.body)
-        assert data == {"data": {"follow_up_optin": True}}
+        assert data == {"data": {"follow_up_optin": True}, "language": "eng"}
 
         base.actions.actions.config.HEALTHCONNECT_URL = None
         base.actions.actions.config.HEALTHCONNECT_TOKEN = None
@@ -431,7 +431,8 @@ class TestOptInForm:
         [(request, response)] = request.calls
         data = json.loads(request.stream.body)
         assert data == {
-            "data": {"follow_up_optin": True, "synced_to_tb_rapidpro": False}
+            "data": {"follow_up_optin": True, "synced_to_tb_rapidpro": False},
+            "language": "eng",
         }
 
         base.actions.actions.config.HEALTHCONNECT_URL = None

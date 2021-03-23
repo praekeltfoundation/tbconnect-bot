@@ -295,7 +295,6 @@ responses:
 
   # claim: revert will ignore the message text, and reevaluate this message using
   # turn automation
-  # TODO: add translation
   utter_exit:
     - text: "You can do your TB Check anytime by typing the word *TB*."
       claim: revert
