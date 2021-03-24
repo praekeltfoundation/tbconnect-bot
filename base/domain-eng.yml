@@ -260,6 +260,7 @@ responses:
 
         - If you develop cough, fever, weight loss or night sweats, visit your nearest clinic.
 
+  # TODO: fix this translation
   utter_risk_low_unknown_exposure:
     - text: |
         Check if the people you live with are on TB treatment.

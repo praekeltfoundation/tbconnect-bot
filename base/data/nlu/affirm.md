@@ -41,3 +41,4 @@
 - yamkela
 - amohela
 - ee
+- yamukela
