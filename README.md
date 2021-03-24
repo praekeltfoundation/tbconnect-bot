@@ -20,3 +20,4 @@ It has the following languages:
 `eng`: English
 `afr`: Afrikaans
 `xho`: Xhosa
+`sot`: Sesotho
