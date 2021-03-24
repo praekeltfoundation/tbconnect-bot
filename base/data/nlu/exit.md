@@ -10,3 +10,6 @@
 - izixhobo
 - pheko
 - mehlodi
+- uhlu
+- izinsiza
+- ikhambi

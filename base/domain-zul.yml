@@ -1,0 +1,304 @@
+intents:
+  - request_tbcheck
+  - affirm
+  - deny
+  - inform
+  - maybe
+  - more
+  - chitchat
+  - address
+  - opt_in
+  - exit:
+      triggers: action_exit
+
+entities:
+  - province
+  - number
+
+actions:
+  - action_session_start
+  - action_exit
+  - action_opt_in
+  - utter_ask_terms
+  - utter_ask_age
+  - utter_ask_gender
+  - utter_ask_location
+  - utter_ask_location_confirm
+  - utter_ask_symptoms_cough
+  - utter_ask_symptoms_fever
+  - utter_ask_symptoms_sweat
+  - utter_ask_symptoms_weight
+  - utter_ask_exposure
+  - utter_ask_tracing
+  - utter_risk_high
+  - utter_risk_moderate
+  - utter_risk_low
+  - utter_risk_low_unknown_exposure
+  - utter_follow_up_request
+  - utter_keywords
+  - utter_opt_in_yes
+  - utter_do_tb_screening
+
+slots:
+  terms:
+    type: categorical
+    values:
+      - yes
+  age:
+    type: unfeaturized
+    auto_fill: false
+  gender:
+    type: unfeaturized
+    auto_fill: false
+  province:
+    type: unfeaturized
+    auto_fill: false
+  location:
+    type: unfeaturized
+    auto_fill: false
+  location_confirm:
+    type: unfeaturized
+    auto_fill: false
+  location_coords:
+    type: unfeaturized
+    auto_fill: false
+  city_location_coords:
+    type: unfeaturized
+    auto_fill: false
+  symptoms_cough:
+    type: unfeaturized
+    auto_fill: false
+  symptoms_fever:
+    type: unfeaturized
+    auto_fill: false
+  symptoms_sweat:
+    type: unfeaturized
+    auto_fill: false
+  symptoms_weight:
+    type: unfeaturized
+    auto_fill: false
+  exposure:
+    type: unfeaturized
+    auto_fill: false
+  tracing:
+    type: unfeaturized
+    auto_fill: false
+
+forms:
+  - tbcheck_form
+  - tbcheck_terms_form
+  - tbcheck_profile_form
+
+responses:
+  utter_welcome:
+      - text: |
+          *I-TB HealthCheck* iyithuluzi lakho lokuhlola i-TB. Lokhu kungakutshela uma udinga ukuhlolwa kwe-TB.
+
+          Ukuhlolelwa i-TB kuzokutshela uma une-TB noma cha. I-TB iyisifo eselaphekayo. Ijwayele ukuthinta amaphaphu. Sicela uphendule imibuzo embalwa ukuthola iseluleko sokuthi uzokwenzenjani ngokulandelayo.
+
+
+          Siyabonga ngokulawula impilo yakho.
+
+  utter_welcome_back:
+      - text: |
+          Siyakwamukela futhi ku- *TB HealthCheck*, ithuluzi lakho lokuhlola i-TB. Siyabonga ngokulawula impilo yakho.
+
+  utter_ask_terms:
+      - text: |
+          Phendula ngegama elilodwa kulawa AGQAMILE ukuze uqhubeke
+
+          *YAMUKELA* ✅ -_ukwamukela imigomo nemibandela_
+          *FUNDA* 📄 - _ukufunda imigomo nemibandela_
+
+          (noma Phendula UHLU 📌 _ukubuyela kuhlu lokuqala_)
+
+  utter_more_terms:
+      - text: |
+          Le sevisi inikeza imininingwane kuphela futhi ayithathi indawo yezeluleko zezokwelapha/ukuxilongwa/ukwelashwa. Thola izeluleko zomhlinzeki wezempilo oqeqeshiwe mayelana nesimo sakho sezempilo/ ukunakekelwa, ikakhulukazi uma uba nezimpawu ezinzima.
+
+          Thembela kulolu lwazi ngokuzibeka wena engcupheni. Uyavuma ukuthi unesibopho sokunakekelwa nokwelashwa kwakho. Uyavuma ukuthi akufanele ukushaye indiva/ukubambezeleka kokuthola iseluleko sezokwelapha mayelana nokwelashwa /ukunakekelwa ngenxa yale nsizakalo.
+
+  utter_ask_province:
+    - text: |
+        Usuhlala kusiphi isifundazwe manje? Phendula ngenombolo kusuka kuhlu:
+
+        *1.* EASTERN CAPE
+        *2.* FREE STATE
+        *3.* GAUTENG
+        *4.* KWAZULU NATAL
+        *5.* LIMPOPO
+        *6.* MPUMALANGA
+        *7.* NORTH WEST
+        *8.* NORTHERN CAPE
+        *9.* WESTERN CAPE
+
+  utter_incorrect_selection:
+    - text: |
+        Le sevisi isebenza kahle kakhulu uma usebenzisa izinketho ezinikezwe *NGOKUQGAMILE*.
+
+        📌 Phendula ngo *UHLU* ukubuyela kuhlu lokuqala
+
+  utter_incorrect_location:
+    - text: |
+        Uma uthayiphe ikheli lakho ngokungeyikho, sicela uzame futhi. Uma ungakwazi ukuhlinzeka ngekheli lakho, sicela UTHAYIPHE igama ledolobha lakho, ilokishi, idolobha noma idolobhana (noma eliseduzane)
+
+  utter_ask_age:
+    - text: |
+        Uneminyaka emingaki
+
+        *1.* ngaphansi kwa-18
+        *2.* 18-39
+        *3.* 40-65
+        *4.* ngaphezu kwa-65
+
+  utter_ask_gender:
+    - text: |
+        Ubuphi ubulili ozibona uyibo?
+
+        Phendula
+        *1.* OWESILISA
+        *2.* OWESIFAZANE
+        *3.* OKUNYE*
+        *4.* NGINCAMELA UKUNGASHO*
+
+  utter_ask_location:
+    - text: |
+        Siyabonga. Manje sidinga indawo okuyo.
+
+        Sicela UTHAYIPHE ikheli lakho lasekhaya (noma ikheli ohlala kulo njengamanje). Nikeza inombolo yomgwaqo, igama lomgwaqo, i-suburb/ilokishi/idolobha/isigodi
+
+  utter_ask_location_confirm:
+    - text: |
+        Sisebenzisa amasevisi e-location e-Google ukuqinisekisa indawo okuyo. Sicela ubheke ukuthi ikheli elingezansi lilungile futhi lihambisana nemininingwane osinike yona:
+        {location}
+
+        Phendula
+        *1.* YEBO
+        *2.* CHA
+
+  utter_ask_symptoms_cough:
+    - text: |
+        ⬛⬜⬜⬜⬜⬜
+
+        Asibone ukuthi uzizwa kanjani namuhla. Uyakhwehlela?
+
+        Phendula 1 noma 2
+        *1.* YEBO
+        *2.* CHA
+
+  utter_ask_symptoms_fever:
+    - text: |
+        ⬛⬛⬜⬜⬜⬜
+
+        Unemfiva? (uma uthina isiphongo sakho, usizwa sishisa?)
+
+        Phendula 1 noma 2
+        *1.* YEBO
+        *2.* CHA
+
+  utter_ask_symptoms_sweat:
+    - text: |
+        ⬛⬛⬛⬜⬜⬜
+
+        Ingabe ujuluka ngaphezu kokujwayelekile ebusuku?
+
+        Phendula
+        *1.* YEBO
+        *2.* CHA
+
+  utter_ask_symptoms_weight:
+    - text: |
+        ⬛⬛⬛⬛⬜⬜
+
+        Ngabe uyancipha emzimbeni ngaphandle kokuzama?
+
+        Phendula
+        *1.* YEBO
+        *2.* CHA
+
+  utter_ask_exposure:
+    - text: |
+        ⬛⬛⬛⬛⬛⬜
+
+        Ingabe usengozini enkulu ye-TB?
+
+        _Usengozini enkulu ye-TB uma:_
+        _Uhlala nomuntu one/oke waba ne-TB eminyakeni emi-2 edlule NOMA wena uke waba ne-TB eminyakeni emi-2 edlule, NOMA wena uphila une-HIV._
+
+        Phendula 1, 2 noma 3
+        *1.* Ngisengozini enkulu yokuba ne-TB
+        *2.* Angikho engozini enkulu ye-TB
+        *3.* Angazi noma ngisengozini enkulu yini
+
+  utter_ask_tracing:
+    - text: |
+        ⬛⬛⬛⬛⬛⬛
+
+        Ekugcineni, ngicela uvume ukuthi imininingwane owabelane ngayo *iyiqiniso* ngokwazi kwakho nokuthi unikeza uMnyango Wezempilo Kazwelonke ukuthi uxhumane nawe uma kudingeka?
+
+        Phendula 1 noma 2
+        *1.* YEBO
+        *2.* CHA
+
+  utter_risk_high:
+    - text: |
+        *Izimpendulo zakho kule mibuzo zibonisa ukuthi udinga ukuhlolwa i-TB kungakapheli isonto elizayo*
+
+        - Iya emtholampilo engakini uyohlolelwa i-TB yamahhala.
+        - Sicela ufake isifonyo sobuso ngaphambi kokungena emtholampilo
+
+  utter_risk_moderate:
+    - text: |
+        *Izimpendulo zakho kule mibuzo zibonisa ukuthi udinga ukuhlolwa i-TB kungakapheli isonto elizayo*
+
+        - Iya emtholampilo engakini uyohlolelwa i-TB yamahhala.
+        - Sicela ufake isifonyo sobuso ngaphambi kokungena emtholampilo
+
+  utter_risk_low:
+    - text: |
+        *Awudingi ukuhlolwa kwe-TB ngalesi sikhathi.*
+
+        - Uma uba nokukhwehlela, imfiva, ukuncipha ngokomzimba noma ukujuluka ebusuku, vakashela umtholampilo oseduzane nawe.
+
+  # TODO: fix this translation
+  utter_risk_low_unknown_exposure:
+    - text: |
+        Check if the people you live with are on TB treatment.
+
+        If you do not know your HIV status, please go to the clinic for a free HIV test.
+
+        Come back and do the TB check again when you have this information.
+
+  utter_follow_up_request:
+    - text: |
+        📲 Ukuze uthole imilayezo yokulandelela, phendula *IN*
+      claim: release
+
+  utter_keywords:
+    - text: |
+        💊 Phendula *IKHAMBI* ukuthola imininingwane mayelana nokwelashwa
+        📗 Phendula ngo- *IZINSIZA* ukuze uthole ulwazi mayelana nezimpawu nokuhlolelwa i-TB
+        📌 Phendula ngo *UHLU* ukubuyela kuhlu lokuqala
+      claim: release
+
+  utter_opt_in_yes:
+    - text: |
+        Siyabonga ngokukhetha ukuthola imilayezo ezolandelela.
+
+        📌  Phendula ngo *UHLU* ukubuyela kuhlu lokuqala
+      claim: release
+
+  utter_do_tb_screening:
+    - text: |
+        Sicela uphendule ngo- *TB* ukuqala ukuhlolwa kwakho kwe-TB.
+      claim: release
+
+# claim: revert will ignore the message text, and reevaluate this message using
+# turn automation
+  utter_exit:
+    - text: "Ungayihlola i-TB yakho noma yinini ngokuthayipha igama elithi *TB*."
+      claim: revert
+
+session_config:
+  session_expiration_time: 5
+  carry_over_slots_to_new_session: true

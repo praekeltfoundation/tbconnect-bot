@@ -21,3 +21,4 @@ It has the following languages:
 `afr`: Afrikaans
 `xho`: Xhosa
 `sot`: Sesotho
+`zul`: Zulu

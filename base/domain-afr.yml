@@ -256,11 +256,11 @@ responses:
 
   utter_risk_low:
     - text: |
-        *Jou antwoorde op die vrae toon dat jy binne die volgende week vir 'n TB-toets moet gaan*
+        *Jy benodig nie tans 'n TB-toets nie.*
 
-        - Gaan na jou plaaslike kliniek vir 'n gratis TB-toets.
-        - Sit asseblief jou gesigmasker op voordat jy by die kliniek ingaan.
+        - Indien jy begin hoes, koors kry, gewig verloor of snags sweet, besoek jou naaste kliniek.
 
+  # TODO: fix this translation
   utter_risk_low_unknown_exposure:
     - text: |
         *Jy benodig nie tans 'n TB-toets nie.*

@@ -33,7 +33,6 @@
 - ya
 - Ohh ohk
 - ja
-- e
 - ewe
 - yebo
 - aanvaar
@@ -41,3 +40,4 @@
 - yamkela
 - amohela
 - ee
+- yamukela

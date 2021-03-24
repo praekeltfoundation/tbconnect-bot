@@ -256,11 +256,11 @@ responses:
 
   utter_risk_low:
     - text: |
-        *Iimpendulo zakho kule mibuzo zibonisa ukuba udinga uvavanyo lwe-TB kwiveki ezayo*
+        *Akudingi vavanyo lwe-TB ngeli xesha.*
 
-        - Yiya kwikliniki yakho yengingqi uyofumana uvavanyo lwe-TB lwasimahla
-        - Nceda unxibe imaski yobuso phambi kokuba ungene eklinikhi.
+        - Ukuba ngaba uyakhohlela, unomkhuhlane, ukunciphisa umzimba okanye ukubila ebusuku, ndwendwela iklinikhi ekufutshane nawe.
 
+  # TODO: fix this translation
   utter_risk_low_unknown_exposure:
     - text: |
         *Akudingi vavanyo lwe-TB ngeli xesha.*
