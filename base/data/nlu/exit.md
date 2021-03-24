@@ -5,3 +5,6 @@
 - kieslys
 - genesing
 - bronne
+- imenyu
+- unyango
+- izixhobo

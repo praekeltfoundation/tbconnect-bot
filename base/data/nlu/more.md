@@ -17,3 +17,4 @@
 - tse ding tse ngata
 - meer
 - lees
+- funda

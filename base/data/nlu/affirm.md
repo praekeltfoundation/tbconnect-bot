@@ -38,3 +38,4 @@
 - yebo
 - aanvaar
 - anvaar
+- yamkela
