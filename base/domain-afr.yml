@@ -138,10 +138,9 @@ responses:
 
         📌 Antwoord met *KIESLYS* om na die hoof-kieslys terug te keer
 
-  # TODO: add translation
   utter_incorrect_location:
     - text: |
-        If you have typed your address incorrectly, please try again. If you are unable to provide your address, please TYPE the name of your Suburb, Township, Town or Village (or nearest)
+        Indien jy jou adres verkeerd getik het, probeer asseblief weer. Indien jy nie daartoe in staat is om jou adres te verskaf nie, TIK asseblief die naam van jou Woonbuurt, Informele Nedersetting, Dorp of Dorpie (of naaste)
 
   utter_ask_age:
     - text: |
@@ -287,16 +286,15 @@ responses:
         📌 Antwoord met *KIESLYS* om na die hoof-kieslys terug te keer
       claim: release
 
-  # TODO: add translation
   utter_do_tb_screening:
     - text: |
-        Please reply with *TB* to start your TB check.
+        Reageer asseblief met *TB* om jou TB-check te begin.
       claim: release
 
   # claim: revert will ignore the message text, and reevaluate this message using
   # turn automation
   utter_exit:
-    - text: "You can do your TB Check anytime by typing the word *TB*."
+    - text: "Jy kan jou TB-Check enige tyd doen deur die woord *TB* te tik."
       claim: revert
 
 session_config:

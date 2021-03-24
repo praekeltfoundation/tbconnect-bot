@@ -138,10 +138,9 @@ responses:
 
         📌 Phendula uthi *IMENYU* ukuze ubuyele kwi menyu yakuqala
 
-  # TODO: add translation
   utter_incorrect_location:
     - text: |
-        If you have typed your address incorrectly, please try again. If you are unable to provide your address, please TYPE the name of your Suburb, Township, Town or Village (or nearest)
+        Ukuba idilesi yakho uyibhudile, cela uphinde uzame ukuyibhala kakuhle. Ukuba awuzukwazi ukubhala idilesi, bhala igama lenginqi, ilokishi, idolophi okanye ilali yakho (okanye esondelene nawe)
 
   utter_ask_age:
     - text: |
@@ -287,16 +286,15 @@ responses:
         📌 Phendula uthi *IMENYU* ukuze ubuyele kwi menyu yakuqala
       claim: release
 
-  # TODO: add translation
   utter_do_tb_screening:
     - text: |
-        Please reply with *TB* to start your TB check.
+        Phendula ubhale TB ukuze uzoqala ukuhlolelwa i-TB
       claim: release
 
 # claim: revert will ignore the message text, and reevaluate this message using
 # turn automation
   utter_exit:
-    - text: "You can do your TB Check anytime by typing the word *TB*."
+    - text: "Ukuhlolelwa I-TB ungakwenza noba kunini ngokubhala igama *TB*"
       claim: revert
 
 session_config:
