@@ -18,3 +18,4 @@
 - meer
 - lees
 - funda
+- bala

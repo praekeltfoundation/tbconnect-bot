@@ -8,3 +8,5 @@
 - imenyu
 - unyango
 - izixhobo
+- pheko
+- mehlodi

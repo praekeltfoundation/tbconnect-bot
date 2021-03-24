@@ -1,0 +1,302 @@
+intents:
+  - request_tbcheck
+  - affirm
+  - deny
+  - inform
+  - maybe
+  - more
+  - chitchat
+  - address
+  - opt_in
+  - exit:
+      triggers: action_exit
+
+entities:
+  - province
+  - number
+
+actions:
+  - action_session_start
+  - action_exit
+  - action_opt_in
+  - utter_ask_terms
+  - utter_ask_age
+  - utter_ask_gender
+  - utter_ask_location
+  - utter_ask_location_confirm
+  - utter_ask_symptoms_cough
+  - utter_ask_symptoms_fever
+  - utter_ask_symptoms_sweat
+  - utter_ask_symptoms_weight
+  - utter_ask_exposure
+  - utter_ask_tracing
+  - utter_risk_high
+  - utter_risk_moderate
+  - utter_risk_low
+  - utter_risk_low_unknown_exposure
+  - utter_follow_up_request
+  - utter_keywords
+  - utter_opt_in_yes
+  - utter_do_tb_screening
+
+slots:
+  terms:
+    type: categorical
+    values:
+      - yes
+  age:
+    type: unfeaturized
+    auto_fill: false
+  gender:
+    type: unfeaturized
+    auto_fill: false
+  province:
+    type: unfeaturized
+    auto_fill: false
+  location:
+    type: unfeaturized
+    auto_fill: false
+  location_confirm:
+    type: unfeaturized
+    auto_fill: false
+  location_coords:
+    type: unfeaturized
+    auto_fill: false
+  city_location_coords:
+    type: unfeaturized
+    auto_fill: false
+  symptoms_cough:
+    type: unfeaturized
+    auto_fill: false
+  symptoms_fever:
+    type: unfeaturized
+    auto_fill: false
+  symptoms_sweat:
+    type: unfeaturized
+    auto_fill: false
+  symptoms_weight:
+    type: unfeaturized
+    auto_fill: false
+  exposure:
+    type: unfeaturized
+    auto_fill: false
+  tracing:
+    type: unfeaturized
+    auto_fill: false
+
+forms:
+  - tbcheck_form
+  - tbcheck_terms_form
+  - tbcheck_profile_form
+
+responses:
+  utter_welcome:
+      - text: |
+          *TB HealthCheck* ke sesebediswa sa hao sa ho hlahloba TB. Sena se ka ho jwetsa haeba o hloka tlhahlobo ya TB.
+
+          Tlhahlobo ya TB e tla o jwetsa haeba o na le TB kapa tjhee. TB ke lefu le phekolehang. Hangata e ama matshwafo. Ka kopo araba dipotso tse mmalwa ho fumana dikeletso mabapi le seo o lokelang ho se etsa kamoraho ha moo.
+
+
+          Ke ya leboha ha o laola bophelo ba hao.
+
+  utter_welcome_back:
+      - text: |
+          Re ya o amohela hape ho *TB HealthCheck*, sesebediswa sa hao sa ho lekola TB. Ke ya leboha ha o laola bophelo ba hao.
+
+  utter_ask_terms:
+      - text: |
+          Araba ka le leng la mantswe a MATENYA ho tswela pele
+
+          *AMOHELA* ✅ - _ho amohela dipallo le dipehelo_
+          *BALA* 📄 - _ho bala dipallo le dipehelo_
+
+          (kapa Araba LENANEHO 📌 _ho kgutlela ho lenaneho la mantlha_)
+
+  utter_more_terms:
+      - text: |
+          Tshebeletso ena e fana ka lesedi feela mme ha e nke sebaka sa boeletsi ba bongaka/tlhahlobo ya bolwetse/kalafo. Fumana boeletsi ba mofani wa bophelo bo botle ka boemo ba hao ba bongaka/tlhokomelo, haholoholo haeba o ba le matshwao a kotsi haholo.
+
+          O itshetleha ka lesedi lena ka ho ipeha kotsing. Oa dumela hore ke wena ya ikarabellang bakeng sa tlhokomelo le kalafo ya hao ya bongaka. O dumela hore ha wa lokela ho hlokomoloha/ho dieha ho fumana boeletsi ba bongaka mabapi le kalafo/tlhokomelo ka lebaka la tshebeletso ena.
+
+  utter_ask_province:
+    - text: |
+        O dula porofenseng efe hona jwale? Araba ka nomoro ho tswa lenaneng:
+
+        *1.* KAPA BOTJHABELA
+        *2.* FOREISETATA
+        *3.* GAUTENG
+        *4.* KWAZULU NATAL
+        *5.* LIMPOPO
+        *6.* MPUMALANGA
+        *7.* LEBOWA BOPHIRIMELA
+        *8.* KAPA LEBOWA
+        *9.* KAPA BOPHIRIMA
+
+  utter_incorrect_selection:
+    - text: |
+        Tshebeletso ena e sebetsa hantle ha o sebedisa dikgetho tse fanweng ka *BOTENYA*.
+
+        📌 Araba *MENU* ho kgutlela ho menu o ka sehloohong
+
+  utter_incorrect_location:
+    - text: |
+        Haeba o thaepile aterese ya hao ka mokgwa o fosahetseng, ka kopo leka hape. Haeba ha o kgone ho fana ka aterese ya hao, ka kopo THAEPA lebitso la Suburb, Lekeishini, Toropo kapa Motse (kapa ho haufinyane)
+
+  utter_ask_age:
+    - text: |
+        O dilemo di kae?
+
+        *1.* Ka tlase ho dilemo tse 18
+        *2.* 18-39
+        *3.* 40-65
+        *4.* tse fetang 65
+
+  utter_ask_gender:
+    - text: |
+        O kgetha bong bofe?
+
+        Araba
+        *1.* MONNA
+        *2.* MOSADI
+        *3.* HO HONG
+        *4.* HA KE RATE HO TJHO
+
+  utter_ask_location:
+    - text: |
+        Ke ya leboha. Jwale re hloka sebaka seo o leng ho sona.
+
+        Ka kopo NGOLA aterese ya lapeng (kapa aterese eo o dulang ho yona hona jwale). Fana ka nomoro ya seterata, lebitso la seterata, motse-toropong/lekeishene/ toropo/motseng
+
+  utter_ask_location_confirm:
+    - text: |
+        Re sebedisa Google Location Services ho netefatsa sebaka seo o leng ho sona. Ka kopo netefatsa hore aterese e ka tlase e nepahetse mme e tshwana le tlhaiso-leseding eo o faneng ka yona:
+        {location}
+
+        Araba
+        *1.* EE
+        *2.* TJHEE
+
+  utter_ask_symptoms_cough:
+    - text: |
+        ⬛⬜⬜⬜⬜⬜
+
+        Ha re bone hore na o ikutlwa jwang kajeno. Na o a kgohlola?
+
+        Araba 1 kapa 2
+        *1.* EE
+        *2.* TJHEE
+
+  utter_ask_symptoms_fever:
+    - text: |
+        ⬛⬛⬜⬜⬜⬜
+
+        O na le feberu? (ha o tshwara phatla ya hao, na e utlwa e tjhesa? )
+
+        Araba 1 kapa 2
+        *1.* EE
+        *2.* TJHEE
+
+  utter_ask_symptoms_sweat:
+    - text: |
+        ⬛⬛⬛⬜⬜⬜
+
+        Na o fufulelwa ho feta ka moo ho tlwaelehileng bosiu?
+
+        Araba 1 kapa 2
+        *1.* EE
+        *2.* TJHEE
+
+  utter_ask_symptoms_weight:
+    - text: |
+        ⬛⬛⬛⬛⬜⬜
+
+        Na o ntse o theola boima ba mmele o sa leke ho etsa jwalo?
+
+        Araba 1 kapa 2
+        *1.* EE
+        *2.* TJHEE
+
+  utter_ask_exposure:
+    - text: |
+        ⬛⬛⬛⬛⬛⬜
+
+        Na o kotsing e kgolo ya TB?
+
+        _O kotsing e kgolo ya TB haeba:_
+        _O dula le motho ya nang kapa ya ileng a ba le TB selemong se fetileng, KAPA o bile le TB dilemong tse 2 tse fetileng, KAPA o phela le tshwaetso ya HIV._
+
+        Araba 1, 2 kapa 3
+        *1.* Ke kotsing e kgolo ya TB
+        *2.* Ha ke kotsing e kgolo ya TB
+        *3.* Ha ke tsebe hore na ke kotsing e kgolo
+
+  utter_ask_tracing:
+    - text: |
+        ⬛⬛⬛⬛⬛⬛
+
+        Qetellong, ka kopo dumela hore tlhaiso-leseding eo o e arolelaneng e *nepahetse* ho latela tsebo ya hao le hore o fa Lefapha la Naha la Bophelo tumello ya ho ikopanya le wena ha ho hlokahala?
+
+        Araba 1 kapa 2
+        *1.* EE
+        *2.* TJHEE
+
+  utter_risk_high:
+    - text: |
+        *Dikarabo tsa hao dipotsong di bontsha hore o hloka tlhahlobo ya TB bekeng e tlang*
+
+        - E-ya tleliniking ya heno bakeng sa tlhahlobo ya mahala ya TB.
+        - Ka kopo, apara maske wa sefahleho pele o kena tleliniking
+
+  utter_risk_moderate:
+    - text: |
+        *Dikarabo tsa hao dipotsong di bontsha hore o hloka tlhahlobo ya TB bekeng e tlang*
+
+        - E-ya tleliniking ya heno bakeng sa tlhahlobo ya mahala ya TB.
+        - Ka kopo, apara maske wa sefahleho pele o kena tleliniking
+
+  utter_risk_low:
+    - text: |
+        *Dikarabo tsa hao dipotsong di bontsha hore o hloka tlhahlobo ya TB bekeng e tlang*
+
+        - E-ya tleliniking ya heno bakeng sa tlhahlobo ya mahala ya TB.
+        - Ka kopo, apara maske wa sefahleho pele o kena tleliniking
+
+  utter_risk_low_unknown_exposure:
+    - text: |
+        *Ha o hloke tlhahlobo ya TB ka nako ena.*
+
+        - Haeba o ba le ho kgohlola, feberu, ho theoha ha boima ba mmele kapa mofufutso bosiu, etela tleliniki e haufinyane.
+
+  utter_follow_up_request:
+    - text: |
+        📲 Ho fumana melaetsa ya tatello, araba *IN*
+      claim: release
+
+  utter_keywords:
+    - text: |
+        💊 Araba *PHEKO* bakeng sa tlhaiso-leseding ka kalafo
+        📗 Araba *MEHLODI* bakeng sa tlhaiso-leseding ka matshwao le teko ya TB
+        📌 Araba *MENU* ho kgutlela ho menu o ka sehloohong
+      claim: release
+
+  utter_opt_in_yes:
+    - text: |
+        Re leboha ha o kgethile ho fumana melaetsa ya rona ya tshalo-morao.
+
+        📌 Araba *MENU* ho kgutlela ho menu o ka sehloohong
+      claim: release
+
+  utter_do_tb_screening:
+    - text: |
+        Ka kopo araba ka *TB* ho qala tlhahlobo ya TB.
+      claim: release
+
+# claim: revert will ignore the message text, and reevaluate this message using
+# turn automation
+  utter_exit:
+    - text: "O ka etsa tlhahlobo ya hao ya TB nako efe kapa efe ka ho thaepa lentswe *TB*."
+      claim: revert
+
+session_config:
+  session_expiration_time: 5
+  carry_over_slots_to_new_session: true

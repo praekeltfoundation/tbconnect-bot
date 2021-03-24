@@ -39,3 +39,5 @@
 - aanvaar
 - anvaar
 - yamkela
+- amohela
+- ee
