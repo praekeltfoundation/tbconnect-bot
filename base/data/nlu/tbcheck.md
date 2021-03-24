@@ -15,3 +15,8 @@
 - Check my symptoms
 - I have a fever! Do I have covid?
 - check
+- A
+- B
+- C
+- D
+- E
