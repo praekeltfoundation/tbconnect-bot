@@ -260,12 +260,13 @@ responses:
 
         - Haeba o ba le ho kgohlola, feberu, ho theoha ha boima ba mmele kapa mofufutso bosiu, etela tleliniki e haufinyane.
 
-  # TODO: fix this translation
   utter_risk_low_unknown_exposure:
     - text: |
-        *Ha o hloke tlhahlobo ya TB ka nako ena.*
+        Sheba haeba batho bao o phelang le bona ba kalafong ya TB.
 
-        - Haeba o ba le ho kgohlola, feberu, ho theoha ha boima ba mmele kapa mofufutso bosiu, etela tleliniki e haufinyane.
+        Haeba I sa tsebe boemo ba hao ba HIV, ka kopo e-ya tleliniking bakeng sa tlhahlobo ya HIV ya mahala.
+
+        Kgutla mme o etse tlhahlobo ya TB hape ha o na le lesedi lena.
 
   utter_follow_up_request:
     - text: |

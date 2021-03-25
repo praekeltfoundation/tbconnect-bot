@@ -260,14 +260,13 @@ responses:
 
         - Uma uba nokukhwehlela, imfiva, ukuncipha ngokomzimba noma ukujuluka ebusuku, vakashela umtholampilo oseduzane nawe.
 
-  # TODO: fix this translation
   utter_risk_low_unknown_exposure:
     - text: |
-        Check if the people you live with are on TB treatment.
+        Bheka ukuthi abantu ohlala nabo abekho yini kwi'treatment.
 
-        If you do not know your HIV status, please go to the clinic for a free HIV test.
+        Uma ungasazi isimo sakho seNculazi sicela uye emtholampilo uyohlolela iNculazi mahala.
 
-        Come back and do the TB check again when you have this information.
+        Ubuye uhlolele iTB futhi uma usunolwazi lwakho lokhu.
 
   utter_follow_up_request:
     - text: |

@@ -260,12 +260,13 @@ responses:
 
         - Ukuba ngaba uyakhohlela, unomkhuhlane, ukunciphisa umzimba okanye ukubila ebusuku, ndwendwela iklinikhi ekufutshane nawe.
 
-  # TODO: fix this translation
   utter_risk_low_unknown_exposure:
     - text: |
-        *Akudingi vavanyo lwe-TB ngeli xesha.*
+        Jonga abo uhlala nabo bakunyango lwe TB na.
 
-        - Ukuba ngaba uyakhohlela, unomkhuhlane, ukunciphisa umzimba okanye ukubila ebusuku, ndwendwela iklinikhi ekufutshane nawe.
+        Ukuba awusazi isimo sakho se HIV yiya eklinikhi uhlolwe mahala.
+
+        Buya wenze uhlolo lwe TB kwakhona xa unolulwazi.
 
   utter_follow_up_request:
     - text: |

@@ -260,12 +260,13 @@ responses:
 
         - Indien jy begin hoes, koors kry, gewig verloor of snags sweet, besoek jou naaste kliniek.
 
-  # TODO: fix this translation
   utter_risk_low_unknown_exposure:
     - text: |
-        *Jy benodig nie tans 'n TB-toets nie.*
+        Kyk of die mense met wie jy woon op TB-behandeling is.
 
-        - Indien jy begin hoes, koors kry, gewig verloor of snags sweet, besoek jou naaste kliniek.
+        Indien jy nie bewus is van jou HIV-status nie, besoek asseblief jou kliniek vir 'n gratis toets.
+
+        Kom terug en doen weer die TB-check sodra jy jou uitslae het.
 
   utter_follow_up_request:
     - text: |
@@ -276,7 +277,7 @@ responses:
     - text: |
         💊 Antwoord *GENESING* vir inligting oor behandeling
         📗 Antwoord *BRONNE* vir inligting oor simptome en TB-toetsing
-        📌 Antwoord met *KIESLYS* om na die hoof-kieslys terug te keer"
+        📌 Antwoord met *KIESLYS* om na die hoof-kieslys terug te keer
       claim: release
 
   utter_opt_in_yes:
