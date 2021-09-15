@@ -156,6 +156,11 @@ class TBCheckProfileForm(BaseFormAction):
         "location_confirm",
     ]
 
+    MINOR_SKIP_SLOTS = [
+        "location",
+        "location_confirm",
+    ]
+
     def name(self) -> Text:
         """Unique identifier of the form"""
 
@@ -170,6 +175,11 @@ class TBCheckProfileForm(BaseFormAction):
         # To prevent that, we just tell Rasa with each message that the slots
         # that it's required to fill is just a single slot, the first
         # slot that hasn't been filled yet.
+
+        if tracker.get_slot("age") == "<18":
+            for slot in cls.MINOR_SKIP_SLOTS:
+                if slot in slots:
+                    slots.remove(slot)
 
         for slot in slots:
             if not tracker.get_slot(slot):
@@ -216,7 +226,10 @@ class TBCheckProfileForm(BaseFormAction):
         tracker: Tracker,
         domain: Dict[Text, Any],
     ) -> Dict[Text, Optional[Text]]:
-        return self.validate_generic("age", dispatcher, value, self.age_data)
+        result = self.validate_generic("age", dispatcher, value, self.age_data)
+        if result.get("age") == "<18":
+            result["location"] = "<not collected>"
+        return result
 
     def validate_gender(
         self,
