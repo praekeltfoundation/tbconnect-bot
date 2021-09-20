@@ -320,7 +320,7 @@ class TestTBCheckForm:
 
         base.actions.actions.config.HEALTHCONNECT_URL = None
         base.actions.actions.config.HEALTHCONNECT_TOKEN = None
-    
+
     @respx.mock
     @pytest.mark.asyncio
     async def test_submit_18_minor_to_healthconnect(self):
