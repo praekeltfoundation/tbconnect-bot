@@ -323,6 +323,63 @@ class TestTBCheckForm:
 
     @respx.mock
     @pytest.mark.asyncio
+    async def test_submit_18_minor_to_healthconnect(self):
+        """
+        Submits the data to the eventstore in the correct format
+        """
+        base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
+        base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
+
+        request = respx.post("https://healthconnect/v2/tbcheck/")
+
+        form = TBCheckForm()
+        dispatcher = CollectingDispatcher()
+        tracker = utils.get_tracker_for_slot_from_intent(
+            form,
+            "tracing",
+            "affirm",
+            {
+                "province": "wc",
+                "age": "<18",
+                "symptoms_fever": "no",
+                "symptoms_cough": "yes",
+                "symptoms_sweat": "yes",
+                "symptoms_weight": "yes",
+                "exposure": "not sure",
+                "tracing": "yes",
+                "gender": "RATHER NOT SAY",
+                "location": "<not collected>",
+            },
+        )
+        await form.submit(dispatcher, tracker, {})
+
+        assert request.called
+        [(request, response)] = request.calls
+        data = json.loads(request.stream.body)
+        assert data.pop("deduplication_id")
+        assert data == {
+            "msisdn": "+default",
+            "source": "WhatsApp",
+            "province": "ZA-WC",
+            "city": "<not collected>",
+            "age": "<18",
+            "gender": "not_say",
+            "cough": True,
+            "fever": False,
+            "sweat": True,
+            "weight": True,
+            "exposure": "not_sure",
+            "tracing": True,
+            "risk": "moderate",
+            "location": "<not collected>",
+            "city_location": "<not collected>",
+        }
+
+        base.actions.actions.config.HEALTHCONNECT_URL = None
+        base.actions.actions.config.HEALTHCONNECT_TOKEN = None
+
+    @respx.mock
+    @pytest.mark.asyncio
     async def test_submit_to_healthconnect_duplicate_check(self):
         """
         Should ignore a duplicate contact error from healthconnect

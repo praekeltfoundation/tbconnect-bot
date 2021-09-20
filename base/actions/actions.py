@@ -533,6 +533,20 @@ class TBCheckForm(BaseFormAction):
     ) -> Dict[Text, Optional[Text]]:
         return self.validate_generic("tracing", dispatcher, value, self.yes_no_data)
 
+    def set_location(self, tracker: Tracker):
+        location = tracker.get_slot("location")
+        if location == "<not collected>":
+            return location
+        location = tracker.get_slot("location_coords")
+        return location
+
+    def set_city_location(self, tracker: Tracker):
+        location = tracker.get_slot("location")
+        if location == "<not collected>":
+            return location
+        city_location = tracker.get_slot("city_location_coords")
+        return city_location
+
     def get_healthcheck_data(self, tracker: Tracker, risk: Text) -> Dict[Text, Any]:
         return {
             "deduplication_id": uuid.uuid4().hex,
@@ -549,8 +563,8 @@ class TBCheckForm(BaseFormAction):
             "exposure": self.YES_NO_MAYBE_MAPPING[tracker.get_slot("exposure")],
             "tracing": self.YES_NO_MAPPING[tracker.get_slot("tracing")],
             "risk": risk,
-            "location": tracker.get_slot("location_coords"),
-            "city_location": tracker.get_slot("city_location_coords"),
+            "location": self.set_location(tracker),
+            "city_location": self.set_city_location(tracker),
         }
 
     async def submit(
