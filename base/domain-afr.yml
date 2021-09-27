@@ -118,6 +118,10 @@ responses:
 
           Jy maak op eie risiko staat op hierdie inligting. Jy stem saam dat jy self verantwoordelik is vir jou mediese sorg en behandeling. Jy stem saam dat jy nie mediese advies sal ignoreer of behandeling sal uitstel as gevolg van hierdie diens nie.
 
+  utter_more_terms_doc:
+    - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH_WhatsApp_TB_Privacy_Policy_September2021.pdf"
+      text: Terms and Conditions
+
   utter_ask_province:
     - text: |
         In watter provinsie woon jy tans? Antwoord met 'n nommer van die lys:

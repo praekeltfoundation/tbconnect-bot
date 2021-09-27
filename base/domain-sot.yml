@@ -118,6 +118,10 @@ responses:
 
           O itshetleha ka lesedi lena ka ho ipeha kotsing. Oa dumela hore ke wena ya ikarabellang bakeng sa tlhokomelo le kalafo ya hao ya bongaka. O dumela hore ha wa lokela ho hlokomoloha/ho dieha ho fumana boeletsi ba bongaka mabapi le kalafo/tlhokomelo ka lebaka la tshebeletso ena.
 
+  utter_more_terms_doc:
+    - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH_WhatsApp_TB_Privacy_Policy_September2021.pdf"
+      text: Terms and Conditions
+
   utter_ask_province:
     - text: |
         O dula porofenseng efe hona jwale? Araba ka nomoro ho tswa lenaneng:

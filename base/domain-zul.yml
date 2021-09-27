@@ -118,6 +118,10 @@ responses:
 
           Thembela kulolu lwazi ngokuzibeka wena engcupheni. Uyavuma ukuthi unesibopho sokunakekelwa nokwelashwa kwakho. Uyavuma ukuthi akufanele ukushaye indiva/ukubambezeleka kokuthola iseluleko sezokwelapha mayelana nokwelashwa /ukunakekelwa ngenxa yale nsizakalo.
 
+  utter_more_terms_doc:
+    - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH_WhatsApp_TB_Privacy_Policy_September2021.pdf"
+      text: Terms and Conditions
+
   utter_ask_province:
     - text: |
         Usuhlala kusiphi isifundazwe manje? Phendula ngenombolo kusuka kuhlu:

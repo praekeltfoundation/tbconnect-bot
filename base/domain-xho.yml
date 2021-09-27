@@ -118,6 +118,10 @@ responses:
 
           Uxhomekeke kolu lwazi ngokomngcipheko wakho. Uyavuma ukuba unoxanduva lonyango lwakho. Uyavuma ukuba akufuneki ukungahoyi / ulibazise ukufumana iingcebiso zonyango malunga nonyango / ukhathalelo ngenxa yale nkonzo.
 
+  utter_more_terms_doc:
+    - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH_WhatsApp_TB_Privacy_Policy_September2021.pdf"
+      text: Terms and Conditions
+
   utter_ask_province:
     - text: |
         Uhlala kweliphi iphondo ngoku? Phendula ngenombolo koluluhlu:

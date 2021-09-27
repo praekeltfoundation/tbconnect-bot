@@ -118,6 +118,10 @@ responses:
 
           You rely on this info at your own risk. You agree that you are responsible for your medical care & treatment. You agree that you should not ignore/delay getting medical advice about treatment/care because of this service.
 
+  utter_more_terms_doc:
+    - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH_WhatsApp_TB_Privacy_Policy_September2021.pdf"
+      text: Terms and Conditions
+
   utter_ask_province:
     - text: |
         In which province are you living now? Reply with a number from the list:
