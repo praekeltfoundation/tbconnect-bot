@@ -120,7 +120,7 @@ responses:
 
   utter_more_terms_doc:
     - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH_WhatsApp_TB_Privacy_Policy_September2021.pdf"
-      text: Terms and Conditions
+      text: Bepalings en Voorwaardes
 
   utter_ask_province:
     - text: |
