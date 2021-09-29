@@ -1,4 +1,5 @@
 import logging
+import re
 import uuid
 from typing import Any, Dict, List, Optional, Text, Union
 from urllib.parse import urlencode, urljoin
@@ -534,19 +535,31 @@ class TBCheckForm(BaseFormAction):
     ) -> Dict[Text, Optional[Text]]:
         return self.validate_generic("tracing", dispatcher, value, self.yes_no_data)
 
-    def set_location(self, tracker: Tracker):
-        location = tracker.get_slot("location")
-        if location == "<not collected>":
-            return location
-        location = tracker.get_slot("location_coords")
-        return location
-
-    def set_city_location(self, tracker: Tracker):
-        location = tracker.get_slot("location")
-        if location == "<not collected>":
-            return location
-        city_location = tracker.get_slot("city_location_coords")
-        return city_location
+    @staticmethod
+    def fix_location_format(text: Text) -> Text:
+        """
+        Previously there was a bug that caused the location to not be stored in
+        proper ISO6709 format. This function extracts the latitude and longitude from
+        either the incorrect or correct format, and then returns a properly formatted
+        ISO6709 string
+        """
+        if not text:
+            return ""
+        regex = re.compile(
+            r"""
+            ^
+            (?P<latitude>[\+|-]\d+\.?\d*)
+            (?P<longitude>[\+|-]\d+\.?\d*)
+            """,
+            flags=re.VERBOSE,
+        )
+        match = regex.match(text)
+        if not match:
+            raise ValueError(f"Invalid location {text}")
+        data = match.groupdict()
+        return BaseFormAction.format_location(
+            float(data["latitude"]), float(data["longitude"])
+        )
 
     def get_healthcheck_data(self, tracker: Tracker, risk: Text) -> Dict[Text, Any]:
         return {
@@ -564,8 +577,10 @@ class TBCheckForm(BaseFormAction):
             "exposure": self.YES_NO_MAYBE_MAPPING[tracker.get_slot("exposure")],
             "tracing": self.YES_NO_MAPPING[tracker.get_slot("tracing")],
             "risk": risk,
-            "location": self.set_location(tracker),
-            "city_location": self.set_city_location(tracker),
+            "location": self.fix_location_format(tracker.get_slot("location_coords")),
+            "city_location": self.fix_location_format(
+                tracker.get_slot("city_location_coords")
+            ),
         }
 
     async def submit(

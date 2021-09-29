@@ -314,8 +314,8 @@ class TestTBCheckForm:
             "exposure": "not_sure",
             "tracing": True,
             "risk": "moderate",
-            "location": "+3.4-1.2",
-            "city_location": "+1.2-3.4",
+            "location": "+03.4-001.2/",
+            "city_location": "+01.2-003.4/",
         }
 
         base.actions.actions.config.HEALTHCONNECT_URL = None
@@ -371,8 +371,8 @@ class TestTBCheckForm:
             "exposure": "not_sure",
             "tracing": True,
             "risk": "moderate",
-            "location": "<not collected>",
-            "city_location": "<not collected>",
+            "location": "",
+            "city_location": "",
         }
 
         base.actions.actions.config.HEALTHCONNECT_URL = None
