@@ -581,10 +581,11 @@ class TBCheckForm(BaseFormAction):
             "exposure": self.YES_NO_MAYBE_MAPPING[tracker.get_slot("exposure")],
             "tracing": self.YES_NO_MAPPING[tracker.get_slot("tracing")],
             "risk": risk,
-            
         }
         if self.AGE_MAPPING[tracker.get_slot("age")] != "<18":
-            data['location'] = self.fix_location_format(tracker.get_slot("location_coords"))
+            data["location"] = self.fix_location_format(
+                tracker.get_slot("location_coords")
+            )
             data["city_location"] = self.fix_location_format(
                 tracker.get_slot("city_location_coords")
             )
