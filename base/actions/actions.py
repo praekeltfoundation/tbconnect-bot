@@ -561,6 +561,10 @@ class TBCheckForm(BaseFormAction):
             float(data["latitude"]), float(data["longitude"])
         )
 
+    def merge(self, data_minor, data):
+        data_minor.update(data)
+        return data_minor
+
     def get_healthcheck_data(self, tracker: Tracker, risk: Text) -> Dict[Text, Any]:
         data = {
             "deduplication_id": uuid.uuid4().hex,
@@ -577,22 +581,13 @@ class TBCheckForm(BaseFormAction):
             "exposure": self.YES_NO_MAYBE_MAPPING[tracker.get_slot("exposure")],
             "tracing": self.YES_NO_MAPPING[tracker.get_slot("tracing")],
             "risk": risk,
+            
         }
         if self.AGE_MAPPING[tracker.get_slot("age")] != "<18":
-            data.update(
-                {
-                    "location": self.fix_location_format(
-                        tracker.get_slot("location_coords")
-                    )
-                }
+            data['location'] = self.fix_location_format(tracker.get_slot("location_coords"))
+            data["city_location"] = self.fix_location_format(
+                tracker.get_slot("city_location_coords")
             )
-            data.update(
-                {
-                    "city_location": self.fix_location_format(
-                        tracker.get_slot("city_location_coords")
-                    )
-                }
-            ),
         return data
 
     async def submit(
