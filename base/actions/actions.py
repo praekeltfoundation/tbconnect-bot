@@ -561,12 +561,8 @@ class TBCheckForm(BaseFormAction):
             float(data["latitude"]), float(data["longitude"])
         )
 
-    def merge(self, dict1, dict2):
-        dict1.update(dict2)
-        return dict1
-
     def get_healthcheck_data(self, tracker: Tracker, risk: Text) -> Dict[Text, Any]:
-        dict1 = {
+        data = {
             "deduplication_id": uuid.uuid4().hex,
             "msisdn": f'+{tracker.sender_id.lstrip("+")}',
             "source": "WhatsApp",
@@ -582,15 +578,23 @@ class TBCheckForm(BaseFormAction):
             "tracing": self.YES_NO_MAPPING[tracker.get_slot("tracing")],
             "risk": risk,
         }
-        dict2 = {
-            "location": self.fix_location_format(tracker.get_slot("location_coords")),
-            "city_location": self.fix_location_format(
-                tracker.get_slot("city_location_coords")
+        if self.AGE_MAPPING[tracker.get_slot("age")] != "<18":
+            data.update(
+                {
+                    "location": self.fix_location_format(
+                        tracker.get_slot("location_coords")
+                    )
+                }
+            )
+            data.update(
+                {
+                    "city_location": self.fix_location_format(
+                        tracker.get_slot("city_location_coords")
+                    )
+                }
             ),
-        }
-        if self.AGE_MAPPING[tracker.get_slot("age")] == "<18":
-            return dict1
-        return self.merge(dict1, dict2)
+        print(data)
+        return data
 
     async def submit(
         self,
