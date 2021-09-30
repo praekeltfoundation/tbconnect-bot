@@ -561,8 +561,12 @@ class TBCheckForm(BaseFormAction):
             float(data["latitude"]), float(data["longitude"])
         )
 
+    def merge(self, dict1, dict2):
+        dict1.update(dict2)
+        return dict1
+
     def get_healthcheck_data(self, tracker: Tracker, risk: Text) -> Dict[Text, Any]:
-        return {
+        dict1 = {
             "deduplication_id": uuid.uuid4().hex,
             "msisdn": f'+{tracker.sender_id.lstrip("+")}',
             "source": "WhatsApp",
@@ -577,11 +581,16 @@ class TBCheckForm(BaseFormAction):
             "exposure": self.YES_NO_MAYBE_MAPPING[tracker.get_slot("exposure")],
             "tracing": self.YES_NO_MAPPING[tracker.get_slot("tracing")],
             "risk": risk,
+        }
+        dict2 = {
             "location": self.fix_location_format(tracker.get_slot("location_coords")),
             "city_location": self.fix_location_format(
                 tracker.get_slot("city_location_coords")
             ),
         }
+        if self.AGE_MAPPING[tracker.get_slot("age")] == "<18":
+            return dict1
+        return self.merge(dict1, dict2)
 
     async def submit(
         self,
@@ -605,7 +614,6 @@ class TBCheckForm(BaseFormAction):
 
         if config.HEALTHCONNECT_URL and config.HEALTHCONNECT_TOKEN:
             url = urljoin(config.HEALTHCONNECT_URL, "/v2/tbcheck/")
-
             post_data = self.get_healthcheck_data(tracker, risk)
             # TODO: remove print
             print(post_data)

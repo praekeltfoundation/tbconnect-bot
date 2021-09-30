@@ -347,6 +347,7 @@ class TestTBCheckForm:
                 "symptoms_weight": "yes",
                 "exposure": "not sure",
                 "tracing": "yes",
+                "city_location_coords": "",
                 "gender": "RATHER NOT SAY",
                 "location": "<not collected>",
             },
@@ -371,8 +372,6 @@ class TestTBCheckForm:
             "exposure": "not_sure",
             "tracing": True,
             "risk": "moderate",
-            "location": "",
-            "city_location": "",
         }
 
         base.actions.actions.config.HEALTHCONNECT_URL = None
