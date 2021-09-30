@@ -593,7 +593,6 @@ class TBCheckForm(BaseFormAction):
                     )
                 }
             ),
-        print(data)
         return data
 
     async def submit(
