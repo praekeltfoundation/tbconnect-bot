@@ -624,17 +624,13 @@ class TBCheckForm(BaseFormAction):
             "risk": risk,
         }
 
-        location = self.fix_location_format(tracker.get_slot("location_coords"))
-        city_location = self.fix_location_format(
-            tracker.get_slot("city_location_coords")
-        )
         if self.AGE_MAPPING[tracker.get_slot("age")] != "<18":
-            if city_location != "":
-                data["city_location"] = self.fix_location_format(
-                    tracker.get_slot("city_location_coords")
-                )
-            if location != "":
-                data["location"] = location
+            data["city_location"] = self.fix_location_format(
+                tracker.get_slot("city_location_coords")
+            )
+            data["location"] = self.fix_location_format(
+                tracker.get_slot("location_coords")
+            )
         return data
 
     async def submit(
