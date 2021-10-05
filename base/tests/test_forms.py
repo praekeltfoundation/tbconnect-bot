@@ -178,42 +178,23 @@ class TestTBCheckProfileForm:
     @pytest.mark.asyncio
     async def test_validate_location_google_places(self):
         """
-        If there's are google places API credentials, then do a lookup
+        If there are no results, then display error message and ask again
         """
         base.actions.actions.config.GOOGLE_PLACES_API_KEY = "test_key"
-        querystring = urlencode(
-            {
-                "key": "test_key",
-                "input": "Cape Town",
-                "language": "en",
-                "inputtype": "textquery",
-                "fields": "formatted_address,geometry",
-            }
-        )
-        request = respx.get(
-            "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?"
-            f"{querystring}",
-            content=json.dumps(
-                {
-                    "candidates": [
-                        {
-                            "formatted_address": "Cape Town, South Africa",
-                            "geometry": {"location": {"lat": 1.23, "lng": 4.56}},
-                        }
-                    ]
-                }
-            ),
-        )
         form = TBCheckProfileForm()
+        form.places_lookup = utils.AsyncMock()
+        form.places_lookup.return_value = None
 
         tracker = self.get_tracker_for_text_slot_with_message("location", "Cape Town",)
 
-        events = await form.validate(CollectingDispatcher(), tracker, {})
+        dispatcher = CollectingDispatcher()
+        events = await form.validate(dispatcher, tracker, {})
         assert events == [
-            SlotSet("location", "Cape Town, South Africa"),
-            SlotSet("city_location_coords", "+01.23+004.56/"),
+            SlotSet("location", None),
         ]
-        assert request.called
+
+        [message] = dispatcher.messages
+        assert message["template"] == "utter_incorrect_location"
 
         base.actions.actions.config.GOOGLE_PLACES_API_KEY = None
 

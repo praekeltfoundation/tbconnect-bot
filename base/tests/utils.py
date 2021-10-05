@@ -1,3 +1,5 @@
+from unittest.mock import MagicMock
+
 from rasa_sdk import Tracker
 
 
@@ -31,3 +33,8 @@ def get_tracker_for_slot_from_intent(form, slot_name, intent_name, existing_slot
         {"name": form.name(), "validate": True, "rejected": False},
         "action_listen",
     )
+
+
+class AsyncMock(MagicMock):
+    async def __call__(self, *args, **kwargs):
+        return super().__call__(*args, **kwargs)
