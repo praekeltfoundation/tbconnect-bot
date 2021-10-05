@@ -356,7 +356,7 @@ class TestTBCheckForm:
 
         base.actions.actions.config.HEALTHCONNECT_URL = None
         base.actions.actions.config.HEALTHCONNECT_TOKEN = None
-    
+
     @respx.mock
     @pytest.mark.asyncio
     async def test_submit_over_65_to_healthconnect(self):
@@ -387,7 +387,6 @@ class TestTBCheckForm:
                 "city_location_coords": "+1.2-3.4",
                 "location_coords": "+3.4-1.2",
                 "location": "Cape Town, South Africa",
-                
             },
         )
         await form.submit(dispatcher, tracker, {})
