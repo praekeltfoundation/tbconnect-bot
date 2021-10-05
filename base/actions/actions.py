@@ -90,6 +90,33 @@ class BaseFormAction(FormAction):
             "/"
         )
 
+    @staticmethod
+    def fix_location_format(text: Text) -> Text:
+        """
+        Previously there was a bug that caused the location to not be stored in
+        proper ISO6709 format. This function extracts the latitude and longitude from
+        either the incorrect or correct format, and then returns a properly formatted
+        ISO6709 string
+
+        """
+        if not text:
+            return ""
+        regex = re.compile(
+            r"""
+            ^
+            (?P<latitude>[\+|-]\d+\.?\d*)
+            (?P<longitude>[\+|-]\d+\.?\d*)
+            """,
+            flags=re.VERBOSE,
+        )
+        match = regex.match(text)
+        if not match:
+            raise ValueError(f"Invalid location {text}")
+        data = match.groupdict()
+        return BaseFormAction.format_location(
+            float(data["latitude"]), float(data["longitude"])
+        )
+
 
 class TBCheckTermsForm(BaseFormAction):
     """TBCheck form action"""
@@ -251,6 +278,53 @@ class TBCheckProfileForm(BaseFormAction):
     ) -> Dict[Text, Optional[Text]]:
         return self.validate_generic("province", dispatcher, value, self.province_data)
 
+    async def places_lookup(self, client, search_text, session_token, province):
+        locationbias = {
+            "ec": "-32.2968402,26.419389",
+            "fs": "-28.4541105,26.7967849",
+            "gt": "-26.2707593,28.1122679",
+            "lp": "-23.4012946,29.4179324",
+            "mp": "-25.565336,30.5279096",
+            "nc": "-29.0466808,21.8568586",
+            "nl": "-28.5305539,30.8958242",
+            "nw": "-26.6638599,25.2837585",
+            "wc": "-33.2277918,21.8568586",
+        }[province]
+        querystring = urlencode(
+            {
+                "key": config.GOOGLE_PLACES_API_KEY,
+                "input": search_text,
+                "sessiontoken": session_token,
+                "language": "en",
+                "components": "country:za",
+                "location": locationbias,
+            }
+        )
+        url = (
+            "https://maps.googleapis.com/maps/api/place/autocomplete/json"
+            f"?{querystring}"
+        )
+        response = (await client.get(url)).json()
+        if not response["predictions"]:
+            return None
+        place_id = response["predictions"][0]["place_id"]
+
+        querystring = urlencode(
+            {
+                "key": config.GOOGLE_PLACES_API_KEY,
+                "place_id": place_id,
+                "sessiontoken": session_token,
+                "language": "en",
+                "fields": "formatted_address,geometry",
+            }
+        )
+        url = f"https://maps.googleapis.com/maps/api/place/details/json?{querystring}"
+        response = (await client.get(url)).json()
+        return response["result"]
+
+    def get_province(self, tracker):
+        return tracker.get_slot("province")
+
     async def validate_location(
         self,
         value: Text,
@@ -283,15 +357,8 @@ class TBCheckProfileForm(BaseFormAction):
                 "location": value,
             }
 
-        querystring = urlencode(
-            {
-                "key": config.GOOGLE_PLACES_API_KEY,
-                "input": value,
-                "language": "en",
-                "inputtype": "textquery",
-                "fields": "formatted_address,geometry",
-            }
-        )
+        session_token = uuid.uuid4().hex
+        province = self.get_province(tracker)
 
         if hasattr(httpx, "AsyncClient"):
             # from httpx>=0.11.0, the async client is a different class
@@ -300,25 +367,25 @@ class TBCheckProfileForm(BaseFormAction):
             HTTPXClient = getattr(httpx, "Client")
 
         async with HTTPXClient() as client:
-            response = await client.get(
-                (
-                    f"https://maps.googleapis.com"
-                    f"/maps/api/place/findplacefromtext/json?{querystring}"
-                )
-            )
-            location = response.json()
-            if location["candidates"]:
-                formatted_address = location["candidates"][0]["formatted_address"]
-                geometry = location["candidates"][0]["geometry"]["location"]
-                latitude = geometry["lat"]
-                longitude = geometry["lng"]
-                return {
-                    "location": formatted_address,
-                    "city_location_coords": self.format_location(latitude, longitude),
-                }
-            else:
+            location = None
+            for _ in range(3):
+                try:
+                    location = await self.places_lookup(
+                        client, value, session_token, province
+                    )
+                    break
+                except Exception:
+                    pass
+            if not location:
                 dispatcher.utter_message(template="utter_incorrect_location")
                 return {"location": None}
+            geometry = location["geometry"]["location"]
+            return {
+                "location": location["formatted_address"],
+                "city_location_coords": self.format_location(
+                    geometry["lat"], geometry["lng"]
+                ),
+            }
 
     def validate_location_confirm(
         self,
@@ -535,32 +602,6 @@ class TBCheckForm(BaseFormAction):
     ) -> Dict[Text, Optional[Text]]:
         return self.validate_generic("tracing", dispatcher, value, self.yes_no_data)
 
-    @staticmethod
-    def fix_location_format(text: Text) -> Text:
-        """
-        Previously there was a bug that caused the location to not be stored in
-        proper ISO6709 format. This function extracts the latitude and longitude from
-        either the incorrect or correct format, and then returns a properly formatted
-        ISO6709 string
-        """
-        if not text:
-            return ""
-        regex = re.compile(
-            r"""
-            ^
-            (?P<latitude>[\+|-]\d+\.?\d*)
-            (?P<longitude>[\+|-]\d+\.?\d*)
-            """,
-            flags=re.VERBOSE,
-        )
-        match = regex.match(text)
-        if not match:
-            raise ValueError(f"Invalid location {text}")
-        data = match.groupdict()
-        return BaseFormAction.format_location(
-            float(data["latitude"]), float(data["longitude"])
-        )
-
     def merge(self, data_minor, data):
         data_minor.update(data)
         return data_minor
@@ -583,13 +624,13 @@ class TBCheckForm(BaseFormAction):
             "risk": risk,
         }
 
-        location = self.fix_location_format(tracker.get_slot("location_coords"))
         if self.AGE_MAPPING[tracker.get_slot("age")] != "<18":
             data["city_location"] = self.fix_location_format(
                 tracker.get_slot("city_location_coords")
             )
-            if location != "":
-                data["location"] = location
+            data["location"] = self.fix_location_format(
+                tracker.get_slot("location_coords")
+            )
         return data
 
     async def submit(

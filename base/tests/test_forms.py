@@ -1,6 +1,5 @@
 import json
 from typing import Any, Dict, Optional, Text
-from urllib.parse import urlencode
 
 import pytest
 import respx
@@ -178,42 +177,23 @@ class TestTBCheckProfileForm:
     @pytest.mark.asyncio
     async def test_validate_location_google_places(self):
         """
-        If there's are google places API credentials, then do a lookup
+        If there are no results, then display error message and ask again
         """
         base.actions.actions.config.GOOGLE_PLACES_API_KEY = "test_key"
-        querystring = urlencode(
-            {
-                "key": "test_key",
-                "input": "Cape Town",
-                "language": "en",
-                "inputtype": "textquery",
-                "fields": "formatted_address,geometry",
-            }
-        )
-        request = respx.get(
-            "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?"
-            f"{querystring}",
-            content=json.dumps(
-                {
-                    "candidates": [
-                        {
-                            "formatted_address": "Cape Town, South Africa",
-                            "geometry": {"location": {"lat": 1.23, "lng": 4.56}},
-                        }
-                    ]
-                }
-            ),
-        )
         form = TBCheckProfileForm()
+        form.places_lookup = utils.AsyncMock()
+        form.places_lookup.return_value = None
 
         tracker = self.get_tracker_for_text_slot_with_message("location", "Cape Town",)
 
-        events = await form.validate(CollectingDispatcher(), tracker, {})
+        dispatcher = CollectingDispatcher()
+        events = await form.validate(dispatcher, tracker, {})
         assert events == [
-            SlotSet("location", "Cape Town, South Africa"),
-            SlotSet("city_location_coords", "+01.23+004.56/"),
+            SlotSet("location", None),
         ]
-        assert request.called
+
+        [message] = dispatcher.messages
+        assert message["template"] == "utter_incorrect_location"
 
         base.actions.actions.config.GOOGLE_PLACES_API_KEY = None
 
@@ -372,6 +352,65 @@ class TestTBCheckForm:
             "exposure": "not_sure",
             "tracing": True,
             "risk": "moderate",
+        }
+
+        base.actions.actions.config.HEALTHCONNECT_URL = None
+        base.actions.actions.config.HEALTHCONNECT_TOKEN = None
+
+    @respx.mock
+    @pytest.mark.asyncio
+    async def test_submit_over_65_to_healthconnect(self):
+        """
+        Submits the data to the eventstore in the correct format
+        """
+        base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
+        base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
+
+        request = respx.post("https://healthconnect/v2/tbcheck/")
+
+        form = TBCheckForm()
+        dispatcher = CollectingDispatcher()
+        tracker = utils.get_tracker_for_slot_from_intent(
+            form,
+            "tracing",
+            "affirm",
+            {
+                "province": "za-ec",
+                "age": ">65",
+                "symptoms_fever": "no",
+                "symptoms_cough": "yes",
+                "symptoms_sweat": "yes",
+                "symptoms_weight": "yes",
+                "exposure": "not sure",
+                "tracing": "yes",
+                "gender": "MALE",
+                "city_location_coords": "+1.2-3.4",
+                "location_coords": "+3.4-1.2",
+                "location": "Cape Town, South Africa",
+            },
+        )
+        await form.submit(dispatcher, tracker, {})
+
+        assert request.called
+        [(request, response)] = request.calls
+        data = json.loads(request.stream.body)
+        assert data.pop("deduplication_id")
+        assert data == {
+            "msisdn": "+default",
+            "source": "WhatsApp",
+            "province": "ZA-ZA-EC",
+            "city": "Cape Town, South Africa",
+            "age": ">65",
+            "gender": "male",
+            "cough": True,
+            "fever": False,
+            "sweat": True,
+            "weight": True,
+            "exposure": "not_sure",
+            "tracing": True,
+            "risk": "moderate",
+            "location": "+03.4-001.2/",
+            "city_location": "+01.2-003.4/",
         }
 
         base.actions.actions.config.HEALTHCONNECT_URL = None
