@@ -356,6 +356,66 @@ class TestTBCheckForm:
 
         base.actions.actions.config.HEALTHCONNECT_URL = None
         base.actions.actions.config.HEALTHCONNECT_TOKEN = None
+    
+    @respx.mock
+    @pytest.mark.asyncio
+    async def test_submit_over_65_to_healthconnect(self):
+        """
+        Submits the data to the eventstore in the correct format
+        """
+        base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
+        base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
+
+        request = respx.post("https://healthconnect/v2/tbcheck/")
+
+        form = TBCheckForm()
+        dispatcher = CollectingDispatcher()
+        tracker = utils.get_tracker_for_slot_from_intent(
+            form,
+            "tracing",
+            "affirm",
+            {
+                "province": "za-ec",
+                "age": ">65",
+                "symptoms_fever": "no",
+                "symptoms_cough": "yes",
+                "symptoms_sweat": "yes",
+                "symptoms_weight": "yes",
+                "exposure": "not sure",
+                "tracing": "yes",
+                "gender": "MALE",
+                "city_location_coords": "+1.2-3.4",
+                "location_coords": "+3.4-1.2",
+                "location": "Cape Town, South Africa",
+                
+            },
+        )
+        await form.submit(dispatcher, tracker, {})
+
+        assert request.called
+        [(request, response)] = request.calls
+        data = json.loads(request.stream.body)
+        assert data.pop("deduplication_id")
+        assert data == {
+            "msisdn": "+default",
+            "source": "WhatsApp",
+            "province": "ZA-ZA-EC",
+            "city": "Cape Town, South Africa",
+            "age": ">65",
+            "gender": "male",
+            "cough": True,
+            "fever": False,
+            "sweat": True,
+            "weight": True,
+            "exposure": "not_sure",
+            "tracing": True,
+            "risk": "moderate",
+            "location": "+03.4-001.2/",
+            "city_location": "+01.2-003.4/",
+        }
+
+        base.actions.actions.config.HEALTHCONNECT_URL = None
+        base.actions.actions.config.HEALTHCONNECT_TOKEN = None
 
     @respx.mock
     @pytest.mark.asyncio
