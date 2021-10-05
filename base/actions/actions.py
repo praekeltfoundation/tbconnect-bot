@@ -89,7 +89,7 @@ class BaseFormAction(FormAction):
             f"{fractional_part(longitude)}"
             "/"
         )
-    
+
     @staticmethod
     def fix_location_format(text: Text) -> Text:
         """
@@ -97,6 +97,7 @@ class BaseFormAction(FormAction):
         proper ISO6709 format. This function extracts the latitude and longitude from
         either the incorrect or correct format, and then returns a properly formatted
         ISO6709 string
+
         """
         if not text:
             return ""
@@ -276,7 +277,7 @@ class TBCheckProfileForm(BaseFormAction):
         domain: Dict[Text, Any],
     ) -> Dict[Text, Optional[Text]]:
         return self.validate_generic("province", dispatcher, value, self.province_data)
-    
+
     async def places_lookup(self, client, search_text, session_token, province):
         locationbias = {
             "ec": "-32.2968402,26.419389",
@@ -601,8 +602,6 @@ class TBCheckForm(BaseFormAction):
     ) -> Dict[Text, Optional[Text]]:
         return self.validate_generic("tracing", dispatcher, value, self.yes_no_data)
 
-    
-
     def merge(self, data_minor, data):
         data_minor.update(data)
         return data_minor
@@ -626,7 +625,9 @@ class TBCheckForm(BaseFormAction):
         }
 
         location = self.fix_location_format(tracker.get_slot("location_coords"))
-        city_location = self.fix_location_format(tracker.get_slot("city_location_coords"))
+        city_location = self.fix_location_format(
+            tracker.get_slot("city_location_coords")
+        )
         if self.AGE_MAPPING[tracker.get_slot("age")] != "<18":
             if city_location != "":
                 data["city_location"] = self.fix_location_format(
