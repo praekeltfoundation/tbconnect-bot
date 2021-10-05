@@ -1,6 +1,5 @@
 import json
 from typing import Any, Dict, Optional, Text
-from urllib.parse import urlencode
 
 import pytest
 import respx
