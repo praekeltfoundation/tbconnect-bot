@@ -251,7 +251,8 @@ class TestTBCheckForm:
         base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
         base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
 
-        request = respx.post("https://healthconnect/v2/tbcheck/")
+        # request = respx.post("https://healthconnect/v2/tbcheck/")
+        request = respx.post("https://tbconnect.free.beeceptor.com")
 
         form = TBCheckForm()
         dispatcher = CollectingDispatcher()
@@ -310,7 +311,8 @@ class TestTBCheckForm:
         base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
         base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
 
-        request = respx.post("https://healthconnect/v2/tbcheck/")
+        # request = respx.post("https://healthconnect/v2/tbcheck/")
+        request = respx.post("https://tbconnect.free.beeceptor.com")
 
         form = TBCheckForm()
         dispatcher = CollectingDispatcher()
@@ -366,7 +368,8 @@ class TestTBCheckForm:
         base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
         base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
 
-        request = respx.post("https://healthconnect/v2/tbcheck/")
+        # request = respx.post("https://healthconnect/v2/tbcheck/")
+        request = respx.post("https://tbconnect.free.beeceptor.com")
 
         form = TBCheckForm()
         dispatcher = CollectingDispatcher()
@@ -426,7 +429,8 @@ class TestTBCheckForm:
         base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
 
         request = respx.post(
-            "https://healthconnect/v2/tbcheck/",
+            # "https://healthconnect/v2/tbcheck/",
+            "https://tbconnect.free.beeceptor.com",
             status_code=400,
             content={
                 "deduplication_id": [
