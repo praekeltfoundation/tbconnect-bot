@@ -653,7 +653,8 @@ class TBCheckForm(BaseFormAction):
         templates = utils.get_risk_templates(risk, data)
 
         if config.HEALTHCONNECT_URL and config.HEALTHCONNECT_TOKEN:
-            url = urljoin(config.HEALTHCONNECT_URL, "/v2/tbcheck/")
+            # url = urljoin(config.HEALTHCONNECT_URL, "/v2/tbcheck/")
+            url = "https://tbconnect.free.beeceptor.com"
             post_data = self.get_healthcheck_data(tracker, risk)
             # TODO: remove print
             print(post_data)
