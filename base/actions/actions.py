@@ -624,9 +624,11 @@ class TBCheckForm(BaseFormAction):
             "risk": risk,
         }
         if self.AGE_MAPPING[tracker.get_slot("age")] != "<18":
-            data["city_location"] = self.fix_location_format(
+            city_location = self.fix_location_format(
                 tracker.get_slot("city_location_coords")
             )
+            if city_location != "":
+                data["city_location"] = city_location
             location = self.fix_location_format(tracker.get_slot("location_coords"))
             if location != "":
                 data["location"] = location
@@ -653,8 +655,7 @@ class TBCheckForm(BaseFormAction):
         templates = utils.get_risk_templates(risk, data)
 
         if config.HEALTHCONNECT_URL and config.HEALTHCONNECT_TOKEN:
-            # url = urljoin(config.HEALTHCONNECT_URL, "/v2/tbcheck/")
-            url = "https://tbconnect.free.beeceptor.com"
+            url = urljoin(config.HEALTHCONNECT_URL, "/v2/tbcheck/")
             post_data = self.get_healthcheck_data(tracker, risk)
             # TODO: remove print
             print(post_data)
