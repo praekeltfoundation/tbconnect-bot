@@ -43,3 +43,14 @@ def is_duplicate_error(response):
         return error in response.json().get("deduplication_id", [])
     except JSONDecodeError:
         return False
+
+
+def get_display_message_template(response):
+    print('SSSSSSSSSSSss')
+    print('*********', response.json(), '>>>>>>', response.content)
+    templates = []
+    if "profile" in response:
+        group_arm = response.json().get('profile').get()
+        templates.append(f"utter_risk_{group_arm}")
+
+    return templates

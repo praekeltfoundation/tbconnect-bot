@@ -672,13 +672,14 @@ class TBCheckForm(BaseFormAction):
         )
 
         risk = utils.get_risk_level(data)
-        templates = utils.get_risk_templates(risk, data)
-
+        # templates = utils.get_risk_templates(risk, data)
+        templates = []
+        print('/////', config.HEALTHCONNECT_URL, '.....', config.HEALTHCONNECT_TOKEN)
         if config.HEALTHCONNECT_URL and config.HEALTHCONNECT_TOKEN:
             url = urljoin(config.HEALTHCONNECT_URL, "/v2/tbcheck/")
             post_data = self.get_healthcheck_data(tracker, risk)
             # TODO: remove print
-            print(post_data)
+            print('>>>>>>>>>', post_data)
             headers = {
                 "Authorization": f"Token {config.HEALTHCONNECT_TOKEN}",
                 "User-Agent": "rasa/tbconnect-bot",
@@ -696,6 +697,8 @@ class TBCheckForm(BaseFormAction):
                         resp = await client.post(url, json=post_data, headers=headers)
                         # TODO: remove print
                         print(resp.content)
+                        templates = utils.get_display_message_template(resp)
+
                         if not utils.is_duplicate_error(resp):
                             resp.raise_for_status()
                         break
