@@ -166,7 +166,10 @@ class TestTBCheckProfileForm:
         """
         form = TBCheckProfileForm()
 
-        tracker = self.get_tracker_for_text_slot_with_message("location", "Cape Town",)
+        tracker = self.get_tracker_for_text_slot_with_message(
+            "location",
+            "Cape Town",
+        )
 
         events = await form.validate(CollectingDispatcher(), tracker, {})
         assert events == [
@@ -184,7 +187,10 @@ class TestTBCheckProfileForm:
         form.places_lookup = utils.AsyncMock()
         form.places_lookup.return_value = None
 
-        tracker = self.get_tracker_for_text_slot_with_message("location", "Cape Town",)
+        tracker = self.get_tracker_for_text_slot_with_message(
+            "location",
+            "Cape Town",
+        )
 
         dispatcher = CollectingDispatcher()
         events = await form.validate(dispatcher, tracker, {})
@@ -522,7 +528,10 @@ class TestOptInForm:
         form = OptInForm()
         dispatcher = CollectingDispatcher()
         tracker = utils.get_tracker_for_slot_from_intent(
-            form, "terms", "opt_in", {"terms": "yes", "symptoms_cough": "yes"},
+            form,
+            "terms",
+            "opt_in",
+            {"terms": "yes", "symptoms_cough": "yes"},
         )
         await form.run(dispatcher, tracker, {})
 
@@ -552,7 +561,12 @@ class TestOptInForm:
 
         form = OptInForm()
         dispatcher = CollectingDispatcher()
-        tracker = utils.get_tracker_for_slot_from_intent(form, "terms", "opt_in", {},)
+        tracker = utils.get_tracker_for_slot_from_intent(
+            form,
+            "terms",
+            "opt_in",
+            {},
+        )
         await form.run(dispatcher, tracker, {})
 
         assert not request.called

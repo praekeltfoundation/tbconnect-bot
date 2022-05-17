@@ -169,7 +169,7 @@ class TBCheckTermsForm(BaseFormAction):
         domain: Dict[Text, Any],
     ) -> List[Dict]:
         """Define what the form has to do
-            after all required slots are filled"""
+        after all required slots are filled"""
 
         # utter submit template
         return []
@@ -429,7 +429,7 @@ class TBCheckProfileForm(BaseFormAction):
         domain: Dict[Text, Any],
     ) -> List[Dict]:
         """Define what the form has to do
-            after all required slots are filled"""
+        after all required slots are filled"""
 
         # utter submit template
         return []
@@ -666,7 +666,7 @@ class TBCheckForm(BaseFormAction):
         domain: Dict[Text, Any],
     ) -> List[Dict]:
         """Define what the form has to do
-            after all required slots are filled"""
+        after all required slots are filled"""
         data = {
             slot: tracker.get_slot(slot)
             for slot in self.SLOTS
