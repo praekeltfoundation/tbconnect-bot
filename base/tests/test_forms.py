@@ -47,24 +47,32 @@ class TestTBCheckProfileForm:
             SlotSet("requested_slot", "gender"),
         ]
 
-        tracker = utils.get_tracker_for_number_slot_with_value(form, "age", "2")
+        tracker = utils.get_tracker_for_number_slot_with_value(
+            form, "age", "2", {"research_consent": "yes"}
+        )
         events = await form.run(dispatcher=dispatcher, tracker=tracker, domain=None)
         assert events == [SlotSet("age", "18-39"), SlotSet("requested_slot", "gender")]
 
-        tracker = utils.get_tracker_for_number_slot_with_value(form, "age", "3")
+        tracker = utils.get_tracker_for_number_slot_with_value(
+            form, "age", "3", {"research_consent": "yes"}
+        )
         events = await form.run(dispatcher=dispatcher, tracker=tracker, domain=None)
         assert events == [SlotSet("age", "40-65"), SlotSet("requested_slot", "gender")]
 
-        tracker = utils.get_tracker_for_number_slot_with_value(form, "age", "4")
+        tracker = utils.get_tracker_for_number_slot_with_value(
+            form, "age", "4", {"research_consent": "yes"}
+        )
         events = await form.run(dispatcher=dispatcher, tracker=tracker, domain=None)
         assert events == [SlotSet("age", ">65"), SlotSet("requested_slot", "gender")]
 
-        tracker = utils.get_tracker_for_number_slot_with_value(form, "age", ["2", "39"])
+        tracker = utils.get_tracker_for_number_slot_with_value(
+            form, "age", ["2", "39"], {"research_consent": "yes"}
+        )
         events = await form.run(dispatcher=dispatcher, tracker=tracker, domain=None)
         assert events == [SlotSet("age", None), SlotSet("requested_slot", "age")]
 
         tracker = utils.get_tracker_for_number_slot_with_value(
-            form, "age", "not a number"
+            form, "age", "not a number", {"research_consent": "yes"}
         )
         events = await form.run(dispatcher=dispatcher, tracker=tracker, domain=None)
         assert events == [SlotSet("age", None), SlotSet("requested_slot", "age")]
@@ -75,7 +83,7 @@ class TestTBCheckProfileForm:
         dispatcher = CollectingDispatcher()
 
         tracker = utils.get_tracker_for_number_slot_with_value(
-            form, "gender", "1", {"age": "18-39"}
+            form, "gender", "1", {"age": "18-39", "research_consent": "yes"}
         )
         events = await form.run(dispatcher=dispatcher, tracker=tracker, domain=None)
         assert events == [
@@ -84,7 +92,7 @@ class TestTBCheckProfileForm:
         ]
 
         tracker = utils.get_tracker_for_number_slot_with_value(
-            form, "gender", "2", {"age": "18-39"}
+            form, "gender", "2", {"age": "18-39", "research_consent": "yes"}
         )
         events = await form.run(dispatcher=dispatcher, tracker=tracker, domain=None)
         assert events == [
@@ -93,7 +101,7 @@ class TestTBCheckProfileForm:
         ]
 
         tracker = utils.get_tracker_for_number_slot_with_value(
-            form, "gender", "3", {"age": "18-39"}
+            form, "gender", "3", {"age": "18-39", "research_consent": "yes"}
         )
         events = await form.run(dispatcher=dispatcher, tracker=tracker, domain=None)
         assert events == [
@@ -102,7 +110,7 @@ class TestTBCheckProfileForm:
         ]
 
         tracker = utils.get_tracker_for_number_slot_with_value(
-            form, "gender", "4", {"age": "18-39"}
+            form, "gender", "4", {"age": "18-39", "research_consent": "yes"}
         )
         events = await form.run(dispatcher=dispatcher, tracker=tracker, domain=None)
         assert events == [
@@ -118,7 +126,10 @@ class TestTBCheckProfileForm:
         i = 1
         for p in ["ec", "fs", "gt", "nl", "lp", "mp", "nw", "nc", "wc"]:
             tracker = utils.get_tracker_for_number_slot_with_value(
-                form, "province", str(i), {"age": "18-39", "gender": "MALE"}
+                form,
+                "province",
+                str(i),
+                {"age": "18-39", "gender": "MALE", "research_consent": "yes"},
             )
             events = await form.run(dispatcher=dispatcher, tracker=tracker, domain=None)
             assert events == [
@@ -278,6 +289,7 @@ class TestTBCheckForm:
                 "city_location_coords": "+1.2-3.4",
                 "location_coords": "+3.4-1.2",
                 "location": "Cape Town, South Africa",
+                "research_consent": "no",
             },
         )
         await form.submit(dispatcher, tracker, {})
@@ -302,6 +314,7 @@ class TestTBCheckForm:
             "risk": "moderate",
             "location": "+03.4-001.2/",
             "city_location": "+01.2-003.4/",
+            "research_consent": False,
         }
 
         base.actions.actions.config.HEALTHCONNECT_URL = None
@@ -336,6 +349,7 @@ class TestTBCheckForm:
                 "city_location_coords": "",
                 "gender": "RATHER NOT SAY",
                 "location": "<not collected>",
+                "research_consent": "yes",
             },
         )
         await form.submit(dispatcher, tracker, {})
@@ -358,6 +372,7 @@ class TestTBCheckForm:
             "exposure": "not_sure",
             "tracing": True,
             "risk": "moderate",
+            "research_consent": True,
         }
 
         base.actions.actions.config.HEALTHCONNECT_URL = None
@@ -393,6 +408,7 @@ class TestTBCheckForm:
                 "city_location_coords": "+1.2-3.4",
                 "location_coords": "+3.4-1.2",
                 "location": "Cape Town, South Africa",
+                "research_consent": "yes",
             },
         )
         await form.submit(dispatcher, tracker, {})
@@ -417,6 +433,7 @@ class TestTBCheckForm:
             "risk": "moderate",
             "location": "+03.4-001.2/",
             "city_location": "+01.2-003.4/",
+            "research_consent": True,
         }
 
         base.actions.actions.config.HEALTHCONNECT_URL = None
@@ -460,6 +477,7 @@ class TestTBCheckForm:
                 "city_location_coords": "+1.2-3.4",
                 "location_coords": "+3.4-1.2",
                 "location": "Cape Town, South Africa",
+                "research_consent": "no",
             },
         )
         await form.submit(dispatcher, tracker, {})
