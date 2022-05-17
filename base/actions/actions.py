@@ -38,10 +38,6 @@ class BaseFormAction(FormAction):
     def yes_no_maybe_data(self) -> Dict[int, Text]:
         return {1: "yes", 2: "no", 3: "not sure"}
 
-    @property
-    def yes_no_more_data(self) -> Dict[int, Text]:
-        return {1: "yes", 2: "no", 3: "more"}
-
     @staticmethod
     def is_int(value: Text) -> bool:
         if not isinstance(value, str):
@@ -178,7 +174,7 @@ class TBCheckTermsForm(BaseFormAction):
 class TBCheckProfileForm(BaseFormAction):
     """TBCheck form action"""
 
-    SLOTS = ["research_consent", "age"]
+    SLOTS = ["age", "research_consent"]
 
     PERSISTED_SLOTS = [
         "gender",
@@ -248,7 +244,6 @@ class TBCheckProfileForm(BaseFormAction):
             "research_consent": [
                 self.from_intent(intent="affirm", value="yes"),
                 self.from_intent(intent="deny", value="no"),
-                self.from_intent(intent="more", value="more"),
                 self.from_text(),
             ],
         }
@@ -296,7 +291,7 @@ class TBCheckProfileForm(BaseFormAction):
             return {"research_consent": None}
 
         return self.validate_generic(
-            "research_consent", dispatcher, value, self.yes_no_more_data
+            "research_consent", dispatcher, value, self.yes_no_data
         )
 
     async def places_lookup(self, client, search_text, session_token, province):
@@ -647,7 +642,7 @@ class TBCheckForm(BaseFormAction):
                 tracker.get_slot("research_consent")
             ],
         }
-        print("Data: ", data)
+
         if self.AGE_MAPPING[tracker.get_slot("age")] != "<18":
             city_location = self.fix_location_format(
                 tracker.get_slot("city_location_coords")
