@@ -197,6 +197,31 @@ class TestTBCheckProfileForm:
 
         base.actions.actions.config.GOOGLE_PLACES_API_KEY = None
 
+    @pytest.mark.asyncio
+    async def test_validate_terms(self):
+        form = TBCheckTermsForm()
+        dispatcher = CollectingDispatcher()
+
+        tracker = utils.get_tracker_for_slot_from_intent(
+            form, "research_consent", "affirm"
+        )
+        events = await form.run(dispatcher=dispatcher, tracker=tracker, domain=None)
+        assert form.required_slots(tracker) == ["research_consent"]
+        assert events == [
+            SlotSet("research_consent", "yes"),
+            Form(None),
+            SlotSet("requested_slot", None),
+        ]
+
+        tracker = utils.get_tracker_for_slot_from_intent(
+            form, "research_consent", "more"
+        )
+        events = await form.run(dispatcher=dispatcher, tracker=tracker, domain=None)
+        assert events == [
+            SlotSet("research_consent", None),
+            SlotSet("requested_slot", "research_consent"),
+        ]
+
 
 class TestTBCheckTermsForm:
     @pytest.mark.asyncio
