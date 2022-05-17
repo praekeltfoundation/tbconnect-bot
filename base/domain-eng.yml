@@ -38,6 +38,7 @@ actions:
   - utter_keywords
   - utter_opt_in_yes
   - utter_do_tb_screening
+  - utter_ask_research_consent
 
 slots:
   terms:
@@ -83,6 +84,9 @@ slots:
   tracing:
     type: unfeaturized
     auto_fill: false
+  research_consent:
+    type: unfeaturized
+    auto_fill: false
 
 forms:
   - tbcheck_form
@@ -117,6 +121,19 @@ responses:
           This service provides info only and does not replace professional medical advice/diagnosis/treatment. Get a qualified health provider's advice about your medical condition/care, especially if you develop severe symptoms.
 
           You rely on this info at your own risk. You agree that you are responsible for your medical care & treatment. You agree that you should not ignore/delay getting medical advice about treatment/care because of this service.
+
+  utter_ask_research_consent:
+    - text: |
+        One last thing... 
+
+        We may ask you a few simple questions for research after you've completed your TB HealthCheck. Taking the survey is FREE and will not use up any airtime. We will use this information to see if TB HealthCheck helps people.  
+
+        Are you willing to take part? 
+        ---- 
+        Reply 1,2 or 3:   
+        1. YES, I'm happy to take part 
+        2. NO, thank you 
+        3. I need MORE info on TB HealthCheck and the research
 
   utter_more_terms_doc:
     - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH_WhatsApp_TB_Privacy_Policy_September2021.pdf"

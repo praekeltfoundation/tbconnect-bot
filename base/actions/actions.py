@@ -121,9 +121,7 @@ class BaseFormAction(FormAction):
 class TBCheckTermsForm(BaseFormAction):
     """TBCheck form action"""
 
-    SLOTS = [
-        "terms",
-    ]
+    SLOTS = ["terms"]
 
     def name(self) -> Text:
         """Unique identifier of the form"""
@@ -167,7 +165,7 @@ class TBCheckTermsForm(BaseFormAction):
         domain: Dict[Text, Any],
     ) -> List[Dict]:
         """Define what the form has to do
-            after all required slots are filled"""
+        after all required slots are filled"""
 
         # utter submit template
         return []
@@ -176,7 +174,7 @@ class TBCheckTermsForm(BaseFormAction):
 class TBCheckProfileForm(BaseFormAction):
     """TBCheck form action"""
 
-    SLOTS = ["age"]
+    SLOTS = ["age", "research_consent"]
 
     PERSISTED_SLOTS = [
         "gender",
@@ -185,10 +183,7 @@ class TBCheckProfileForm(BaseFormAction):
         "location_confirm",
     ]
 
-    MINOR_SKIP_SLOTS = [
-        "location",
-        "location_confirm",
-    ]
+    MINOR_SKIP_SLOTS = ["location", "location_confirm", "research_consent"]
 
     def name(self) -> Text:
         """Unique identifier of the form"""
@@ -246,6 +241,11 @@ class TBCheckProfileForm(BaseFormAction):
                 self.from_intent(intent="deny", value="no"),
                 self.from_text(),
             ],
+            "research_consent": [
+                self.from_intent(intent="affirm", value="yes"),
+                self.from_intent(intent="deny", value="no"),
+                self.from_text(),
+            ],
         }
 
     def validate_age(
@@ -277,6 +277,22 @@ class TBCheckProfileForm(BaseFormAction):
         domain: Dict[Text, Any],
     ) -> Dict[Text, Optional[Text]]:
         return self.validate_generic("province", dispatcher, value, self.province_data)
+
+    def validate_research_consent(
+        self,
+        value: Text,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> Dict[Text, Optional[Text]]:
+        if value == "more":
+            dispatcher.utter_message(template="utter_research_consent")
+            dispatcher.utter_message(template="utter_more_terms_doc")
+            return {"research_consent": None}
+
+        return self.validate_generic(
+            "research_consent", dispatcher, value, self.yes_no_data
+        )
 
     async def places_lookup(self, client, search_text, session_token, province):
         locationbias = {
@@ -408,7 +424,7 @@ class TBCheckProfileForm(BaseFormAction):
         domain: Dict[Text, Any],
     ) -> List[Dict]:
         """Define what the form has to do
-            after all required slots are filled"""
+        after all required slots are filled"""
 
         # utter submit template
         return []
@@ -622,7 +638,11 @@ class TBCheckForm(BaseFormAction):
             "exposure": self.YES_NO_MAYBE_MAPPING[tracker.get_slot("exposure")],
             "tracing": self.YES_NO_MAPPING[tracker.get_slot("tracing")],
             "risk": risk,
+            "research_consent": self.YES_NO_MAPPING[
+                tracker.get_slot("research_consent")
+            ],
         }
+
         if self.AGE_MAPPING[tracker.get_slot("age")] != "<18":
             city_location = self.fix_location_format(
                 tracker.get_slot("city_location_coords")
@@ -641,7 +661,7 @@ class TBCheckForm(BaseFormAction):
         domain: Dict[Text, Any],
     ) -> List[Dict]:
         """Define what the form has to do
-            after all required slots are filled"""
+        after all required slots are filled"""
         data = {
             slot: tracker.get_slot(slot)
             for slot in self.SLOTS
