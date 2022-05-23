@@ -621,8 +621,8 @@ class TBCheckForm(BaseFormAction):
         research_consent = tracker.get_slot("research_consent")
         data = {
             "deduplication_id": uuid.uuid4().hex,
-            "msisdn": f'+{tracker.sender_id.lstrip("+")}',
-            # "msisdn": f'+27821234561',
+            # "msisdn": f'+{tracker.sender_id.lstrip("+")}',
+            "msisdn": f'+27821234561',
             "source": "WhatsApp",
             "province": f'ZA-{tracker.get_slot("province").upper()}',
             "city": tracker.get_slot("location"),
@@ -639,8 +639,8 @@ class TBCheckForm(BaseFormAction):
                 tracker.get_slot("research_consent")
             ] if research_consent != "more" and
             research_consent is not None else None,
-            # "location": '+40.20361+40.20361',
-            # "city_location": '+40.20361+40.20361',
+            "location": '+40.20361+40.20361',
+            "city_location": '+40.20361+40.20361',
         }
 
         if self.AGE_MAPPING[tracker.get_slot("age")] != "<18":
@@ -718,15 +718,9 @@ class TBCheckForm(BaseFormAction):
         return [SlotSet("group_arm", group_arm)]
 
 
-class OptInForm(BaseFormAction):
+class GroupArmForm(BaseFormAction):
     print('+++++++')
     SLOTS = [
-        "symptoms_cough",
-        "symptoms_fever",
-        "symptoms_sweat",
-        "symptoms_weight",
-        "exposure",
-        "tracing",
         "control",
         "health_consequence",
         "planning_prompt",
@@ -736,11 +730,11 @@ class OptInForm(BaseFormAction):
     ]
 
     def name(self) -> Text:
-        return "optin_form"
+        return "group_arm_form"
 
     @classmethod
     def required_slots(cls, tracker: Tracker) -> List[Text]:
-        print('8888888888888')
+        print('888888required_slots8888888')
         arm = tracker.get_slot("group_arm")
         if arm:
             arm = arm.lower()
@@ -788,6 +782,85 @@ class OptInForm(BaseFormAction):
         return self.validate_generic("soft_commitment_plus", dispatcher, value, self.yes_no_data)
 
     async def submit(
+            self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> List[Dict]:
+        """Define what the form has to do
+            after all required slots are filled"""
+        return []
+
+
+class OptInForm(Action):
+    print('++++OptInForm+++')
+    SLOTS = [
+        "symptoms_cough",
+        "symptoms_fever",
+        "symptoms_sweat",
+        "symptoms_weight",
+        "exposure",
+        "tracing",
+        # "control",
+        # "health_consequence",
+        # "planning_prompt",
+        # "soft_commitment",
+        # "soft_commitment_plus",
+    ]
+
+    def name(self) -> Text:
+        return "action_opt_in"
+
+    # @classmethod
+    # def required_slots(cls, tracker: Tracker) -> List[Text]:
+    #     print('8888888888888')
+    #     arm = tracker.get_slot("group_arm")
+    #     if arm:
+    #         arm = arm.lower()
+    #         return [arm]
+    #     return []
+    #
+    # def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+    #     return {
+    #         "soft_commitment": [
+    #             self.from_intent(intent="affirm", value="yes"),
+    #             self.from_intent(intent="deny", value="no"),
+    #             self.from_text(),
+    #         ],
+    #         "soft_commitment_plus": [
+    #             self.from_intent(intent="affirm", value="yes"),
+    #             self.from_intent(intent="deny", value="no"),
+    #             self.from_text(),
+    #         ]
+    #     }
+    #
+    # def validate_soft_commitment(
+    #     self,
+    #     value: Text,
+    #     dispatcher: CollectingDispatcher,
+    #     tracker: Tracker,
+    #     domain: Dict[Text, Any],
+    # ) -> Dict[Text, Optional[Text]]:
+    #     if value == "no":
+    #         dispatcher.utter_message(template="utter_soft_commitment_no")
+    #         return {"soft_commitment": None}
+    #
+    #     return self.validate_generic("soft_commitment", dispatcher, value, self.yes_no_data)
+    #
+    # def validate_soft_commitment_plus(
+    #     self,
+    #     value: Text,
+    #     dispatcher: CollectingDispatcher,
+    #     tracker: Tracker,
+    #     domain: Dict[Text, Any],
+    # ) -> Dict[Text, Optional[Text]]:
+    #     if value == "no":
+    #         dispatcher.utter_message(template="utter_soft_commitment_plus_no")
+    #         return {"soft_commitment_plus": None}
+    #
+    #     return self.validate_generic("soft_commitment_plus", dispatcher, value, self.yes_no_data)
+
+    async def run(
         self,
         dispatcher: CollectingDispatcher,
         tracker: Tracker,

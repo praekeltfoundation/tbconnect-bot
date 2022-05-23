@@ -123,7 +123,7 @@ forms:
   - tbcheck_form
   - tbcheck_terms_form
   - tbcheck_profile_form
-  - optin_form
+  - group_arm_form
 
 responses:
   utter_welcome:
