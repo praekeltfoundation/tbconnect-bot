@@ -892,7 +892,6 @@ class OptInForm(Action):
     ) -> List[Dict[Text, Any]]:
         if config.HEALTHCONNECT_URL and config.HEALTHCONNECT_TOKEN:
             msisdn = f'+{tracker.sender_id.lstrip("+")}'
-            # msisdn = '+27821234561'
             url = urljoin(
                 config.HEALTHCONNECT_URL, f"/v2/healthcheckuserprofile/{msisdn}/"
             )
