@@ -37,7 +37,6 @@ actions:
   - utter_risk_commitment_yes
   - utter_risk_soft_commitment_no
   - utter_risk_soft_commitment_plus
-  - utter_risk_soft_commitment_plus_yes
   - utter_risk_soft_commitment_plus_no
   - utter_risk_low_unknown_exposure
   - utter_follow_up_request
@@ -105,7 +104,7 @@ slots:
   soft_commitment:
     type: unfeaturized
     auto_fill: false
-  soft_commitment_yes:
+  commitment_yes:
     type: unfeaturized
     auto_fill: false
   soft_commitment_no:
@@ -114,17 +113,17 @@ slots:
   soft_commitment_plus:
     type: unfeaturized
     auto_fill: false
-  soft_commitment_plus_yes:
+  soft_commitment_plus_no:
     type: unfeaturized
     auto_fill: false
-  commitment_plus_no:
+  group_arm:
     type: unfeaturized
-    auto_fill: false
 
 forms:
   - tbcheck_form
   - tbcheck_terms_form
   - tbcheck_profile_form
+  - optin_form
 
 responses:
   utter_welcome:
@@ -163,7 +162,7 @@ responses:
 
         Are you willing to take part? 
         ---- 
-        Reply 1,2 or 3:   
+        *Reply 1,2 or 3:*   
         1. YES, I'm happy to take part 
         2. NO, thank you 
         3. I need MORE info on TB HealthCheck and the research

@@ -46,11 +46,11 @@ def is_duplicate_error(response):
 
 
 def get_display_message_template(response):
-    print('SSSSSSSSSSSss')
-    print('*********', response.json(), '>>>>>>', response.content)
-    templates = []
-    if "profile" in response:
-        group_arm = response.json().get('profile').get()
-        templates.append(f"utter_risk_{group_arm}")
+    template = None
+    group_arm = None
 
-    return templates
+    if "profile" in response.json():
+        group_arm = response.json().get('profile', {}).get("tbconnect_group_arm")
+        template = f"utter_risk_{group_arm}"
+
+    return template, group_arm
