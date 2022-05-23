@@ -636,8 +636,9 @@ class TBCheckForm(BaseFormAction):
             "risk": risk,
             "research_consent": self.YES_NO_MAPPING[
                 tracker.get_slot("research_consent")
-            ] if research_consent != "more" and
-            research_consent is not None else None,
+            ]
+            if research_consent != "more" and research_consent is not None
+            else None,
         }
 
         if self.AGE_MAPPING[tracker.get_slot("age")] != "<18":
@@ -765,7 +766,7 @@ class GroupArmForm(BaseFormAction):
                 self.from_intent(intent="affirm", value="yes"),
                 self.from_intent(intent="deny", value="no"),
                 self.from_text(),
-            ]
+            ],
         }
 
     def validate_soft_commitment(
@@ -775,7 +776,9 @@ class GroupArmForm(BaseFormAction):
         tracker: Tracker,
         domain: Dict[Text, Any],
     ) -> Dict[Text, Optional[Text]]:
-        return self.validate_generic("soft_commitment", dispatcher, value, self.yes_no_data)
+        return self.validate_generic(
+            "soft_commitment", dispatcher, value, self.yes_no_data
+        )
 
     def validate_soft_commitment_plus(
         self,
@@ -784,13 +787,15 @@ class GroupArmForm(BaseFormAction):
         tracker: Tracker,
         domain: Dict[Text, Any],
     ) -> Dict[Text, Optional[Text]]:
-        return self.validate_generic("soft_commitment_plus", dispatcher, value, self.yes_no_data)
+        return self.validate_generic(
+            "soft_commitment_plus", dispatcher, value, self.yes_no_data
+        )
 
     async def submit(
-            self,
-            dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any],
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
     ) -> List[Dict]:
         """Check user response to display next message"""
 
@@ -813,27 +818,30 @@ class GroupArmForm(BaseFormAction):
             }
 
             msisdn = f'+{tracker.sender_id.lstrip("+")}'
-            data = {"msisdn": msisdn,
-                    "source": "WhatsApp",
-                    "province": f'ZA-{tracker.get_slot("province").upper()}',
-                    "city": tracker.get_slot("location"),
-                    "age": self.AGE_MAPPING[tracker.get_slot("age")],
-                    "gender": self.GENDER_MAPPING[tracker.get_slot("gender")],
-                    "cough": self.YES_NO_MAPPING[tracker.get_slot("symptoms_cough")],
-                    "fever": self.YES_NO_MAPPING[tracker.get_slot("symptoms_fever")],
-                    "sweat": self.YES_NO_MAPPING[tracker.get_slot("symptoms_sweat")],
-                    "weight": self.YES_NO_MAPPING[tracker.get_slot("symptoms_weight")],
-                    "exposure": self.YES_NO_MAYBE_MAPPING[tracker.get_slot("exposure")],
-                    "tracing": self.YES_NO_MAPPING[tracker.get_slot("tracing")],
-                    "risk": risk,
-                    }
+            data = {
+                "msisdn": msisdn,
+                "source": "WhatsApp",
+                "province": f'ZA-{tracker.get_slot("province").upper()}',
+                "city": tracker.get_slot("location"),
+                "age": self.AGE_MAPPING[tracker.get_slot("age")],
+                "gender": self.GENDER_MAPPING[tracker.get_slot("gender")],
+                "cough": self.YES_NO_MAPPING[tracker.get_slot("symptoms_cough")],
+                "fever": self.YES_NO_MAPPING[tracker.get_slot("symptoms_fever")],
+                "sweat": self.YES_NO_MAPPING[tracker.get_slot("symptoms_sweat")],
+                "weight": self.YES_NO_MAPPING[tracker.get_slot("symptoms_weight")],
+                "exposure": self.YES_NO_MAYBE_MAPPING[tracker.get_slot("exposure")],
+                "tracing": self.YES_NO_MAPPING[tracker.get_slot("tracing")],
+                "risk": risk,
+            }
 
             soft_commit = tracker.get_slot("soft_commitment")
             soft_commit_plus = tracker.get_slot("soft_commitment_plus")
 
-            test_commit_data = {"commit_get_tested": soft_commit
-                                if soft_commit is not None else soft_commit_plus
-                                }
+            test_commit_data = {
+                "commit_get_tested": soft_commit
+                if soft_commit is not None
+                else soft_commit_plus
+            }
             data.update(test_commit_data)
 
             if hasattr(httpx, "AsyncClient"):

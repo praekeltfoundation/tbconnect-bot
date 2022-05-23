@@ -50,7 +50,7 @@ def get_display_message_template(response):
     group_arm = None
 
     if "profile" in response.json():
-        group_arm = response.json().get('profile', {}).get("tbconnect_group_arm")
+        group_arm = response.json().get("profile", {}).get("tbconnect_group_arm")
         template = f"utter_{group_arm}"
 
     return template, group_arm
