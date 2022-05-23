@@ -621,8 +621,7 @@ class TBCheckForm(BaseFormAction):
         research_consent = tracker.get_slot("research_consent")
         data = {
             "deduplication_id": uuid.uuid4().hex,
-            # "msisdn": f'+{tracker.sender_id.lstrip("+")}',
-            "msisdn": f'+27821234561',
+            "msisdn": f'+{tracker.sender_id.lstrip("+")}',
             "source": "WhatsApp",
             "province": f'ZA-{tracker.get_slot("province").upper()}',
             "city": tracker.get_slot("location"),
@@ -639,8 +638,6 @@ class TBCheckForm(BaseFormAction):
                 tracker.get_slot("research_consent")
             ] if research_consent != "more" and
             research_consent is not None else None,
-            "location": '+40.20361+40.20361',
-            "city_location": '+40.20361+40.20361',
         }
 
         if self.AGE_MAPPING[tracker.get_slot("age")] != "<18":
@@ -709,24 +706,41 @@ class TBCheckForm(BaseFormAction):
                     if i == config.HTTP_RETRIES - 1:
                         raise e
 
-        # dispatcher.utter_message(template=template)
-
-        # if "soft_commitment" in group_arm:
-        #     return [SlotSet("group_arm", group_arm)]
-        # return []
-
-        return [SlotSet("group_arm", group_arm)]
+        if "soft_commitment" in group_arm:
+            return [SlotSet("group_arm", group_arm)]
+        dispatcher.utter_message(template=template)
+        return []
 
 
 class GroupArmForm(BaseFormAction):
-    print('+++++++')
+    YES_NO_MAPPING = {
+        "yes": True,
+        "no": False,
+    }
+
+    GENDER_MAPPING = {
+        "MALE": "male",
+        "FEMALE": "female",
+        "OTHER": "other",
+        "RATHER NOT SAY": "not_say",
+    }
+
+    AGE_MAPPING = {
+        "<18": "<18",
+        "18-39": "18-40",
+        "40-65": "40-65",
+        ">65": ">65",
+    }
+
+    YES_NO_MAYBE_MAPPING = {
+        "yes": "yes",
+        "no": "no",
+        "not sure": "not_sure",
+    }
+
     SLOTS = [
-        "control",
-        "health_consequence",
-        "planning_prompt",
         "soft_commitment",
         "soft_commitment_plus",
-
     ]
 
     def name(self) -> Text:
@@ -734,7 +748,6 @@ class GroupArmForm(BaseFormAction):
 
     @classmethod
     def required_slots(cls, tracker: Tracker) -> List[Text]:
-        print('888888required_slots8888888')
         arm = tracker.get_slot("group_arm")
         if arm:
             arm = arm.lower()
@@ -762,10 +775,6 @@ class GroupArmForm(BaseFormAction):
         tracker: Tracker,
         domain: Dict[Text, Any],
     ) -> Dict[Text, Optional[Text]]:
-        if value == "no":
-            dispatcher.utter_message(template="utter_soft_commitment_no")
-            return {"soft_commitment": None}
-
         return self.validate_generic("soft_commitment", dispatcher, value, self.yes_no_data)
 
     def validate_soft_commitment_plus(
@@ -775,10 +784,6 @@ class GroupArmForm(BaseFormAction):
         tracker: Tracker,
         domain: Dict[Text, Any],
     ) -> Dict[Text, Optional[Text]]:
-        if value == "no":
-            dispatcher.utter_message(template="utter_soft_commitment_plus_no")
-            return {"soft_commitment_plus": None}
-
         return self.validate_generic("soft_commitment_plus", dispatcher, value, self.yes_no_data)
 
     async def submit(
@@ -787,13 +792,78 @@ class GroupArmForm(BaseFormAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> List[Dict]:
-        """Define what the form has to do
-            after all required slots are filled"""
-        return []
+        """Check user response to display next message"""
+
+        if config.HEALTHCONNECT_URL and config.HEALTHCONNECT_TOKEN:
+            risk_data = {
+                "symptoms_cough": tracker.get_slot("symptoms_cough"),
+                "symptoms_fever": tracker.get_slot("symptoms_fever"),
+                "symptoms_sweat": tracker.get_slot("symptoms_sweat"),
+                "symptoms_weight": tracker.get_slot("symptoms_weight"),
+                "exposure": tracker.get_slot("exposure"),
+                # "",
+            }
+            risk = utils.get_risk_level(risk_data)
+
+            url = urljoin(config.HEALTHCONNECT_URL, "/v2/tbcheck/")
+
+            headers = {
+                "Authorization": f"Token {config.HEALTHCONNECT_TOKEN}",
+                "User-Agent": "rasa/tbconnect-bot",
+            }
+
+            msisdn = f'+{tracker.sender_id.lstrip("+")}'
+            data = {"msisdn": msisdn,
+                    "source": "WhatsApp",
+                    "province": f'ZA-{tracker.get_slot("province").upper()}',
+                    "city": tracker.get_slot("location"),
+                    "age": self.AGE_MAPPING[tracker.get_slot("age")],
+                    "gender": self.GENDER_MAPPING[tracker.get_slot("gender")],
+                    "cough": self.YES_NO_MAPPING[tracker.get_slot("symptoms_cough")],
+                    "fever": self.YES_NO_MAPPING[tracker.get_slot("symptoms_fever")],
+                    "sweat": self.YES_NO_MAPPING[tracker.get_slot("symptoms_sweat")],
+                    "weight": self.YES_NO_MAPPING[tracker.get_slot("symptoms_weight")],
+                    "exposure": self.YES_NO_MAYBE_MAPPING[tracker.get_slot("exposure")],
+                    "tracing": self.YES_NO_MAPPING[tracker.get_slot("tracing")],
+                    "risk": risk,
+                    }
+
+            soft_commit = tracker.get_slot("soft_commitment")
+            soft_commit_plus = tracker.get_slot("soft_commitment_plus")
+
+            test_commit_data = {"commit_get_tested": soft_commit
+                                if soft_commit is not None else soft_commit_plus
+                                }
+            data.update(test_commit_data)
+
+            if hasattr(httpx, "AsyncClient"):
+                # from httpx>=0.11.0, the async client is a different class
+                HTTPXClient = getattr(httpx, "AsyncClient")
+            else:
+                HTTPXClient = getattr(httpx, "Client")
+
+            for i in range(config.HTTP_RETRIES):
+                try:
+                    async with HTTPXClient() as client:
+                        resp = await client.post(url, json=data, headers=headers)
+                        # TODO: remove print
+                        print(resp.content)
+                        break
+                except httpx.HTTPError as e:
+                    print(e)
+                    if i == config.HTTP_RETRIES - 1:
+                        raise e
+
+            if soft_commit == "yes" or soft_commit_plus == "yes":
+                dispatcher.utter_message(template="utter_commitment_yes")
+            elif soft_commit == "no":
+                dispatcher.utter_message(template="utter_soft_commitment_no")
+            elif soft_commit_plus == "no":
+                dispatcher.utter_message(template="utter_soft_commitment_plus_no")
+            return []
 
 
 class OptInForm(Action):
-    print('++++OptInForm+++')
     SLOTS = [
         "symptoms_cough",
         "symptoms_fever",
@@ -801,64 +871,10 @@ class OptInForm(Action):
         "symptoms_weight",
         "exposure",
         "tracing",
-        # "control",
-        # "health_consequence",
-        # "planning_prompt",
-        # "soft_commitment",
-        # "soft_commitment_plus",
     ]
 
     def name(self) -> Text:
         return "action_opt_in"
-
-    # @classmethod
-    # def required_slots(cls, tracker: Tracker) -> List[Text]:
-    #     print('8888888888888')
-    #     arm = tracker.get_slot("group_arm")
-    #     if arm:
-    #         arm = arm.lower()
-    #         return [arm]
-    #     return []
-    #
-    # def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
-    #     return {
-    #         "soft_commitment": [
-    #             self.from_intent(intent="affirm", value="yes"),
-    #             self.from_intent(intent="deny", value="no"),
-    #             self.from_text(),
-    #         ],
-    #         "soft_commitment_plus": [
-    #             self.from_intent(intent="affirm", value="yes"),
-    #             self.from_intent(intent="deny", value="no"),
-    #             self.from_text(),
-    #         ]
-    #     }
-    #
-    # def validate_soft_commitment(
-    #     self,
-    #     value: Text,
-    #     dispatcher: CollectingDispatcher,
-    #     tracker: Tracker,
-    #     domain: Dict[Text, Any],
-    # ) -> Dict[Text, Optional[Text]]:
-    #     if value == "no":
-    #         dispatcher.utter_message(template="utter_soft_commitment_no")
-    #         return {"soft_commitment": None}
-    #
-    #     return self.validate_generic("soft_commitment", dispatcher, value, self.yes_no_data)
-    #
-    # def validate_soft_commitment_plus(
-    #     self,
-    #     value: Text,
-    #     dispatcher: CollectingDispatcher,
-    #     tracker: Tracker,
-    #     domain: Dict[Text, Any],
-    # ) -> Dict[Text, Optional[Text]]:
-    #     if value == "no":
-    #         dispatcher.utter_message(template="utter_soft_commitment_plus_no")
-    #         return {"soft_commitment_plus": None}
-    #
-    #     return self.validate_generic("soft_commitment_plus", dispatcher, value, self.yes_no_data)
 
     async def run(
         self,
@@ -866,13 +882,6 @@ class OptInForm(Action):
         tracker: Tracker,
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
-        print(">>>>>>>>>>>>>>>>>>>")
-        group_arm = tracker.get_slot("group_arm")
-        print('GROUP ARM: ', group_arm)
-
-        if group_arm:
-            dispatcher.utter_message(f"utter_risk_{group_arm}")
-
         if config.HEALTHCONNECT_URL and config.HEALTHCONNECT_TOKEN:
             msisdn = f'+{tracker.sender_id.lstrip("+")}'
             # msisdn = '+27821234561'
@@ -884,21 +893,12 @@ class OptInForm(Action):
                 dispatcher.utter_message(template="utter_do_tb_screening")
                 return []
 
-            if tracker.get_slot("soft_commitment") or tracker.get_slot("soft_commitment_plus"):
-                dispatcher.utter_message(template="utter_commit_yes")
-
             data = {
                 slot: tracker.get_slot(slot)
                 for slot in self.SLOTS
                 if slot.startswith("symptoms_")
             }
             data.update({"exposure": tracker.get_slot("exposure")})
-
-            soft_commit = tracker.get_slot("soft_commitment")
-            soft_commit_plus = tracker.get_slot("soft_commitment_plus")
-
-            test_commit_data = {"commit_get_tested": soft_commit if soft_commit is not None else soft_commit_plus}
-            data.update(test_commit_data)
 
             risk = utils.get_risk_level(data)
 

@@ -30,13 +30,13 @@ actions:
   - utter_ask_symptoms_weight
   - utter_ask_exposure
   - utter_ask_tracing
-  - utter_risk_control
-  - utter_risk_health_consequence
-  - utter_risk_planning_prompt
-  - utter_risk_soft_commitment
-  - utter_risk_commitment_yes
-  - utter_risk_soft_commitment_no
-  - utter_risk_soft_commitment_plus
+  - utter_control
+  - utter_health_consequence
+  - utter_planning_prompt
+  - utter_ask_soft_commitment
+  - utter_commitment_yes
+  - utter_soft_commitment_no
+  - utter_ask_soft_commitment_plus
   - utter_risk_soft_commitment_plus_no
   - utter_risk_low_unknown_exposure
   - utter_follow_up_request
@@ -92,28 +92,10 @@ slots:
   research_consent:
     type: unfeaturized
     auto_fill: false
-  control:
-    type: unfeaturized
-    auto_fill: false
-  health_consequence:
-    type: unfeaturized
-    auto_fill: false
-  planning_prompt:
-    type: unfeaturized
-    auto_fill: false
   soft_commitment:
     type: unfeaturized
     auto_fill: false
-  commitment_yes:
-    type: unfeaturized
-    auto_fill: false
-  soft_commitment_no:
-    type: unfeaturized
-    auto_fill: false
   soft_commitment_plus:
-    type: unfeaturized
-    auto_fill: false
-  soft_commitment_plus_no:
     type: unfeaturized
     auto_fill: false
   group_arm:
@@ -293,14 +275,14 @@ responses:
         *1.* YES
         *2.* NO
 
-  utter_risk_control:
+  utter_control:
     - text: |
         *Your replies to the questions show that you need a TB test this week.* 
 
         🩸 Visit your local clinic for a free TB test. 
         😷 Please put on a face mask before you enter the clinic.
 
-  utter_risk_health_consequence:
+  utter_health_consequence:
     - text: |
         *Your replies to the questions show that you need a TB test this week.* 
 
@@ -310,7 +292,7 @@ responses:
         😷 Please put on a face mask before you enter the clinic. 
         
 
-  utter_risk_planning_prompt:
+  utter_planning_prompt:
     - text: |
         *Your replies to the questions show that you need a TB test this week.*  
 
@@ -321,7 +303,7 @@ responses:
         🟢  Please put on a face mask before you enter the clinic. 
         🟢  Get there early! Clinics are open for TB testing Monday to Friday mornings.
 
-  utter_risk_soft_commitment:
+  utter_ask_soft_commitment:
     - text: |
         ⚠️ *Your replies to the questions show that you need a TB test this week.*  
 
@@ -333,18 +315,18 @@ responses:
         *1. YES* 
         *2. NO*
 
-  utter_risk_commitment_yes:
+  utter_commitment_yes:
     - text: |
         Well done for committing to your health! 👏
       claim: release
 
-  utter_risk_soft_commitment_no:
+  utter_soft_commitment_no:
     - text: |
         ⚠️ Remember: it is important to get tested for TB
         Get your test soon if you haven't already!
       claim: release
 
-  utter_risk_soft_commitment_plus:
+  utter_ask_soft_commitment_plus:
     - text: |
         ⚠️ *Your replies to the questions show that you need a TB test this week.*  
 
@@ -358,7 +340,7 @@ responses:
         *1. YES* 
         *2. NO*
 
-  utter_risk_soft_commitment_plus_no:
+  utter_soft_commitment_plus_no:
     - text: |
         ⚠️ Even if you can’t commit now, it is still important to get tested.
       claim: release
