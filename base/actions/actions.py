@@ -868,7 +868,7 @@ class GroupArmForm(BaseFormAction):
                 dispatcher.utter_message(template="utter_soft_commitment_no")
             elif soft_commit_plus == "no":
                 dispatcher.utter_message(template="utter_soft_commitment_plus_no")
-            return []
+        return []
 
 
 class OptInForm(Action):
