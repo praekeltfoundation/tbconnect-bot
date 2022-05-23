@@ -707,9 +707,10 @@ class TBCheckForm(BaseFormAction):
                     if i == config.HTTP_RETRIES - 1:
                         raise e
 
-        if "soft_commitment" in group_arm:
-            return [SlotSet("group_arm", group_arm)]
-        dispatcher.utter_message(template=template)
+        if group_arm:
+            if group_arm.startswith("soft_"):
+                return [SlotSet("group_arm", group_arm)]
+            dispatcher.utter_message(template=template)
         return []
 
 
@@ -806,7 +807,6 @@ class GroupArmForm(BaseFormAction):
                 "symptoms_sweat": tracker.get_slot("symptoms_sweat"),
                 "symptoms_weight": tracker.get_slot("symptoms_weight"),
                 "exposure": tracker.get_slot("exposure"),
-                # "",
             }
             risk = utils.get_risk_level(risk_data)
 
