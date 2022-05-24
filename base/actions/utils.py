@@ -46,11 +46,17 @@ def is_duplicate_error(response):
 
 
 def get_display_message_template(response):
-    template = None
+    templates = []
     group_arm = None
 
     if "profile" in response.json():
         group_arm = response.json().get("profile", {}).get("tbconnect_group_arm")
-        template = f"utter_{group_arm}"
+        templates.append(f"utter_{group_arm}")
 
-    return template, group_arm
+        if group_arm == "control" or group_arm == "health_consequence":
+            templates.append("utter_keywords")
+        elif group_arm == "planning_prompt":
+            # To add clinic list offer
+            pass
+
+    return templates, group_arm

@@ -670,8 +670,9 @@ class TBCheckForm(BaseFormAction):
         )
 
         risk = utils.get_risk_level(data)
-        template = None
+        templates = []
         group_arm = None
+        tbcheck_id = None
 
         if config.HEALTHCONNECT_URL and config.HEALTHCONNECT_TOKEN:
             url = urljoin(config.HEALTHCONNECT_URL, "/v2/tbcheck/")
@@ -696,10 +697,13 @@ class TBCheckForm(BaseFormAction):
                         # TODO: remove print
                         print(resp.content)
 
-                        template, group_arm = utils.get_display_message_template(resp)
+                        templates, group_arm = utils.get_display_message_template(resp)
 
                         if not utils.is_duplicate_error(resp):
                             resp.raise_for_status()
+
+                        # Get tbcheck ID
+                        tbcheck_id = resp.json().get("id")
                         break
                 except httpx.HTTPError as e:
                     print(e)
@@ -708,37 +712,17 @@ class TBCheckForm(BaseFormAction):
 
         if group_arm:
             if group_arm.startswith("soft_"):
-                return [SlotSet("group_arm", group_arm)]
-            dispatcher.utter_message(template=template)
+                return [
+                    SlotSet("group_arm", group_arm),
+                    SlotSet("tbcheck_id", tbcheck_id),
+                ]
+            else:
+                for template in templates:
+                    dispatcher.utter_message(template=template)
         return []
 
 
 class GroupArmForm(BaseFormAction):
-    YES_NO_MAPPING = {
-        "yes": True,
-        "no": False,
-    }
-
-    GENDER_MAPPING = {
-        "MALE": "male",
-        "FEMALE": "female",
-        "OTHER": "other",
-        "RATHER NOT SAY": "not_say",
-    }
-
-    AGE_MAPPING = {
-        "<18": "<18",
-        "18-39": "18-40",
-        "40-65": "40-65",
-        ">65": ">65",
-    }
-
-    YES_NO_MAYBE_MAPPING = {
-        "yes": "yes",
-        "no": "no",
-        "not sure": "not_sure",
-    }
-
     SLOTS = [
         "soft_commitment",
         "soft_commitment_plus",
@@ -800,73 +784,49 @@ class GroupArmForm(BaseFormAction):
         """Check user response to display next message"""
 
         if config.HEALTHCONNECT_URL and config.HEALTHCONNECT_TOKEN:
-            risk_data = {
-                "symptoms_cough": tracker.get_slot("symptoms_cough"),
-                "symptoms_fever": tracker.get_slot("symptoms_fever"),
-                "symptoms_sweat": tracker.get_slot("symptoms_sweat"),
-                "symptoms_weight": tracker.get_slot("symptoms_weight"),
-                "exposure": tracker.get_slot("exposure"),
-            }
-            risk = utils.get_risk_level(risk_data)
+            if tracker.get_slot("group_arm"):
+                id = tracker.get_slot("tbcheck_id")
+                url = urljoin(config.HEALTHCONNECT_URL, f"/v2/tbcheck/{id}/")
 
-            url = urljoin(config.HEALTHCONNECT_URL, "/v2/tbcheck/")
+                headers = {
+                    "Authorization": f"Token {config.HEALTHCONNECT_TOKEN}",
+                    "User-Agent": "rasa/tbconnect-bot",
+                }
 
-            headers = {
-                "Authorization": f"Token {config.HEALTHCONNECT_TOKEN}",
-                "User-Agent": "rasa/tbconnect-bot",
-            }
+                soft_commit = tracker.get_slot("soft_commitment")
+                soft_commit_plus = tracker.get_slot("soft_commitment_plus")
 
-            msisdn = f'+{tracker.sender_id.lstrip("+")}'
-            data = {
-                "msisdn": msisdn,
-                "source": "WhatsApp",
-                "province": f'ZA-{tracker.get_slot("province").upper()}',
-                "city": tracker.get_slot("location"),
-                "age": self.AGE_MAPPING[tracker.get_slot("age")],
-                "gender": self.GENDER_MAPPING[tracker.get_slot("gender")],
-                "cough": self.YES_NO_MAPPING[tracker.get_slot("symptoms_cough")],
-                "fever": self.YES_NO_MAPPING[tracker.get_slot("symptoms_fever")],
-                "sweat": self.YES_NO_MAPPING[tracker.get_slot("symptoms_sweat")],
-                "weight": self.YES_NO_MAPPING[tracker.get_slot("symptoms_weight")],
-                "exposure": self.YES_NO_MAYBE_MAPPING[tracker.get_slot("exposure")],
-                "tracing": self.YES_NO_MAPPING[tracker.get_slot("tracing")],
-                "risk": risk,
-            }
+                data = {
+                    "commit_get_tested": soft_commit
+                    if soft_commit is not None
+                    else soft_commit_plus
+                }
 
-            soft_commit = tracker.get_slot("soft_commitment")
-            soft_commit_plus = tracker.get_slot("soft_commitment_plus")
+                if hasattr(httpx, "AsyncClient"):
+                    # from httpx>=0.11.0, the async client is a different class
+                    HTTPXClient = getattr(httpx, "AsyncClient")
+                else:
+                    HTTPXClient = getattr(httpx, "Client")
 
-            test_commit_data = {
-                "commit_get_tested": soft_commit
-                if soft_commit is not None
-                else soft_commit_plus
-            }
-            data.update(test_commit_data)
+                for i in range(config.HTTP_RETRIES):
+                    try:
+                        async with HTTPXClient() as client:
+                            resp = await client.patch(url, json=data, headers=headers)
+                            # TODO: remove print
+                            print(resp.content)
+                            break
+                    except httpx.HTTPError as e:
+                        print(e)
+                        if i == config.HTTP_RETRIES - 1:
+                            raise e
 
-            if hasattr(httpx, "AsyncClient"):
-                # from httpx>=0.11.0, the async client is a different class
-                HTTPXClient = getattr(httpx, "AsyncClient")
-            else:
-                HTTPXClient = getattr(httpx, "Client")
-
-            for i in range(config.HTTP_RETRIES):
-                try:
-                    async with HTTPXClient() as client:
-                        resp = await client.post(url, json=data, headers=headers)
-                        # TODO: remove print
-                        print(resp.content)
-                        break
-                except httpx.HTTPError as e:
-                    print(e)
-                    if i == config.HTTP_RETRIES - 1:
-                        raise e
-
-            if soft_commit == "yes" or soft_commit_plus == "yes":
-                dispatcher.utter_message(template="utter_commitment_yes")
-            elif soft_commit == "no":
-                dispatcher.utter_message(template="utter_soft_commitment_no")
-            elif soft_commit_plus == "no":
-                dispatcher.utter_message(template="utter_soft_commitment_plus_no")
+                if soft_commit == "yes" or soft_commit_plus == "yes":
+                    dispatcher.utter_message(template="utter_commitment_yes")
+                elif soft_commit == "no":
+                    dispatcher.utter_message(template="utter_soft_commitment_no")
+                elif soft_commit_plus == "no":
+                    dispatcher.utter_message(template="utter_soft_commitment_plus_no")
+            return []
         return []
 
 

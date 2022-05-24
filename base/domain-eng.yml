@@ -100,6 +100,8 @@ slots:
     auto_fill: false
   group_arm:
     type: unfeaturized
+  tbcheck_id:
+    type: unfeaturized
 
 forms:
   - tbcheck_form
