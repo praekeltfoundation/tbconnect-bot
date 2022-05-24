@@ -697,7 +697,6 @@ class TBCheckForm(BaseFormAction):
                         print(resp.content)
 
                         template, group_arm = utils.get_display_message_template(resp)
-                        self.SLOTS.append(group_arm)
 
                         if not utils.is_duplicate_error(resp):
                             resp.raise_for_status()

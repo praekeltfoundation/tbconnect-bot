@@ -1,6 +1,6 @@
 import json
 from typing import Any, Dict, Optional, Text
-
+import responses
 import pytest
 import respx
 from rasa_sdk import Tracker
@@ -268,7 +268,8 @@ class TestTBCheckForm:
         base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
         base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
 
-        request = respx.post("https://healthconnect/v2/tbcheck/")
+        request = respx.post("https://healthconnect/v2/tbcheck/",
+                             content={"profile": {"tbconnect_group_arm": "control"}})
 
         form = TBCheckForm()
         dispatcher = CollectingDispatcher()
@@ -329,7 +330,8 @@ class TestTBCheckForm:
         base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
         base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
 
-        request = respx.post("https://healthconnect/v2/tbcheck/")
+        request = respx.post("https://healthconnect/v2/tbcheck/",
+                             content={"profile": {"tbconnect_group_arm": "control"}})
 
         form = TBCheckForm()
         dispatcher = CollectingDispatcher()
@@ -387,7 +389,8 @@ class TestTBCheckForm:
         base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
         base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
 
-        request = respx.post("https://healthconnect/v2/tbcheck/")
+        request = respx.post("https://healthconnect/v2/tbcheck/",
+                             content={"profile": {"tbconnect_group_arm": "control"}})
 
         form = TBCheckForm()
         dispatcher = CollectingDispatcher()
