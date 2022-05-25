@@ -268,7 +268,10 @@ class TestTBCheckForm:
         base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
         base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
 
-        request = respx.post("https://healthconnect/v2/tbcheck/")
+        request = respx.post(
+            "https://healthconnect/v2/tbcheck/",
+            content={"profile": {"tbconnect_group_arm": "control"}, "id": 22},
+        )
 
         form = TBCheckForm()
         dispatcher = CollectingDispatcher()
@@ -329,7 +332,10 @@ class TestTBCheckForm:
         base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
         base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
 
-        request = respx.post("https://healthconnect/v2/tbcheck/")
+        request = respx.post(
+            "https://healthconnect/v2/tbcheck/",
+            content={"profile": {"tbconnect_group_arm": "control"}, "id": 22},
+        )
 
         form = TBCheckForm()
         dispatcher = CollectingDispatcher()
@@ -387,7 +393,10 @@ class TestTBCheckForm:
         base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
         base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
 
-        request = respx.post("https://healthconnect/v2/tbcheck/")
+        request = respx.post(
+            "https://healthconnect/v2/tbcheck/",
+            content={"profile": {"tbconnect_group_arm": "control"}, "id": 22},
+        )
 
         form = TBCheckForm()
         dispatcher = CollectingDispatcher()

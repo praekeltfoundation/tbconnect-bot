@@ -13,6 +13,9 @@
     - tbcheck_form
     - form{"name": "tbcheck_form"}
     - form{"name": null}
+    - group_arm_form
+    - form{"name": "group_arm_form"}
+    - form{"name": null}
     - action_session_start
 
 ## happy path returning user
@@ -25,11 +28,14 @@
     - tbcheck_form
     - form{"name": "tbcheck_form"}
     - form{"name": null}
+    - group_arm_form
+    - form{"name": "group_arm_form"}
+    - form{"name": null}
     - action_session_start
 
 ## do optin
 * opt_in
-    - action_opt_in
+   - action_opt_in
 
 ## session start new
     - action_session_start

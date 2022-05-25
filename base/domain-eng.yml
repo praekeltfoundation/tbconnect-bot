@@ -30,9 +30,14 @@ actions:
   - utter_ask_symptoms_weight
   - utter_ask_exposure
   - utter_ask_tracing
-  - utter_risk_high
-  - utter_risk_moderate
-  - utter_risk_low
+  - utter_control
+  - utter_health_consequence
+  - utter_planning_prompt
+  - utter_ask_soft_commitment
+  - utter_commitment_yes
+  - utter_soft_commitment_no
+  - utter_ask_soft_commitment_plus
+  - utter_soft_commitment_plus_no
   - utter_risk_low_unknown_exposure
   - utter_follow_up_request
   - utter_keywords
@@ -87,11 +92,22 @@ slots:
   research_consent:
     type: unfeaturized
     auto_fill: false
+  soft_commitment:
+    type: unfeaturized
+    auto_fill: false
+  soft_commitment_plus:
+    type: unfeaturized
+    auto_fill: false
+  group_arm:
+    type: unfeaturized
+  tbcheck_id:
+    type: unfeaturized
 
 forms:
   - tbcheck_form
   - tbcheck_terms_form
   - tbcheck_profile_form
+  - group_arm_form
 
 responses:
   utter_welcome:
@@ -130,7 +146,7 @@ responses:
 
         Are you willing to take part? 
         ---- 
-        Reply 1,2 or 3:   
+        *Reply 1,2 or 3:*   
         1. YES, I'm happy to take part 
         2. NO, thank you 
         3. I need MORE info on TB HealthCheck and the research
@@ -261,25 +277,75 @@ responses:
         *1.* YES
         *2.* NO
 
-  utter_risk_high:
+  utter_control:
     - text: |
-        *Your replies to the questions show that you need a TB test this week*
+        *Your replies to the questions show that you need a TB test this week.* 
 
-        - Go to your local clinic for a free TB test.
-        - Please put on a face mask before you enter the clinic.
+        🩸 Visit your local clinic for a free TB test. 
+        😷 Please put on a face mask before you enter the clinic.
 
-  utter_risk_moderate:
+  utter_health_consequence:
     - text: |
-        *Your replies to the questions show that you need a TB test this week*
+        *Your replies to the questions show that you need a TB test this week.* 
 
-        - Go to your local clinic for a free TB test.
-        - Please put on a face mask before you enter the clinic.
+        With early diagnosis, TB can be cured. Don’t delay, test today!   
+ 
+        🩸 Visit your local clinic for a free TB test. 
+        😷 Please put on a face mask before you enter the clinic. 
+        
 
-  utter_risk_low:
+  utter_planning_prompt:
     - text: |
-        *You don't need a TB test at this time.*
+        *Your replies to the questions show that you need a TB test this week.*  
 
-        - If you develop cough, fever, weight loss or night sweats, visit your nearest clinic.
+        Here are some tips to help you plan:   
+        
+        🟢  Make the time. Your health is a priority! 
+        🟢  Pick the most convenient clinic for your test. Below are the 5 clinics nearest to you.  
+        🟢  Please put on a face mask before you enter the clinic. 
+        🟢  Get there early! Clinics are open for TB testing Monday to Friday mornings.
+
+  utter_ask_soft_commitment:
+    - text: |
+        ⚠️ *Your replies to the questions show that you need a TB test this week.*  
+
+        🩸 Go to your local clinic for a free TB test. 
+        😷 Please put on a face mask before you enter the clinic. 
+        
+        *Do you commit to getting tested?*  
+        Reply
+        *1. YES* 
+        *2. NO*
+
+  utter_commitment_yes:
+    - text: |
+        Well done for committing to your health! 👏
+      claim: release
+
+  utter_soft_commitment_no:
+    - text: |
+        ⚠️ Remember: it is important to get tested for TB
+        Get your test soon if you haven't already!
+      claim: release
+
+  utter_ask_soft_commitment_plus:
+    - text: |
+        ⚠️ *Your replies to the questions show that you need a TB test this week.*  
+
+        🩸 Go to your local clinic for a free TB test. 
+        😷 Please put on a face mask before you enter the clinic. 
+        📲 You will get R10 airtime if you commit to get tested. Airtime will be sent to you within 1 hour. 
+        
+        *Do you commit to getting tested?*  
+        Reply: 
+        
+        *1. YES* 
+        *2. NO*
+
+  utter_soft_commitment_plus_no:
+    - text: |
+        ⚠️ Even if you can’t commit now, it is still important to get tested.
+      claim: release
 
   utter_risk_low_unknown_exposure:
     - text: |

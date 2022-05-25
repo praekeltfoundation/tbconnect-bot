@@ -285,13 +285,8 @@ class TBCheckProfileForm(BaseFormAction):
         tracker: Tracker,
         domain: Dict[Text, Any],
     ) -> Dict[Text, Optional[Text]]:
-        if value == "more":
-            dispatcher.utter_message(template="utter_research_consent")
-            dispatcher.utter_message(template="utter_more_terms_doc")
-            return {"research_consent": None}
-
         return self.validate_generic(
-            "research_consent", dispatcher, value, self.yes_no_data
+            "research_consent", dispatcher, value, {1: "yes", 2: "no", 3: "more"}
         )
 
     async def places_lookup(self, client, search_text, session_token, province):
@@ -623,6 +618,7 @@ class TBCheckForm(BaseFormAction):
         return data_minor
 
     def get_healthcheck_data(self, tracker: Tracker, risk: Text) -> Dict[Text, Any]:
+        research_consent = tracker.get_slot("research_consent")
         data = {
             "deduplication_id": uuid.uuid4().hex,
             "msisdn": f'+{tracker.sender_id.lstrip("+")}',
@@ -640,7 +636,9 @@ class TBCheckForm(BaseFormAction):
             "risk": risk,
             "research_consent": self.YES_NO_MAPPING[
                 tracker.get_slot("research_consent")
-            ],
+            ]
+            if research_consent != "more" and research_consent is not None
+            else None,
         }
 
         if self.AGE_MAPPING[tracker.get_slot("age")] != "<18":
@@ -672,7 +670,9 @@ class TBCheckForm(BaseFormAction):
         )
 
         risk = utils.get_risk_level(data)
-        templates = utils.get_risk_templates(risk, data)
+        templates = []
+        group_arm = None
+        tbcheck_id = None
 
         if config.HEALTHCONNECT_URL and config.HEALTHCONNECT_TOKEN:
             url = urljoin(config.HEALTHCONNECT_URL, "/v2/tbcheck/")
@@ -696,22 +696,141 @@ class TBCheckForm(BaseFormAction):
                         resp = await client.post(url, json=post_data, headers=headers)
                         # TODO: remove print
                         print(resp.content)
+
+                        templates, group_arm = utils.get_display_message_template(resp)
+
                         if not utils.is_duplicate_error(resp):
                             resp.raise_for_status()
+
+                        # Get tbcheck ID
+                        tbcheck_id = resp.json().get("id")
                         break
                 except httpx.HTTPError as e:
                     print(e)
                     if i == config.HTTP_RETRIES - 1:
                         raise e
 
-        for template in templates:
-            dispatcher.utter_message(template=template)
+        if group_arm:
+            if group_arm.startswith("soft_"):
+                return [
+                    SlotSet("group_arm", group_arm),
+                    SlotSet("tbcheck_id", tbcheck_id),
+                ]
+            else:
+                for template in templates:
+                    dispatcher.utter_message(template=template)
+        return []
 
+
+class GroupArmForm(BaseFormAction):
+    SLOTS = [
+        "soft_commitment",
+        "soft_commitment_plus",
+    ]
+
+    def name(self) -> Text:
+        return "group_arm_form"
+
+    @classmethod
+    def required_slots(cls, tracker: Tracker) -> List[Text]:
+        arm = tracker.get_slot("group_arm")
+        if arm:
+            arm = arm.lower()
+            return [arm]
+        return []
+
+    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+        return {
+            "soft_commitment": [
+                self.from_intent(intent="affirm", value="yes"),
+                self.from_intent(intent="deny", value="no"),
+                self.from_text(),
+            ],
+            "soft_commitment_plus": [
+                self.from_intent(intent="affirm", value="yes"),
+                self.from_intent(intent="deny", value="no"),
+                self.from_text(),
+            ],
+        }
+
+    def validate_soft_commitment(
+        self,
+        value: Text,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> Dict[Text, Optional[Text]]:
+        return self.validate_generic(
+            "soft_commitment", dispatcher, value, self.yes_no_data
+        )
+
+    def validate_soft_commitment_plus(
+        self,
+        value: Text,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> Dict[Text, Optional[Text]]:
+        return self.validate_generic(
+            "soft_commitment_plus", dispatcher, value, self.yes_no_data
+        )
+
+    async def submit(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict]:
+        """Check user response to display next message"""
+
+        if config.HEALTHCONNECT_URL and config.HEALTHCONNECT_TOKEN:
+            if tracker.get_slot("group_arm"):
+                id = tracker.get_slot("tbcheck_id")
+                url = urljoin(config.HEALTHCONNECT_URL, f"/v2/tbcheck/{id}/")
+
+                headers = {
+                    "Authorization": f"Token {config.HEALTHCONNECT_TOKEN}",
+                    "User-Agent": "rasa/tbconnect-bot",
+                }
+
+                soft_commit = tracker.get_slot("soft_commitment")
+                soft_commit_plus = tracker.get_slot("soft_commitment_plus")
+
+                data = {
+                    "commit_get_tested": soft_commit
+                    if soft_commit is not None
+                    else soft_commit_plus
+                }
+
+                if hasattr(httpx, "AsyncClient"):
+                    # from httpx>=0.11.0, the async client is a different class
+                    HTTPXClient = getattr(httpx, "AsyncClient")
+                else:
+                    HTTPXClient = getattr(httpx, "Client")
+
+                for i in range(config.HTTP_RETRIES):
+                    try:
+                        async with HTTPXClient() as client:
+                            resp = await client.patch(url, json=data, headers=headers)
+                            # TODO: remove print
+                            print(resp.content)
+                            break
+                    except httpx.HTTPError as e:
+                        print(e)
+                        if i == config.HTTP_RETRIES - 1:
+                            raise e
+
+                if soft_commit == "yes" or soft_commit_plus == "yes":
+                    dispatcher.utter_message(template="utter_commitment_yes")
+                elif soft_commit == "no":
+                    dispatcher.utter_message(template="utter_soft_commitment_no")
+                elif soft_commit_plus == "no":
+                    dispatcher.utter_message(template="utter_soft_commitment_plus_no")
+            return []
         return []
 
 
 class OptInForm(Action):
-
     SLOTS = [
         "symptoms_cough",
         "symptoms_fever",
