@@ -670,6 +670,14 @@ class TBCheckForm(BaseFormAction):
             location = self.fix_location_format(tracker.get_slot("location_coords"))
             if location != "":
                 data["location"] = location
+        activation = tracker.get_slot("activation")
+        if activation:
+            if activation.endswith("_agent"):
+                # Switch the msisdn if the device is shared.
+                data["originating_msisdn"] = data["msisdn"]
+                data["msisdn"] = f'+27{tracker.get_slot("mobile_no").lstrip("0")}'
+            data["activation"] = activation
+
         return data
 
     async def submit(
@@ -934,3 +942,48 @@ class ActionExit(Action):
     ) -> List[Dict[Text, Any]]:
         dispatcher.utter_message(template="utter_exit")
         return ActionSessionStart().get_carry_over_slots(tracker)
+
+
+class SetActivationAction(Action):
+    def name(self):
+        return "action_set_activation"
+
+    async def get_activation(self, msisdn):
+        if config.TURN_URL and config.TURN_TOKEN:
+            url = urljoin(config.TURN_URL, f"/v1/contacts/{msisdn}/profile")
+
+            headers = {
+                "Accept": "application/vnd.v1+json",
+                "Authorization": f"Bearer {config.TURN_TOKEN}",
+                "User-Agent": "rasa/tbconnect-bot",
+            }
+
+            if hasattr(httpx, "AsyncClient"):
+                # from httpx>=0.11.0, the async client is a different class
+                HTTPXClient = getattr(httpx, "AsyncClient")
+            else:
+                HTTPXClient = getattr(httpx, "Client")
+
+            for i in range(config.HTTP_RETRIES):
+                try:
+                    async with HTTPXClient() as client:
+                        resp = await client.get(url, headers=headers)
+                        resp.raise_for_status()
+                        return resp.json()
+                except httpx.HTTPError as e:
+                    print(e)
+                    if i == config.HTTP_RETRIES - 1:
+                        raise e
+
+    async def run(self, dispatcher, tracker, domain):
+
+        msisdn = f'{tracker.sender_id.lstrip("+")}'
+        data = await self.get_activation(msisdn)
+        events = []
+        activation = data.get("fields", {}).get("tb_activation")
+        if activation:
+            if activation.endswith("_agent"):
+                events.append(AllSlotsReset())
+            events.append(SlotSet("activation", activation))
+
+        return events

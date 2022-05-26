@@ -16,6 +16,7 @@ entities:
   - number
 
 actions:
+  - action_set_activation
   - action_session_start
   - action_exit
   - action_opt_in
