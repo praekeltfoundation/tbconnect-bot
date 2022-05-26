@@ -7,7 +7,7 @@ from urllib.parse import urlencode, urljoin
 import httpx
 import sentry_sdk
 from rasa_sdk import Tracker
-from rasa_sdk.events import ActionExecuted, SessionStarted, SlotSet
+from rasa_sdk.events import ActionExecuted, AllSlotsReset, SessionStarted, SlotSet
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import Action, FormAction
 from sentry_sdk.integrations.logging import LoggingIntegration
@@ -174,7 +174,7 @@ class TBCheckTermsForm(BaseFormAction):
 class TBCheckProfileForm(BaseFormAction):
     """TBCheck form action"""
 
-    SLOTS = ["age", "research_consent"]
+    SLOTS = ["mobile_no", "age", "research_consent"]
 
     PERSISTED_SLOTS = [
         "gender",
@@ -206,6 +206,11 @@ class TBCheckProfileForm(BaseFormAction):
                     slots.remove(slot)
 
         for slot in slots:
+            if slot == "mobile_no":
+                activation = tracker.get_slot("activation")
+                if not activation or not activation.endswith("_agent"):
+                    continue
+
             if not tracker.get_slot(slot):
                 return [slot]
         return []
@@ -227,6 +232,7 @@ class TBCheckProfileForm(BaseFormAction):
 
     def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
         return {
+            "mobile_no": [self.from_entity(entity="number"), self.from_text()],
             "age": [self.from_entity(entity="number"), self.from_text()],
             "gender": [self.from_entity(entity="number"), self.from_text()],
             "province": [
@@ -411,6 +417,20 @@ class TBCheckProfileForm(BaseFormAction):
         if loc_confirm["location_confirm"] and loc_confirm["location_confirm"] == "no":
             return {"location_confirm": None, "location": None}
         return loc_confirm
+
+    def validate_mobile_no(
+        self,
+        value: Text,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> Dict[Text, Optional[Text]]:
+
+        numbers = re.findall(r"0\d{9}", re.sub(r"[\s-]", "", value))
+        if numbers:
+            return {"mobile_no": numbers[0]}
+        dispatcher.utter_message(template="utter_invalid_mobile_no")
+        return {"mobile_no": None}
 
     def submit(
         self,

@@ -19,6 +19,7 @@ actions:
   - action_session_start
   - action_exit
   - action_opt_in
+  - utter_ask_mobile_no
   - utter_ask_terms
   - utter_ask_age
   - utter_ask_gender
@@ -44,8 +45,15 @@ actions:
   - utter_opt_in_yes
   - utter_do_tb_screening
   - utter_ask_research_consent
+  - utter_invalid_mobile_no
 
 slots:
+  mobile_no:
+    type: unfeaturized
+    auto_fill: false
+  activation:
+    type: unfeaturized
+    auto_fill: false
   terms:
     type: categorical
     values:
@@ -110,6 +118,14 @@ forms:
   - group_arm_form
 
 responses:
+  utter_ask_mobile_no:
+      - text: |
+          Please enter your mobile number e.g 082001000i1
+
+  utter_invalid_mobile_no:
+      - text: |
+          Invalid mobile number.
+
   utter_welcome:
       - text: |
           *TB HealthCheck* is your TB checking tool. This can tell you if you need a TB test.
