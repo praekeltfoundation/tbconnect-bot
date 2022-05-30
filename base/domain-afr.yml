@@ -30,14 +30,20 @@ actions:
   - utter_ask_symptoms_weight
   - utter_ask_exposure
   - utter_ask_tracing
-  - utter_risk_high
-  - utter_risk_moderate
-  - utter_risk_low
+  - utter_control
+  - utter_health_consequence
+  - utter_planning_prompt
+  - utter_ask_soft_commitment
+  - utter_commitment_yes
+  - utter_soft_commitment_no
+  - utter_ask_soft_commitment_plus
+  - utter_soft_commitment_plus_no
   - utter_risk_low_unknown_exposure
   - utter_follow_up_request
   - utter_keywords
   - utter_opt_in_yes
   - utter_do_tb_screening
+  - utter_ask_research_consent
 
 slots:
   terms:
@@ -83,6 +89,19 @@ slots:
   tracing:
     type: unfeaturized
     auto_fill: false
+  research_consent:
+    type: unfeaturized
+    auto_fill: false
+  soft_commitment:
+    type: unfeaturized
+    auto_fill: false
+  soft_commitment_plus:
+    type: unfeaturized
+    auto_fill: false
+  group_arm:
+    type: unfeaturized
+  tbcheck_id:
+    type: unfeaturized
 
 forms:
   - tbcheck_form
@@ -118,6 +137,21 @@ responses:
           Hierdie diens verskaf slegs inligting en is nie 'n plaasvervanger vir professionele mediese advies/diagnose/behandeling nie. Kry advies van 'n gekwalifiseerde gesondheidsdiens-verskaffer vir jou mediese toestand en -behandeling, veral as jy erge simptome ontwikkel.
 
           Jy maak op eie risiko staat op hierdie inligting. Jy stem saam dat jy self verantwoordelik is vir jou mediese sorg en behandeling. Jy stem saam dat jy nie mediese advies sal ignoreer of behandeling sal uitstel as gevolg van hierdie diens nie.
+
+  utter_ask_research_consent:
+      - text: |
+          Een laaste ding...
+
+          Ons mag dalk vir jou 'n paar eenvoudige vrae vra vir navorsingsdoeleindes nadat jy die TB HealthCheck voltooi het. Om aan die opname deel te neem is GRATIS en sal geen lugtyd gebruik nie. Ons sal hierdie inligting gebruik om te sien of TB HealthCheck mense help.
+          
+          Is jy gewillig om deel te neem?
+          
+          ----
+          *Antwoord 1, 2 of 3:*
+          
+          1. JA, ek wil deelneem
+          2. NEE dankie
+          3. Ek het MEER inligting oor TB HealthCheck en die navorsing nodig
 
   utter_more_terms_doc:
     - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH_WhatsApp_TB_Privacy_Policy_September2021.pdf"
@@ -245,25 +279,75 @@ responses:
         *1.* JA
         *2.* NEE
 
-  utter_risk_high:
+  utter_control:
     - text: |
-        *Jou antwoorde op die vrae toon dat jy binne die volgende week vir 'n TB-toets moet gaan*
+        *Jou antwoorde op die vrae dui aan dat jy hierdie week 'n TB-toets moet laat doen.* 
 
-        - Gaan na jou plaaslike kliniek vir 'n gratis TB-toets.
-        - Sit asseblief jou gesigmasker op voordat jy by die kliniek ingaan.
+        🩸 Besoek jou plaaslike kliniek vir 'n gratis TB-toets.
+        😷 Sit asseblief 'n gesigmasker op voor jy by die kliniek ingaan.
 
-  utter_risk_moderate:
+  utter_health_consequence:
     - text: |
-        *Jou antwoorde op die vrae toon dat jy binne die volgende week vir 'n TB-toets moet gaan*
+        *Jou antwoorde op die vrae dui aan dat jy hierdie week 'n TB-toets moet laat doen.*
 
-        - Gaan na jou plaaslike kliniek vir 'n gratis TB-toets.
-        - Sit asseblief jou gesigmasker op voordat jy by die kliniek ingaan.
+        As TB vroeg gediagnoseer word, kan dit genees word. Hoekom wag? Laat toets jou vandag!
+        
+        🩸 Besoek jou plaaslike kliniek vir 'n gratis TB-toets.
+        😷 Sit asseblief 'n gesigmasker op voor jy by die kliniek ingaan. 
 
-  utter_risk_low:
+  utter_planning_prompt:
     - text: |
-        *Jy benodig nie tans 'n TB-toets nie.*
+        *Jou antwoorde op die vrae dui aan dat jy hierdie week 'n TB-toets moet laat doen.* 
 
-        - Indien jy begin hoes, koors kry, gewig verloor of snags sweet, besoek jou naaste kliniek.
+        Hier is 'n paar wenke om jou te help beplan:
+        
+        🟢 Maak tyd. Jou gesondheid is belangrik!
+        🟢 Kies die gerieflikste kliniek vir jou toets. Hieronder is die 5 klinieke naaste aan jou.
+        🟢 Sit asseblief 'n gesigmasker op voor jy by die kliniek ingaan.
+        🟢 Wees vroeg daar! Klinieke is van Maandag- tot Vrydagoggend oop vir TB-toetse.
+
+  utter_ask_soft_commitment:
+    - text: |
+        ⚠️ *Jou antwoorde op die vrae dui aan dat jy hierdie week 'n TB-toets moet laat doen.* 
+
+        🩸 Gaan na jou plaaslike kliniek vir 'n gratis TB-toets.
+        😷 Sit asseblief 'n gesigmasker op voor jy by die kliniek ingaan.
+        
+        Neem jy voor om jou te laat toets?
+        Antwoord:
+        
+        *1. JA* 
+        *2. NEE*
+
+  utter_commitment_yes:
+    - text: |
+        Geluk omdat jy jou gesondheid eerste stel! 👏
+      claim: release
+
+  utter_soft_commitment_no:
+    - text: |
+        ⚠️ *Onthou: dit is belangrik om vir TB getoets te word*
+        Laat toets jou gou as jy nog nie het nie!
+      claim: release
+
+  utter_ask_soft_commitment_plus:
+    - text: |
+        ⚠️ *Jou antwoorde op die vrae dui aan dat jy hierdie week 'n TB-toets moet laat doen.*
+
+        🩸 Gaan na jou plaaslike kliniek vir 'n gratis TB-toets.
+        😷 Sit asseblief 'n gesigmasker op voor jy by die kliniek ingaan.
+        📲 Jy sal R10 lugtyd kry as jy onderneem om jou te laat toets. Lugtyd sal binne 1 uur aan jou gestuur word.
+        
+        Neem jy voor om jou te laat toets?
+        Antwoord: 
+
+        *1. JA* 
+        *2. NEE*
+
+  utter_soft_commitment_plus_no:
+    - text: |
+        ⚠️ Al kan jy nie nou voorneem om dit te doen nie, is dit steeds belangrik om getoets te word.
+      claim: release
 
   utter_risk_low_unknown_exposure:
     - text: |
