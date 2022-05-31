@@ -30,14 +30,20 @@ actions:
   - utter_ask_symptoms_weight
   - utter_ask_exposure
   - utter_ask_tracing
-  - utter_risk_high
-  - utter_risk_moderate
-  - utter_risk_low
+  - utter_control
+  - utter_health_consequence
+  - utter_planning_prompt
+  - utter_ask_soft_commitment
+  - utter_commitment_yes
+  - utter_soft_commitment_no
+  - utter_ask_soft_commitment_plus
+  - utter_soft_commitment_plus_no
   - utter_risk_low_unknown_exposure
   - utter_follow_up_request
   - utter_keywords
   - utter_opt_in_yes
   - utter_do_tb_screening
+  - utter_ask_research_consent
 
 slots:
   terms:
@@ -83,6 +89,19 @@ slots:
   tracing:
     type: unfeaturized
     auto_fill: false
+  research_consent:
+    type: unfeaturized
+    auto_fill: false
+  soft_commitment:
+    type: unfeaturized
+    auto_fill: false
+  soft_commitment_plus:
+    type: unfeaturized
+    auto_fill: false
+  group_arm:
+    type: unfeaturized
+  tbcheck_id:
+    type: unfeaturized
 
 forms:
   - tbcheck_form
@@ -118,6 +137,21 @@ responses:
           Le nkonzo inikezela ngolwazi kuphela kwaye ayithathi indawo yengcebiso zonyango /yokuxilonga/yonyango. Fumana iingcebiso zomboneleli wezempilo malunga nemeko yonyango / inkathalo, ngakumbi ukuba uvelisa iimpawu ezinzima.
 
           Uxhomekeke kolu lwazi ngokomngcipheko wakho. Uyavuma ukuba unoxanduva lonyango lwakho. Uyavuma ukuba akufuneki ukungahoyi / ulibazise ukufumana iingcebiso zonyango malunga nonyango / ukhathalelo ngenxa yale nkonzo.
+
+  utter_ask_research_consent:
+      - text: |
+          Into yokugqibela...
+
+          Sinokubuza imibuzo embalwa elula yokuphanda emva kokuba uyigqibile i-TB HealthCheck yakho. Ukuthatha uphando KUMAHALA kwaye akuyi kusebenzisa ne-airtime encinci. Siza kusebenzisa olu lwazi ukubona ukuba i-TB HealthCheck iyabanceda abantu. 
+          
+          Ngaba uzimisele ukuthatha inxaxheba? 
+          
+          ----
+          *Phendula u-1,2 okanye 3:*
+          
+           1. EWE, ndifuna ukuthatha inxaxheba 
+           2. HAYI, enkosi 
+           3. Ndidinga ulwazi oluthe KRATYA nge-TB HealthCheck kunye nophando
 
   utter_more_terms_doc:
     - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH_WhatsApp_TB_Privacy_Policy_September2021.pdf"
@@ -245,25 +279,75 @@ responses:
         *1.* EWE
         *2.* HAYI
 
-  utter_risk_high:
+  utter_control:
     - text: |
-        *Iimpendulo zakho kule mibuzo zibonisa ukuba udinga uvavanyo lwe-TB kwiveki ezayo*
+        *Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki.* 
 
-        - Yiya kwikliniki yakho yengingqi uyofumana uvavanyo lwe-TB lwasimahla
-        - Nceda unxibe imaski yobuso phambi kokuba ungene eklinikhi.
+        🩸 Ndwendwela ikliniki yengingqi yakho ukwenza uvavanyo lwe-TB lwamahala.
+        😷 Nceda unxibe imaski ngaphambi kokuba ungene ekliniki.
 
-  utter_risk_moderate:
+  utter_health_consequence:
     - text: |
-        *Iimpendulo zakho kule mibuzo zibonisa ukuba udinga uvavanyo lwe-TB kwiveki ezayo*
+        *Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki.* 
 
-        - Yiya kwikliniki yakho yengingqi uyofumana uvavanyo lwe-TB lwasimahla
-        - Nceda unxibe imaski yobuso phambi kokuba ungene eklinikhi.
+        Ukufunywanwa ngethuba, i-TB inokunyangeka. Ungalibazisi, vavanya namhlanje!
+        
+        🩸 Ndwendwela ikliniki yengingqi yakho ukwenza uvavanyo lwe-TB lwamahala.
+        😷 Nceda unxibe imaski ngaphambi kokuba ungene ekliniki. 
 
-  utter_risk_low:
+  utter_planning_prompt:
     - text: |
-        *Akudingi vavanyo lwe-TB ngeli xesha.*
+        *Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki.*
 
-        - Ukuba ngaba uyakhohlela, unomkhuhlane, ukunciphisa umzimba okanye ukubila ebusuku, ndwendwela iklinikhi ekufutshane nawe.
+        Nazi ezinye zeengcebiso zokukunceda ucwangcise:
+        
+        🟢 Yenza ixesha. Impilo yakho ibalulekile!
+        🟢 Khetha eyona klinikhi elula kakhulu kuwe ukwenza uvavanyo lwakho. Ngezantsi ziikliniki ezi-5 ezikufutshane kuwe.
+        🟢 Nceda unxibe imaski ngaphambi kokuba ungene ekliniki.
+        🟢 Fika kwangexesha! iiKlinikhi zivulwa ukuba ufumane uvavanyo lweTB ngoMvulo ukuya ngoLwesihlanu kusasa.
+
+  utter_ask_soft_commitment:
+    - text: |
+        ⚠️ *Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki.*
+
+        🩸 Yiya kwiklinikhi yengingqi yakho ukufumana uvavanyo lwamahala lwe-TB.
+        😷 Nceda unxibe imaski ngaphambi kokuba ungene ekliniki.
+        
+        Ingaba uyazibophelela ukuba uzakuvavanya?
+        Phendula:
+        
+        *1. EWE* 
+        *2. HAYI*
+
+  utter_commitment_yes:
+    - text: |
+        Wenze kakuhle ngokuzibophelela ekunakekeleni impilo yakho! 👏
+      claim: release
+
+  utter_soft_commitment_no:
+    - text: |
+        ⚠️ *Khumbula: kubalulekile ukuba uvavanyelwe i-TB*
+        Fumana uvavanyo lwakho kungekudala ukuba awukalenzi!
+      claim: release
+
+  utter_ask_soft_commitment_plus:
+    - text: |
+        ⚠️ *⚠️ Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki.*
+
+        🩸 Yiya kwiklinikhi yengingqi yakho ukufumana uvavanyo lwamahala lwe-TB.
+        😷 Nceda unxibe imaski ngaphambi kokuba ungene ekliniki.
+        📲 Uya kufumana i-airtime ye-R10 ukuba uyazibophelela ukuba uvavanywe. I-Airtime iya kuthunyelwa kuwe phambi kokudlula kweyure enye.
+        
+        Ingaba uyazibophelela ukuba uzakuvavanya?
+        Phendula: 
+
+        *1. EWE* 
+        *2. HAYI*
+
+  utter_soft_commitment_plus_no:
+    - text: |
+        ⚠️ Nokuba awukwazi ukuzibophelela ngoku, kusabalulekile ukuba uvavanye.
+      claim: release
 
   utter_risk_low_unknown_exposure:
     - text: |

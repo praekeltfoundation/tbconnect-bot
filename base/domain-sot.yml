@@ -30,14 +30,20 @@ actions:
   - utter_ask_symptoms_weight
   - utter_ask_exposure
   - utter_ask_tracing
-  - utter_risk_high
-  - utter_risk_moderate
-  - utter_risk_low
+  - utter_control
+  - utter_health_consequence
+  - utter_planning_prompt
+  - utter_ask_soft_commitment
+  - utter_commitment_yes
+  - utter_soft_commitment_no
+  - utter_ask_soft_commitment_plus
+  - utter_soft_commitment_plus_no
   - utter_risk_low_unknown_exposure
   - utter_follow_up_request
   - utter_keywords
   - utter_opt_in_yes
   - utter_do_tb_screening
+  - utter_ask_research_consent
 
 slots:
   terms:
@@ -83,6 +89,19 @@ slots:
   tracing:
     type: unfeaturized
     auto_fill: false
+  research_consent:
+    type: unfeaturized
+    auto_fill: false
+  soft_commitment:
+    type: unfeaturized
+    auto_fill: false
+  soft_commitment_plus:
+    type: unfeaturized
+    auto_fill: false
+  group_arm:
+    type: unfeaturized
+  tbcheck_id:
+    type: unfeaturized
 
 forms:
   - tbcheck_form
@@ -118,6 +137,21 @@ responses:
           Tshebeletso ena e fana ka lesedi feela mme ha e nke sebaka sa boeletsi ba bongaka/tlhahlobo ya bolwetse/kalafo. Fumana boeletsi ba mofani wa bophelo bo botle ka boemo ba hao ba bongaka/tlhokomelo, haholoholo haeba o ba le matshwao a kotsi haholo.
 
           O itshetleha ka lesedi lena ka ho ipeha kotsing. Oa dumela hore ke wena ya ikarabellang bakeng sa tlhokomelo le kalafo ya hao ya bongaka. O dumela hore ha wa lokela ho hlokomoloha/ho dieha ho fumana boeletsi ba bongaka mabapi le kalafo/tlhokomelo ka lebaka la tshebeletso ena.
+
+  utter_ask_research_consent:
+      - text: |
+          Ntho ya ho qetela... 
+
+          Re ka o botsa dipotso tse bonolo bakeng sa diphuputso ka mor'a hore o qete tlhahlobo ya TB HealthCheck. Ho etsa diphuputso ke MAHALA mme ho ke ke ha sebedisa airtime. Re tla sebedisa dintlha tsena ho bona hore na TB HealthCheck e ka thusa batho.
+          
+          A na o ikemiseditse ho nka karolo?
+          
+          ----
+          *Araba 1,2 kapa 3:* 
+          
+          1. E, ke batla ho nka karolo 
+          2. CHE, kea leboha 
+          3. Ke hloka dintlha TSE DING ka TB HealthCheck le diphuputso 
 
   utter_more_terms_doc:
     - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH_WhatsApp_TB_Privacy_Policy_September2021.pdf"
@@ -245,25 +279,74 @@ responses:
         *1.* EE
         *2.* TJHEE
 
-  utter_risk_high:
+  utter_control:
     - text: |
-        *Dikarabo tsa hao dipotsong di bontsha hore o hloka tlhahlobo ya TB bekeng e tlang*
+        *Dikarabo tsa hao ho dipotso di bontsha hore o hloka tlhahlobo ea LEFUBA bekeng ena.* 
 
-        - E-ya tleliniking ya heno bakeng sa tlhahlobo ya mahala ya TB.
-        - Ka kopo, apara maske wa sefahleho pele o kena tleliniking
+        🩸 Etela tleliniki ya heno ho etsa tlhahlobo ya mahala ya LEFUBA.
+        😷 Ka kopo rwala semonkwana pele o kena ka tleliniking.
 
-  utter_risk_moderate:
+  utter_health_consequence:
     - text: |
-        *Dikarabo tsa hao dipotsong di bontsha hore o hloka tlhahlobo ya TB bekeng e tlang*
+        *Dikarabo tsa hao ho dipotso di bontsha hore o hloka tlhahlobo ea LEFUBA bekeng ena.*  
 
-        - E-ya tleliniking ya heno bakeng sa tlhahlobo ya mahala ya TB.
-        - Ka kopo, apara maske wa sefahleho pele o kena tleliniking
+        Ka tlhatlhobo ya kapele, LEFUBA le ka phekoleha. Se ke wa dieha, hlahloba kajeno!
+        
+        🩸 Etela tleliniki ya heno ho etsa tlhahlobo ya mahala ya LEFUBA.
+        😷 Ka kopo rwala semonkwana pele o kena ka tleliniking.
 
-  utter_risk_low:
+  utter_planning_prompt:
     - text: |
-        *Ha o hloke tlhahlobo ya TB ka nako ena.*
+        *Dikarabo tsa hao ho dipotso di bontsha hore o hloka tlhahlobo ea LEFUBA bekeng ena.*
 
-        - Haeba o ba le ho kgohlola, feberu, ho theoha ha boima ba mmele kapa mofufutso bosiu, etela tleliniki e haufinyane.
+        Malebela ke ana a tla o thusa ho rala:
+        
+        🟢  Etsa nako. Bophelo ba hao bo tla pele!
+        🟢  Kgetha tleliniki e loketseng tlhahlobo ya hao. Ka tlase ke ditleliniki tse 5 tse haufi le wena.
+        🟢 Ka kopo rwala semonkwana pele o kena ka tleliniking.
+        🟢  Fihla mono kapele! Ditleliniki di butswe bakeng sa tlhahlobo ya LEFUBA hoseng hwa Mantaha ho isa ho Labohlano.
+
+  utter_ask_soft_commitment:
+    - text: |
+        ⚠️ *Dikarabo tsa hao ho dipotso di bontsha hore o hloka tlhahlobo ea LEFUBA bekeng ena.*
+
+        🩸 Eya tleliniking ya heno ho etsa tlhahlobo ya mahala ya LEFUBA.
+        😷 Ka kopo rwala semonkwana pele o kena ka tleliniking.
+        
+        *Na o itlama ho hlahloba?*
+        Araba:
+        
+        *1. EE* 
+        *2. TJHE*
+
+  utter_commitment_yes:
+    - text: |
+        O entse hantle ka ho itlamo ka bophelo bo botle ba hao! 👏
+      claim: release
+
+  utter_soft_commitment_no:
+    - text: |
+        ⚠️ *Hopola: ho bohlokwa ho hlahlobela LEFUBA*
+        Fumana tlhahlobo ya hao kapele haeba ha o so etse jwalo!
+      claim: release
+
+  utter_ask_soft_commitment_plus:
+    - text: |
+        ⚠️ *Dikarabo tsa hao ho dipotso di bontsha hore o hloka tlhahlobo ea LEFUBA bekeng ena.*
+
+        🩸 Eya tleliniking ya heno ho etsa tlhahlobo ya mahala ya LEFUBA.
+        😷 Ka kopo rwala semonkwana pele o kena ka tleliniking.
+        📲 O tla fumana airtime ya R10 ha o itlama ho hlahloba. O tla romellwa airtime nakong ya hora e le 1.
+        
+        Na o itlama ho hlahloba?
+        Araba: 
+
+        *1. EE* 
+        *2. TJHE*
+
+  utter_soft_commitment_plus_no:
+    - text: |
+        ⚠️ Leha o sa kgone ho itlama hona jwale, ho ntso le bohlokwa ho etsa tlhahlobo.      claim: release
 
   utter_risk_low_unknown_exposure:
     - text: |

@@ -30,14 +30,20 @@ actions:
   - utter_ask_symptoms_weight
   - utter_ask_exposure
   - utter_ask_tracing
-  - utter_risk_high
-  - utter_risk_moderate
-  - utter_risk_low
+  - utter_control
+  - utter_health_consequence
+  - utter_planning_prompt
+  - utter_ask_soft_commitment
+  - utter_commitment_yes
+  - utter_soft_commitment_no
+  - utter_ask_soft_commitment_plus
+  - utter_soft_commitment_plus_no
   - utter_risk_low_unknown_exposure
   - utter_follow_up_request
   - utter_keywords
   - utter_opt_in_yes
   - utter_do_tb_screening
+  - utter_ask_research_consent
 
 slots:
   terms:
@@ -83,6 +89,19 @@ slots:
   tracing:
     type: unfeaturized
     auto_fill: false
+  research_consent:
+    type: unfeaturized
+    auto_fill: false
+  soft_commitment:
+    type: unfeaturized
+    auto_fill: false
+  soft_commitment_plus:
+    type: unfeaturized
+    auto_fill: false
+  group_arm:
+    type: unfeaturized
+  tbcheck_id:
+    type: unfeaturized
 
 forms:
   - tbcheck_form
@@ -118,6 +137,21 @@ responses:
           Le sevisi inikeza imininingwane kuphela futhi ayithathi indawo yezeluleko zezokwelapha/ukuxilongwa/ukwelashwa. Thola izeluleko zomhlinzeki wezempilo oqeqeshiwe mayelana nesimo sakho sezempilo/ ukunakekelwa, ikakhulukazi uma uba nezimpawu ezinzima.
 
           Thembela kulolu lwazi ngokuzibeka wena engcupheni. Uyavuma ukuthi unesibopho sokunakekelwa nokwelashwa kwakho. Uyavuma ukuthi akufanele ukushaye indiva/ukubambezeleka kokuthola iseluleko sezokwelapha mayelana nokwelashwa /ukunakekelwa ngenxa yale nsizakalo.
+
+  utter_ask_research_consent:
+      - text: |
+          Okokugcina... 
+
+          Singahle sikubuze imibuzo embalwa elula yocwaningo ngemva kokuqeda i-TB HealthCheck yakho. Ukwenza ucwaningo KUMAHHALA futhi ngeke kusebenzise i-airtime nhlobo. Sizosebenzisa lolu lwazi ukuze sibone ukuthi i-TB HealthCheck iyabasiza yini abantu. 
+          
+          Ingabe uzimisele ukuba nengxenye? 
+          
+          ---- 
+          *Phendula 1, 2 noma 3:* 
+          
+          1. YEBO, ngifuna ukuba yingxenye 
+          2. CHA, ngiyabonga 
+          3. Ngidinga ulwazi OLWENGEZIWE nge-TB HealthCheck kanye nocwaningo
 
   utter_more_terms_doc:
     - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH_WhatsApp_TB_Privacy_Policy_September2021.pdf"
@@ -245,25 +279,77 @@ responses:
         *1.* YEBO
         *2.* CHA
 
-  utter_risk_high:
+  utter_control:
     - text: |
-        *Izimpendulo zakho kule mibuzo zibonisa ukuthi udinga ukuhlolwa i-TB kungakapheli isonto elizayo*
+        *Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki.* 
 
-        - Iya emtholampilo engakini uyohlolelwa i-TB yamahhala.
-        - Sicela ufake isifonyo sobuso ngaphambi kokungena emtholampilo
+        🩸 Vakashela umtholampilo wangakini ukuze uyohlola i-TB mahhala.
+        😷 Sicela ufake isifonyo sobuso ngaphambi kokuthi ungene emtholampilo.
 
-  utter_risk_moderate:
+  utter_health_consequence:
     - text: |
-        *Izimpendulo zakho kule mibuzo zibonisa ukuthi udinga ukuhlolwa i-TB kungakapheli isonto elizayo*
+        *Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki.* 
 
-        - Iya emtholampilo engakini uyohlolelwa i-TB yamahhala.
-        - Sicela ufake isifonyo sobuso ngaphambi kokungena emtholampilo
+        Ngokuxilonga kusenesikhathi, i-TB ingelapheka. Mus'ukubambezela, hlola namuhlanje!
+        
+        🩸 Vakashela umtholampilo wangakini ukuze uyohlola i-TB mahhala.
+        😷 Sicela ufake isifonyo sobuso ngaphambi kokuthi ungene emtholampilo.
 
-  utter_risk_low:
+
+  utter_planning_prompt:
     - text: |
-        *Awudingi ukuhlolwa kwe-TB ngalesi sikhathi.*
+        *Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki.*
 
-        - Uma uba nokukhwehlela, imfiva, ukuncipha ngokomzimba noma ukujuluka ebusuku, vakashela umtholampilo oseduzane nawe.
+        Nawa amathiphu angakusiza ukuthi uhlele:
+        
+        🟢 Yenza isikhathi. Impilo yakho ibalulekile!
+        🟢 Khetha umtholampilo olungele kakhulu ukuhlolwa kwakho. Ngezansi kukhona imitholampilo emihlanu eseduze nawe.
+        🟢 Sicela ufake isifonyo sobuso ngaphambi kokuthi ungene emtholampilo.
+        🟢 Fika lapho kusenesikhathi! Imitholampilo ivuliwe ukuze uyohlola i-TB ngoMsombuluko kuya ngoLwesihlanu ekuseni.
+
+  utter_ask_soft_commitment:
+    - text: |
+        ⚠️ *Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki.*
+
+        🩸 Hamba emtholampilo wangakini uyohlola i-TB mahhala.
+        😷 Sicela ufake isifonyo sobuso ngaphambi kokuthi ungene emtholampilo.
+        📲 Uzothola i-airtime ye-R10 uma uzibophezela ukuthi uzohlola. I-airtime izothunyelelwa kuwe phakathi nehora elinye.
+        
+        Ingabe uyazibophezela ukuthi uhlole?
+        Phendula ngokuthi:
+        
+        *1. YEBO* 
+        *2. CHA*
+
+  utter_commitment_yes:
+    - text: |
+        Wenze kahle ngokubophezela impilo yakho! 👏
+      claim: release
+
+  utter_soft_commitment_no:
+    - text: |
+        ⚠️ Khumbula: uzibophezele ukuhlola i-TB. 
+        Thola ukuhlolwa kwakho ngokushesha uma ungakenzi!
+      claim: release
+
+  utter_ask_soft_commitment_plus:
+    - text: |
+        ⚠️ Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki.
+
+        🩸 Hamba emtholampilo wangakini uyohlola i-TB mahhala.
+        😷 Sicela ufake isifonyo sobuso ngaphambi kokuthi ungene emtholampilo.
+        📲 Uzothola i-airtime ye-R10 uma uzibophezela ukuthi uzohlola. I-airtime izothunyelelwa kuwe phakathi nehora elinye.
+        
+        Ingabe uyazibophezela ukuthi uhlole?
+        Phendula ngokuthi: 
+
+        *1. YEBO* 
+        *2. CHA*
+
+  utter_soft_commitment_plus_no:
+    - text: |
+        ⚠️ Ngisho noma ungakwazi ukuzinikelela manje, kusabalulekile ukuthi uhlole.
+      claim: release
 
   utter_risk_low_unknown_exposure:
     - text: |
