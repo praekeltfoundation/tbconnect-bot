@@ -121,7 +121,7 @@ forms:
 responses:
   utter_ask_mobile_no:
       - text: |
-          Please enter your mobile number e.g 082001000i1
+          Please enter the mobile phone number of the person for whom this TBCheck is for?
 
   utter_invalid_mobile_no:
       - text: |

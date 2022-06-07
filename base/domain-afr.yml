@@ -16,9 +16,11 @@ entities:
   - number
 
 actions:
+  - action_set_activation
   - action_session_start
   - action_exit
   - action_opt_in
+  - utter_ask_mobile_no
   - utter_ask_terms
   - utter_ask_age
   - utter_ask_gender
@@ -40,6 +42,12 @@ actions:
   - utter_do_tb_screening
 
 slots:
+  mobile_no:
+    type: unfeaturized
+    auto_fill: false
+  activation:
+    type: unfeaturized
+    auto_fill: false
   terms:
     type: categorical
     values:
@@ -91,6 +99,14 @@ forms:
   - group_arm_form
 
 responses:
+  utter_ask_mobile_no:
+      - text: |
+          Tik asseblief die selfoonnommer in van die persoon waarvoor hierdie TBCheck is.
+
+  utter_invalid_mobile_no:
+      - text: |
+          Invalid mobile number.
+
   utter_welcome:
       - text: |
           *TB GesondheidsVraelys* is jou TB-kontrole vraelys. Dit kan aandui of jy getoets moet word vir TB.
