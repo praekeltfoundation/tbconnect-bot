@@ -967,6 +967,8 @@ class SetActivationAction(Action):
                 try:
                     async with HTTPXClient() as client:
                         resp = await client.get(url, headers=headers)
+                        if resp.status_code == httpx.codes.NOT_FOUND:
+                            return {}
                         resp.raise_for_status()
                         return resp.json()
                 except httpx.HTTPError as e:
