@@ -3,6 +3,7 @@
 
 ## happy path tbcheck
 * request_tbcheck: check
+  - action_set_activation
   - slot{"terms": null}
   - utter_welcome
   - tbcheck_terms_form
@@ -21,6 +22,7 @@
 
 ## happy path tbcheck returning user
 * request_tbcheck: check
+  - action_set_activation
   - slot{"terms": "yes"}
   - utter_welcome_back
   - tbcheck_profile_form
