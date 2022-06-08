@@ -35,6 +35,54 @@ class TestTBCheckProfileForm:
         )
 
     @pytest.mark.asyncio
+    async def test_validate_mobile_no(self):
+        form = TBCheckProfileForm()
+        dispatcher = CollectingDispatcher()
+
+        tracker = utils.get_tracker_for_number_slot_with_value(
+            form, "mobile_no", "0820010001", {
+                "activation": "foo_agent"
+            }
+        )
+        events = await form.run(dispatcher=dispatcher, tracker=tracker, domain=None)
+        assert events == [
+            SlotSet("mobile_no", "0820010001"),
+            SlotSet("requested_slot", "age"),
+        ]
+
+    @pytest.mark.asyncio
+    async def test_validate_mobile_no_with_spaces(self):
+        form = TBCheckProfileForm()
+        dispatcher = CollectingDispatcher()
+
+        tracker = utils.get_tracker_for_number_slot_with_value(
+            form, "mobile_no", "082 001 0001", {
+                "activation": "foo_agent"
+            }
+        )
+        events = await form.run(dispatcher=dispatcher, tracker=tracker, domain=None)
+        assert events == [
+            SlotSet("mobile_no", "0820010001"),
+            SlotSet("requested_slot", "age"),
+        ]
+
+    @pytest.mark.asyncio
+    async def test_validate_mobile_no_with_dashes(self):
+        form = TBCheckProfileForm()
+        dispatcher = CollectingDispatcher()
+
+        tracker = utils.get_tracker_for_number_slot_with_value(
+            form, "mobile_no", "082-001-0001", {
+                "activation": "foo_agent"
+            }
+        )
+        events = await form.run(dispatcher=dispatcher, tracker=tracker, domain=None)
+        assert events == [
+            SlotSet("mobile_no", "0820010001"),
+            SlotSet("requested_slot", "age"),
+        ]
+
+    @pytest.mark.asyncio
     async def test_validate_age(self):
         form = TBCheckProfileForm()
         dispatcher = CollectingDispatcher()
@@ -318,6 +366,74 @@ class TestTBCheckForm:
             "location": "+03.4-001.2/",
             "city_location": "+01.2-003.4/",
             "research_consent": False,
+        }
+
+        base.actions.actions.config.HEALTHCONNECT_URL = None
+        base.actions.actions.config.HEALTHCONNECT_TOKEN = None
+
+    @respx.mock
+    @pytest.mark.asyncio
+    async def test_submit_to_healthconnect_from_shared_device(self):
+        """
+        Submits the data to the eventstore in the correct format
+        """
+        base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
+        base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
+
+        request = respx.post(
+            "https://healthconnect/v2/tbcheck/",
+            content={"profile": {"tbconnect_group_arm": "control"}, "id": 22},
+        )
+
+        form = TBCheckForm()
+        dispatcher = CollectingDispatcher()
+        tracker = utils.get_tracker_for_slot_from_intent(
+            form,
+            "tracing",
+            "affirm",
+            {
+                "province": "wc",
+                "activation": "foo_agent",
+                "mobile_no": "0820010001",
+                "age": "18-39",
+                "symptoms_fever": "no",
+                "symptoms_cough": "yes",
+                "symptoms_sweat": "yes",
+                "symptoms_weight": "yes",
+                "exposure": "not sure",
+                "tracing": "yes",
+                "gender": "RATHER NOT SAY",
+                "city_location_coords": "+1.2-3.4",
+                "location_coords": "+3.4-1.2",
+                "location": "Cape Town, South Africa",
+                "research_consent": "no",
+            },
+        )
+        await form.submit(dispatcher, tracker, {})
+
+        assert request.called
+        [(request, response)] = request.calls
+        data = json.loads(request.stream.body)
+        assert data.pop("deduplication_id")
+        assert data == {
+            "msisdn": "+27820010001",
+            "source": "WhatsApp",
+            "province": "ZA-WC",
+            "city": "Cape Town, South Africa",
+            "age": "18-40",
+            "gender": "not_say",
+            "cough": True,
+            "fever": False,
+            "sweat": True,
+            "weight": True,
+            "exposure": "not_sure",
+            "tracing": True,
+            "risk": "moderate",
+            "location": "+03.4-001.2/",
+            "city_location": "+01.2-003.4/",
+            "research_consent": False,
+            "originating_msisdn": "+default",
+            "activation": "foo_agent",
         }
 
         base.actions.actions.config.HEALTHCONNECT_URL = None
