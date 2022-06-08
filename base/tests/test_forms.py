@@ -40,9 +40,7 @@ class TestTBCheckProfileForm:
         dispatcher = CollectingDispatcher()
 
         tracker = utils.get_tracker_for_number_slot_with_value(
-            form, "mobile_no", "0820010001", {
-                "activation": "foo_agent"
-            }
+            form, "mobile_no", "0820010001", {"activation": "foo_agent"}
         )
         events = await form.run(dispatcher=dispatcher, tracker=tracker, domain=None)
         assert events == [
@@ -56,9 +54,7 @@ class TestTBCheckProfileForm:
         dispatcher = CollectingDispatcher()
 
         tracker = utils.get_tracker_for_number_slot_with_value(
-            form, "mobile_no", "082 001 0001", {
-                "activation": "foo_agent"
-            }
+            form, "mobile_no", "082 001 0001", {"activation": "foo_agent"}
         )
         events = await form.run(dispatcher=dispatcher, tracker=tracker, domain=None)
         assert events == [
@@ -72,9 +68,7 @@ class TestTBCheckProfileForm:
         dispatcher = CollectingDispatcher()
 
         tracker = utils.get_tracker_for_number_slot_with_value(
-            form, "mobile_no", "082-001-0001", {
-                "activation": "foo_agent"
-            }
+            form, "mobile_no", "082-001-0001", {"activation": "foo_agent"}
         )
         events = await form.run(dispatcher=dispatcher, tracker=tracker, domain=None)
         assert events == [
