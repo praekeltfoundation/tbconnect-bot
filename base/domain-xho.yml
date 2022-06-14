@@ -343,16 +343,16 @@ responses:
         Phendula ngekliniki:
         {nearest_clinic}
 
-    utter_ask_clinic_visit_day:
-      - text: |
-          *Uza kuvavanywa nini?*
-          
-          Phendula ngemini:
-          *1.* MVULO
-          *2.* LWESIBINI
-          *3.* LWESITHATHU
-          *4.* LWESINE
-          *5.* LWESIHLANU
+  utter_ask_clinic_visit_day:
+    - text: |
+        *Uza kuvavanywa nini?*
+        
+        Phendula ngemini:
+        *1.* MVULO
+        *2.* LWESIBINI
+        *3.* LWESITHATHU
+        *4.* LWESINE
+        *5.* LWESIHLANU
 
   utter_ask_soft_commitment:
     - text: |

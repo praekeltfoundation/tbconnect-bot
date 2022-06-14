@@ -343,16 +343,16 @@ responses:
         Araba ka tliliniki:
         {nearest_clinic}
 
-    utter_ask_clinic_visit_day:
-      - text: |
-          *O tla ya tlhatlhobong ya hao neng?*
-          
-          Araba ka letsatsi:
-          *1.* MANTAHA
-          *2.* LABOBELI
-          *3.* LABORARO
-          *4.* LABONE
-          *5.* LABOHLANO
+  utter_ask_clinic_visit_day:
+    - text: |
+        *O tla ya tlhatlhobong ya hao neng?*
+        
+        Araba ka letsatsi:
+        *1.* MANTAHA
+        *2.* LABOBELI
+        *3.* LABORARO
+        *4.* LABONE
+        *5.* LABOHLANO
 
   utter_ask_soft_commitment:
     - text: |
