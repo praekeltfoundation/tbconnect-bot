@@ -1,5 +1,6 @@
 from json.decoder import JSONDecodeError
 from typing import Any, Dict, List, Text
+
 from iso6709 import Location
 
 
