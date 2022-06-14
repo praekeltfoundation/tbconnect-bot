@@ -738,25 +738,31 @@ class TBCheckForm(BaseFormAction):
                         # Get clinic list for
                         if group_arm == "planning_prompt":
                             location = json_resp.get("location")
-                            longitude, latitude = utils.extract_location_long_lat(location, 2)
+                            longitude, latitude = utils.extract_location_long_lat(
+                                location, 2
+                            )
 
                             if longitude and latitude:
                                 querystring = urlencode(
-                                    {
-                                        "longitude": longitude,
-                                        "latitude": latitude
-                                    }
+                                    {"longitude": longitude, "latitude": latitude}
                                 )
 
-                                clinic_url = urljoin(config.HEALTHCONNECT_URL, "/v1/clinic_finder" f"?{querystring}")
+                                clinic_url = urljoin(
+                                    config.HEALTHCONNECT_URL,
+                                    "/v1/clinic_finder" f"?{querystring}",
+                                )
 
-                                nearest_clinic = await client.get(clinic_url, headers=headers)
+                                nearest_clinic = await client.get(
+                                    clinic_url, headers=headers
+                                )
 
                                 clinic_list = ""
                                 original_clinic = []
                                 list_num = 0
                                 if nearest_clinic:
-                                    for clinic in nearest_clinic.json().get("locations"):
+                                    for clinic in nearest_clinic.json().get(
+                                        "locations"
+                                    ):
                                         name = clinic.get("short_name")
                                         list_num += 1
                                         clinic_list += f"*{str(list_num)}.* {name}\n"
@@ -764,11 +770,15 @@ class TBCheckForm(BaseFormAction):
 
                                     for template in templates:
                                         dispatcher.utter_message(template=template)
-                                    return[
-                                        SlotSet("nearest_clinic", clinic_list.strip("\n")),
-                                        SlotSet("original_clinic_list", original_clinic),
+                                    return [
+                                        SlotSet(
+                                            "nearest_clinic", clinic_list.strip("\n")
+                                        ),
+                                        SlotSet(
+                                            "original_clinic_list", original_clinic
+                                        ),
                                         SlotSet("group_arm", group_arm),
-                                        SlotSet("tbcheck_id", tbcheck_id)
+                                        SlotSet("tbcheck_id", tbcheck_id),
                                     ]
 
                         if not utils.is_duplicate_error(resp):
@@ -797,22 +807,16 @@ class TBCheckForm(BaseFormAction):
 
 
 class GroupArmForm(BaseFormAction):
-    SLOTS = [
-        "soft_commitment",
-        "soft_commitment_plus"
-    ]
+    SLOTS = ["soft_commitment", "soft_commitment_plus"]
 
-    CLINIC_SLOTS = [
-        "clinic_list",
-        "clinic_visit_day"
-    ]
+    CLINIC_SLOTS = ["clinic_list", "clinic_visit_day"]
 
     DAYS_MAPPING = {
         "MONDAY": "mon",
         "TUESDAY": "tue",
         "WEDNESDAY": "wed",
         "THURSDAY": "thu",
-        "FRIDAY": "fri"
+        "FRIDAY": "fri",
     }
 
     def name(self) -> Text:
@@ -885,7 +889,10 @@ class GroupArmForm(BaseFormAction):
     ) -> Dict[Text, Optional[Text]]:
         clinic_list = tracker.get_slot("original_clinic_list")
         return self.validate_generic(
-            "clinic_list", dispatcher, value, {x+1: y for x, y in enumerate(clinic_list)}
+            "clinic_list",
+            dispatcher,
+            value,
+            {x + 1: y for x, y in enumerate(clinic_list)},
         )
 
     def validate_clinic_visit_day(
@@ -896,9 +903,10 @@ class GroupArmForm(BaseFormAction):
         domain: Dict[Text, Any],
     ) -> Dict[Text, Optional[Text]]:
         return self.validate_generic(
-            "clinic_visit_day", dispatcher, value, {1: "MONDAY", 2: "TUESDAY",
-                                                    3: "WEDNESDAY", 4: "THURSDAY",
-                                                    5: "FRIDAY"}
+            "clinic_visit_day",
+            dispatcher,
+            value,
+            {1: "MONDAY", 2: "TUESDAY", 3: "WEDNESDAY", 4: "THURSDAY", 5: "FRIDAY"},
         )
 
     async def submit(
@@ -926,7 +934,9 @@ class GroupArmForm(BaseFormAction):
                     if soft_commit is not None
                     else soft_commit_plus,
                     "clinic_to_visit": tracker.get_slot("clinic_list"),
-                    "clinic_visit_day": self.DAYS_MAPPING.get(tracker.get_slot("clinic_visit_day"))
+                    "clinic_visit_day": self.DAYS_MAPPING.get(
+                        tracker.get_slot("clinic_visit_day")
+                    ),
                 }
 
                 if hasattr(httpx, "AsyncClient"):
