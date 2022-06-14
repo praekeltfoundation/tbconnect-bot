@@ -44,6 +44,8 @@ actions:
   - utter_opt_in_yes
   - utter_do_tb_screening
   - utter_ask_research_consent
+  - utter_ask_clinic_list
+  - utter_ask_clinic_visit_day
 
 slots:
   terms:
@@ -102,6 +104,18 @@ slots:
     type: unfeaturized
   tbcheck_id:
     type: unfeaturized
+  clinic_list:
+    type: unfeaturized
+    auto_fill: false
+  clinic_visit_day:
+    type: unfeaturized
+    auto_fill: false
+  nearest_clinic:
+    type: unfeaturized
+    auto_fill: false
+  original_clinic_list:
+    type: unfeaturized
+    auto_fill: false
 
 forms:
   - tbcheck_form
@@ -304,6 +318,26 @@ responses:
         🟢  Pick the most convenient clinic for your test. Below are the 5 clinics nearest to you.  
         🟢  Please put on a face mask before you enter the clinic. 
         🟢  Get there early! Clinics are open for TB testing Monday to Friday mornings.
+
+  utter_ask_clinic_list:
+    - text: |
+        Here is a list of clinics that offer TB tests near you.
+
+        *Where will you go?*
+        
+        Reply:
+        {nearest_clinic}
+
+  utter_ask_clinic_visit_day:
+    - text: |
+        *When will you will go?*
+        
+        Reply:
+        *1.* MONDAY
+        *2.* TUESDAY
+        *3.* WEDNESDAY
+        *4.* THURSDAY
+        *5.* FRIDAY
 
   utter_ask_soft_commitment:
     - text: |

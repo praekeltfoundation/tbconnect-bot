@@ -44,6 +44,8 @@ actions:
   - utter_opt_in_yes
   - utter_do_tb_screening
   - utter_ask_research_consent
+  - utter_ask_clinic_list
+  - utter_ask_clinic_visit_day
 
 slots:
   terms:
@@ -102,6 +104,18 @@ slots:
     type: unfeaturized
   tbcheck_id:
     type: unfeaturized
+  clinic_list:
+    type: unfeaturized
+  auto_fill: false
+  clinic_visit_day:
+    type: unfeaturized
+    auto_fill: false
+  nearest_clinic:
+    type: unfeaturized
+    auto_fill: false
+  original_clinic_list:
+    type: unfeaturized
+    auto_fill: false
 
 forms:
   - tbcheck_form
@@ -306,6 +320,24 @@ responses:
         🟢 Khetha umtholampilo olungele kakhulu ukuhlolwa kwakho. Ngezansi kukhona imitholampilo emihlanu eseduze nawe.
         🟢 Sicela ufake isifonyo sobuso ngaphambi kokuthi ungene emtholampilo.
         🟢 Fika lapho kusenesikhathi! Imitholampilo ivuliwe ukuze uyohlola i-TB ngoMsombuluko kuya ngoLwesihlanu ekuseni.
+
+  utter_ask_clinic_list:
+    - text: |
+        *Uzoya kuphi lapho uhlolwa?* 
+        
+        Phendula ngomtholampilo:
+        {nearest_clinic}
+
+  utter_ask_clinic_visit_day:
+    - text: |
+        *Uzoya nini ukuyohlolwa kwakho?* 
+        
+        Phendula ngosuku:
+        *1.* MSOMBULUKO
+        *2.* LWESIBILI
+        *3.* LWESITHATHU
+        *4.* LWESINE
+        *5.* LWESIHLANU
 
   utter_ask_soft_commitment:
     - text: |

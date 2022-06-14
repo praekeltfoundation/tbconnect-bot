@@ -696,14 +696,56 @@ class TBCheckForm(BaseFormAction):
                         resp = await client.post(url, json=post_data, headers=headers)
                         # TODO: remove print
                         print(resp.content)
+                        json_resp = resp.json()
 
+                        # Get tbcheck ID
+                        tbcheck_id = json_resp.get("id")
+
+                        # Get template and user group arm
                         templates, group_arm = utils.get_display_message_template(resp)
+
+                        if not group_arm:
+                            templates = utils.get_risk_templates(risk, data)
+
+                        # Get clinic list for
+                        if group_arm == "planning_prompt":
+                            location = json_resp.get("location")
+                            longitude, latitude = utils.extract_location_long_lat(location, 2)
+
+                            if longitude and latitude:
+                                querystring = urlencode(
+                                    {
+                                        "longitude": longitude,
+                                        "latitude": latitude
+                                    }
+                                )
+
+                                clinic_url = urljoin(config.HEALTHCONNECT_URL, "/v1/clinic_finder" f"?{querystring}")
+
+                                nearest_clinic = await client.get(clinic_url, headers=headers)
+
+                                clinic_list = ""
+                                original_clinic = []
+                                list_num = 0
+                                if nearest_clinic:
+                                    for clinic in nearest_clinic.json().get("locations"):
+                                        name = clinic.get("short_name")
+                                        list_num += 1
+                                        clinic_list += f"*{str(list_num)}.* {name}\n"
+                                        original_clinic.append(name)
+
+                                    for template in templates:
+                                        dispatcher.utter_message(template=template)
+                                    return[
+                                        SlotSet("nearest_clinic", clinic_list.strip("\n")),
+                                        SlotSet("original_clinic_list", original_clinic),
+                                        SlotSet("group_arm", group_arm),
+                                        SlotSet("tbcheck_id", tbcheck_id)
+                                    ]
 
                         if not utils.is_duplicate_error(resp):
                             resp.raise_for_status()
 
-                        # Get tbcheck ID
-                        tbcheck_id = resp.json().get("id")
                         break
                 except httpx.HTTPError as e:
                     print(e)
@@ -719,14 +761,31 @@ class TBCheckForm(BaseFormAction):
             else:
                 for template in templates:
                     dispatcher.utter_message(template=template)
+        else:
+            for template in templates:
+                dispatcher.utter_message(template=template)
+
         return []
 
 
 class GroupArmForm(BaseFormAction):
     SLOTS = [
         "soft_commitment",
-        "soft_commitment_plus",
+        "soft_commitment_plus"
     ]
+
+    CLINIC_SLOTS = [
+        "clinic_list",
+        "clinic_visit_day"
+    ]
+
+    DAYS_MAPPING = {
+        "MONDAY": "mon",
+        "TUESDAY": "tue",
+        "WEDNESDAY": "wed",
+        "THURSDAY": "thu",
+        "FRIDAY": "fri"
+    }
 
     def name(self) -> Text:
         return "group_arm_form"
@@ -735,8 +794,14 @@ class GroupArmForm(BaseFormAction):
     def required_slots(cls, tracker: Tracker) -> List[Text]:
         arm = tracker.get_slot("group_arm")
         if arm:
-            arm = arm.lower()
-            return [arm]
+            if arm == "planning_prompt":
+                for slot in cls.CLINIC_SLOTS:
+                    if not tracker.get_slot(slot):
+                        return [slot]
+                return []
+            else:
+                arm = arm.lower()
+                return [arm]
         return []
 
     def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
@@ -749,6 +814,14 @@ class GroupArmForm(BaseFormAction):
             "soft_commitment_plus": [
                 self.from_intent(intent="affirm", value="yes"),
                 self.from_intent(intent="deny", value="no"),
+                self.from_text(),
+            ],
+            "clinic_list": [
+                self.from_entity(entity="number"),
+                self.from_text(),
+            ],
+            "clinic_visit_day": [
+                self.from_entity(entity="number"),
                 self.from_text(),
             ],
         }
@@ -775,6 +848,31 @@ class GroupArmForm(BaseFormAction):
             "soft_commitment_plus", dispatcher, value, self.yes_no_data
         )
 
+    def validate_clinic_list(
+        self,
+        value: Text,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> Dict[Text, Optional[Text]]:
+        clinic_list = tracker.get_slot("original_clinic_list")
+        return self.validate_generic(
+            "clinic_list", dispatcher, value, {x+1: y for x, y in enumerate(clinic_list)}
+        )
+
+    def validate_clinic_visit_day(
+        self,
+        value: Text,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> Dict[Text, Optional[Text]]:
+        return self.validate_generic(
+            "clinic_visit_day", dispatcher, value, {1: "MONDAY", 2: "TUESDAY",
+                                                    3: "WEDNESDAY", 4: "THURSDAY",
+                                                    5: "FRIDAY"}
+        )
+
     async def submit(
         self,
         dispatcher: CollectingDispatcher,
@@ -782,7 +880,6 @@ class GroupArmForm(BaseFormAction):
         domain: Dict[Text, Any],
     ) -> List[Dict]:
         """Check user response to display next message"""
-
         if config.HEALTHCONNECT_URL and config.HEALTHCONNECT_TOKEN:
             if tracker.get_slot("group_arm"):
                 id = tracker.get_slot("tbcheck_id")
@@ -799,7 +896,9 @@ class GroupArmForm(BaseFormAction):
                 data = {
                     "commit_get_tested": soft_commit
                     if soft_commit is not None
-                    else soft_commit_plus
+                    else soft_commit_plus,
+                    "clinic_to_visit": tracker.get_slot("clinic_list"),
+                    "clinic_visit_day": self.DAYS_MAPPING.get(tracker.get_slot("clinic_visit_day"))
                 }
 
                 if hasattr(httpx, "AsyncClient"):

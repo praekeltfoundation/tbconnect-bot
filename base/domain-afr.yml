@@ -44,6 +44,8 @@ actions:
   - utter_opt_in_yes
   - utter_do_tb_screening
   - utter_ask_research_consent
+  - utter_ask_clinic_list
+  - utter_ask_clinic_visit_day
 
 slots:
   terms:
@@ -102,6 +104,18 @@ slots:
     type: unfeaturized
   tbcheck_id:
     type: unfeaturized
+  clinic_list:
+    type: unfeaturized
+    auto_fill: false
+  clinic_visit_day:
+    type: unfeaturized
+    auto_fill: false
+  nearest_clinic:
+    type: unfeaturized
+    auto_fill: false
+  original_clinic_list:
+    type: unfeaturized
+    auto_fill: false
 
 forms:
   - tbcheck_form
@@ -305,6 +319,24 @@ responses:
         🟢 Kies die gerieflikste kliniek vir jou toets. Hieronder is die 5 klinieke naaste aan jou.
         🟢 Sit asseblief 'n gesigmasker op voor jy by die kliniek ingaan.
         🟢 Wees vroeg daar! Klinieke is van Maandag- tot Vrydagoggend oop vir TB-toetse.
+
+  utter_ask_clinic_list:
+    - text: |
+        *Waar sal jy gaan vir jou toets?*
+        
+        Antwoord met die kliniek:
+        {nearest_clinic}
+
+  utter_ask_clinic_visit_day:
+    - text: |
+        *Wanneer sal jy gaan vir jou toets?*
+        
+        Antwoord met die dag:
+        *1.* MAANDAG
+        *2.* DINSDAG
+        *3.* WOENSDAG
+        *4.* DONDERDAG
+        *5.* VRYDAG
 
   utter_ask_soft_commitment:
     - text: |
