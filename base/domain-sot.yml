@@ -114,7 +114,7 @@ slots:
     type: unfeaturized
   clinic_list:
     type: unfeaturized
-  auto_fill: false
+    auto_fill: false
   clinic_visit_day:
     type: unfeaturized
     auto_fill: false
