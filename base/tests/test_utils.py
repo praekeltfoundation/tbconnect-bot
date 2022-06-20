@@ -98,7 +98,7 @@ def test_build_clinic_list():
                 "longitude": 26.68533,
                 "name": "fs AM Kruger Clinic",
                 "province": "Free State",
-                "short_name": "AM Kruger Clinic",
+                "short_name": "A Kruger Clinic",
             },
             {
                 "address": "565 Vorster Street, Wesselsbron, 9680",
@@ -118,7 +118,7 @@ def test_build_clinic_list():
                 "longitude": 26.64478,
                 "name": "fs Allanridge Clinic",
                 "province": "Free State",
-                "short_name": "Allaridge Clinic",
+                "short_name": "Ridge Clinic",
             },
         ],
     }
@@ -126,10 +126,10 @@ def test_build_clinic_list():
 
     assert (
         clinic_list
-        == "*1.* AM Kruger Clinic\n*2.* Albert Luthuli Mem Clinic\n*3.* Allaridge Clinic\n"
+        == "*1.* A Kruger Clinic\n*2.* Albert Luthuli Mem Clinic\n*3.* Ridge Clinic\n"
     )
     assert original_clinic_list == [
-        "AM Kruger Clinic",
+        "A Kruger Clinic",
         "Albert Luthuli Mem Clinic",
-        "Allaridge Clinic",
+        "Ridge Clinic",
     ]
