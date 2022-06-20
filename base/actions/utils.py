@@ -70,3 +70,17 @@ def extract_location_long_lat(location, resolution=1):
         return lat, long
     else:
         return None, None
+
+
+def build_clinic_list(nearest_clinic):
+    clinic_list = ""
+    original_clinic = []
+    list_num = 0
+
+    for clinic in nearest_clinic.json().get("locations"):
+        name = clinic.get("short_name")
+        list_num += 1
+        clinic_list += f"*{str(list_num)}.* {name}\n"
+        original_clinic.append(name)
+
+    return clinic_list, original_clinic

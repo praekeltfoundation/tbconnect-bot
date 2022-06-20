@@ -756,17 +756,11 @@ class TBCheckForm(BaseFormAction):
                                     clinic_url, headers=headers
                                 )
 
-                                clinic_list = ""
-                                original_clinic = []
-                                list_num = 0
-                                if nearest_clinic:
-                                    for clinic in nearest_clinic.json().get(
-                                        "locations"
-                                    ):
-                                        name = clinic.get("short_name")
-                                        list_num += 1
-                                        clinic_list += f"*{str(list_num)}.* {name}\n"
-                                        original_clinic.append(name)
+                                if nearest_clinic and nearest_clinic.status_code == 200:
+                                    (
+                                        clinic_list,
+                                        original_clinic,
+                                    ) = utils.build_clinic_list(nearest_clinic)
 
                                     for template in templates:
                                         dispatcher.utter_message(template=template)
