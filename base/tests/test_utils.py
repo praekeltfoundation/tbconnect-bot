@@ -118,7 +118,7 @@ def test_build_clinic_list():
                 "longitude": 26.64478,
                 "name": "fs Allanridge Clinic",
                 "province": "Free State",
-                "short_name": "Allanridge Clinic",
+                "short_name": "Allaridge Clinic",
             },
         ],
     }
@@ -126,11 +126,10 @@ def test_build_clinic_list():
 
     assert (
         clinic_list
-        == """*1.* AM Kruger Clinic\n*2.* Albert Luthuli Mem Clinic\n
-           "*3.* Allanridge Clinic\n"""
+        == "*1.* AM Kruger Clinic\n*2.* Albert Luthuli Mem Clinic\n*3.* Allaridge Clinic\n"
     )
     assert original_clinic_list == [
         "AM Kruger Clinic",
         "Albert Luthuli Mem Clinic",
-        "Allanridge Clinic",
+        "Allaridge Clinic",
     ]
