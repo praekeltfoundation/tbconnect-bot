@@ -51,8 +51,8 @@ def get_display_message_template(response):
     templates = []
     group_arm = None
 
-    if "profile" in response.json():
-        group_arm = response.json().get("profile", {}).get("tbconnect_group_arm")
+    if "profile" in response:
+        group_arm = response.get("profile", {}).get("tbconnect_group_arm")
 
         if group_arm:
             templates.append(f"utter_{group_arm}")
@@ -77,7 +77,7 @@ def build_clinic_list(nearest_clinic):
     original_clinic = []
     list_num = 0
 
-    for clinic in nearest_clinic.json().get("locations"):
+    for clinic in nearest_clinic.get("locations"):
         name = clinic.get("short_name")
         list_num += 1
         clinic_list += f"*{str(list_num)}.* {name}\n"

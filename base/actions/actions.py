@@ -701,6 +701,7 @@ class TBCheckForm(BaseFormAction):
         templates = []
         group_arm = None
         tbcheck_id = None
+        activation = tracker.get_slot("activation")
 
         if config.HEALTHCONNECT_URL and config.HEALTHCONNECT_TOKEN:
             url = urljoin(config.HEALTHCONNECT_URL, "/v2/tbcheck/")
@@ -730,9 +731,11 @@ class TBCheckForm(BaseFormAction):
                         tbcheck_id = json_resp.get("id")
 
                         # Get template and user group arm
-                        templates, group_arm = utils.get_display_message_template(resp)
+                        templates, group_arm = utils.get_display_message_template(
+                            json_resp
+                        )
 
-                        if not group_arm:
+                        if not group_arm or activation:
                             templates = utils.get_risk_templates(risk, data)
 
                         # Get clinic list for
@@ -760,7 +763,7 @@ class TBCheckForm(BaseFormAction):
                                     (
                                         clinic_list,
                                         original_clinic,
-                                    ) = utils.build_clinic_list(nearest_clinic)
+                                    ) = utils.build_clinic_list(nearest_clinic.json())
 
                                     for template in templates:
                                         dispatcher.utter_message(template=template)
