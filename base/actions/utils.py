@@ -1,6 +1,8 @@
 from json.decoder import JSONDecodeError
 from typing import Any, Dict, List, Text
 
+from iso6709 import Location
+
 
 def get_risk_level(data: Dict[Any, Any]) -> Text:
     if data.get("exposure") == "yes":
@@ -49,14 +51,36 @@ def get_display_message_template(response):
     templates = []
     group_arm = None
 
-    if "profile" in response.json():
-        group_arm = response.json().get("profile", {}).get("tbconnect_group_arm")
-        templates.append(f"utter_{group_arm}")
+    if "profile" in response:
+        group_arm = response.get("profile", {}).get("tbconnect_group_arm")
 
-        if group_arm == "control" or group_arm == "health_consequence":
-            templates.append("utter_keywords")
-        elif group_arm == "planning_prompt":
-            # To add clinic list offer
-            pass
+        if group_arm:
+            templates.append(f"utter_{group_arm}")
 
+            if group_arm == "control" or group_arm == "health_consequence":
+                templates.append("utter_keywords")
     return templates, group_arm
+
+
+def extract_location_long_lat(location, resolution=1):
+    if location:
+        loc = Location(location)
+        lat = round(float(loc.lat.decimal), resolution)
+        long = round(float(loc.lng.decimal), resolution)
+        return lat, long
+    else:
+        return None, None
+
+
+def build_clinic_list(nearest_clinic):
+    clinic_list = ""
+    original_clinic = []
+    list_num = 0
+
+    for clinic in nearest_clinic.get("locations"):
+        name = clinic.get("short_name")
+        list_num += 1
+        clinic_list += f"*{str(list_num)}.* {name}\n"
+        original_clinic.append(name)
+
+    return clinic_list, original_clinic
