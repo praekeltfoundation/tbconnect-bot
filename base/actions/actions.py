@@ -200,7 +200,7 @@ class TBCheckProfileForm(BaseFormAction):
         # that it's required to fill is just a single slot, the first
         # slot that hasn't been filled yet.
 
-        if not config.TBCONNECT_RESEARCH_CONSENT:
+        if not config.RESEARCH_CONSENT_ENABLED:
             slots.remove("research_consent")
 
         if tracker.get_slot("age") == "<18":
