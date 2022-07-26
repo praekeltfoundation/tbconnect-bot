@@ -87,7 +87,6 @@ class BaseFormAction(FormAction):
             f"{fractional_part(latitude)}"
             f"{int(longitude):+04d}"
             f"{fractional_part(longitude)}"
-            "/"
         )
 
     @staticmethod
@@ -402,6 +401,9 @@ class TBCheckProfileForm(BaseFormAction):
             geometry = location["geometry"]["location"]
             return {
                 "location": location["formatted_address"],
+                "location_coords": self.format_location(
+                    geometry["lat"], geometry["lng"]
+                ),
                 "city_location_coords": self.format_location(
                     geometry["lat"], geometry["lng"]
                 ),
@@ -744,7 +746,7 @@ class TBCheckForm(BaseFormAction):
                         # Get clinic list for
                         if group_arm == "planning_prompt":
                             location = json_resp.get("location")
-                            longitude, latitude = utils.extract_location_long_lat(
+                            latitude, longitude = utils.extract_location_long_lat(
                                 location, 2
                             )
 
@@ -937,6 +939,8 @@ class GroupArmForm(BaseFormAction):
                     "clinic_visit_day": self.DAYS_MAPPING.get(
                         tracker.get_slot("clinic_visit_day")
                     ),
+                    "location": tracker.get_slot("location_coords"),
+                    "city_location": tracker.get_slot("city_location_coords"),
                 }
 
                 if hasattr(httpx, "AsyncClient"):
