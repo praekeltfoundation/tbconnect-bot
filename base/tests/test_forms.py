@@ -184,13 +184,13 @@ class TestTBCheckProfileForm:
         """
         Ensures that the location pin is returned in ISO6709 format
         """
-        assert TBCheckProfileForm.format_location(0, 0) == "+00+000/"
-        assert TBCheckProfileForm.format_location(-1, -1) == "-01-001/"
-        assert TBCheckProfileForm.format_location(1.234, -5.678) == "+01.234-005.678/"
-        assert TBCheckProfileForm.format_location(-12.34, 123.456) == "-12.34+123.456/"
+        assert TBCheckProfileForm.format_location(0, 0) == "+00+000"
+        assert TBCheckProfileForm.format_location(-1, -1) == "-01-001"
+        assert TBCheckProfileForm.format_location(1.234, -5.678) == "+01.234-005.678"
+        assert TBCheckProfileForm.format_location(-12.34, 123.456) == "-12.34+123.456"
         assert (
             TBCheckProfileForm.format_location(51.481845, 7.216236)
-            == "+51.481845+007.216236/"
+            == "+51.481845+007.216236"
         )
 
     @pytest.mark.asyncio
@@ -208,7 +208,7 @@ class TestTBCheckProfileForm:
         events = await form.validate(CollectingDispatcher(), tracker, {})
         assert events == [
             SlotSet("location", "GPS: 1.23, 4.56"),
-            SlotSet("location_coords", "+01.23+004.56/"),
+            SlotSet("location_coords", "+01.23+004.56"),
             SlotSet("location_confirm", "yes"),
         ]
 
@@ -357,8 +357,8 @@ class TestTBCheckForm:
             "exposure": "not_sure",
             "tracing": True,
             "risk": "moderate",
-            "location": "+03.4-001.2/",
-            "city_location": "+01.2-003.4/",
+            "location": "+03.4-001.2",
+            "city_location": "+01.2-003.4",
             "research_consent": False,
         }
 
@@ -423,8 +423,8 @@ class TestTBCheckForm:
             "exposure": "not_sure",
             "tracing": True,
             "risk": "moderate",
-            "location": "+03.4-001.2/",
-            "city_location": "+01.2-003.4/",
+            "location": "+03.4-001.2",
+            "city_location": "+01.2-003.4",
             "research_consent": False,
             "originating_msisdn": "+default",
             "activation": "foo_agent",
@@ -550,8 +550,8 @@ class TestTBCheckForm:
             "exposure": "not_sure",
             "tracing": True,
             "risk": "moderate",
-            "location": "+03.4-001.2/",
-            "city_location": "+01.2-003.4/",
+            "location": "+03.4-001.2",
+            "city_location": "+01.2-003.4",
             "research_consent": True,
         }
 
