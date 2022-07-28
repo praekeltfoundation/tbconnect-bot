@@ -748,7 +748,7 @@ class TBCheckForm(BaseFormAction):
                             location = None
                             try:
                                 location = json_resp["location"]
-                            except ValueError:
+                            except Exception:
                                 location = json_resp["city_location"]
 
                             if location:
