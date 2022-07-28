@@ -745,43 +745,55 @@ class TBCheckForm(BaseFormAction):
 
                         # Get clinic list for
                         if group_arm == "planning_prompt":
-                            location = json_resp.get("location")
-                            latitude, longitude = utils.extract_location_long_lat(
-                                location, 2
-                            )
+                            location = None
+                            try:
+                                location = json_resp["location"]
+                            except ValueError:
+                                location = json_resp["city_location"]
 
-                            if longitude and latitude:
-                                querystring = urlencode(
-                                    {"longitude": longitude, "latitude": latitude}
+                            if location:
+                                latitude, longitude = utils.extract_location_long_lat(
+                                    location, 2
                                 )
 
-                                clinic_url = urljoin(
-                                    config.HEALTHCONNECT_URL,
-                                    "/v1/clinic_finder" f"?{querystring}",
-                                )
+                                if longitude and latitude:
+                                    querystring = urlencode(
+                                        {"longitude": longitude, "latitude": latitude}
+                                    )
 
-                                nearest_clinic = await client.get(
-                                    clinic_url, headers=headers
-                                )
+                                    clinic_url = urljoin(
+                                        config.HEALTHCONNECT_URL,
+                                        "/v1/clinic_finder" f"?{querystring}",
+                                    )
 
-                                if nearest_clinic and nearest_clinic.status_code == 200:
-                                    (
-                                        clinic_list,
-                                        original_clinic,
-                                    ) = utils.build_clinic_list(nearest_clinic.json())
+                                    nearest_clinic = await client.get(
+                                        clinic_url, headers=headers
+                                    )
 
-                                    for template in templates:
-                                        dispatcher.utter_message(template=template)
-                                    return [
-                                        SlotSet(
-                                            "nearest_clinic", clinic_list.strip("\n")
-                                        ),
-                                        SlotSet(
-                                            "original_clinic_list", original_clinic
-                                        ),
-                                        SlotSet("group_arm", group_arm),
-                                        SlotSet("tbcheck_id", tbcheck_id),
-                                    ]
+                                    if (
+                                        nearest_clinic
+                                        and nearest_clinic.status_code == 200
+                                    ):
+                                        (
+                                            clinic_list,
+                                            original_clinic,
+                                        ) = utils.build_clinic_list(
+                                            nearest_clinic.json()
+                                        )
+
+                                        for template in templates:
+                                            dispatcher.utter_message(template=template)
+                                        return [
+                                            SlotSet(
+                                                "nearest_clinic",
+                                                clinic_list.strip("\n"),
+                                            ),
+                                            SlotSet(
+                                                "original_clinic_list", original_clinic
+                                            ),
+                                            SlotSet("group_arm", group_arm),
+                                            SlotSet("tbcheck_id", tbcheck_id),
+                                        ]
 
                         if not utils.is_duplicate_error(resp):
                             resp.raise_for_status()
