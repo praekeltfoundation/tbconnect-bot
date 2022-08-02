@@ -32,9 +32,9 @@ actions:
   - utter_ask_symptoms_weight
   - utter_ask_exposure
   - utter_ask_tracing
+  - utter_risk_high
   - utter_risk_moderate
   - utter_risk_low
-  - utter_control
   - utter_control
   - utter_health_consequence
   - utter_planning_prompt
