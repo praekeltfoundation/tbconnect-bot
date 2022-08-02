@@ -32,6 +32,9 @@ actions:
   - utter_ask_symptoms_weight
   - utter_ask_exposure
   - utter_ask_tracing
+  - utter_risk_moderate
+  - utter_risk_low
+  - utter_control
   - utter_control
   - utter_health_consequence
   - utter_planning_prompt
@@ -308,6 +311,26 @@ responses:
         Phendula 1 noma 2
         *1.* YEBO
         *2.* CHA
+
+  utter_risk_high:
+    - text: |
+        *Izimpendulo zakho kule mibuzo zibonisa ukuthi udinga ukuhlolwa i-TB kungakapheli isonto elizayo*
+
+        - Iya emtholampilo engakini uyohlolelwa i-TB yamahhala.
+        - Sicela ufake isifonyo sobuso ngaphambi kokungena emtholampilo
+
+  utter_risk_moderate:
+    - text: |
+        *Izimpendulo zakho kule mibuzo zibonisa ukuthi udinga ukuhlolwa i-TB kungakapheli isonto elizayo*
+
+        - Iya emtholampilo engakini uyohlolelwa i-TB yamahhala.
+        - Sicela ufake isifonyo sobuso ngaphambi kokungena emtholampilo
+
+  utter_risk_low:
+    - text: |
+        *Awudingi ukuhlolwa kwe-TB ngalesi sikhathi.*
+
+        - Uma uba nokukhwehlela, imfiva, ukuncipha ngokomzimba noma ukujuluka ebusuku, vakashela umtholampilo oseduzane nawe.
 
   utter_control:
     - text: |

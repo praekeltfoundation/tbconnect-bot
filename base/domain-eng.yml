@@ -32,6 +32,9 @@ actions:
   - utter_ask_symptoms_weight
   - utter_ask_exposure
   - utter_ask_tracing
+  - utter_risk_high
+  - utter_risk_moderate
+  - utter_risk_low
   - utter_control
   - utter_health_consequence
   - utter_planning_prompt
@@ -307,6 +310,26 @@ responses:
         Reply 1 or 2
         *1.* YES
         *2.* NO
+
+  utter_risk_high:
+    - text: |
+        *Your replies to the questions show that you need a TB test this week*
+        
+        - Go to your local clinic for a free TB test.
+        - Please put on a face mask before you enter the clinic.
+
+  utter_risk_moderate:
+    - text: |
+        *Your replies to the questions show that you need a TB test this week*
+
+        - Go to your local clinic for a free TB test.
+        - Please put on a face mask before you enter the clinic.
+
+  utter_risk_low:
+    - text: |
+        *You don't need a TB test at this time.*
+
+        - If you develop cough, fever, weight loss or night sweats, visit your nearest clinic.
 
   utter_control:
     - text: |

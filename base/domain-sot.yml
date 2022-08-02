@@ -32,6 +32,9 @@ actions:
   - utter_ask_symptoms_weight
   - utter_ask_exposure
   - utter_ask_tracing
+  - utter_risk_moderate
+  - utter_risk_low
+  - utter_control
   - utter_control
   - utter_health_consequence
   - utter_planning_prompt
@@ -308,6 +311,26 @@ responses:
         Araba 1 kapa 2
         *1.* EE
         *2.* TJHEE
+
+  utter_risk_high:
+    - text: |
+        *Dikarabo tsa hao dipotsong di bontsha hore o hloka tlhahlobo ya TB bekeng e tlang*
+
+        - E-ya tleliniking ya heno bakeng sa tlhahlobo ya mahala ya TB.
+        - Ka kopo, apara maske wa sefahleho pele o kena tleliniking
+
+  utter_risk_moderate:
+    - text: |
+        *Dikarabo tsa hao dipotsong di bontsha hore o hloka tlhahlobo ya TB bekeng e tlang*
+
+        - E-ya tleliniking ya heno bakeng sa tlhahlobo ya mahala ya TB.
+        - Ka kopo, apara maske wa sefahleho pele o kena tleliniking
+
+  utter_risk_low:
+    - text: |
+        *Ha o hloke tlhahlobo ya TB ka nako ena.*
+
+        - Haeba o ba le ho kgohlola, feberu, ho theoha ha boima ba mmele kapa mofufutso bosiu, etela tleliniki e haufinyane.
 
   utter_control:
     - text: |
