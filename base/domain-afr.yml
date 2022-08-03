@@ -32,6 +32,9 @@ actions:
   - utter_ask_symptoms_weight
   - utter_ask_exposure
   - utter_ask_tracing
+  - utter_risk_high
+  - utter_risk_moderate
+  - utter_risk_low
   - utter_control
   - utter_health_consequence
   - utter_planning_prompt
@@ -308,6 +311,25 @@ responses:
         Antwoord 1 of 2
         *1.* JA
         *2.* NEE
+  utter_risk_high:
+    - text: |
+        *Jou antwoorde op die vrae toon dat jy binne die volgende week vir 'n TB-toets moet gaan*
+
+        - Gaan na jou plaaslike kliniek vir 'n gratis TB-toets.
+        - Sit asseblief jou gesigmasker op voordat jy by die kliniek ingaan.
+
+  utter_risk_moderate:
+    - text: |
+        *Jou antwoorde op die vrae toon dat jy binne die volgende week vir 'n TB-toets moet gaan*
+
+        - Gaan na jou plaaslike kliniek vir 'n gratis TB-toets.
+        - Sit asseblief jou gesigmasker op voordat jy by die kliniek ingaan.
+
+  utter_risk_low:
+    - text: |
+        *Jy benodig nie tans 'n TB-toets nie.*
+
+        - Indien jy begin hoes, koors kry, gewig verloor of snags sweet, besoek jou naaste kliniek.
 
   utter_control:
     - text: |

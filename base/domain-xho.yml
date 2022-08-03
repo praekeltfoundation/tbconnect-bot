@@ -32,6 +32,9 @@ actions:
   - utter_ask_symptoms_weight
   - utter_ask_exposure
   - utter_ask_tracing
+  - utter_risk_high
+  - utter_risk_moderate
+  - utter_risk_low
   - utter_control
   - utter_health_consequence
   - utter_planning_prompt
@@ -308,6 +311,26 @@ responses:
         Phendula u-1 okanye u-2
         *1.* EWE
         *2.* HAYI
+
+  utter_risk_high:
+    - text: |
+        *Iimpendulo zakho kule mibuzo zibonisa ukuba udinga uvavanyo lwe-TB kwiveki ezayo*
+
+        - Yiya kwikliniki yakho yengingqi uyofumana uvavanyo lwe-TB lwasimahla
+        - Nceda unxibe imaski yobuso phambi kokuba ungene eklinikhi.
+
+  utter_risk_moderate:
+    - text: |
+        *Iimpendulo zakho kule mibuzo zibonisa ukuba udinga uvavanyo lwe-TB kwiveki ezayo*
+
+        - Yiya kwikliniki yakho yengingqi uyofumana uvavanyo lwe-TB lwasimahla
+        - Nceda unxibe imaski yobuso phambi kokuba ungene eklinikhi.
+
+  utter_risk_low:
+    - text: |
+        *Akudingi vavanyo lwe-TB ngeli xesha.*
+
+        - Ukuba ngaba uyakhohlela, unomkhuhlane, ukunciphisa umzimba okanye ukubila ebusuku, ndwendwela iklinikhi ekufutshane nawe.
 
   utter_control:
     - text: |
