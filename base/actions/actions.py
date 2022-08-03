@@ -393,7 +393,7 @@ class TBCheckProfileForm(BaseFormAction):
                         client, value, session_token, province
                     )
                     break
-                except KeyError:
+                except Exception:
                     pass
             if not location:
                 dispatcher.utter_message(template="utter_incorrect_location")
@@ -748,7 +748,7 @@ class TBCheckForm(BaseFormAction):
                             location = None
                             try:
                                 location = json_resp["location"]
-                            except Exception:
+                            except KeyError:
                                 location = json_resp["city_location"]
 
                             if location:
