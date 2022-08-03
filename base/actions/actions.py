@@ -393,7 +393,7 @@ class TBCheckProfileForm(BaseFormAction):
                         client, value, session_token, province
                     )
                     break
-                except Exception:
+                except KeyError:
                     pass
             if not location:
                 dispatcher.utter_message(template="utter_incorrect_location")
@@ -763,7 +763,7 @@ class TBCheckForm(BaseFormAction):
 
                                     clinic_url = urljoin(
                                         config.HEALTHCONNECT_URL,
-                                        "/v1/clinic_finder" f"?{querystring}",
+                                        f"/v1/clinic_finder?{querystring}",
                                     )
 
                                     nearest_clinic = await client.get(
