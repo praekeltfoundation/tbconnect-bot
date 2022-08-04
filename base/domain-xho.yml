@@ -44,7 +44,6 @@ actions:
   - utter_ask_soft_commitment_plus
   - utter_soft_commitment_plus_no
   - utter_risk_low_unknown_exposure
-  - utter_follow_up_request
   - utter_keywords
   - utter_opt_in_yes
   - utter_do_tb_screening
@@ -427,11 +426,6 @@ responses:
         Ukuba awusazi isimo sakho se HIV yiya eklinikhi uhlolwe mahala.
 
         Buya wenze uhlolo lwe TB kwakhona xa unolulwazi.
-
-  utter_follow_up_request:
-    - text: |
-        📲 Ukufumana imiyalezo yokulandelelisa, phendula *PHAKATHI*
-      claim: release
 
   utter_keywords:
     - text: |
