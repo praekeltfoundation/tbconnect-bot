@@ -44,6 +44,7 @@ actions:
   - utter_ask_soft_commitment_plus
   - utter_soft_commitment_plus_no
   - utter_risk_low_unknown_exposure
+  - utter_follow_up_request
   - utter_keywords
   - utter_opt_in_yes
   - utter_do_tb_screening
@@ -427,6 +428,11 @@ responses:
         If you do not know your HIV status, please go to the clinic for a free HIV test.
 
         Come back and do the TB check again when you have this information.
+
+  utter_follow_up_request:
+    - text: |
+        📲To get follow-up messages, reply *IN*
+      claim: release
 
   utter_keywords:
     - text: |

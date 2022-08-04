@@ -59,7 +59,7 @@ def test_risk_template():
 
     data = {"exposure": "not sure"}
     templates = utils.get_risk_templates("high", data)
-    assert templates == ["utter_risk_high", "utter_keywords"]
+    assert templates == ["utter_risk_high", "utter_keywords", "utter_follow_up_request"]
 
 
 def test_group_arm_templates():
