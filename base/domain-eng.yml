@@ -370,7 +370,7 @@ responses:
 
   utter_ask_clinic_visit_day:
     - text: |
-        *When will you will go?*
+        *When will you go?*
         
         Reply:
         *1.* MONDAY
