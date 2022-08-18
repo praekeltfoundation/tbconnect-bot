@@ -180,11 +180,10 @@ responses:
           Ingabe uzimisele ukuba nengxenye? 
           
           ---- 
-          *Phendula 1, 2 noma 3:* 
+          *Phendula 1 noma 2:* 
           
           1. YEBO, ngifuna ukuba yingxenye 
-          2. CHA, ngiyabonga 
-          3. Ngidinga ulwazi OLWENGEZIWE nge-TB HealthCheck kanye nocwaningo
+          2. CHA, ngiyabonga
 
   utter_more_terms_doc:
     - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH_WhatsApp_TB_Privacy_Policy_September2021.pdf"

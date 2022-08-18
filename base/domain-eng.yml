@@ -180,10 +180,9 @@ responses:
   
           Are you willing to take part? 
           ---- 
-          *Reply 1,2 or 3:*   
+          *Reply 1 or 2:*   
           1. YES, I'm happy to take part 
-          2. NO, thank you 
-          3. I need MORE info on TB HealthCheck and the research
+          2. NO, thank you
 
   utter_more_terms_doc:
     - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH_WhatsApp_TB_Privacy_Policy_September2021.pdf"

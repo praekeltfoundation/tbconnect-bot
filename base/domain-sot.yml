@@ -180,11 +180,10 @@ responses:
           A na o ikemiseditse ho nka karolo?
           
           ----
-          *Araba 1,2 kapa 3:* 
+          *Araba 1 kapa 2:* 
           
           1. E, ke batla ho nka karolo 
           2. CHE, kea leboha 
-          3. Ke hloka dintlha TSE DING ka TB HealthCheck le diphuputso 
 
   utter_more_terms_doc:
     - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH_WhatsApp_TB_Privacy_Policy_September2021.pdf"

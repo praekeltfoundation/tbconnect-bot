@@ -180,11 +180,10 @@ responses:
           Ngaba uzimisele ukuthatha inxaxheba? 
           
           ----
-          *Phendula u-1,2 okanye 3:*
+          *Phendula u-1 okanye 2:*
           
            1. EWE, ndifuna ukuthatha inxaxheba 
-           2. HAYI, enkosi 
-           3. Ndidinga ulwazi oluthe KRATYA nge-TB HealthCheck kunye nophando
+           2. HAYI, enkosi
 
   utter_more_terms_doc:
     - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH_WhatsApp_TB_Privacy_Policy_September2021.pdf"
