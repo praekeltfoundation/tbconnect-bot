@@ -294,7 +294,7 @@ class TBCheckProfileForm(BaseFormAction):
         domain: Dict[Text, Any],
     ) -> Dict[Text, Optional[Text]]:
         return self.validate_generic(
-            "research_consent", dispatcher, value, {1: "yes", 2: "no", 3: "more"}
+            "research_consent", dispatcher, value, {1: "yes", 2: "no"}
         )
 
     async def places_lookup(self, client, search_text, session_token, province):

@@ -180,11 +180,10 @@ responses:
           Is jy gewillig om deel te neem?
           
           ----
-          *Antwoord 1, 2 of 3:*
+          *Antwoord 1 or 2:*
           
           1. JA, ek wil deelneem
           2. NEE dankie
-          3. Ek het MEER inligting oor TB HealthCheck en die navorsing nodig
 
   utter_more_terms_doc:
     - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH_WhatsApp_TB_Privacy_Policy_September2021.pdf"
