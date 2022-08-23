@@ -312,7 +312,11 @@ class TestTBCheckForm:
 
         request = respx.post(
             "https://healthconnect/v2/tbcheck/",
-            content={"profile": {"tbconnect_group_arm": "control"}, "id": 22},
+            content={
+                "profile": {"tbconnect_group_arm": "control"},
+                "id": 22,
+                "research_consent": False,
+            },
         )
 
         form = TBCheckForm()
@@ -376,7 +380,11 @@ class TestTBCheckForm:
 
         request = respx.post(
             "https://healthconnect/v2/tbcheck/",
-            content={"profile": {"tbconnect_group_arm": "control"}, "id": 22},
+            content={
+                "profile": {"tbconnect_group_arm": "control"},
+                "id": 22,
+                "research_consent": False,
+            },
         )
 
         form = TBCheckForm()
@@ -444,7 +452,11 @@ class TestTBCheckForm:
 
         request = respx.post(
             "https://healthconnect/v2/tbcheck/",
-            content={"profile": {"tbconnect_group_arm": "control"}, "id": 22},
+            content={
+                "profile": {"tbconnect_group_arm": "control"},
+                "id": 22,
+                "research_consent": True,
+            },
         )
 
         form = TBCheckForm()
@@ -505,7 +517,11 @@ class TestTBCheckForm:
 
         request = respx.post(
             "https://healthconnect/v2/tbcheck/",
-            content={"profile": {"tbconnect_group_arm": "control"}, "id": 22},
+            content={
+                "profile": {"tbconnect_group_arm": "control"},
+                "id": 22,
+                "research_consent": True,
+            },
         )
 
         form = TBCheckForm()
