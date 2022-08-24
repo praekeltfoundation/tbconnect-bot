@@ -729,14 +729,13 @@ class TBCheckForm(BaseFormAction):
                     async with HTTPXClient() as client:
                         resp = await client.post(url, json=post_data, headers=headers)
                         # TODO: remove print
-                        print("%%%%%%%%", resp.content)
+                        print(resp.content)
                         json_resp = resp.json()
 
                         # Get tbcheck ID
                         tbcheck_id = json_resp.get("id")
                         consent = json_resp.get("research_consent")
 
-                        print(">>>>>", consent, "*****", not consent)
                         if not consent:
                             templates = utils.get_risk_templates(risk, data)
                         else:
