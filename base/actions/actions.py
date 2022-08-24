@@ -1119,6 +1119,4 @@ class SetActivationAction(Action):
             if activation.endswith("_agent"):
                 events.append(AllSlotsReset())
             events.append(SlotSet("activation", activation))
-        # else:
-        #     events.append(SlotSet("activation", "tb_study_a"))
         return events
