@@ -198,8 +198,9 @@ class TBCheckProfileForm(BaseFormAction):
         # To prevent that, we just tell Rasa with each message that the slots
         # that it's required to fill is just a single slot, the first
         # slot that hasn't been filled yet.
+        activation = tracker.get_slot("activation")
 
-        if not config.RESEARCH_CONSENT_ENABLED:
+        if activation != "tb_study_a":
             slots.remove("research_consent")
 
         if tracker.get_slot("age") == "<18":
@@ -706,7 +707,6 @@ class TBCheckForm(BaseFormAction):
         templates = []
         group_arm = None
         tbcheck_id = None
-        activation = tracker.get_slot("activation")
 
         if config.HEALTHCONNECT_URL and config.HEALTHCONNECT_TOKEN:
             url = urljoin(config.HEALTHCONNECT_URL, "/v2/tbcheck/")
@@ -734,66 +734,74 @@ class TBCheckForm(BaseFormAction):
 
                         # Get tbcheck ID
                         tbcheck_id = json_resp.get("id")
+                        consent = json_resp.get("research_consent")
 
-                        # Get template and user group arm
-                        templates, group_arm = utils.get_display_message_template(
-                            json_resp
-                        )
-
-                        if not group_arm or activation:
+                        if not consent:
                             templates = utils.get_risk_templates(risk, data)
+                        else:
+                            # Get template and user group arm
+                            templates, group_arm = utils.get_display_message_template(
+                                json_resp
+                            )
 
-                        # Get clinic list for
-                        if group_arm == "planning_prompt":
-                            location = None
-                            try:
-                                location = json_resp["location"]
-                            except KeyError:
-                                location = json_resp["city_location"]
+                            # Get clinic list for
+                            if group_arm == "planning_prompt":
+                                location = None
+                                try:
+                                    location = json_resp["location"]
+                                except KeyError:
+                                    location = json_resp["city_location"]
 
-                            if location:
-                                latitude, longitude = utils.extract_location_long_lat(
-                                    location, 2
-                                )
+                                if location:
+                                    (
+                                        latitude,
+                                        longitude,
+                                    ) = utils.extract_location_long_lat(location, 2)
 
-                                if longitude and latitude:
-                                    querystring = urlencode(
-                                        {"longitude": longitude, "latitude": latitude}
-                                    )
-
-                                    clinic_url = urljoin(
-                                        config.HEALTHCONNECT_URL,
-                                        f"/v1/clinic_finder?{querystring}",
-                                    )
-
-                                    nearest_clinic = await client.get(
-                                        clinic_url, headers=headers
-                                    )
-
-                                    if (
-                                        nearest_clinic
-                                        and nearest_clinic.status_code == 200
-                                    ):
-                                        (
-                                            clinic_list,
-                                            original_clinic,
-                                        ) = utils.build_clinic_list(
-                                            nearest_clinic.json()
+                                    if longitude and latitude:
+                                        querystring = urlencode(
+                                            {
+                                                "longitude": longitude,
+                                                "latitude": latitude,
+                                            }
                                         )
 
-                                        for template in templates:
-                                            dispatcher.utter_message(template=template)
-                                        return [
-                                            SlotSet(
-                                                "nearest_clinic",
-                                                clinic_list.strip("\n"),
-                                            ),
-                                            SlotSet(
-                                                "original_clinic_list", original_clinic
-                                            ),
-                                            SlotSet("group_arm", group_arm),
-                                            SlotSet("tbcheck_id", tbcheck_id),
-                                        ]
+                                        clinic_url = urljoin(
+                                            config.HEALTHCONNECT_URL,
+                                            f"/v1/clinic_finder?{querystring}",
+                                        )
+
+                                        nearest_clinic = await client.get(
+                                            clinic_url, headers=headers
+                                        )
+
+                                        if (
+                                            nearest_clinic
+                                            and nearest_clinic.status_code == 200
+                                        ):
+                                            (
+                                                clinic_list,
+                                                original_clinic,
+                                            ) = utils.build_clinic_list(
+                                                nearest_clinic.json()
+                                            )
+
+                                            for template in templates:
+                                                dispatcher.utter_message(
+                                                    template=template
+                                                )
+                                            return [
+                                                SlotSet(
+                                                    "nearest_clinic",
+                                                    clinic_list.strip("\n"),
+                                                ),
+                                                SlotSet(
+                                                    "original_clinic_list",
+                                                    original_clinic,
+                                                ),
+                                                SlotSet("group_arm", group_arm),
+                                                SlotSet("tbcheck_id", tbcheck_id),
+                                            ]
 
                         if not utils.is_duplicate_error(resp):
                             resp.raise_for_status()
@@ -1111,5 +1119,4 @@ class SetActivationAction(Action):
             if activation.endswith("_agent"):
                 events.append(AllSlotsReset())
             events.append(SlotSet("activation", activation))
-
         return events
