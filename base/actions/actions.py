@@ -1171,7 +1171,9 @@ class StudyRestriction(Action):
                             if resp:
                                 data = resp.json()
                                 if data.get("activation") == "tb_study_a":
-                                    dispatcher.utter_message(template="utter_study_completed")
+                                    dispatcher.utter_message(
+                                        template="utter_study_completed"
+                                    )
 
                                     # Reset activation slot
                                     return [SlotSet("activation", None)]
