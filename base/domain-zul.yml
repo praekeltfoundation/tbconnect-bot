@@ -17,6 +17,7 @@ entities:
 
 actions:
   - action_set_activation
+  - action_study_restriction
   - action_session_start
   - action_exit
   - action_opt_in
@@ -57,6 +58,9 @@ slots:
     type: unfeaturized
     auto_fill: false
   activation:
+    type: unfeaturized
+    auto_fill: false
+  study_restriction:
     type: unfeaturized
     auto_fill: false
   terms:
