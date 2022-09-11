@@ -253,6 +253,7 @@ class TBCheckProfileForm(BaseFormAction):
             "research_consent": [
                 self.from_intent(intent="affirm", value="yes"),
                 self.from_intent(intent="deny", value="no"),
+                self.from_intent(intent="more", value="more"),
                 self.from_text(),
             ],
         }
@@ -294,8 +295,16 @@ class TBCheckProfileForm(BaseFormAction):
         tracker: Tracker,
         domain: Dict[Text, Any],
     ) -> Dict[Text, Optional[Text]]:
+        if value == "3":
+            dispatcher.utter_message(template="utter_research_consent_more_p1")
+            dispatcher.utter_message(template="utter_research_consent_more_p2")
+            dispatcher.utter_message(template="utter_research_consent_more_p3")
+            return {"research_consent": None}
+        if value == "2":
+            dispatcher.utter_message(template="utter_research_consent_no")
+            return {"research_consent": None}
         return self.validate_generic(
-            "research_consent", dispatcher, value, {1: "yes", 2: "no"}
+            "research_consent", dispatcher, value, {1: "yes", 2: "no", 3: "more"}
         )
 
     async def places_lookup(self, client, search_text, session_token, province):
@@ -1110,7 +1119,6 @@ class SetActivationAction(Action):
                         raise e
 
     async def run(self, dispatcher, tracker, domain):
-
         msisdn = f'{tracker.sender_id.lstrip("+")}'
         data = await self.get_activation(msisdn)
         events = []
@@ -1120,3 +1128,55 @@ class SetActivationAction(Action):
                 events.append(AllSlotsReset())
             events.append(SlotSet("activation", activation))
         return events
+
+
+class StudyRestriction(Action):
+    def name(self) -> Text:
+        return "action_study_restriction"
+
+    async def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        if config.HEALTHCONNECT_URL and config.HEALTHCONNECT_TOKEN:
+            activation = tracker.get_slot("activation")
+
+            if activation == "tb_study_a":
+                msisdn = f'+{tracker.sender_id.lstrip("+")}'
+
+                url = urljoin(
+                    config.HEALTHCONNECT_URL, f"/v2/healthcheckuserprofile/{msisdn}/"
+                )
+
+                headers = {
+                    "Authorization": f"Token {config.HEALTHCONNECT_TOKEN}",
+                    "User-Agent": "rasa/tbconnect-bot",
+                }
+
+                if hasattr(httpx, "AsyncClient"):
+                    # from httpx>=0.11.0, the async client is a different class
+                    HTTPXClient = getattr(httpx, "AsyncClient")
+                else:
+                    HTTPXClient = getattr(httpx, "Client")
+
+                for i in range(config.HTTP_RETRIES):
+                    try:
+                        async with HTTPXClient() as client:
+                            resp = await client.get(url, headers=headers)
+                            # TODO: remove print
+                            print(resp.content)
+
+                            if resp:
+                                data = resp.json()
+                                if data.get("activation") == "tb_study_a":
+                                    dispatcher.utter_message(template="utter_study_completed")
+
+                                    # Reset activation slot
+                                    return [SlotSet("activation", None)]
+                            break
+                    except httpx.HTTPError as e:
+                        if i == config.HTTP_RETRIES - 1:
+                            raise e
+        return []

@@ -17,6 +17,7 @@ entities:
 
 actions:
   - action_set_activation
+  - action_study_restriction
   - action_session_start
   - action_exit
   - action_opt_in
@@ -58,6 +59,9 @@ slots:
     type: unfeaturized
     auto_fill: false
   activation:
+    type: unfeaturized
+    auto_fill: false
+  study_restriction:
     type: unfeaturized
     auto_fill: false
   terms:
@@ -179,10 +183,10 @@ responses:
           We may ask you a few simple questions for research after you've completed your TB HealthCheck. Taking the survey is FREE and will not use up any airtime. We will use this information to see if TB HealthCheck helps people.  
   
           Are you willing to take part? 
-          ---- 
-          *Reply 1 or 2:*   
-          1. YES, I'm happy to take part 
-          2. NO, thank you
+            
+          *1.* YES, I'm happy to take part 
+          *2.* NO, thank you
+          *3.* MORE, for more on TB HealthCheck and the research
 
   utter_more_terms_doc:
     - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH_WhatsApp_TB_Privacy_Policy_September2021.pdf"
@@ -190,7 +194,7 @@ responses:
 
   utter_ask_province:
     - text: |
-        In which province are you living now? Reply with a number from the list:
+        Which province do you live in?
 
         *1.* EASTERN CAPE
         *2.* FREE STATE
@@ -225,7 +229,6 @@ responses:
     - text: |
         Which gender do you identify as?
 
-        Reply
         *1.* MALE
         *2.* FEMALE
         *3.* OTHER
@@ -242,7 +245,6 @@ responses:
         We use Google Location Services to confirm your location. Please check that the address below is correct and matches the information you gave:
         {location}
 
-        Reply
         *1.* YES
         *2.* NO
 
@@ -252,7 +254,6 @@ responses:
 
         Let's see how you're feeling today. Do you have a cough?
 
-        Reply 1 or 2
         *1.* YES
         *2.* NO
 
@@ -262,7 +263,6 @@ responses:
 
         Do you have a fever? (when you touch your forehead, does it feel hot?)
 
-        Reply 1 or 2
         *1.* YES
         *2.* NO
 
@@ -272,7 +272,6 @@ responses:
 
         Are you sweating more than usual at night?
 
-        Reply 1 or 2
         *1.* YES
         *2.* NO
 
@@ -282,7 +281,6 @@ responses:
 
         Have you been losing weight without trying?
 
-        Reply 1 or 2
         *1.* YES
         *2.* NO
 
@@ -295,7 +293,6 @@ responses:
         _You are at high risk for TB if:_
         _You live with someone who has/had TB in the last year, OR you have had TB in the last 2 years, OR you are living with HIV._
 
-        Reply 1, 2 or 3
         *1.* I am at high risk of TB
         *2.* I am not at high risk of TB
         *3.* I don't know if I am at high risk
@@ -306,7 +303,6 @@ responses:
 
         Finally, please agree that the information you shared is *correct* to the best of your knowledge and that you give the National Department of Health permission to contact you if needed?
 
-        Reply 1 or 2
         *1.* YES
         *2.* NO
 
@@ -364,14 +360,12 @@ responses:
 
         *Where will you go?*
         
-        Reply:
         {nearest_clinic}
 
   utter_ask_clinic_visit_day:
     - text: |
         *When will you go?*
         
-        Reply:
         *1.* MONDAY
         *2.* TUESDAY
         *3.* WEDNESDAY
@@ -386,7 +380,7 @@ responses:
         😷 Please put on a face mask before you enter the clinic. 
         
         *Do you commit to getting tested?*  
-        Reply
+       
         *1. YES* 
         *2. NO*
 
@@ -410,7 +404,6 @@ responses:
         📲 You will get R10 airtime if you commit to get tested. Airtime will be sent to you within 1 hour. 
         
         *Do you commit to getting tested?*  
-        Reply: 
         
         *1. YES* 
         *2. NO*
@@ -435,22 +428,92 @@ responses:
 
   utter_keywords:
     - text: |
-        💊Reply *CURE* for information about treatment
-        📗Reply *INFO* for information about symptoms and TB testing
-        📌Reply *MENU* to return to the main menu
+        💊 *CURE* for information about treatment
+        📗 *INFO* for information about symptoms and TB testing
+        📌 *MENU* to return to the main menu
       claim: release
 
   utter_opt_in_yes:
     - text: |
         Thank you for choosing to receive follow-up messages.
 
-        📌 Reply with *MENU* to return to the main menu
+        📌  with *MENU* to return to the main menu
       claim: release
 
   utter_do_tb_screening:
     - text: |
         Please reply with *TB* to start your TB check.
       claim: release
+
+  utter_study_completed:
+    - text: |
+        ⚠️Unfortunately, you cannot participate in the study more than once.
+        You can still continue with a TB Check but you will not be included
+        in the study.
+      claim: release
+
+  utter_study_minor_error:
+    - text: |
+        ⚠️  Unfortunately you cant participate in the study if you are younger
+        than 18. You can still continue with a TB Check but you will not be 
+        included in the study.
+      claim: release
+
+  utter_research_consent_no:
+    - text: |
+        Okay, no problem. You will not be included in the research, but you can still 
+        continue to check if you need to take a TB test.
+
+  utter_research_consent_more_p1:
+    - text: |
+        *Can you tell me more about the research?*
+        
+        We are conducting a study about the TB HealthCheck tool.
+        We will ask you about your choices in relation to the tool.
+        
+        *What information will you ask me for?*
+
+        We'll never ask your name, but may ask your ID number so that we can help 
+        to link you to a facility to get tested. Providing your ID is completely up to you.
+        We would only use it for your benefit.
+        
+        *Why did I get this SMS?*
+
+        We have chosen you at random from a database hosted by the Western Cape Department of Health.
+
+  utter_research_consent_more_p2:
+    - text: |
+        *What will I need to do?*
+
+        We will ask you a few questions and it will take about 6 minutes of your time.
+
+        *What will happen to the information?*
+
+        We will store it safely as required by law and it will only be used by the Stellenbosch University
+        and Erasmus University researchers.
+        
+        The information is stored without your name and ID. We will share what we find other researchers 
+        and journals what we find, but what we share will be based on averages and totals from the full 
+        group of survey participants.
+
+  utter_research_consent_more_p3:
+    - text: |
+        *What if I want to stop halfway through the survey?*
+
+        That's OK. You can stop at any point.
+        
+        *Are there any costs or risks to me?*
+
+        There are no costs and no risks. Your information will be kept private and safe. 
+        The researchers will receive the answers without names or ID numbers.
+        
+        *What can I do if I am unhappy?*
+
+        If you have questions or doubts about this invitation, please contact Ronelle Burger on 
+        0838863016 or at rburger@sun.ac.za.
+        
+        TB HealthCheck has been approved by the Health Research Ethics Committee. 
+        You can contact them by calling 021 938 9677 or 021 938 9819.
 
 # claim: revert will ignore the message text, and reevaluate this message using
 # turn automation
