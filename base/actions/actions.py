@@ -1165,8 +1165,6 @@ class StudyRestriction(Action):
                     try:
                         async with HTTPXClient() as client:
                             resp = await client.get(url, headers=headers)
-                            # TODO: remove print
-                            print(resp.content)
 
                             if resp:
                                 data = resp.json()
