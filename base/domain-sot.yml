@@ -183,9 +183,6 @@ responses:
           
           A na o ikemiseditse ho nka karolo?
           
-          ----
-          *Araba 1 kapa 2:* 
-          
           1. E, ke batla ho nka karolo 
           2. CHE, kea leboha 
 
@@ -195,7 +192,7 @@ responses:
 
   utter_ask_province:
     - text: |
-        O dula porofenseng efe hona jwale? Araba ka nomoro ho tswa lenaneng:
+        O dula porofenseng efe hona jwale?
 
         *1.* KAPA BOTJHABELA
         *2.* FOREISETATA
@@ -230,7 +227,6 @@ responses:
     - text: |
         O kgetha bong bofe?
 
-        Araba
         *1.* MONNA
         *2.* MOSADI
         *3.* HO HONG
@@ -247,7 +243,6 @@ responses:
         Re sebedisa Google Location Services ho netefatsa sebaka seo o leng ho sona. Ka kopo netefatsa hore aterese e ka tlase e nepahetse mme e tshwana le tlhaiso-leseding eo o faneng ka yona:
         {location}
 
-        Araba
         *1.* EE
         *2.* TJHEE
 
@@ -257,7 +252,6 @@ responses:
 
         Ha re bone hore na o ikutlwa jwang kajeno. Na o a kgohlola?
 
-        Araba 1 kapa 2
         *1.* EE
         *2.* TJHEE
 
@@ -267,7 +261,6 @@ responses:
 
         O na le feberu? (ha o tshwara phatla ya hao, na e utlwa e tjhesa? )
 
-        Araba 1 kapa 2
         *1.* EE
         *2.* TJHEE
 
@@ -277,7 +270,6 @@ responses:
 
         Na o fufulelwa ho feta ka moo ho tlwaelehileng bosiu?
 
-        Araba 1 kapa 2
         *1.* EE
         *2.* TJHEE
 
@@ -287,7 +279,6 @@ responses:
 
         Na o ntse o theola boima ba mmele o sa leke ho etsa jwalo?
 
-        Araba 1 kapa 2
         *1.* EE
         *2.* TJHEE
 
@@ -300,7 +291,6 @@ responses:
         _O kotsing e kgolo ya TB haeba:_
         _O dula le motho ya nang kapa ya ileng a ba le TB selemong se fetileng, KAPA o bile le TB dilemong tse 2 tse fetileng, KAPA o phela le tshwaetso ya HIV._
 
-        Araba 1, 2 kapa 3
         *1.* Ke kotsing e kgolo ya TB
         *2.* Ha ke kotsing e kgolo ya TB
         *3.* Ha ke tsebe hore na ke kotsing e kgolo
@@ -311,7 +301,6 @@ responses:
 
         Qetellong, ka kopo dumela hore tlhaiso-leseding eo o e arolelaneng e *nepahetse* ho latela tsebo ya hao le hore o fa Lefapha la Naha la Bophelo tumello ya ho ikopanya le wena ha ho hlokahala?
 
-        Araba 1 kapa 2
         *1.* EE
         *2.* TJHEE
 
@@ -366,14 +355,12 @@ responses:
     - text: |
         *O tla ya hokae bakeng sa tlhahlobo ya hao?* 
         
-        Araba ka tliliniki:
         {nearest_clinic}
 
   utter_ask_clinic_visit_day:
     - text: |
         *O tla ya tlhatlhobong ya hao neng?*
         
-        Araba ka letsatsi:
         *1.* MANTAHA
         *2.* LABOBELI
         *3.* LABORARO
@@ -388,7 +375,6 @@ responses:
         😷 Ka kopo rwala semonkwana pele o kena ka tleliniking.
         
         *Na o itlama ho hlahloba?*
-        Araba:
         
         *1. EE* 
         *2. TJHE*
@@ -413,7 +399,6 @@ responses:
         📲 O tla fumana airtime ya R10 ha o itlama ho hlahloba. O tla romellwa airtime nakong ya hora e le 1.
         
         Na o itlama ho hlahloba?
-        Araba: 
 
         *1. EE* 
         *2. TJHE*
@@ -437,9 +422,9 @@ responses:
 
   utter_keywords:
     - text: |
-        💊 Araba *PHEKO* bakeng sa tlhaiso-leseding ka kalafo
-        📗 Araba *MEHLODI* bakeng sa tlhaiso-leseding ka matshwao le teko ya TB
-        📌 Araba *MENU* ho kgutlela ho menu o ka sehloohong
+        💊 *PHEKO* bakeng sa tlhaiso-leseding ka kalafo
+        📗 *MEHLODI* bakeng sa tlhaiso-leseding ka matshwao le teko ya TB
+        📌 *MENU* ho kgutlela ho menu o ka sehloohong
       claim: release
 
   utter_opt_in_yes:
@@ -453,6 +438,76 @@ responses:
     - text: |
         Ka kopo araba ka *TB* ho qala tlhahlobo ya TB.
       claim: release
+
+  utter_study_completed:
+    - text: |
+        ⚠️Unfortunately, you cannot participate in the study more than once.
+        You can still continue with a TB Check but you will not be included
+        in the study.
+      claim: release
+
+  utter_study_minor_error:
+    - text: |
+        ⚠️  Unfortunately you cant participate in the study if you are younger
+        than 18. You can still continue with a TB Check but you will not be 
+        included in the study.
+      claim: release
+
+  utter_research_consent_no:
+    - text: |
+        Okay, no problem. You will not be included in the research, but you can still 
+        continue to check if you need to take a TB test.
+
+  utter_research_consent_more_p1:
+    - text: |
+        *Can you tell me more about the research?*
+        
+        We are conducting a study about the TB HealthCheck tool.
+        We will ask you about your choices in relation to the tool.
+        
+        *What information will you ask me for?*
+
+        We'll never ask your name, but may ask your ID number so that we can help 
+        to link you to a facility to get tested. Providing your ID is completely up to you.
+        We would only use it for your benefit.
+        
+        *Why did I get this SMS?*
+
+        We have chosen you at random from a database hosted by the Western Cape Department of Health.
+
+  utter_research_consent_more_p2:
+    - text: |
+        *What will I need to do?*
+
+        We will ask you a few questions and it will take about 6 minutes of your time.
+
+        *What will happen to the information?*
+
+        We will store it safely as required by law and it will only be used by the Stellenbosch University
+        and Erasmus University researchers.
+        
+        The information is stored without your name and ID. We will share what we find other researchers 
+        and journals what we find, but what we share will be based on averages and totals from the full 
+        group of survey participants.
+
+  utter_research_consent_more_p3:
+    - text: |
+        *What if I want to stop halfway through the survey?*
+
+        That's OK. You can stop at any point.
+        
+        *Are there any costs or risks to me?*
+
+        There are no costs and no risks. Your information will be kept private and safe. 
+        The researchers will receive the answers without names or ID numbers.
+        
+        *What can I do if I am unhappy?*
+
+        If you have questions or doubts about this invitation, please contact Ronelle Burger on 
+        0838863016 or at rburger@sun.ac.za.
+        
+        TB HealthCheck has been approved by the Health Research Ethics Committee. 
+        You can contact them by calling 021 938 9677 or 021 938 9819.
 
 # claim: revert will ignore the message text, and reevaluate this message using
 # turn automation

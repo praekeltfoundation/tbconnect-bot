@@ -18,10 +18,7 @@ class TestActionSetActivation:
 
         action.get_activation = utils.AsyncMock()
         action.get_activation.return_value = {
-            "fields": {
-                "msisdn": "+27820001001",
-                "tb_activation": "tb_soccer_1_2022",
-            }
+            "fields": {"msisdn": "+27820001001", "tb_activation": "tb_soccer_1_2022"}
         }
         events = await action.run(
             dispatcher,
@@ -81,23 +78,10 @@ class TestActionSetActivation:
         dispatcher = CollectingDispatcher()
 
         action.get_activation = utils.AsyncMock()
-        action.get_activation.return_value = {
-            "fields": {
-                "msisdn": "+27820001001",
-            }
-        }
+        action.get_activation.return_value = {"fields": {"msisdn": "+27820001001"}}
         events = await action.run(
             dispatcher,
-            Tracker(
-                "27820001001",
-                {},
-                {},
-                [],
-                False,
-                None,
-                {},
-                "action_listen",
-            ),
+            Tracker("27820001001", {}, {}, [], False, None, {}, "action_listen"),
             {},
         )
         assert SlotSet("activation", None) not in events

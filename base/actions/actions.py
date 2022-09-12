@@ -879,14 +879,8 @@ class GroupArmForm(BaseFormAction):
                 self.from_intent(intent="deny", value="no"),
                 self.from_text(),
             ],
-            "clinic_list": [
-                self.from_entity(entity="number"),
-                self.from_text(),
-            ],
-            "clinic_visit_day": [
-                self.from_entity(entity="number"),
-                self.from_text(),
-            ],
+            "clinic_list": [self.from_entity(entity="number"), self.from_text()],
+            "clinic_visit_day": [self.from_entity(entity="number"), self.from_text()],
         }
 
     def validate_soft_commitment(

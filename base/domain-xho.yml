@@ -183,9 +183,6 @@ responses:
           
           Ngaba uzimisele ukuthatha inxaxheba? 
           
-          ----
-          *Phendula u-1 okanye 2:*
-          
            1. EWE, ndifuna ukuthatha inxaxheba 
            2. HAYI, enkosi
 
@@ -195,7 +192,7 @@ responses:
 
   utter_ask_province:
     - text: |
-        Uhlala kweliphi iphondo ngoku? Phendula ngenombolo koluluhlu:
+        Uhlala kweliphi iphondo ngoku?
 
         *1.* IMPUMA KOLONI
         *2.* I-FREE STATE
@@ -230,7 +227,6 @@ responses:
     - text: |
         Sesiphi isini ozichonga njengaso?
 
-        Phendula
         *1.* INDODA
         *2.* UMFAZI
         *3.* ENYE
@@ -247,7 +243,6 @@ responses:
         Sisebenzisa iinkonzo zendawo zikaGoogle ukuqinisekisa indawo okuyo. Nceda ujonge ukuba le dilesi ingezantsi ichanekile kwaye iyangqinelana nolwazi olunikezeleyo:
         {location}
 
-        Phendula
         *1.* EWE
         *2.* HAYI
 
@@ -257,7 +252,6 @@ responses:
 
         Masibone ukuba uziva njani namhlanje. Unokhohlokhohlo?
 
-        Phendula u-1 okanye u-2
         *1.* EWE
         *2.* HAYI
 
@@ -267,7 +261,6 @@ responses:
 
         Unobushushu unefiva? (xa uchukumisa ibunzi lakho, ngaba uziva ushushu?)
 
-        Phendula u-1 okanye u-2
         *1.* EWE
         *2.* HAYI
 
@@ -277,7 +270,6 @@ responses:
 
         Ingaba ubila ngaphezulu kunesiqhelo ebusuku?
 
-        Phendula
         *1.* EWE
         *2.* HAYI
 
@@ -287,7 +279,6 @@ responses:
 
         Ingaba uye wehla emzimbeni ngaphandle kokuzama?
 
-        Phendula
         *1.* EWE
         *2.* HAYI
 
@@ -300,7 +291,6 @@ responses:
         _Usemngciphekweni omkhulu we-TB ukuba:_
         _Uhlala nomntu one-TB kunyaka ophelileyo, OKANYE ubune-TB kule minyaka mibini idlulileyo, OKANYE uphila ne-HIV._
 
-        Phendula ngo-1, ngo-2 okanye ngo-3
         *1.* Ndisemngciphekweni omkhulu we-TB
         *2.* Andikho semngciphekweni omkhulu we-TB
         *3.* Andiyazi ukuba ndisemngciphekweni omkhulu
@@ -311,7 +301,6 @@ responses:
 
         Okokugqibela, nceda uvume ukuba ulwazi owabelane ngalo *luchanekile* ngokolwazi lwakho lonke kwaye unika iSebe lezeMpilo likaZwelonke imvume yokunxibelelana nawe xa kufuneka njalo?
 
-        Phendula u-1 okanye u-2
         *1.* EWE
         *2.* HAYI
 
@@ -373,7 +362,6 @@ responses:
     - text: |
         *Uza kuvavanywa nini?*
         
-        Phendula ngemini:
         *1.* MVULO
         *2.* LWESIBINI
         *3.* LWESITHATHU
@@ -388,7 +376,6 @@ responses:
         😷 Nceda unxibe imaski ngaphambi kokuba ungene ekliniki.
         
         Ingaba uyazibophelela ukuba uzakuvavanya?
-        Phendula:
         
         *1. EWE* 
         *2. HAYI*
@@ -413,7 +400,6 @@ responses:
         📲 Uya kufumana i-airtime ye-R10 ukuba uyazibophelela ukuba uvavanywe. I-Airtime iya kuthunyelwa kuwe phambi kokudlula kweyure enye.
         
         Ingaba uyazibophelela ukuba uzakuvavanya?
-        Phendula: 
 
         *1. EWE* 
         *2. HAYI*
@@ -438,9 +424,9 @@ responses:
 
   utter_keywords:
     - text: |
-        💊 Phendula *UNYANGO* ngolwazi malunga nonyango
-        📗 Phendula *IZIXHOBO* ngolwazi malunga neempawu kunye nokuvavanywa lwe-TB
-        📌 Phendula uthi *IMENYU* ukuze ubuyele kwi menyu yakuqala
+        💊 *UNYANGO* ngolwazi malunga nonyango
+        📗 *IZIXHOBO* ngolwazi malunga neempawu kunye nokuvavanywa lwe-TB
+        📌 *uthi *IMENYU* ukuze ubuyele kwi menyu yakuqala
       claim: release
 
   utter_opt_in_yes:
@@ -454,6 +440,76 @@ responses:
     - text: |
         Phendula ubhale TB ukuze uzoqala ukuhlolelwa i-TB
       claim: release
+
+  utter_study_completed:
+    - text: |
+        ⚠️Unfortunately, you cannot participate in the study more than once.
+        You can still continue with a TB Check but you will not be included
+        in the study.
+      claim: release
+
+  utter_study_minor_error:
+    - text: |
+        ⚠️  Unfortunately you cant participate in the study if you are younger
+        than 18. You can still continue with a TB Check but you will not be 
+        included in the study.
+      claim: release
+
+  utter_research_consent_no:
+    - text: |
+        Okay, no problem. You will not be included in the research, but you can still 
+        continue to check if you need to take a TB test.
+
+  utter_research_consent_more_p1:
+    - text: |
+        *Can you tell me more about the research?*
+        
+        We are conducting a study about the TB HealthCheck tool.
+        We will ask you about your choices in relation to the tool.
+        
+        *What information will you ask me for?*
+
+        We'll never ask your name, but may ask your ID number so that we can help 
+        to link you to a facility to get tested. Providing your ID is completely up to you.
+        We would only use it for your benefit.
+        
+        *Why did I get this SMS?*
+
+        We have chosen you at random from a database hosted by the Western Cape Department of Health.
+
+  utter_research_consent_more_p2:
+    - text: |
+        *What will I need to do?*
+
+        We will ask you a few questions and it will take about 6 minutes of your time.
+
+        *What will happen to the information?*
+
+        We will store it safely as required by law and it will only be used by the Stellenbosch University
+        and Erasmus University researchers.
+        
+        The information is stored without your name and ID. We will share what we find other researchers 
+        and journals what we find, but what we share will be based on averages and totals from the full 
+        group of survey participants.
+
+  utter_research_consent_more_p3:
+    - text: |
+        *What if I want to stop halfway through the survey?*
+
+        That's OK. You can stop at any point.
+        
+        *Are there any costs or risks to me?*
+
+        There are no costs and no risks. Your information will be kept private and safe. 
+        The researchers will receive the answers without names or ID numbers.
+        
+        *What can I do if I am unhappy?*
+
+        If you have questions or doubts about this invitation, please contact Ronelle Burger on 
+        0838863016 or at rburger@sun.ac.za.
+        
+        TB HealthCheck has been approved by the Health Research Ethics Committee. 
+        You can contact them by calling 021 938 9677 or 021 938 9819.
 
 # claim: revert will ignore the message text, and reevaluate this message using
 # turn automation

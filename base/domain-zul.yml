@@ -183,9 +183,6 @@ responses:
           
           Ingabe uzimisele ukuba nengxenye? 
           
-          ---- 
-          *Phendula 1 noma 2:* 
-          
           1. YEBO, ngifuna ukuba yingxenye 
           2. CHA, ngiyabonga
 
@@ -195,7 +192,7 @@ responses:
 
   utter_ask_province:
     - text: |
-        Usuhlala kusiphi isifundazwe manje? Phendula ngenombolo kusuka kuhlu:
+        Usuhlala kusiphi isifundazwe manje?
 
         *1.* EASTERN CAPE
         *2.* FREE STATE
@@ -257,7 +254,6 @@ responses:
 
         Asibone ukuthi uzizwa kanjani namuhla. Uyakhwehlela?
 
-        Phendula 1 noma 2
         *1.* YEBO
         *2.* CHA
 
@@ -267,7 +263,6 @@ responses:
 
         Unemfiva? (uma uthina isiphongo sakho, usizwa sishisa?)
 
-        Phendula 1 noma 2
         *1.* YEBO
         *2.* CHA
 
@@ -277,7 +272,6 @@ responses:
 
         Ingabe ujuluka ngaphezu kokujwayelekile ebusuku?
 
-        Phendula
         *1.* YEBO
         *2.* CHA
 
@@ -287,7 +281,6 @@ responses:
 
         Ngabe uyancipha emzimbeni ngaphandle kokuzama?
 
-        Phendula
         *1.* YEBO
         *2.* CHA
 
@@ -300,7 +293,6 @@ responses:
         _Usengozini enkulu ye-TB uma:_
         _Uhlala nomuntu one/oke waba ne-TB eminyakeni emi-2 edlule NOMA wena uke waba ne-TB eminyakeni emi-2 edlule, NOMA wena uphila une-HIV._
 
-        Phendula 1, 2 noma 3
         *1.* Ngisengozini enkulu yokuba ne-TB
         *2.* Angikho engozini enkulu ye-TB
         *3.* Angazi noma ngisengozini enkulu yini
@@ -311,7 +303,6 @@ responses:
 
         Ekugcineni, ngicela uvume ukuthi imininingwane owabelane ngayo *iyiqiniso* ngokwazi kwakho nokuthi unikeza uMnyango Wezempilo Kazwelonke ukuthi uxhumane nawe uma kudingeka?
 
-        Phendula 1 noma 2
         *1.* YEBO
         *2.* CHA
 
@@ -374,7 +365,6 @@ responses:
     - text: |
         *Uzoya nini ukuyohlolwa kwakho?* 
         
-        Phendula ngosuku:
         *1.* MSOMBULUKO
         *2.* LWESIBILI
         *3.* LWESITHATHU
@@ -390,7 +380,6 @@ responses:
         📲 Uzothola i-airtime ye-R10 uma uzibophezela ukuthi uzohlola. I-airtime izothunyelelwa kuwe phakathi nehora elinye.
         
         Ingabe uyazibophezela ukuthi uhlole?
-        Phendula ngokuthi:
         
         *1. YEBO* 
         *2. CHA*
@@ -415,7 +404,6 @@ responses:
         📲 Uzothola i-airtime ye-R10 uma uzibophezela ukuthi uzohlola. I-airtime izothunyelelwa kuwe phakathi nehora elinye.
         
         Ingabe uyazibophezela ukuthi uhlole?
-        Phendula ngokuthi: 
 
         *1. YEBO* 
         *2. CHA*
@@ -440,9 +428,9 @@ responses:
 
   utter_keywords:
     - text: |
-        💊 Phendula *IKHAMBI* ukuthola imininingwane mayelana nokwelashwa
-        📗 Phendula ngo- *IZINSIZA* ukuze uthole ulwazi mayelana nezimpawu nokuhlolelwa i-TB
-        📌 Phendula ngo *UHLU* ukubuyela kuhlu lokuqala
+        💊 *IKHAMBI* ukuthola imininingwane mayelana nokwelashwa
+        📗 *IZINSIZA* ukuze uthole ulwazi mayelana nezimpawu nokuhlolelwa i-TB
+        📌 *UHLU* ukubuyela kuhlu lokuqala
       claim: release
 
   utter_opt_in_yes:
@@ -456,6 +444,76 @@ responses:
     - text: |
         Sicela uphendule ngo- *TB* ukuqala ukuhlolwa kwakho kwe-TB.
       claim: release
+
+  utter_study_completed:
+    - text: |
+        ⚠️Unfortunately, you cannot participate in the study more than once.
+        You can still continue with a TB Check but you will not be included
+        in the study.
+      claim: release
+
+  utter_study_minor_error:
+    - text: |
+        ⚠️  Unfortunately you cant participate in the study if you are younger
+        than 18. You can still continue with a TB Check but you will not be 
+        included in the study.
+      claim: release
+
+  utter_research_consent_no:
+    - text: |
+        Okay, no problem. You will not be included in the research, but you can still 
+        continue to check if you need to take a TB test.
+
+  utter_research_consent_more_p1:
+    - text: |
+        *Can you tell me more about the research?*
+        
+        We are conducting a study about the TB HealthCheck tool.
+        We will ask you about your choices in relation to the tool.
+        
+        *What information will you ask me for?*
+
+        We'll never ask your name, but may ask your ID number so that we can help 
+        to link you to a facility to get tested. Providing your ID is completely up to you.
+        We would only use it for your benefit.
+        
+        *Why did I get this SMS?*
+
+        We have chosen you at random from a database hosted by the Western Cape Department of Health.
+
+  utter_research_consent_more_p2:
+    - text: |
+        *What will I need to do?*
+
+        We will ask you a few questions and it will take about 6 minutes of your time.
+
+        *What will happen to the information?*
+
+        We will store it safely as required by law and it will only be used by the Stellenbosch University
+        and Erasmus University researchers.
+        
+        The information is stored without your name and ID. We will share what we find other researchers 
+        and journals what we find, but what we share will be based on averages and totals from the full 
+        group of survey participants.
+
+  utter_research_consent_more_p3:
+    - text: |
+        *What if I want to stop halfway through the survey?*
+
+        That's OK. You can stop at any point.
+        
+        *Are there any costs or risks to me?*
+
+        There are no costs and no risks. Your information will be kept private and safe. 
+        The researchers will receive the answers without names or ID numbers.
+        
+        *What can I do if I am unhappy?*
+
+        If you have questions or doubts about this invitation, please contact Ronelle Burger on 
+        0838863016 or at rburger@sun.ac.za.
+        
+        TB HealthCheck has been approved by the Health Research Ethics Committee. 
+        You can contact them by calling 021 938 9677 or 021 938 9819.
 
 # claim: revert will ignore the message text, and reevaluate this message using
 # turn automation

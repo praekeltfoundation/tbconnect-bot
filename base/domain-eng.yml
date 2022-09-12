@@ -356,9 +356,9 @@ responses:
 
   utter_ask_clinic_list:
     - text: |
-        Here is a list of clinics that offer TB tests near you.
+        *Here is a list of clinics that offer TB tests near you.*
 
-        *Where will you go?*
+        Where will you go?
         
         {nearest_clinic}
 
@@ -437,7 +437,7 @@ responses:
     - text: |
         Thank you for choosing to receive follow-up messages.
 
-        📌  with *MENU* to return to the main menu
+        📌 Reply with *MENU* to return to the main menu
       claim: release
 
   utter_do_tb_screening:
