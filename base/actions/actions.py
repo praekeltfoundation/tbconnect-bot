@@ -266,6 +266,9 @@ class TBCheckProfileForm(BaseFormAction):
         domain: Dict[Text, Any],
     ) -> Dict[Text, Optional[Text]]:
         result = self.validate_generic("age", dispatcher, value, self.age_data)
+
+        if value == "1":
+            dispatcher.utter_message(template="utter_study_minor_error")
         if result.get("age") == "<18":
             result["location"] = "<not collected>"
         return result
