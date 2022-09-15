@@ -165,7 +165,7 @@ class TBCheckTermsForm(BaseFormAction):
     ) -> List[Dict]:
         """Define what the form has to do
         after all required slots are filled"""
-
+        print(">>>>>", tracker.get_slot('activation'))
         # utter submit template
         return []
 
@@ -843,7 +843,7 @@ class TBCheckForm(BaseFormAction):
 class GroupArmForm(BaseFormAction):
     SLOTS = ["soft_commitment", "soft_commitment_plus"]
 
-    CLINIC_SLOTS = ["clinic_list", "clinic_visit_day"]
+    CLINIC_SLOTS = ["clinic_list", "clinic_visit_day", "commitment_yes"]
 
     DAYS_MAPPING = {
         "MONDAY": "mon",
@@ -1130,6 +1130,8 @@ class SetActivationAction(Action):
             if activation.endswith("_agent"):
                 events.append(AllSlotsReset())
             events.append(SlotSet("activation", activation))
+        else:
+            events.append(SlotSet("activation", "tb_study_a"))
         return events
 
 
