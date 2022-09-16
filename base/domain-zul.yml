@@ -183,11 +183,9 @@ responses:
           
           Ingabe uzimisele ukuba nengxenye? 
           
-          ---- 
-          *Phendula 1 noma 2:* 
-          
           1. YEBO, ngifuna ukuba yingxenye 
           2. CHA, ngiyabonga
+          3. Ngidinga ulwazi OLWENGEZIWE nge-TB HealthCheck kanye nocwaningo
 
   utter_more_terms_doc:
     - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH_WhatsApp_TB_Privacy_Policy_September2021.pdf"
@@ -195,7 +193,7 @@ responses:
 
   utter_ask_province:
     - text: |
-        Usuhlala kusiphi isifundazwe manje? Phendula ngenombolo kusuka kuhlu:
+        Usuhlala kusiphi isifundazwe manje?
 
         *1.* EASTERN CAPE
         *2.* FREE STATE
@@ -257,7 +255,6 @@ responses:
 
         Asibone ukuthi uzizwa kanjani namuhla. Uyakhwehlela?
 
-        Phendula 1 noma 2
         *1.* YEBO
         *2.* CHA
 
@@ -267,7 +264,6 @@ responses:
 
         Unemfiva? (uma uthina isiphongo sakho, usizwa sishisa?)
 
-        Phendula 1 noma 2
         *1.* YEBO
         *2.* CHA
 
@@ -277,7 +273,6 @@ responses:
 
         Ingabe ujuluka ngaphezu kokujwayelekile ebusuku?
 
-        Phendula
         *1.* YEBO
         *2.* CHA
 
@@ -287,7 +282,6 @@ responses:
 
         Ngabe uyancipha emzimbeni ngaphandle kokuzama?
 
-        Phendula
         *1.* YEBO
         *2.* CHA
 
@@ -300,7 +294,6 @@ responses:
         _Usengozini enkulu ye-TB uma:_
         _Uhlala nomuntu one/oke waba ne-TB eminyakeni emi-2 edlule NOMA wena uke waba ne-TB eminyakeni emi-2 edlule, NOMA wena uphila une-HIV._
 
-        Phendula 1, 2 noma 3
         *1.* Ngisengozini enkulu yokuba ne-TB
         *2.* Angikho engozini enkulu ye-TB
         *3.* Angazi noma ngisengozini enkulu yini
@@ -311,7 +304,6 @@ responses:
 
         Ekugcineni, ngicela uvume ukuthi imininingwane owabelane ngayo *iyiqiniso* ngokwazi kwakho nokuthi unikeza uMnyango Wezempilo Kazwelonke ukuthi uxhumane nawe uma kudingeka?
 
-        Phendula 1 noma 2
         *1.* YEBO
         *2.* CHA
 
@@ -337,44 +329,39 @@ responses:
 
   utter_control:
     - text: |
-        *Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki.* 
+        ⚠ *Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki.* 
 
         🩸 Vakashela umtholampilo wangakini ukuze uyohlola i-TB mahhala.
-        😷 Sicela ufake isifonyo sobuso ngaphambi kokuthi ungene emtholampilo.
 
   utter_health_consequence:
     - text: |
-        *Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki.* 
+        ⚠ *Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki.* 
 
         Ngokuxilonga kusenesikhathi, i-TB ingelapheka. Mus'ukubambezela, hlola namuhlanje!
         
         🩸 Vakashela umtholampilo wangakini ukuze uyohlola i-TB mahhala.
-        😷 Sicela ufake isifonyo sobuso ngaphambi kokuthi ungene emtholampilo.
 
 
   utter_planning_prompt:
     - text: |
-        *Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki.*
+        ⚠ *Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki.*
 
         Nawa amathiphu angakusiza ukuthi uhlele:
         
         🟢 Yenza isikhathi. Impilo yakho ibalulekile!
         🟢 Khetha umtholampilo olungele kakhulu ukuhlolwa kwakho. Ngezansi kukhona imitholampilo emihlanu eseduze nawe.
-        🟢 Sicela ufake isifonyo sobuso ngaphambi kokuthi ungene emtholampilo.
         🟢 Fika lapho kusenesikhathi! Imitholampilo ivuliwe ukuze uyohlola i-TB ngoMsombuluko kuya ngoLwesihlanu ekuseni.
 
   utter_ask_clinic_list:
     - text: |
         *Uzoya kuphi lapho uhlolwa?* 
         
-        Phendula ngomtholampilo:
         {nearest_clinic}
 
   utter_ask_clinic_visit_day:
     - text: |
         *Uzoya nini ukuyohlolwa kwakho?* 
         
-        Phendula ngosuku:
         *1.* MSOMBULUKO
         *2.* LWESIBILI
         *3.* LWESITHATHU
@@ -386,11 +373,9 @@ responses:
         ⚠️ *Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki.*
 
         🩸 Hamba emtholampilo wangakini uyohlola i-TB mahhala.
-        😷 Sicela ufake isifonyo sobuso ngaphambi kokuthi ungene emtholampilo.
         📲 Uzothola i-airtime ye-R10 uma uzibophezela ukuthi uzohlola. I-airtime izothunyelelwa kuwe phakathi nehora elinye.
         
         Ingabe uyazibophezela ukuthi uhlole?
-        Phendula ngokuthi:
         
         *1. YEBO* 
         *2. CHA*
@@ -411,11 +396,9 @@ responses:
         ⚠️ Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki.
 
         🩸 Hamba emtholampilo wangakini uyohlola i-TB mahhala.
-        😷 Sicela ufake isifonyo sobuso ngaphambi kokuthi ungene emtholampilo.
         📲 Uzothola i-airtime ye-R10 uma uzibophezela ukuthi uzohlola. I-airtime izothunyelelwa kuwe phakathi nehora elinye.
         
         Ingabe uyazibophezela ukuthi uhlole?
-        Phendula ngokuthi: 
 
         *1. YEBO* 
         *2. CHA*
@@ -440,9 +423,9 @@ responses:
 
   utter_keywords:
     - text: |
-        💊 Phendula *IKHAMBI* ukuthola imininingwane mayelana nokwelashwa
-        📗 Phendula ngo- *IZINSIZA* ukuze uthole ulwazi mayelana nezimpawu nokuhlolelwa i-TB
-        📌 Phendula ngo *UHLU* ukubuyela kuhlu lokuqala
+        💊 *IKHAMBI* ukuthola imininingwane mayelana nokwelashwa
+        📗 *IZINSIZA* ukuze uthole ulwazi mayelana nezimpawu nokuhlolelwa i-TB
+        📌 *UHLU* ukubuyela kuhlu lokuqala
       claim: release
 
   utter_opt_in_yes:
@@ -456,6 +439,64 @@ responses:
     - text: |
         Sicela uphendule ngo- *TB* ukuqala ukuhlolwa kwakho kwe-TB.
       claim: release
+
+  utter_study_completed:
+    - text: |
+        ⚠️Ngeshwa, awukwazi ukubamba iqhaza ocwaningweni ngaphezu kokukodwa. 
+        Ungaqhubeka nge TB Check kodwa ngeke ufakwe ocwaningweni.
+      claim: release
+
+  utter_study_minor_error:
+    - text: |
+        ⚠️  Ngeshwa awukwazi ukubamba iqhaza ocwaningweni uma ungaphansi kweminyaka engu-18. 
+        Ungaqhubeka nge TB Check kodwa ngeke ufakwe ocwaningweni.
+      claim: release
+
+  utter_research_consent_no:
+    - text: |
+        Kulungile ayikho inkinga. Angeke ufakwe ocwaningweni, kodwa ungaqhubheka ubone ukuthi awudingi na ukuhlolelwa i-TB. 
+
+  utter_research_consent_more_p1:
+    - text: |
+        💭 *Ungakwazi ukungitshela kabanzi ngocwaningo?*
+        
+        Senza ucwaningo mayelana nethuluzi le-TB HealthCheck. Sizokubuza mayelana nokukhetha kwakho okuqondene nethuluzi.
+        
+        💭 *Imiphi imininingwane ozongibuza ngako?*
+        
+        Angeke sibuze igama lakho, kodwa singase sibuze inombolo yakho ye-ID ukuze sikwazi ukukuxhumanisa nesikhungo ukuze uhlolwe. Ukunikeza i-ID yakho kuya ngawe. Sizoyisebenzisela ngenzuzo yakho kuphela.
+        
+        💭 *Kungani ngithole le SMS?*
+        
+        Sikukhethe ngokungahleliwe kwi-database ephethwe uMnyango Wezempilo WaseNtshonalanga Kapa.
+
+  utter_research_consent_more_p2:
+    - text: |
+        💭 *Yini engizodinga ukuyenza?*
+        
+        Sizokubuza imibuzo embalwa futhi kuzothatha cishe imizuzu ewu-6 yesikhathi sakho.
+        
+        💭 *Kuzokwenzekani ngemininingwane?*
+        
+        Sizoyigcina ngokuphepha njengoba kuqoshwe umthethweni futhi izosetshenziswa abacwaningi baseNyuvesi yaseStellenbosch kanye nabaseNyuvesi yase-Erasmus kuphela. 
+        
+        Imininingwane igcinwa ngaphandle kwegama lakho ne-ID. Sizophawula ngalokho esikutholayo nabanye abacwaningi namajenali esiwatholayo, kodwa esiphawula ngakho kuzosuselwa kuma-avareji namathothali asuka eqenjini eligcwele labahlanganyeli benhlolovo.
+
+  utter_research_consent_more_p3:
+    - text: |
+        💭 *Kutheni uma ngifuna ukuyeka ngisaphakathi kwenhlolovo?*
+        
+        Kulungile. Ungayeka noma inini.
+        
+        💭 *Ingabe zikhona izindleko noma ubungozi kimi?*
+        
+        Azikho izindleko futhi azikho izingozi. Imininingwane yakho izogcinwa iyimfihlo futhi iphephile. Abacwaningi bazothola izimpendulo ngaphandle kwamagama noma izinombolo ze-ID.
+        
+        💭 *Ngenzenjani uma ngingajabulanga?*
+        
+        Uma unemibuzo noma ukungabaza ngalesi simemo, sicela uthinte uRonelle Burger ku-0838863016 noma ku-rburger@sun.ac.za. 
+        
+        I-TB HealthCheck igunyazwe yiKomidi Lezimilo Lokucwaninga Ngezempilo. Ungaxhumana nabo ngokushayela u-021 938 9677 noma u-021 938 9819.
 
 # claim: revert will ignore the message text, and reevaluate this message using
 # turn automation

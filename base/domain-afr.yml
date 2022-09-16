@@ -183,11 +183,9 @@ responses:
           
           Is jy gewillig om deel te neem?
           
-          ----
-          *Antwoord 1 or 2:*
-          
-          1. JA, ek wil deelneem
-          2. NEE dankie
+          *1. JA*, ek wil deelneem
+          *2. NEE*, dankie
+          *3.* Ek het *MEER* inligting oor TB HealthCheck en die navorsing nodig
 
   utter_more_terms_doc:
     - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH_WhatsApp_TB_Privacy_Policy_September2021.pdf"
@@ -195,7 +193,7 @@ responses:
 
   utter_ask_province:
     - text: |
-        In watter provinsie woon jy tans? Antwoord met 'n nommer van die lys:
+        In watter provinsie woon jy tans?
 
         *1.* OOSKAAP
         *2.* VRYSTAAT
@@ -230,7 +228,6 @@ responses:
     - text: |
         As watter geslag identifiseer jy?
 
-        Antwoord met
         *1.* MANLIK
         *2.* VROULIK
         *3.* ANDER
@@ -247,7 +244,6 @@ responses:
         Ons gebruik Google Location Services om jou ligging te bevestig. Maak asseblief seker dat onderstaande adres korrek is en ooreenstem met die inligting wat jy vir ons gegee het:
         {location}
 
-        Antwoord met
         *1.* JA
         *2.* NEE
 
@@ -257,7 +253,6 @@ responses:
 
         Kom ons kyk hoe jy vandag voel. Hoes jy?
 
-        Antwoord 1 of 2
         *1.* JA
         *2.* NEE
 
@@ -267,7 +262,6 @@ responses:
 
         Het jy koors? (wanneer jy aan jou voorkop raak, voel dit warm?)
 
-        Antwoord 1 of 2
         *1.* JA
         *2.* NEE
 
@@ -277,7 +271,6 @@ responses:
 
         Sweet jy snags meer as gewoonlik?
 
-        Antwoord met
         *1.* JA
         *2.* NEE
 
@@ -287,7 +280,6 @@ responses:
 
         Verloor jy gewig sonder dat jy probeer?
 
-        Antwoord met
         *1.* JA
         *2.* NEE
 
@@ -300,7 +292,6 @@ responses:
         _Die kanse dat jy TB het is hoog indien:_
         _Jy saam met iemand woon wat TB het/gehad het die afgelope jaar, OF as jy TB gehad die afgelope 2 jaar, OF as jy MIV-positief is._
 
-        Antwoord 1, 2 of 3
         *1.* My risiko om TB te hê, is hoog
         *2.* My risiko om TB te hê, is nie hoog nie
         *3.* Ek weet nie of my risiko hoog is nie
@@ -311,7 +302,6 @@ responses:
 
         Laastens, bevestig asseblief dat, sover jy weet, die inligting wat jy gegee het *korrek* is en dat jy die Nasionale Departement van Gesondheid toestemming gee om jou te kontak indien nodig?
 
-        Antwoord 1 of 2
         *1.* JA
         *2.* NEE
   utter_risk_high:
@@ -336,43 +326,38 @@ responses:
 
   utter_control:
     - text: |
-        *Jou antwoorde op die vrae dui aan dat jy hierdie week 'n TB-toets moet laat doen.* 
+        ⚠ *Jou antwoorde op die vrae dui aan dat jy hierdie week 'n TB-toets moet laat doen.* 
 
         🩸 Besoek jou plaaslike kliniek vir 'n gratis TB-toets.
-        😷 Sit asseblief 'n gesigmasker op voor jy by die kliniek ingaan.
 
   utter_health_consequence:
     - text: |
-        *Jou antwoorde op die vrae dui aan dat jy hierdie week 'n TB-toets moet laat doen.*
+        ⚠ *Jou antwoorde op die vrae dui aan dat jy hierdie week 'n TB-toets moet laat doen.*
 
         As TB vroeg gediagnoseer word, kan dit genees word. Hoekom wag? Laat toets jou vandag!
         
         🩸 Besoek jou plaaslike kliniek vir 'n gratis TB-toets.
-        😷 Sit asseblief 'n gesigmasker op voor jy by die kliniek ingaan. 
 
   utter_planning_prompt:
     - text: |
-        *Jou antwoorde op die vrae dui aan dat jy hierdie week 'n TB-toets moet laat doen.* 
+        ⚠ *Jou antwoorde op die vrae dui aan dat jy hierdie week 'n TB-toets moet laat doen.* 
 
         Hier is 'n paar wenke om jou te help beplan:
         
         🟢 Maak tyd. Jou gesondheid is belangrik!
         🟢 Kies die gerieflikste kliniek vir jou toets. Hieronder is die 5 klinieke naaste aan jou.
-        🟢 Sit asseblief 'n gesigmasker op voor jy by die kliniek ingaan.
         🟢 Wees vroeg daar! Klinieke is van Maandag- tot Vrydagoggend oop vir TB-toetse.
 
   utter_ask_clinic_list:
     - text: |
         *Waar sal jy gaan vir jou toets?*
-        
-        Antwoord met die kliniek:
+      
         {nearest_clinic}
 
   utter_ask_clinic_visit_day:
     - text: |
         *Wanneer sal jy gaan vir jou toets?*
-        
-        Antwoord met die dag:
+
         *1.* MAANDAG
         *2.* DINSDAG
         *3.* WOENSDAG
@@ -384,10 +369,8 @@ responses:
         ⚠️ *Jou antwoorde op die vrae dui aan dat jy hierdie week 'n TB-toets moet laat doen.* 
 
         🩸 Gaan na jou plaaslike kliniek vir 'n gratis TB-toets.
-        😷 Sit asseblief 'n gesigmasker op voor jy by die kliniek ingaan.
         
         Neem jy voor om jou te laat toets?
-        Antwoord:
         
         *1. JA* 
         *2. NEE*
@@ -408,11 +391,9 @@ responses:
         ⚠️ *Jou antwoorde op die vrae dui aan dat jy hierdie week 'n TB-toets moet laat doen.*
 
         🩸 Gaan na jou plaaslike kliniek vir 'n gratis TB-toets.
-        😷 Sit asseblief 'n gesigmasker op voor jy by die kliniek ingaan.
         📲 Jy sal R10 lugtyd kry as jy onderneem om jou te laat toets. Lugtyd sal binne 1 uur aan jou gestuur word.
         
-        Neem jy voor om jou te laat toets?
-        Antwoord: 
+        Neem jy voor om jou te laat toets? 
 
         *1. JA* 
         *2. NEE*
@@ -437,9 +418,9 @@ responses:
 
   utter_keywords:
     - text: |
-        💊 Antwoord *GENESING* vir inligting oor behandeling
-        📗 Antwoord *BRONNE* vir inligting oor simptome en TB-toetsing
-        📌 Antwoord met *KIESLYS* om na die hoof-kieslys terug te keer
+        💊 *GENESING* vir inligting oor behandeling
+        📗 *BRONNE* vir inligting oor simptome en TB-toetsing
+        📌 *KIESLYS* om na die hoof-kieslys terug te keer
       claim: release
 
   utter_opt_in_yes:
@@ -453,6 +434,66 @@ responses:
     - text: |
         Reageer asseblief met *TB* om jou TB-check te begin.
       claim: release
+
+  utter_study_completed:
+    - text: |
+        ⚠️Ongelukkig kan jy nie deelneem aan die studie meer as een keer.
+        Jy kan wel voortgaan met 'n TB Check wat nie by die studie ingesluit 
+        sal word nie.
+      claim: release
+
+  utter_study_minor_error:
+    - text: |
+        ⚠️  Ongelukkig kan jy nie deelneem aan die studie as jy jonger as 18 is nie.
+        Jy kan wel voortgaan met 'n TB Check wat nie by die studie ingesluit sal word nie.
+      claim: release
+
+  utter_research_consent_no:
+    - text: |
+        Geen probleem nie. Jy sal nie ingesluit word in die navorsing nie, 
+        maar jy kan nogsteeds voortgaan om te bepaal of jy 'n TB- toets moet laat doen. 
+
+  utter_research_consent_more_p1:
+    - text: |
+        💭 *Kan jy my meer van die navorsing vertel?*
+        
+        Ons doen 'n studie oor die TB HealthCheck-vraelys. Ons sal jou vra oor jou keuses ten opsigte van die vraelys.
+        
+        💭 *Watter inligting sal ek moet verskaf?*
+        
+        Ons sal nooit jou naam vra nie, maar kan dalk vra wat jou ID-nommer is sodat ons kan help om jou te verbind met 'n fasiliteit vir toetsing. Jy kan self besluit of jy jou ID-nommer wil gee. Ons sal dit slegs tot jou eie voordeel gebruik.
+        
+        💭 *Hoekom het ek hierdie SMS ontvang?* 
+        
+        Die rekenaar het jou gekies uit 'n databasis van die Wes-Kaapse Departement van Gesondheid.
+
+  utter_research_consent_more_p2:
+    - text: |
+        💭 *Wat moet ek doen?*
+        
+        Ons gaan jou 'n paar vrae vra en dit sal sowat 6 minute van jou tyd neem.
+        
+        💭 *Wat gebeur met die inligting?*
+        
+        Ons sal dit veilig berg, soos deur die wet vereis, en dit sal slegs deur navorsers van die Universiteit Stellenbosch en Erasmus Universiteit gebruik word. 
+        
+        Die inligting word sonder jou naam en ID geberg. Ons sal ons bevindings deel met ander navorsers en vaktydskrifte, maar dit sal gebaseer wees op gemiddeldes en totale van al die deelnemers aan die opname.
+
+  utter_research_consent_more_p3:
+    - text: |
+        💭 *Wat as ek halfpad deur die opname wil ophou?*
+        
+        Dis OK. Jy kan enige tyd ophou.
+        
+        💭 *Is daar enige onkoste of risiko vir my?*
+        
+        Daar is geen onkoste en geen risiko nie. Jou inligting word vertroulik en veilig gehou. Die navorsers kry die antwoorde sonder name en ID-nommers.
+        
+        💭 *Wat kan ek doen as ek ongemaklik is hiermee?*
+          
+        As jy enige vrae het oor hierdie uitnodiging, of oor iets twyfel, kontak asseblief vir Ronelle Burger by 0838863016 of rburger@sun.ac.za.
+        
+        TB HealthCheck is goedgekeur deur die Komitee vir Gesondheidsnavorsing-etiek. Jy kan hulle kontak deur 021 938 9677 of 021 938 9819 te skakel.
 
   # claim: revert will ignore the message text, and reevaluate this message using
   # turn automation
