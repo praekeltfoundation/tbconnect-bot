@@ -478,11 +478,11 @@ responses:
 
   utter_research_consent_more_p2:
     - text: |
-                💭 *What will I need to do?*
+        💭 *What will I need to do?*
 
         We will ask you a few questions and it will take about 6 minutes of your time.
 
-                💭 *What will happen to the information?*
+        💭 *What will happen to the information?*
 
         We will store it safely as required by law and it will only be used by the Stellenbosch University
         and Erasmus University researchers.
