@@ -440,13 +440,11 @@ responses:
         ⚠️Ongelukkig kan jy nie deelneem aan die studie meer as een keer.
         Jy kan wel voortgaan met 'n TB Check wat nie by die studie ingesluit 
         sal word nie.
-      claim: release
 
   utter_study_minor_error:
     - text: |
-        ⚠️  Ongelukkig kan jy nie deelneem aan die studie as jy jonger as 18 is nie.
+        ⚠️ Ongelukkig kan jy nie deelneem aan die studie as jy jonger as 18 is nie.
         Jy kan wel voortgaan met 'n TB Check wat nie by die studie ingesluit sal word nie.
-      claim: release
 
   utter_research_consent_no:
     - text: |

@@ -438,13 +438,11 @@ responses:
 
   utter_study_completed:
     - text: |
-        ⚠️Ka bomalimabe, u ke ke ua nka karolo phuputsong ho feta hang. O ntse o ka tswela pele ka TB CHECK empa o ke ke wa kenyelletswa diphuputsong.
-      claim: release
+        ⚠️ Ka bomalimabe, u ke ke ua nka karolo phuputsong ho feta hang. O ntse o ka tswela pele ka TB CHECK empa o ke ke wa kenyelletswa diphuputsong.
 
   utter_study_minor_error:
     - text: |
-        ⚠️Ka bomadimabe o ke ke wa nka karolo phuputsong haeba o le ka tlase ho dilemo tse 18. O ntse o ka tswela pele ka TB CHECK empa o ke ke wa kenyelletswa diphuputsong.
-      claim: release
+        ⚠️ Ka bomadimabe o ke ke wa nka karolo phuputsong haeba o le ka tlase ho dilemo tse 18. O ntse o ka tswela pele ka TB CHECK empa o ke ke wa kenyelletswa diphuputsong.
 
   utter_research_consent_no:
     - text: |
