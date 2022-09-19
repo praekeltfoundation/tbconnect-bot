@@ -442,17 +442,15 @@ responses:
 
   utter_study_completed:
     - text: |
-        ⚠️Unfortunately, you cannot participate in the study more than once.
+        ⚠️ Unfortunately, you cannot participate in the study more than once.
         You can still continue with a TB Check but you will not be included
         in the study.
-      claim: release
 
   utter_study_minor_error:
     - text: |
-        ⚠️  Unfortunately you cant participate in the study if you are younger
+        ⚠️ Unfortunately you cant participate in the study if you are younger
         than 18. You can still continue with a TB Check but you will not be 
         included in the study.
-      claim: release
 
   utter_research_consent_no:
     - text: |

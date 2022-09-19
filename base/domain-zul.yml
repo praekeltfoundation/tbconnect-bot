@@ -444,13 +444,11 @@ responses:
     - text: |
         ⚠️Ngeshwa, awukwazi ukubamba iqhaza ocwaningweni ngaphezu kokukodwa. 
         Ungaqhubeka nge TB Check kodwa ngeke ufakwe ocwaningweni.
-      claim: release
 
   utter_study_minor_error:
     - text: |
-        ⚠️  Ngeshwa awukwazi ukubamba iqhaza ocwaningweni uma ungaphansi kweminyaka engu-18. 
+        ⚠️ Ngeshwa awukwazi ukubamba iqhaza ocwaningweni uma ungaphansi kweminyaka engu-18. 
         Ungaqhubeka nge TB Check kodwa ngeke ufakwe ocwaningweni.
-      claim: release
 
   utter_research_consent_no:
     - text: |

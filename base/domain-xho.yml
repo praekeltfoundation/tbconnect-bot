@@ -441,13 +441,11 @@ responses:
     - text: |
         ⚠️Ngelishwa, awukwazi ukuthatha inxaxheba kuphononongo ngaphezu kwexesha elinye. 
         Usenako ukuqhubeka noHlolo lwe-TB kodwa awuzukuqukwa kuphononongo.
-      claim: release
 
   utter_study_minor_error:
     - text: |
         ⚠️Ngelishwa awunakuthatha inxaxheba kuphononongo ukuba ungaphantsi kweminyaka eyi-18. 
         Usenako ukuqhubeka nokuhlolwa kwe-TB kodwa awuzukuqukwa kuphononongo.
-      claim: release
 
   utter_research_consent_no:
     - text: |
