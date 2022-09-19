@@ -328,30 +328,27 @@ responses:
 
   utter_control:
     - text: |
-        *Your replies to the questions show that you need a TB test this week.* 
+        ⚠ *Your replies to the questions show that you need a TB test this week.* 
 
-        🩸 Visit your local clinic for a free TB test. 
-        😷 Please put on a face mask before you enter the clinic.
+        🩸 Visit your local clinic for a free TB test.
 
   utter_health_consequence:
     - text: |
-        *Your replies to the questions show that you need a TB test this week.* 
+        ⚠ *Your replies to the questions show that you need a TB test this week.* 
 
         With early diagnosis, TB can be cured. Don’t delay, test today!   
  
-        🩸 Visit your local clinic for a free TB test. 
-        😷 Please put on a face mask before you enter the clinic. 
+        🩸 Visit your local clinic for a free TB test.
         
 
   utter_planning_prompt:
     - text: |
-        *Your replies to the questions show that you need a TB test this week.*  
+        ⚠ *Your replies to the questions show that you need a TB test this week.*  
 
         Here are some tips to help you plan:   
         
         🟢  Make the time. Your health is a priority! 
-        🟢  Pick the most convenient clinic for your test. Below are the 5 clinics nearest to you.  
-        🟢  Please put on a face mask before you enter the clinic. 
+        🟢  Pick the most convenient clinic for your test. Below are the 5 clinics nearest to you.   
         🟢  Get there early! Clinics are open for TB testing Monday to Friday mornings.
 
   utter_ask_clinic_list:
@@ -377,7 +374,6 @@ responses:
         ⚠️ *Your replies to the questions show that you need a TB test this week.*  
 
         🩸 Go to your local clinic for a free TB test. 
-        😷 Please put on a face mask before you enter the clinic. 
         
         *Do you commit to getting tested?*  
        
@@ -400,7 +396,6 @@ responses:
         ⚠️ *Your replies to the questions show that you need a TB test this week.*  
 
         🩸 Go to your local clinic for a free TB test. 
-        😷 Please put on a face mask before you enter the clinic. 
         📲 You will get R10 airtime if you commit to get tested. Airtime will be sent to you within 1 hour. 
         
         *Do you commit to getting tested?*  
@@ -466,28 +461,28 @@ responses:
 
   utter_research_consent_more_p1:
     - text: |
-        *Can you tell me more about the research?*
+        💭 *Can you tell me more about the research?*
         
         We are conducting a study about the TB HealthCheck tool.
         We will ask you about your choices in relation to the tool.
         
-        *What information will you ask me for?*
+        💭 *What information will you ask me for?*
 
         We'll never ask your name, but may ask your ID number so that we can help 
         to link you to a facility to get tested. Providing your ID is completely up to you.
         We would only use it for your benefit.
         
-        *Why did I get this SMS?*
+        💭 *Why did I get this SMS?*
 
         We have chosen you at random from a database hosted by the Western Cape Department of Health.
 
   utter_research_consent_more_p2:
     - text: |
-        *What will I need to do?*
+        💭 *What will I need to do?*
 
         We will ask you a few questions and it will take about 6 minutes of your time.
 
-        *What will happen to the information?*
+        💭 *What will happen to the information?*
 
         We will store it safely as required by law and it will only be used by the Stellenbosch University
         and Erasmus University researchers.
@@ -498,16 +493,16 @@ responses:
 
   utter_research_consent_more_p3:
     - text: |
-        *What if I want to stop halfway through the survey?*
+        💭 *What if I want to stop halfway through the survey?*
 
         That's OK. You can stop at any point.
         
-        *Are there any costs or risks to me?*
+        💭 *Are there any costs or risks to me?*
 
         There are no costs and no risks. Your information will be kept private and safe. 
         The researchers will receive the answers without names or ID numbers.
         
-        *What can I do if I am unhappy?*
+        💭 *What can I do if I am unhappy?*
 
         If you have questions or doubts about this invitation, please contact Ronelle Burger on 
         0838863016 or at rburger@sun.ac.za.

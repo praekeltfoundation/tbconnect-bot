@@ -183,9 +183,6 @@ responses:
           
           Ngaba uzimisele ukuthatha inxaxheba? 
           
-          ----
-          *Phendula u-1 okanye 2:*
-          
            1. EWE, ndifuna ukuthatha inxaxheba 
            2. HAYI, enkosi
 
@@ -195,7 +192,7 @@ responses:
 
   utter_ask_province:
     - text: |
-        Uhlala kweliphi iphondo ngoku? Phendula ngenombolo koluluhlu:
+        Uhlala kweliphi iphondo ngoku?
 
         *1.* IMPUMA KOLONI
         *2.* I-FREE STATE
@@ -230,7 +227,6 @@ responses:
     - text: |
         Sesiphi isini ozichonga njengaso?
 
-        Phendula
         *1.* INDODA
         *2.* UMFAZI
         *3.* ENYE
@@ -247,7 +243,6 @@ responses:
         Sisebenzisa iinkonzo zendawo zikaGoogle ukuqinisekisa indawo okuyo. Nceda ujonge ukuba le dilesi ingezantsi ichanekile kwaye iyangqinelana nolwazi olunikezeleyo:
         {location}
 
-        Phendula
         *1.* EWE
         *2.* HAYI
 
@@ -257,7 +252,6 @@ responses:
 
         Masibone ukuba uziva njani namhlanje. Unokhohlokhohlo?
 
-        Phendula u-1 okanye u-2
         *1.* EWE
         *2.* HAYI
 
@@ -267,7 +261,6 @@ responses:
 
         Unobushushu unefiva? (xa uchukumisa ibunzi lakho, ngaba uziva ushushu?)
 
-        Phendula u-1 okanye u-2
         *1.* EWE
         *2.* HAYI
 
@@ -277,7 +270,6 @@ responses:
 
         Ingaba ubila ngaphezulu kunesiqhelo ebusuku?
 
-        Phendula
         *1.* EWE
         *2.* HAYI
 
@@ -287,7 +279,6 @@ responses:
 
         Ingaba uye wehla emzimbeni ngaphandle kokuzama?
 
-        Phendula
         *1.* EWE
         *2.* HAYI
 
@@ -300,7 +291,6 @@ responses:
         _Usemngciphekweni omkhulu we-TB ukuba:_
         _Uhlala nomntu one-TB kunyaka ophelileyo, OKANYE ubune-TB kule minyaka mibini idlulileyo, OKANYE uphila ne-HIV._
 
-        Phendula ngo-1, ngo-2 okanye ngo-3
         *1.* Ndisemngciphekweni omkhulu we-TB
         *2.* Andikho semngciphekweni omkhulu we-TB
         *3.* Andiyazi ukuba ndisemngciphekweni omkhulu
@@ -311,7 +301,6 @@ responses:
 
         Okokugqibela, nceda uvume ukuba ulwazi owabelane ngalo *luchanekile* ngokolwazi lwakho lonke kwaye unika iSebe lezeMpilo likaZwelonke imvume yokunxibelelana nawe xa kufuneka njalo?
 
-        Phendula u-1 okanye u-2
         *1.* EWE
         *2.* HAYI
 
@@ -337,43 +326,38 @@ responses:
 
   utter_control:
     - text: |
-        *Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki.* 
+        ⚠ *Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki.* 
 
         🩸 Ndwendwela ikliniki yengingqi yakho ukwenza uvavanyo lwe-TB lwamahala.
-        😷 Nceda unxibe imaski ngaphambi kokuba ungene ekliniki.
 
   utter_health_consequence:
     - text: |
-        *Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki.* 
+        ⚠ *Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki.* 
 
         Ukufunywanwa ngethuba, i-TB inokunyangeka. Ungalibazisi, vavanya namhlanje!
         
         🩸 Ndwendwela ikliniki yengingqi yakho ukwenza uvavanyo lwe-TB lwamahala.
-        😷 Nceda unxibe imaski ngaphambi kokuba ungene ekliniki. 
 
   utter_planning_prompt:
     - text: |
-        *Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki.*
+        ⚠ *Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki.*
 
         Nazi ezinye zeengcebiso zokukunceda ucwangcise:
         
         🟢 Yenza ixesha. Impilo yakho ibalulekile!
         🟢 Khetha eyona klinikhi elula kakhulu kuwe ukwenza uvavanyo lwakho. Ngezantsi ziikliniki ezi-5 ezikufutshane kuwe.
-        🟢 Nceda unxibe imaski ngaphambi kokuba ungene ekliniki.
         🟢 Fika kwangexesha! iiKlinikhi zivulwa ukuba ufumane uvavanyo lweTB ngoMvulo ukuya ngoLwesihlanu kusasa.
 
   utter_ask_clinic_list:
     - text: |
         *Uza kuvavanywa phi?* 
         
-        Phendula ngekliniki:
         {nearest_clinic}
 
   utter_ask_clinic_visit_day:
     - text: |
         *Uza kuvavanywa nini?*
         
-        Phendula ngemini:
         *1.* MVULO
         *2.* LWESIBINI
         *3.* LWESITHATHU
@@ -388,7 +372,6 @@ responses:
         😷 Nceda unxibe imaski ngaphambi kokuba ungene ekliniki.
         
         Ingaba uyazibophelela ukuba uzakuvavanya?
-        Phendula:
         
         *1. EWE* 
         *2. HAYI*
@@ -413,7 +396,6 @@ responses:
         📲 Uya kufumana i-airtime ye-R10 ukuba uyazibophelela ukuba uvavanywe. I-Airtime iya kuthunyelwa kuwe phambi kokudlula kweyure enye.
         
         Ingaba uyazibophelela ukuba uzakuvavanya?
-        Phendula: 
 
         *1. EWE* 
         *2. HAYI*
@@ -438,9 +420,9 @@ responses:
 
   utter_keywords:
     - text: |
-        💊 Phendula *UNYANGO* ngolwazi malunga nonyango
-        📗 Phendula *IZIXHOBO* ngolwazi malunga neempawu kunye nokuvavanywa lwe-TB
-        📌 Phendula uthi *IMENYU* ukuze ubuyele kwi menyu yakuqala
+        💊 *UNYANGO* ngolwazi malunga nonyango
+        📗 *IZIXHOBO* ngolwazi malunga neempawu kunye nokuvavanywa lwe-TB
+        📌 *IMENYU* ukuze ubuyele kwi menyu yakuqala
       claim: release
 
   utter_opt_in_yes:
@@ -454,6 +436,59 @@ responses:
     - text: |
         Phendula ubhale TB ukuze uzoqala ukuhlolelwa i-TB
       claim: release
+
+  utter_study_completed:
+    - text: |
+        ⚠️Ngelishwa, awukwazi ukuthatha inxaxheba kuphononongo ngaphezu kwexesha elinye. 
+        Usenako ukuqhubeka noHlolo lwe-TB kodwa awuzukuqukwa kuphononongo.
+      claim: release
+
+  utter_study_minor_error:
+    - text: |
+        ⚠️Ngelishwa awunakuthatha inxaxheba kuphononongo ukuba ungaphantsi kweminyaka eyi-18. 
+        Usenako ukuqhubeka nokuhlolwa kwe-TB kodwa awuzukuqukwa kuphononongo.
+      claim: release
+
+  utter_research_consent_no:
+    - text: |
+        Kulungile, akukho ngxaki. Awuyi kufakwa kuphando, kodwa usenako ukuqhubeka ukujonga ukuba ngaba kufuneka wenze uvavanyo lwe-TB.
+
+  utter_research_consent_more_p1:
+    - text: |
+        💭 Ngaba ungandixelela ngakumbi malunga ngophando?
+        Siqhuba isifundo malunga nesixhobo se-TB HealthCheck. Siya kukubuza malunga nokhetho lwakho ngokunxulumene nesixhobo.
+        
+        💭 Luluphi ulwazi onokuthi undibuze ngalo?
+        Soze sibuze igama lakho, kodwa sinokubuza inombolo yakho ye-ID ukuze sikwazi ukukunxibelelanisa neziko lokuvavanywa. Ukubonelela nge-ID yakho kuxhomekeke ngokupheleleyo kuwe. Singayisebenzisa kuphela ngokwenzuzo yakho.
+        
+        💭 Kutheni ndifumene le-SMS?
+        Siku khethe ngokungacwangciswanga ukusuka kwindawo yedatha eyayisenziwa liSebe lezeMpilo eNtshona Koloni.
+
+  utter_research_consent_more_p2:
+    - text: |
+        💭 Kufuneka ndenze ntoni?
+        Siza kukubuza imibuzo embalwa kwaye iya kuthatha imizuzu emi-6 yexesha lakho.
+        
+        💭 Kuya kwenzeka ntoni kulwazi?
+        Siza kuyigcina ngokukhuselekileyo njengoko kufunwa ngumthetho kwaye iya kusetyenziswa kuphela ngabaphandi beYunivesithi yaseStellenbosch kunye nabase-Erasmus Yunivesithi. 
+        
+        Olu lwazi lugcinwa ngaphandle kwegama lakho kunye ne-ID. Siza kwabelana ngokonwaba kunye neejenali izinto esizifumanayo, kodwa into esiyifumanayo iya kusekelwa kwi-avareji neetotali zabathathi-nxaxheba bophando abapheleleyo abakwiqela eligcweleyo.
+
+  utter_research_consent_more_p3:
+    - text: |
+        💭 *Ndithini ukuba ndifuna ukuyeka phakathi kwisaveyi?*
+        
+        Oko KULUNGILE. Ungayeka nangeliphi ixesha.
+        
+        💭 *Ngaba zikho iindleko okanye iingozi kum?*
+        
+        Ha hona ditshenyehelo kapa dikotsi. Dintlha tsa hao di tla bolokwa e le lekunutu mme di bolokehile. Bafuputsi ba tla fumana dikarabo ntle le mabitso kapa dinomoro tsa ID.
+        
+        💭 *Ndingenza ntoni ukuba andingonwabanga?*
+        
+        Ukuba unemibuzo okanye amathandabuzo ngesi simemo, nceda uqhagamshelane noRonelle Burger ku-0838863016 okanye ku-rburgery@sun.ac.za. 
+        
+        I-TB Healthcheck ivunyiwe yikomiti yokuziphatha kuPhando kwezeMpilo. Ungaqhagamshelana nabo ngokufowuna 021 938 9677 okanye 021 938 9819.
 
 # claim: revert will ignore the message text, and reevaluate this message using
 # turn automation

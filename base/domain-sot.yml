@@ -183,11 +183,9 @@ responses:
           
           A na o ikemiseditse ho nka karolo?
           
-          ----
-          *Araba 1 kapa 2:* 
-          
-          1. E, ke batla ho nka karolo 
-          2. CHE, kea leboha 
+          *1. E*, ke batla ho nka karolo 
+          *2. CHE*, kea leboha 
+          *3.* Ke hloka dintlha *TSE DING* ka TB HealthCheck le diphuputso 
 
   utter_more_terms_doc:
     - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH_WhatsApp_TB_Privacy_Policy_September2021.pdf"
@@ -195,7 +193,7 @@ responses:
 
   utter_ask_province:
     - text: |
-        O dula porofenseng efe hona jwale? Araba ka nomoro ho tswa lenaneng:
+        O dula porofenseng efe hona jwale?
 
         *1.* KAPA BOTJHABELA
         *2.* FOREISETATA
@@ -230,7 +228,6 @@ responses:
     - text: |
         O kgetha bong bofe?
 
-        Araba
         *1.* MONNA
         *2.* MOSADI
         *3.* HO HONG
@@ -247,7 +244,6 @@ responses:
         Re sebedisa Google Location Services ho netefatsa sebaka seo o leng ho sona. Ka kopo netefatsa hore aterese e ka tlase e nepahetse mme e tshwana le tlhaiso-leseding eo o faneng ka yona:
         {location}
 
-        Araba
         *1.* EE
         *2.* TJHEE
 
@@ -257,7 +253,6 @@ responses:
 
         Ha re bone hore na o ikutlwa jwang kajeno. Na o a kgohlola?
 
-        Araba 1 kapa 2
         *1.* EE
         *2.* TJHEE
 
@@ -267,7 +262,6 @@ responses:
 
         O na le feberu? (ha o tshwara phatla ya hao, na e utlwa e tjhesa? )
 
-        Araba 1 kapa 2
         *1.* EE
         *2.* TJHEE
 
@@ -277,7 +271,6 @@ responses:
 
         Na o fufulelwa ho feta ka moo ho tlwaelehileng bosiu?
 
-        Araba 1 kapa 2
         *1.* EE
         *2.* TJHEE
 
@@ -287,7 +280,6 @@ responses:
 
         Na o ntse o theola boima ba mmele o sa leke ho etsa jwalo?
 
-        Araba 1 kapa 2
         *1.* EE
         *2.* TJHEE
 
@@ -300,7 +292,6 @@ responses:
         _O kotsing e kgolo ya TB haeba:_
         _O dula le motho ya nang kapa ya ileng a ba le TB selemong se fetileng, KAPA o bile le TB dilemong tse 2 tse fetileng, KAPA o phela le tshwaetso ya HIV._
 
-        Araba 1, 2 kapa 3
         *1.* Ke kotsing e kgolo ya TB
         *2.* Ha ke kotsing e kgolo ya TB
         *3.* Ha ke tsebe hore na ke kotsing e kgolo
@@ -311,7 +302,6 @@ responses:
 
         Qetellong, ka kopo dumela hore tlhaiso-leseding eo o e arolelaneng e *nepahetse* ho latela tsebo ya hao le hore o fa Lefapha la Naha la Bophelo tumello ya ho ikopanya le wena ha ho hlokahala?
 
-        Araba 1 kapa 2
         *1.* EE
         *2.* TJHEE
 
@@ -337,43 +327,39 @@ responses:
 
   utter_control:
     - text: |
-        *Dikarabo tsa hao ho dipotso di bontsha hore o hloka tlhahlobo ea LEFUBA bekeng ena.* 
+        ⚠ *Dikarabo tsa hao ho dipotso di bontsha hore o hloka tlhahlobo ea LEFUBA bekeng ena.* 
 
         🩸 Etela tleliniki ya heno ho etsa tlhahlobo ya mahala ya LEFUBA.
-        😷 Ka kopo rwala semonkwana pele o kena ka tleliniking.
 
   utter_health_consequence:
     - text: |
-        *Dikarabo tsa hao ho dipotso di bontsha hore o hloka tlhahlobo ea LEFUBA bekeng ena.*  
+        ⚠ *Dikarabo tsa hao ho dipotso di bontsha hore o hloka tlhahlobo ea LEFUBA bekeng ena.*  
 
         Ka tlhatlhobo ya kapele, LEFUBA le ka phekoleha. Se ke wa dieha, hlahloba kajeno!
         
         🩸 Etela tleliniki ya heno ho etsa tlhahlobo ya mahala ya LEFUBA.
-        😷 Ka kopo rwala semonkwana pele o kena ka tleliniking.
 
   utter_planning_prompt:
     - text: |
-        *Dikarabo tsa hao ho dipotso di bontsha hore o hloka tlhahlobo ea LEFUBA bekeng ena.*
+        
+        ⚠ *Dikarabo tsa hao ho dipotso di bontsha hore o hloka tlhahlobo ea LEFUBA bekeng ena.*
 
         Malebela ke ana a tla o thusa ho rala:
         
         🟢  Etsa nako. Bophelo ba hao bo tla pele!
         🟢  Kgetha tleliniki e loketseng tlhahlobo ya hao. Ka tlase ke ditleliniki tse 5 tse haufi le wena.
-        🟢 Ka kopo rwala semonkwana pele o kena ka tleliniking.
         🟢  Fihla mono kapele! Ditleliniki di butswe bakeng sa tlhahlobo ya LEFUBA hoseng hwa Mantaha ho isa ho Labohlano.
 
   utter_ask_clinic_list:
     - text: |
         *O tla ya hokae bakeng sa tlhahlobo ya hao?* 
         
-        Araba ka tliliniki:
         {nearest_clinic}
 
   utter_ask_clinic_visit_day:
     - text: |
         *O tla ya tlhatlhobong ya hao neng?*
         
-        Araba ka letsatsi:
         *1.* MANTAHA
         *2.* LABOBELI
         *3.* LABORARO
@@ -385,10 +371,8 @@ responses:
         ⚠️ *Dikarabo tsa hao ho dipotso di bontsha hore o hloka tlhahlobo ea LEFUBA bekeng ena.*
 
         🩸 Eya tleliniking ya heno ho etsa tlhahlobo ya mahala ya LEFUBA.
-        😷 Ka kopo rwala semonkwana pele o kena ka tleliniking.
         
         *Na o itlama ho hlahloba?*
-        Araba:
         
         *1. EE* 
         *2. TJHE*
@@ -409,11 +393,9 @@ responses:
         ⚠️ *Dikarabo tsa hao ho dipotso di bontsha hore o hloka tlhahlobo ea LEFUBA bekeng ena.*
 
         🩸 Eya tleliniking ya heno ho etsa tlhahlobo ya mahala ya LEFUBA.
-        😷 Ka kopo rwala semonkwana pele o kena ka tleliniking.
         📲 O tla fumana airtime ya R10 ha o itlama ho hlahloba. O tla romellwa airtime nakong ya hora e le 1.
         
         Na o itlama ho hlahloba?
-        Araba: 
 
         *1. EE* 
         *2. TJHE*
@@ -437,9 +419,9 @@ responses:
 
   utter_keywords:
     - text: |
-        💊 Araba *PHEKO* bakeng sa tlhaiso-leseding ka kalafo
-        📗 Araba *MEHLODI* bakeng sa tlhaiso-leseding ka matshwao le teko ya TB
-        📌 Araba *MENU* ho kgutlela ho menu o ka sehloohong
+        💊 *PHEKO* bakeng sa tlhaiso-leseding ka kalafo
+        📗 *MEHLODI* bakeng sa tlhaiso-leseding ka matshwao le teko ya TB
+        📌 *MENU* ho kgutlela ho menu o ka sehloohong
       claim: release
 
   utter_opt_in_yes:
@@ -453,6 +435,62 @@ responses:
     - text: |
         Ka kopo araba ka *TB* ho qala tlhahlobo ya TB.
       claim: release
+
+  utter_study_completed:
+    - text: |
+        ⚠️Ka bomalimabe, u ke ke ua nka karolo phuputsong ho feta hang. O ntse o ka tswela pele ka TB CHECK empa o ke ke wa kenyelletswa diphuputsong.
+      claim: release
+
+  utter_study_minor_error:
+    - text: |
+        ⚠️Ka bomadimabe o ke ke wa nka karolo phuputsong haeba o le ka tlase ho dilemo tse 18. O ntse o ka tswela pele ka TB CHECK empa o ke ke wa kenyelletswa diphuputsong.
+      claim: release
+
+  utter_research_consent_no:
+    - text: |
+        Ha ho bothata. O ke ke wa kenyelletswa dipatlisisong, empa o ntse o ka tswela pele ho hlahloba hore na o hloka ho etsa tlhahlobo ya TB. 
+
+  utter_research_consent_more_p1:
+    - text: |
+        💭 *O ka mpolella haholwanyane ka dipatlisiso?*
+        
+        Re etsa boithuto mabapi le sesebediswa sa TB HealthCheck. Re tla o botsa ka dikgetho tsa hao mabapi le sesebediswa.
+        
+        💭 *O tla mpotsa dintlha dife?*
+        
+        Ha ho mohla re tla botsa lebitso la hao, empa re ka kopa nomoro ya hao ya ID e le hore re tle re thuse ka ho o hokahanya le setsi sa ho etsa tlhahlobo. Ho fana ka ID ya hao ho ho wena ka ho feletseng. Re ne re tla e sebedisa molemong wa hao feela.
+        
+        💭 *Hobaneng ke fumane SMS ee?*
+        
+        Re o kgethile ka tshohanyetso ho tswa polokelong ya boitsebiso e tsamaiswang ke Lefapha la Bophelo bo Botle la Western Cape.
+
+  utter_research_consent_more_p2:
+    - text: |
+        💭 *Ke tla hloka ho etsa eng?*
+        
+        Re tla o botsa dipotso tse mmalwa mme ho tla nka metsotso e ka bang 6 ya nako ya hao.
+        
+        💭 *Ho tla etsahalang ka dintlha tseo?*
+        
+        Re tla e boloka ka polokeho ho ya kamoo molao o laelang kateng mme e tla sebediswa feela ke bafuputsi ba Junifesithi ya Stellenbosch le Junifesithi ya Erasmus. 
+        
+        Dintlha di bolokilwe di se na lebitso la hao le ID. Re tla arolelana seo re se fumanang le bafuputsi le batlalehi ba bang, empa seo re se arolelanang se tla ipapisa le kakaretso le dipalo-palo tse tswang sehlopheng se felletseng sa ba nkileng karolo diphuputsong.
+
+  utter_research_consent_more_p3:
+    - text: |
+        💭 *Ho thweng haeba ke batla ho emisa bohareng ba diphuputso?*
+        
+        Ho lokile. O ka emisa neng kapa neng.
+        
+        💭 *Na ho na le ditshenyehelo kapa dikotsi ho nna?*
+        
+        Akukho zindleko kwaye akukho zingozi. Ulwazi lwakho luya kugcinwa bucala kwaye lukhuselekile. Abaphandi baya kufumana iimpendulo ngaphandle kwamagama okanye iinombolo zezazisi.
+        
+        💭 *Nka etsang ha ke sa thaba?*
+        
+        Haeba o na le dipotso kapa dipelaelo ka memo ena, ka kopo ikopanye le Ronelle Burger ho 0838863016 kapa ho rburger@sun.ac.za. 
+        
+        TB HealthCheck e amohetswe ke Komiti ya Boitshwaro ba Dipatlisiso tsa Bophelo bo Botle. O ka ikopanya le bona ka ho letsetsa 021 938 9677 kapa 021 938 9819.
 
 # claim: revert will ignore the message text, and reevaluate this message using
 # turn automation
