@@ -165,7 +165,6 @@ class TBCheckTermsForm(BaseFormAction):
     ) -> List[Dict]:
         """Define what the form has to do
         after all required slots are filled"""
-        print(">>>>>", tracker.get_slot('activation'))
         # utter submit template
         return []
 
@@ -1143,6 +1142,7 @@ class StudyRestriction(Action):
         tracker: Tracker,
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
+        events = []
         if config.HEALTHCONNECT_URL and config.HEALTHCONNECT_TOKEN:
             activation = tracker.get_slot("activation")
 
@@ -1177,9 +1177,9 @@ class StudyRestriction(Action):
                                     )
 
                                     # Reset activation slot
-                                    return [SlotSet("activation", None)]
+                                    events.append(SlotSet("activation", None))
                             break
                     except httpx.HTTPError as e:
                         if i == config.HTTP_RETRIES - 1:
                             raise e
-        return []
+        return events
