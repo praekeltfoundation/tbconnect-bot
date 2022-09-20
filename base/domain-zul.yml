@@ -329,13 +329,13 @@ responses:
 
   utter_control:
     - text: |
-        ⚠ *Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki.* 
+        ⚠ *Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki!* 
 
         🩸 Vakashela umtholampilo wangakini ukuze uyohlola i-TB mahhala.
 
   utter_health_consequence:
     - text: |
-        ⚠ *Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki.* 
+        ⚠ *Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki!* 
 
         Ngokuxilonga kusenesikhathi, i-TB ingelapheka. Mus'ukubambezela, hlola namuhlanje!
         
@@ -344,7 +344,7 @@ responses:
 
   utter_planning_prompt:
     - text: |
-        ⚠ *Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki.*
+        ⚠ *Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki!*
 
         Nawa amathiphu angakusiza ukuthi uhlele:
         
@@ -370,7 +370,7 @@ responses:
 
   utter_ask_soft_commitment:
     - text: |
-        ⚠️ *Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki.*
+        ⚠️ *Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki!*
 
         🩸 Hamba emtholampilo wangakini uyohlola i-TB mahhala.
         📲 Uzothola i-airtime ye-R10 uma uzibophezela ukuthi uzohlola. I-airtime izothunyelelwa kuwe phakathi nehora elinye.
@@ -393,7 +393,7 @@ responses:
 
   utter_ask_soft_commitment_plus:
     - text: |
-        ⚠️ Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki.
+        ⚠️ *Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki!*
 
         🩸 Hamba emtholampilo wangakini uyohlola i-TB mahhala.
         📲 Uzothola i-airtime ye-R10 uma uzibophezela ukuthi uzohlola. I-airtime izothunyelelwa kuwe phakathi nehora elinye.

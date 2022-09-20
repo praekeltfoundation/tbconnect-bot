@@ -326,13 +326,13 @@ responses:
 
   utter_control:
     - text: |
-        ⚠ *Jou antwoorde op die vrae dui aan dat jy hierdie week 'n TB-toets moet laat doen.* 
+        ⚠ *Jou antwoorde op die vrae dui aan dat jy hierdie week 'n TB-toets moet laat doen!* 
 
         🩸 Besoek jou plaaslike kliniek vir 'n gratis TB-toets.
 
   utter_health_consequence:
     - text: |
-        ⚠ *Jou antwoorde op die vrae dui aan dat jy hierdie week 'n TB-toets moet laat doen.*
+        ⚠ *Jou antwoorde op die vrae dui aan dat jy hierdie week 'n TB-toets moet laat doen!*
 
         As TB vroeg gediagnoseer word, kan dit genees word. Hoekom wag? Laat toets jou vandag!
         
@@ -366,7 +366,7 @@ responses:
 
   utter_ask_soft_commitment:
     - text: |
-        ⚠️ *Jou antwoorde op die vrae dui aan dat jy hierdie week 'n TB-toets moet laat doen.* 
+        ⚠️ *Jou antwoorde op die vrae dui aan dat jy hierdie week 'n TB-toets moet laat doen!* 
 
         🩸 Gaan na jou plaaslike kliniek vir 'n gratis TB-toets.
         
@@ -388,7 +388,7 @@ responses:
 
   utter_ask_soft_commitment_plus:
     - text: |
-        ⚠️ *Jou antwoorde op die vrae dui aan dat jy hierdie week 'n TB-toets moet laat doen.*
+        ⚠️ *Jou antwoorde op die vrae dui aan dat jy hierdie week 'n TB-toets moet laat doen!*
 
         🩸 Gaan na jou plaaslike kliniek vir 'n gratis TB-toets.
         📲 Jy sal R10 lugtyd kry as jy onderneem om jou te laat toets. Lugtyd sal binne 1 uur aan jou gestuur word.

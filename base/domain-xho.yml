@@ -326,13 +326,13 @@ responses:
 
   utter_control:
     - text: |
-        ⚠ *Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki.* 
+        ⚠ *Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki!* 
 
         🩸 Ndwendwela ikliniki yengingqi yakho ukwenza uvavanyo lwe-TB lwamahala.
 
   utter_health_consequence:
     - text: |
-        ⚠ *Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki.* 
+        ⚠ *Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki!* 
 
         Ukufunywanwa ngethuba, i-TB inokunyangeka. Ungalibazisi, vavanya namhlanje!
         
@@ -340,7 +340,7 @@ responses:
 
   utter_planning_prompt:
     - text: |
-        ⚠ *Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki.*
+        ⚠ *Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki!*
 
         Nazi ezinye zeengcebiso zokukunceda ucwangcise:
         
@@ -366,7 +366,7 @@ responses:
 
   utter_ask_soft_commitment:
     - text: |
-        ⚠️ *Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki.*
+        ⚠️ *Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki!*
 
         🩸 Yiya kwiklinikhi yengingqi yakho ukufumana uvavanyo lwamahala lwe-TB.
         😷 Nceda unxibe imaski ngaphambi kokuba ungene ekliniki.
@@ -389,7 +389,7 @@ responses:
 
   utter_ask_soft_commitment_plus:
     - text: |
-        ⚠️ *⚠️ Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki.*
+        ⚠️ *⚠️ Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki!*
 
         🩸 Yiya kwiklinikhi yengingqi yakho ukufumana uvavanyo lwamahala lwe-TB.
         😷 Nceda unxibe imaski ngaphambi kokuba ungene ekliniki.

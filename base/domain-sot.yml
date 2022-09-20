@@ -327,13 +327,13 @@ responses:
 
   utter_control:
     - text: |
-        ⚠ *Dikarabo tsa hao ho dipotso di bontsha hore o hloka tlhahlobo ea LEFUBA bekeng ena.* 
+        ⚠ *Dikarabo tsa hao ho dipotso di bontsha hore o hloka tlhahlobo ea LEFUBA bekeng ena!* 
 
         🩸 Etela tleliniki ya heno ho etsa tlhahlobo ya mahala ya LEFUBA.
 
   utter_health_consequence:
     - text: |
-        ⚠ *Dikarabo tsa hao ho dipotso di bontsha hore o hloka tlhahlobo ea LEFUBA bekeng ena.*  
+        ⚠ *Dikarabo tsa hao ho dipotso di bontsha hore o hloka tlhahlobo ea LEFUBA bekeng ena!*  
 
         Ka tlhatlhobo ya kapele, LEFUBA le ka phekoleha. Se ke wa dieha, hlahloba kajeno!
         
@@ -342,7 +342,7 @@ responses:
   utter_planning_prompt:
     - text: |
         
-        ⚠ *Dikarabo tsa hao ho dipotso di bontsha hore o hloka tlhahlobo ea LEFUBA bekeng ena.*
+        ⚠ *Dikarabo tsa hao ho dipotso di bontsha hore o hloka tlhahlobo ea LEFUBA bekeng ena!*
 
         Malebela ke ana a tla o thusa ho rala:
         
@@ -390,7 +390,7 @@ responses:
 
   utter_ask_soft_commitment_plus:
     - text: |
-        ⚠️ *Dikarabo tsa hao ho dipotso di bontsha hore o hloka tlhahlobo ea LEFUBA bekeng ena.*
+        ⚠️ *Dikarabo tsa hao ho dipotso di bontsha hore o hloka tlhahlobo ea LEFUBA bekeng ena!*
 
         🩸 Eya tleliniking ya heno ho etsa tlhahlobo ya mahala ya LEFUBA.
         📲 O tla fumana airtime ya R10 ha o itlama ho hlahloba. O tla romellwa airtime nakong ya hora e le 1.

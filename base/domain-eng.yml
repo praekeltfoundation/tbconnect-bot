@@ -328,13 +328,13 @@ responses:
 
   utter_control:
     - text: |
-        ⚠ *Your replies to the questions show that you need a TB test this week.* 
+        ⚠ *Your replies to the questions show that you need a TB test this week!* 
 
         🩸 Visit your local clinic for a free TB test.
 
   utter_health_consequence:
     - text: |
-        ⚠ *Your replies to the questions show that you need a TB test this week.* 
+        ⚠ *Your replies to the questions show that you need a TB test this week!* 
 
         With early diagnosis, TB can be cured. Don’t delay, test today!   
  
@@ -343,7 +343,7 @@ responses:
 
   utter_planning_prompt:
     - text: |
-        ⚠ *Your replies to the questions show that you need a TB test this week.*  
+        ⚠ *Your replies to the questions show that you need a TB test this week!*  
 
         Here are some tips to help you plan:   
         
@@ -371,7 +371,7 @@ responses:
 
   utter_ask_soft_commitment:
     - text: |
-        ⚠️ *Your replies to the questions show that you need a TB test this week.*  
+        ⚠️ *Your replies to the questions show that you need a TB test this week!*  
 
         🩸 Go to your local clinic for a free TB test. 
         
@@ -393,7 +393,7 @@ responses:
 
   utter_ask_soft_commitment_plus:
     - text: |
-        ⚠️ *Your replies to the questions show that you need a TB test this week.*  
+        ⚠️ *Your replies to the questions show that you need a TB test this week!*  
 
         🩸 Go to your local clinic for a free TB test. 
         📲 You will get R10 airtime if you commit to get tested. Airtime will be sent to you within 1 hour. 
