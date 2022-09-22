@@ -385,6 +385,11 @@ responses:
         Wenze kahle ngokubophezela impilo yakho! 👏
       claim: release
 
+  utter_planning_to_test:
+    - text: |
+        Well done for planning to get your test! 👏
+      claim: release
+
   utter_soft_commitment_no:
     - text: |
         ⚠️ Khumbula: uzibophezele ukuhlola i-TB. 
