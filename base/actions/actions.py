@@ -842,7 +842,7 @@ class TBCheckForm(BaseFormAction):
 class GroupArmForm(BaseFormAction):
     SLOTS = ["soft_commitment", "soft_commitment_plus"]
 
-    CLINIC_SLOTS = ["clinic_list", "clinic_visit_day", "commitment_yes"]
+    CLINIC_SLOTS = ["clinic_list", "clinic_visit_day", "utter_planning_to_test"]
 
     DAYS_MAPPING = {
         "MONDAY": "mon",
