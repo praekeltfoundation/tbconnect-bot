@@ -387,7 +387,7 @@ responses:
 
   utter_planning_to_test:
     - text: |
-        Well done for planning to get your test! 👏
+        Wenze kahle ngokuhlosa ukuthola ukuhlolwa kwakho! 👏
       claim: release
 
   utter_soft_commitment_no:
