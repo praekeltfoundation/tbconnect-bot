@@ -381,6 +381,11 @@ responses:
         Wenze kakuhle ngokuzibophelela ekunakekeleni impilo yakho! 👏
       claim: release
 
+  utter_planning_to_test:
+    - text: |
+        Wenze kakuhle ngokucwangcisa ukwenza uvavanyo lwakho! 👏
+      claim: release
+
   utter_soft_commitment_no:
     - text: |
         ⚠️ *Khumbula: kubalulekile ukuba uvavanyelwe i-TB*

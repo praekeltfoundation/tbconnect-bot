@@ -384,7 +384,7 @@ responses:
 
   utter_planning_to_test:
     - text: |
-        Well done for planning to get your test! 👏
+        Rea o thoholetsa ka ho rera ho fumana teko ya hao! 👏
       claim: release
 
   utter_soft_commitment_no:

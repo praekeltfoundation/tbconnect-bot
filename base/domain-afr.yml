@@ -382,7 +382,7 @@ responses:
 
   utter_planning_to_test:
     - text: |
-        Well done for planning to get your test! 👏
+        Welgedaan dat jy beplan om jou toets te laat doen! 👏
       claim: release
 
   utter_soft_commitment_no:
