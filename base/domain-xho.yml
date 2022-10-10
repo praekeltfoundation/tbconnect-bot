@@ -41,6 +41,7 @@ actions:
   - utter_planning_prompt
   - utter_ask_soft_commitment
   - utter_commitment_yes
+  - utter_planning_to_test
   - utter_soft_commitment_no
   - utter_ask_soft_commitment_plus
   - utter_soft_commitment_plus_no

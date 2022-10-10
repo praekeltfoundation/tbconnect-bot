@@ -746,9 +746,10 @@ class TBCheckForm(BaseFormAction):
                         # Get tbcheck ID
                         tbcheck_id = json_resp.get("id")
                         consent = json_resp.get("research_consent")
+                        activation = tracker.get_slot("activation")
 
                         if not consent:
-                            templates = utils.get_risk_templates(risk, data)
+                            templates = utils.get_risk_templates(risk, data, activation)
                         else:
                             # Get template and user group arm
                             templates, group_arm = utils.get_display_message_template(
@@ -842,7 +843,7 @@ class TBCheckForm(BaseFormAction):
 class GroupArmForm(BaseFormAction):
     SLOTS = ["soft_commitment", "soft_commitment_plus"]
 
-    CLINIC_SLOTS = ["clinic_list", "clinic_visit_day", "utter_planning_to_test"]
+    CLINIC_SLOTS = ["clinic_list", "clinic_visit_day"]
 
     DAYS_MAPPING = {
         "MONDAY": "mon",
@@ -950,7 +951,9 @@ class GroupArmForm(BaseFormAction):
     ) -> List[Dict]:
         """Check user response to display next message"""
         if config.HEALTHCONNECT_URL and config.HEALTHCONNECT_TOKEN:
-            if tracker.get_slot("group_arm"):
+            group_arm = tracker.get_slot("group_arm")
+
+            if group_arm:
                 id = tracker.get_slot("tbcheck_id")
                 url = urljoin(config.HEALTHCONNECT_URL, f"/v2/tbcheck/{id}/")
 
@@ -998,6 +1001,8 @@ class GroupArmForm(BaseFormAction):
                     dispatcher.utter_message(template="utter_soft_commitment_no")
                 elif soft_commit_plus == "no":
                     dispatcher.utter_message(template="utter_soft_commitment_plus_no")
+                elif group_arm == "planning_prompt":
+                    dispatcher.utter_message(template="utter_planning_to_test")
         return []
 
 
@@ -1129,6 +1134,7 @@ class SetActivationAction(Action):
             if activation.endswith("_agent"):
                 events.append(AllSlotsReset())
             events.append(SlotSet("activation", activation))
+        events.append(SlotSet("activation", "tb_study_a"))
         return events
 
 
