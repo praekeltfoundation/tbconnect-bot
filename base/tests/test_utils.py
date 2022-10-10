@@ -54,7 +54,7 @@ def test_risk_template():
     assert templates == ["utter_risk_low_unknown_exposure", "utter_keywords"]
 
     data = {"exposure": "no"}
-    templates = utils.get_risk_templates("low", data)
+    templates = utils.get_risk_templates("low", data, None)
     assert templates == ["utter_risk_low", "utter_keywords"]
 
     data = {"exposure": "not sure"}

@@ -24,7 +24,7 @@ def get_risk_level(data: Dict[Any, Any]) -> Text:
     return "low"
 
 
-def get_risk_templates(risk: Text, data: Dict[Any, Any]) -> List:
+def get_risk_templates(risk: Text, data: Dict[Any, Any], activation=None) -> List:
     templates = []
     if data.get("exposure") == "not sure" and risk == "low":
         templates.append("utter_risk_low_unknown_exposure")
@@ -33,7 +33,7 @@ def get_risk_templates(risk: Text, data: Dict[Any, Any]) -> List:
 
     templates.append("utter_keywords")
 
-    if risk != "low":
+    if risk != "low" and activation != "tb_study_a":
         templates.append("utter_follow_up_request")
 
     return templates
