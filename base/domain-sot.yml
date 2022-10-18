@@ -178,8 +178,6 @@ responses:
 
   utter_ask_research_consent:
       - text: |
-          Ntho ya ho qetela... 
-
           Re ka o botsa dipotso tse bonolo bakeng sa diphuputso ka mor'a hore o qete tlhahlobo ya TB HealthCheck. Ho etsa diphuputso ke MAHALA mme ho ke ke ha sebedisa airtime. Re tla sebedisa dintlha tsena ho bona hore na TB HealthCheck e ka thusa batho.
           
           A na o ikemiseditse ho nka karolo?

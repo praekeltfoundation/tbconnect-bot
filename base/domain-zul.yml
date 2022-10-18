@@ -178,8 +178,6 @@ responses:
 
   utter_ask_research_consent:
       - text: |
-          Okokugcina... 
-
           Singahle sikubuze imibuzo embalwa elula yocwaningo ngemva kokuqeda i-TB HealthCheck yakho. Ukwenza ucwaningo KUMAHHALA futhi ngeke kusebenzise i-airtime nhlobo. Sizosebenzisa lolu lwazi ukuze sibone ukuthi i-TB HealthCheck iyabasiza yini abantu. 
           
           Ingabe uzimisele ukuba nengxenye? 

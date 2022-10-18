@@ -178,8 +178,6 @@ responses:
 
   utter_ask_research_consent:
       - text: |
-          Into yokugqibela...
-
           Sinokubuza imibuzo embalwa elula yokuphanda emva kokuba uyigqibile i-TB HealthCheck yakho. Ukuthatha uphando KUMAHALA kwaye akuyi kusebenzisa ne-airtime encinci. Siza kusebenzisa olu lwazi ukubona ukuba i-TB HealthCheck iyabanceda abantu. 
           
           Ngaba uzimisele ukuthatha inxaxheba? 
