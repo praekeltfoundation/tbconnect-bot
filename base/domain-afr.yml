@@ -178,8 +178,6 @@ responses:
 
   utter_ask_research_consent:
       - text: |
-          Een laaste ding...
-
           Ons mag dalk vir jou 'n paar eenvoudige vrae vra vir navorsingsdoeleindes nadat jy die TB HealthCheck voltooi het. Om aan die opname deel te neem is GRATIS en sal geen lugtyd gebruik nie. Ons sal hierdie inligting gebruik om te sien of TB HealthCheck mense help.
           
           Is jy gewillig om deel te neem?
