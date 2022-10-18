@@ -184,7 +184,7 @@ responses:
             
           *1.* YES, I'm happy to take part 
           *2.* NO, thank you
-          *3.* MORE, for more on TB HealthCheck and the research
+          *3.* FAQ, for more on TB HealthCheck and the research
 
   utter_more_terms_doc:
     - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH_WhatsApp_TB_Privacy_Policy_September2021.pdf"
@@ -236,7 +236,7 @@ responses:
     - text: |
         Thanks. Now we need your location.
         
-        We will use this information to improve this service and direct you to your nearest clinics.
+        We will use this information to direct you to your nearest clinics.
 
         Please TYPE your home address (or the address where you are currently staying). Give the street number, street name, suburb/township/town/village
 
