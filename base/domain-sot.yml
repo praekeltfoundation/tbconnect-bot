@@ -236,6 +236,8 @@ responses:
     - text: |
         Ke ya leboha. Jwale re hloka sebaka seo o leng ho sona.
 
+        Re tla sebedisa dintlha tsena ho tataisetsa ho tleliniki ya hao e haufinyane.
+        
         Ka kopo NGOLA aterese ya lapeng (kapa aterese eo o dulang ho yona hona jwale). Fana ka nomoro ya seterata, lebitso la seterata, motse-toropong/lekeishene/ toropo/motseng
 
   utter_ask_location_confirm:
@@ -289,7 +291,9 @@ responses:
         Na o kotsing e kgolo ya TB?
 
         _O kotsing e kgolo ya TB haeba:_
-        _O dula le motho ya nang kapa ya ileng a ba le TB selemong se fetileng, KAPA o bile le TB dilemong tse 2 tse fetileng, KAPA o phela le tshwaetso ya HIV._
+        _- O dula le motho ya nang kapa ya ileng a ba le TB selemong se fetileng_
+        _- O bile le TB dilemong tse 2 tse fetileng_
+        _- Ophela le tshwaetso ya HIV._
 
         *1.* Ke kotsing e kgolo ya TB
         *2.* Ha ke kotsing e kgolo ya TB
