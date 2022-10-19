@@ -234,6 +234,8 @@ responses:
   utter_ask_location:
     - text: |
         Enkosi. Ngoku sidinga indawo okuyo.
+        
+        Siza kusebenzisa olu lwazi sikuthumele kwiikliniki ezikufutshane nawe.
 
         Nceda UBHALE idilesi yakho yasekhaya (okanye idilesi ohlala kuyo ngoku). Nika inombolo yesitalato, igama lesitalato, ihlomela ledolophu / ilokishi / idolophu / ilali
 
@@ -288,7 +290,9 @@ responses:
         Ingaba usemngciphekweni omkhulu we-TB?
 
         _Usemngciphekweni omkhulu we-TB ukuba:_
-        _Uhlala nomntu one-TB kunyaka ophelileyo, OKANYE ubune-TB kule minyaka mibini idlulileyo, OKANYE uphila ne-HIV._
+        _- Uhlala nomntu one-TB kunyaka ophelileyo_
+        _- Ubune-TB kule minyaka mibini idlulileyo_
+        _- Uphila ne-HIV._
 
         *1.* Ndisemngciphekweni omkhulu we-TB
         *2.* Andikho semngciphekweni omkhulu we-TB

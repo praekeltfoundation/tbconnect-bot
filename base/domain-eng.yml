@@ -290,8 +290,10 @@ responses:
 
         Are you at high risk of TB?
 
-        _You are at high risk for TB if:_
-        _You live with someone who has/had TB in the last year, OR you have had TB in the last 2 years, OR you are living with HIV._
+        _You are at high risk of TB if:_
+        _- You live with someone who has/had TB in the last year
+        _- You have had TB in the last 2 years_
+        _- You are living with HIV._
 
         *1.* I am at high risk of TB
         *2.* I am not at high risk of TB

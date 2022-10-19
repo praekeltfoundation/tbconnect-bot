@@ -236,6 +236,8 @@ responses:
   utter_ask_location:
     - text: |
         Siyabonga. Manje sidinga indawo okuyo.
+        
+        Siza kusebenzisa olu lwazi sikuthumele kwiikliniki ezikufutshane nawe.
 
         Sicela UTHAYIPHE ikheli lakho lasekhaya (noma ikheli ohlala kulo njengamanje). Nikeza inombolo yomgwaqo, igama lomgwaqo, i-suburb/ilokishi/idolobha/isigodi
 
@@ -291,7 +293,9 @@ responses:
         Ingabe usengozini enkulu ye-TB?
 
         _Usengozini enkulu ye-TB uma:_
-        _Uhlala nomuntu one/oke waba ne-TB eminyakeni emi-2 edlule NOMA wena uke waba ne-TB eminyakeni emi-2 edlule, NOMA wena uphila une-HIV._
+        _- Uhlala nomuntu one/oke waba ne-TB eminyakeni emi-2 edlule_
+        _- Wena uke waba ne-TB eminyakeni emi-2 edlule_
+        _- Wena uphila une-HIV._
 
         *1.* Ngisengozini enkulu yokuba ne-TB
         *2.* Angikho engozini enkulu ye-TB

@@ -235,6 +235,8 @@ responses:
   utter_ask_location:
     - text: |
         Dankie. Nou benodig ons jou ligging.
+        
+        Ons sal die inligting gebruik om jou te verwys na jou naaste kliniek.
 
         TIK asseblief jou woonadres (of die adres waar jy tans woon) in. Gee die straatnommer, straatnaam, woonbuurt/township/stad/dorp
 
@@ -289,7 +291,9 @@ responses:
         Het jy 'n hoë risiko vir TB?
 
         _Die kanse dat jy TB het is hoog indien:_
-        _Jy saam met iemand woon wat TB het/gehad het die afgelope jaar, OF as jy TB gehad die afgelope 2 jaar, OF as jy MIV-positief is._
+        _- Jy saam met iemand woon wat TB het/gehad het die afgelope jaar_
+        _- As jy TB gehad die afgelope 2 jaar_
+        _- As jy MIV-positief is._
 
         *1.* My risiko om TB te hê, is hoog
         *2.* My risiko om TB te hê, is nie hoog nie
