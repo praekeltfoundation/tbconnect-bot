@@ -669,7 +669,9 @@ class TBCheckForm(BaseFormAction):
         tracker: Tracker,
         domain: Dict[Text, Any],
     ) -> Dict[Text, Optional[Text]]:
-        return self.validate_generic("study_tracing", dispatcher, value, self.yes_no_data)
+        return self.validate_generic(
+            "study_tracing", dispatcher, value, self.yes_no_data
+        )
 
     def merge(self, data_minor, data):
         data_minor.update(data)
