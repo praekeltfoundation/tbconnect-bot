@@ -33,6 +33,7 @@ actions:
   - utter_ask_symptoms_weight
   - utter_ask_exposure
   - utter_ask_tracing
+  - utter_ask_study_tracing
   - utter_risk_high
   - utter_risk_moderate
   - utter_risk_low
@@ -105,6 +106,9 @@ slots:
     type: unfeaturized
     auto_fill: false
   tracing:
+    type: unfeaturized
+    auto_fill: false
+  study_tracing:
     type: unfeaturized
     auto_fill: false
   research_consent:
@@ -304,6 +308,15 @@ responses:
         ⬛⬛⬛⬛⬛⬛
 
         Qetellong, ka kopo dumela hore tlhaiso-leseding eo o e arolelaneng e *nepahetse* ho latela tsebo ya hao le hore o fa Lefapha la Naha la Bophelo tumello ya ho ikopanya le wena ha ho hlokahala?
+
+        *1.* EE
+        *2.* TJHEE
+
+  utter_ask_study_tracing:
+    - text: |
+        ⬛⬛⬛⬛⬛⬛
+
+        Qetellong, ka kopo dumela hore tlhaiso-leseding eo o e arolelaneng e nepahetse ho latela tsebo ya hao.
 
         *1.* EE
         *2.* TJHEE

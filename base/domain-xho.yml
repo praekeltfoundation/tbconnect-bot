@@ -33,6 +33,7 @@ actions:
   - utter_ask_symptoms_weight
   - utter_ask_exposure
   - utter_ask_tracing
+  - utter_ask_study_tracing
   - utter_risk_high
   - utter_risk_moderate
   - utter_risk_low
@@ -105,6 +106,9 @@ slots:
     type: unfeaturized
     auto_fill: false
   tracing:
+    type: unfeaturized
+    auto_fill: false
+  study_tracing:
     type: unfeaturized
     auto_fill: false
   research_consent:
@@ -303,6 +307,15 @@ responses:
         ⬛⬛⬛⬛⬛⬛
 
         Okokugqibela, nceda uvume ukuba ulwazi owabelane ngalo *luchanekile* ngokolwazi lwakho lonke kwaye unika iSebe lezeMpilo likaZwelonke imvume yokunxibelelana nawe xa kufuneka njalo?
+
+        *1.* EWE
+        *2.* HAYI
+
+  utter_ask_study_tracing:
+    - text: |
+        ⬛⬛⬛⬛⬛⬛
+        
+        Okokugqibela, nceda uvume ukuba ulwazi owabelane ngalo luchanekile ngokolwazi lwakho lonke.
 
         *1.* EWE
         *2.* HAYI
