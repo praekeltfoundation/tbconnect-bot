@@ -33,6 +33,7 @@ actions:
   - utter_ask_symptoms_weight
   - utter_ask_exposure
   - utter_ask_tracing
+  - utter_ask_study_tracing
   - utter_risk_high
   - utter_risk_moderate
   - utter_risk_low
@@ -105,6 +106,9 @@ slots:
     type: unfeaturized
     auto_fill: false
   tracing:
+    type: unfeaturized
+    auto_fill: false
+  study_tracing:
     type: unfeaturized
     auto_fill: false
   research_consent:
@@ -303,10 +307,20 @@ responses:
     - text: |
         ⬛⬛⬛⬛⬛⬛
 
+        Laastens, bevestig asseblief dat, sover jy weet, die inligting wat jy gegee het korrek is.
+        
+        *1.* JA
+        *2.* NEE
+
+  utter_ask_study_tracing:
+    - text: |
+        ⬛⬛⬛⬛⬛⬛
+
         Laastens, bevestig asseblief dat, sover jy weet, die inligting wat jy gegee het *korrek* is en dat jy die Nasionale Departement van Gesondheid toestemming gee om jou te kontak indien nodig?
 
         *1.* JA
         *2.* NEE
+
   utter_risk_high:
     - text: |
         *Jou antwoorde op die vrae toon dat jy binne die volgende week vir 'n TB-toets moet gaan*

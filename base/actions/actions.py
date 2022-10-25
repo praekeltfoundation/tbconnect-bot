@@ -540,6 +540,12 @@ class TBCheckForm(BaseFormAction):
         # that it's required to fill is just a single slot, the first
         # slot that hasn't been filled yet.
 
+        activation = tracker.get_slot("activation")
+
+        if activation == "tb_study_a" and "tracing" in cls.SLOTS:
+            cls.SLOTS.remove("tracing")
+            cls.SLOTS.append("study_tracing")
+
         for slot in cls.SLOTS:
             if not tracker.get_slot(slot):
                 return [slot]
@@ -579,6 +585,12 @@ class TBCheckForm(BaseFormAction):
                 self.from_text(),
             ],
             "tracing": [
+                self.from_entity(entity="number"),
+                self.from_intent(intent="affirm", value="yes"),
+                self.from_intent(intent="deny", value="no"),
+                self.from_text(),
+            ],
+            "study_tracing": [
                 self.from_entity(entity="number"),
                 self.from_intent(intent="affirm", value="yes"),
                 self.from_intent(intent="deny", value="no"),
@@ -650,6 +662,15 @@ class TBCheckForm(BaseFormAction):
     ) -> Dict[Text, Optional[Text]]:
         return self.validate_generic("tracing", dispatcher, value, self.yes_no_data)
 
+    def validate_study_tracing(
+        self,
+        value: Text,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> Dict[Text, Optional[Text]]:
+        return self.validate_generic("study_tracing", dispatcher, value, self.yes_no_data)
+
     def merge(self, data_minor, data):
         data_minor.update(data)
         return data_minor
@@ -669,7 +690,6 @@ class TBCheckForm(BaseFormAction):
             "sweat": self.YES_NO_MAPPING[tracker.get_slot("symptoms_sweat")],
             "weight": self.YES_NO_MAPPING[tracker.get_slot("symptoms_weight")],
             "exposure": self.YES_NO_MAYBE_MAPPING[tracker.get_slot("exposure")],
-            "tracing": self.YES_NO_MAPPING[tracker.get_slot("tracing")],
             "risk": risk,
             "research_consent": self.YES_NO_MAPPING[
                 tracker.get_slot("research_consent")
@@ -688,6 +708,12 @@ class TBCheckForm(BaseFormAction):
             if location != "":
                 data["location"] = location
         activation = tracker.get_slot("activation")
+
+        if activation == "tb_study_a":
+            data["tracing"] = self.YES_NO_MAPPING[tracker.get_slot("study_tracing")]
+        else:
+            data["tracing"] = self.YES_NO_MAPPING[tracker.get_slot("tracing")]
+
         if activation:
             if activation.endswith("_agent"):
                 # Switch the msisdn if the device is shared.

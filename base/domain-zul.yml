@@ -33,6 +33,7 @@ actions:
   - utter_ask_symptoms_weight
   - utter_ask_exposure
   - utter_ask_tracing
+  - utter_ask_study_tracing
   - utter_risk_high
   - utter_risk_moderate
   - utter_risk_low
@@ -105,6 +106,9 @@ slots:
     type: unfeaturized
     auto_fill: false
   tracing:
+    type: unfeaturized
+    auto_fill: false
+  study_tracing:
     type: unfeaturized
     auto_fill: false
   research_consent:
@@ -306,6 +310,15 @@ responses:
         ⬛⬛⬛⬛⬛⬛
 
         Ekugcineni, ngicela uvume ukuthi imininingwane owabelane ngayo *iyiqiniso* ngokwazi kwakho nokuthi unikeza uMnyango Wezempilo Kazwelonke ukuthi uxhumane nawe uma kudingeka?
+
+        *1.* YEBO
+        *2.* CHA
+
+  utter_ask_study_tracing:
+    - text: |
+        ⬛⬛⬛⬛⬛⬛
+        
+        Ekugcineni, ngicela uvume ukuthi imininingwane owabelane ngayo iyiqiniso ngokwazi kwakho.
 
         *1.* YEBO
         *2.* CHA
