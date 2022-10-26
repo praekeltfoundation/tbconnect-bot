@@ -541,7 +541,7 @@ class TBCheckForm(BaseFormAction):
         # slot that hasn't been filled yet.
 
         activation = tracker.get_slot("activation")
-
+        print("Activation: ", activation)
         if activation == "tb_study_a" and "tracing" in cls.SLOTS:
             print("Removing tracing slot and replacing it with study_tracing >>>")
             cls.SLOTS.remove("tracing")
