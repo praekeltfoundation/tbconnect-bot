@@ -498,6 +498,7 @@ class TBCheckForm(BaseFormAction):
         "symptoms_weight",
         "exposure",
         "tracing",
+        "study_tracing",
     ]
 
     GENDER_MAPPING = {
@@ -541,14 +542,15 @@ class TBCheckForm(BaseFormAction):
         # slot that hasn't been filled yet.
 
         activation = tracker.get_slot("activation")
-        print("Activation: ", activation)
-        if activation == "tb_study_a" and "tracing" in cls.SLOTS:
-            print("Removing tracing slot and replacing it with study_tracing >>>")
-            cls.SLOTS.remove("tracing")
-            cls.SLOTS.append("study_tracing")
-        print("Required slots >>>>", cls.SLOTS)
+
         for slot in cls.SLOTS:
-            print("Next slot >>>>", slot)
+            if activation == "tb_study_a":
+                if slot == "tracing":
+                    continue
+            else:
+                if slot == "study_tracing":
+                    continue
+
             if not tracker.get_slot(slot):
                 return [slot]
         return []
