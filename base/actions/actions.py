@@ -304,7 +304,6 @@ class TBCheckProfileForm(BaseFormAction):
             return {"research_consent": None}
         if value == "2":
             dispatcher.utter_message(template="utter_research_consent_no")
-            return {"research_consent": None}
         return self.validate_generic(
             "research_consent", dispatcher, value, {1: "yes", 2: "no", 3: "more"}
         )

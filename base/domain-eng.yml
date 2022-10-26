@@ -407,8 +407,7 @@ responses:
 
   utter_soft_commitment_no:
     - text: |
-        ⚠️ *Remember: it is important to get tested for TB*
-        Get your test soon if you haven't already!
+        ⚠️ Even if you can’t commit now, it is still important to get tested.
       claim: release
 
   utter_ask_soft_commitment_plus:
