@@ -266,8 +266,6 @@ class TBCheckProfileForm(BaseFormAction):
     ) -> Dict[Text, Optional[Text]]:
         result = self.validate_generic("age", dispatcher, value, self.age_data)
 
-        if value == "1" and tracker.get_slot("activation") == "tb_study_a":
-            dispatcher.utter_message(template="utter_study_minor_error")
         if result.get("age") == "<18":
             result["location"] = "<not collected>"
         return result
