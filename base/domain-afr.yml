@@ -477,43 +477,54 @@ responses:
     - text: |
         💭 *Kan jy my meer van die navorsing vertel?*
         
-        Ons doen 'n studie oor die TB HealthCheck-vraelys. Ons sal jou vra oor jou keuses ten opsigte van die vraelys.
+        Ons is besig met 'n studie oor die TB HealthCheck -instrument. Ons sal jou vra oor 
+        jou keuses met betrekking tot die instrument.
         
-        💭 *Watter inligting sal ek moet verskaf?*
+        💭 *Vir watter inligting sal julle my vra?*
         
-        Ons sal nooit jou naam vra nie, maar kan dalk vra wat jou ID-nommer is sodat ons kan help om jou te verbind met 'n fasiliteit vir toetsing. Jy kan self besluit of jy jou ID-nommer wil gee. Ons sal dit slegs tot jou eie voordeel gebruik.
+        Ons sal nooit jou naam vra nie, maar ons kan jou vra vir persoonlike besonderhede. 
+        Dit is jou keuse om hierdie besonderhede te deel. Ons sal dite inligting gebruik 
+        om ons dienslewering aan jou te probeer verbeter. 
         
-        💭 *Hoekom het ek hierdie SMS ontvang?* 
+        💭 *Waarom het ek hierdie SMS gekry?*
         
-        Die rekenaar het jou gekies uit 'n databasis van die Wes-Kaapse Departement van Gesondheid.
+        Die nasionale en provinsiale departemente van gesondheid moedig mense aan om TBCheck
+        te gebruik om te kyk of hulle 'n TB toets nodig het.
+
 
   utter_research_consent_more_p2:
     - text: |
         💭 *Wat moet ek doen?*
         
-        Ons gaan jou 'n paar vrae vra en dit sal sowat 6 minute van jou tyd neem.
+        Ons sal vir jou 'n paar vrae vra en dit sal ongeveer 6 minute van jou tyd vat. 
         
-        💭 *Wat gebeur met die inligting?*
+        💭 *Wat sal met die inligting gebeur?*
         
-        Ons sal dit veilig berg, soos deur die wet vereis, en dit sal slegs deur navorsers van die Universiteit Stellenbosch en Erasmus Universiteit gebruik word. 
-        
-        Die inligting word sonder jou naam en ID geberg. Ons sal ons bevindings deel met ander navorsers en vaktydskrifte, maar dit sal gebaseer wees op gemiddeldes en totale van al die deelnemers aan die opname.
+        Ons sal dit veilig stoor soos deur die wet vereis, en dit sal slegs deur die 
+        Universiteit van Stellenbosch en die Erasmus Universiteit  se navorsers en die 
+        nasionale en provinsiale departemente van gesondheid gebruik word. Die inligting
+        word gestoor sonder jou naam en persoonlike besonderhede. Ons sal ons bevindings
+        deel met ander navorsers en joernale. Wat ons deel, sal gebaseer wees op gemiddeldes
+        en totale van die volledige groep deelnemers.
 
   utter_research_consent_more_p3:
-    - text: |
-        💭 *Wat as ek halfpad deur die opname wil ophou?*
+    - text: |        
+        💭 *Wat as ek halfpad deur die opname wil stop?*
         
-        Dis OK. Jy kan enige tyd ophou.
+        Dit is ok. Jy kan op enige punt stop.
         
-        💭 *Is daar enige onkoste of risiko vir my?*
+        💭 *Is daar koste of risiko's vir my?*
         
-        Daar is geen onkoste en geen risiko nie. Jou inligting word vertroulik en veilig gehou. Die navorsers kry die antwoorde sonder name en ID-nommers.
+        Daar is geen koste en geen risiko's nie. Jou inligting sal privaat en veilig gehou word.
+        Die navorsers sal die antwoorde sonder name of persoonlike besonderhede ontvang.
         
-        💭 *Wat kan ek doen as ek ongemaklik is hiermee?*
-          
-        As jy enige vrae het oor hierdie uitnodiging, of oor iets twyfel, kontak asseblief vir Ronelle Burger by 0838863016 of rburger@sun.ac.za.
+        💭 *Wat kan ek doen as ek ongelukkig is?*
         
-        TB HealthCheck is goedgekeur deur die Komitee vir Gesondheidsnavorsing-etiek. Jy kan hulle kontak deur 021 938 9677 of 021 938 9819 te skakel.
+        As jy vrae het oor hierdie uitnodiging of oor enige iets twyfel, kontak Ronelle Burger op
+        0838863016 of by rburger@sun.ac.za.
+        TB HealthCheck is goedgekeur deur die Komitee vir Gesondheidsnavorsing Etiek. 
+        Jy kan hulle kontak deur 021 938 9677 of 021 938 9819 te skakel.
+
 
   # claim: revert will ignore the message text, and reevaluate this message using
   # turn automation

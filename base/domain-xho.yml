@@ -474,42 +474,57 @@ responses:
 
   utter_research_consent_more_p1:
     - text: |
-        💭 Ngaba ungandixelela ngakumbi malunga ngophando?
-        Siqhuba isifundo malunga nesixhobo se-TB HealthCheck. Siya kukubuza malunga nokhetho lwakho ngokunxulumene nesixhobo.
+        💭 *Ngaba ungandixelela ngakumbi malunga nophando?*
         
-        💭 Luluphi ulwazi onokuthi undibuze ngalo?
-        Soze sibuze igama lakho, kodwa sinokubuza inombolo yakho ye-ID ukuze sikwazi ukukunxibelelanisa neziko lokuvavanywa. Ukubonelela nge-ID yakho kuxhomekeke ngokupheleleyo kuwe. Singayisebenzisa kuphela ngokwenzuzo yakho.
+        Senza uphando malunga nesixhobo se-TB HealthCheck. Siza kukubuza malunga nokhetho
+        lwakho ngokunxulumene nesixhobo.
         
-        💭 Kutheni ndifumene le-SMS?
-        Siku khethe ngokungacwangciswanga ukusuka kwindawo yedatha eyayisenziwa liSebe lezeMpilo eNtshona Koloni.
+        💭 *Loluphi ulwazi oza kundibuza ngalo?*
+        
+        Asinakuze sikubuze igama lakho, kodwa sinokubuza izazisi zobuqu bakho. 
+        Ukubonelela ngezi zikhombisi kuxhomekeke kuwe ngokupheleleyo. 
+        Siza kuyisebenzisa ukuzama kwaye sinikezele ngenkonzo engcono kuwe. 
+        
+        💭 *Kutheni ndifumana le-Sms?*
+        
+        AmaSebe ezeMpilo kuzwelonke namaphondo akuthaza abemi ukuba bazihlolele i-TB. 
+
 
   utter_research_consent_more_p2:
     - text: |
-        💭 Kufuneka ndenze ntoni?
-        Siza kukubuza imibuzo embalwa kwaye iya kuthatha imizuzu emi-6 yexesha lakho.
+        💭 *Kuza kufuneka ndenze ntoni?*
         
-        💭 Kuya kwenzeka ntoni kulwazi?
-        Siza kuyigcina ngokukhuselekileyo njengoko kufunwa ngumthetho kwaye iya kusetyenziswa kuphela ngabaphandi beYunivesithi yaseStellenbosch kunye nabase-Erasmus Yunivesithi. 
+        Siza kubuza imibuzo embalwa kwaye kuya kuthatha malunga nemizuzu emi-6 yexesha lakho. 
+
+        💭 *Kuya kwenzeka ntoni kulwazi?*
         
-        Olu lwazi lugcinwa ngaphandle kwegama lakho kunye ne-ID. Siza kwabelana ngokonwaba kunye neejenali izinto esizifumanayo, kodwa into esiyifumanayo iya kusekelwa kwi-avareji neetotali zabathathi-nxaxheba bophando abapheleleyo abakwiqela eligcweleyo.
+        Siya kuyigcina ngokukhuselekileyo njengoko kufunwa ngumthetho kwaye iya kusetyenziswa 
+        kuphela ngabaphandi beDyunivesithi yase Stellenbosch kunye ne Yunivesithi yase-Erasmus 
+        kunye neSebe lezeMpilo lesizwe nelephondo. Ulwazi lugcinwe ngaphandle kwegama lakho 
+        kunye neempawu zobuqu. Siza kwabelana nabanye abaphandi kunye neejenali ngezinto 
+        esizifumanayo. Into esabelana ngayo iya kusekelwa kwi-avareji kunye neetotali ezivela 
+        kwiqela elipheleleyo labathathi-nxaxheba bophando.
 
   utter_research_consent_more_p3:
     - text: |
-        💭 *Ndithini ukuba ndifuna ukuyeka phakathi kwisaveyi?*
+        💭 *Kuthekani ukuba ndifuna ukuyeka phakathi kuphando?*
         
-        Oko KULUNGILE. Ungayeka nangeliphi ixesha.
-        
-        💭 *Ngaba zikho iindleko okanye iingozi kum?*
-        
-        Ha hona ditshenyehelo kapa dikotsi. Dintlha tsa hao di tla bolokwa e le lekunutu mme di bolokehile. Bafuputsi ba tla fumana dikarabo ntle le mabitso kapa dinomoro tsa ID.
-        
-        💭 *Ndingenza ntoni ukuba andingonwabanga?*
-        
-        Ukuba unemibuzo okanye amathandabuzo ngesi simemo, nceda uqhagamshelane noRonelle Burger ku-0838863016 okanye ku-rburgery@sun.ac.za. 
-        
-        I-TB Healthcheck ivunyiwe yikomiti yokuziphatha kuPhando kwezeMpilo. Ungaqhagamshelana nabo ngokufowuna 021 938 9677 okanye 021 938 9819.
+        Kulungile. Ungayeka nangaliphi na ixesha. 
 
-# claim: revert will ignore the message text, and reevaluate this message using
+        💭 *Ngaba kukho naziphi na iindleko okanye imingcipheko kum?*
+        
+        Akukho zindleko kwaye akukho mngcipheko. Ulwazi lwakho luya kugcinwa luyimfihlo 
+        kwaye lukhuselekile. 
+        Abaphandi baya kufumana iimpendulo ngaphandle kwamagama okanye iimpawu zomntu 
+
+        💭 *Ndingenza ntoni xa ndingonwabanga?*
+        
+        Ukuba unemibuzo okanye amathandabuzo ngesi simemo, nceda uqhagamshelane noRonelle Burger 
+        kule nombolo 0838863016 okanye ku-rburger@sun.ac.za 
+        I-TB HealthCheck yamkelwe yi-Health Research Ethics Committee. Ungaqhagamshelana nabo 
+        ngokutsalela umnxeba kule nombolo 021 938 9677 okanye 021 938 9819  
+
+  # claim: revert will ignore the message text, and reevaluate this message using
 # turn automation
   utter_exit:
     - text: "Ukuhlolelwa I-TB ungakwenza noba kunini ngokubhala igama *TB*"
