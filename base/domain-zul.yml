@@ -186,9 +186,9 @@ responses:
           
           Ingabe uzimisele ukuba nengxenye? 
           
-          1. YEBO, ngifuna ukuba yingxenye 
-          2. CHA, ngiyabonga
-          3. Ngidinga ulwazi OLWENGEZIWE nge-TB HealthCheck kanye nocwaningo
+          *1. YEBO*, ngifuna ukuba yingxenye 
+          *2. CHA*, ngiyabonga
+          *3. FAQ*, mayelana ne TB HealthCheck kanye nocwaningo
 
   utter_more_terms_doc:
     - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH_WhatsApp_TB_Privacy_Policy_September2021.pdf"
@@ -495,7 +495,7 @@ responses:
 
   utter_research_consent_more_p2:
     - text: |
-        💭 *Yini engizodinga ukuyenza?*
+        💭 *Yini okuzodingeka ngiyenze?*
         
         Sizokubuza imibuzo embalwa futhi kuzothatha imizuzu eyi-6 yesikhathi sakho.
 

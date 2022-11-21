@@ -512,7 +512,7 @@ responses:
 
   utter_research_consent_more_p3:
     - text: |
-        💭 *What if I want to stop halfway through the survey?*
+        💭 *What if I want to stop halfway through?*
         
         That's OK. You can stop at any point. 
         
