@@ -188,7 +188,7 @@ responses:
           
           *1. E*, ke batla ho nka karolo 
           *2. CHE*, kea leboha 
-          *3.* Ke hloka dintlha *TSE DING* ka TB HealthCheck le diphuputso 
+          *3. FAQ*, bakeng sa dintlha tse ding tsa TB HealthCheck le dipatlisiso 
 
   utter_more_terms_doc:
     - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH_WhatsApp_TB_Privacy_Policy_September2021.pdf"
