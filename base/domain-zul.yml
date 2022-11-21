@@ -477,47 +477,56 @@ responses:
 
   utter_research_consent_more_p1:
     - text: |
-        💭 *Ungakwazi ukungitshela kabanzi ngocwaningo?*
+        💭 *Ungangitshela kabanzi ngocwaningo?*
         
-        Senza ucwaningo mayelana nethuluzi le-TB HealthCheck. Sizokubuza mayelana nokukhetha kwakho okuqondene nethuluzi.
+        Siqhuba isifundo ngethuluzi le-TB HealthCheck. Sizokubuza ngezinketho zakho 
+        maqondana nethuluzi.
         
-        💭 *Imiphi imininingwane ozongibuza ngako?*
+        💭 *Yiluphi ulwazi ozongibuza lona?*
         
-        Angeke sibuze igama lakho, kodwa singase sibuze inombolo yakho ye-ID ukuze sikwazi ukukuxhumanisa nesikhungo ukuze uhlolwe. Ukunikeza i-ID yakho kuya ngawe. Sizoyisebenzisela ngenzuzo yakho kuphela.
+        Asoze sikubuze igama lakho, kodwa singakubuza izinhlonzi siqu zakho. 
+        Ukunikeza lezi zinhlonzi siqu kukuwe ngokuphelele. Sizozisebenzisela ukuzama 
+        ukuhlinzeka insiza engcono kuwe.
         
-        💭 *Kungani ngithole le SMS?*
+        💭 *Kungani ngithole le-SMS?*
         
-        Sikukhethe ngokungahleliwe kwi-database ephethwe uMnyango Wezempilo WaseNtshonalanga Kapa.
+        Iminyango kazwelonke neyezifundazwe yezempilo ikhuthaza izakhamizi ukuba 
+        zizihlolele i-TB.
 
   utter_research_consent_more_p2:
     - text: |
         💭 *Yini engizodinga ukuyenza?*
         
-        Sizokubuza imibuzo embalwa futhi kuzothatha cishe imizuzu ewu-6 yesikhathi sakho.
+        Sizokubuza imibuzo embalwa futhi kuzothatha imizuzu eyi-6 yesikhathi sakho.
+
+        💭 *Kuzokwenzekani ngolwazi?*
         
-        💭 *Kuzokwenzekani ngemininingwane?*
-        
-        Sizoyigcina ngokuphepha njengoba kuqoshwe umthethweni futhi izosetshenziswa abacwaningi baseNyuvesi yaseStellenbosch kanye nabaseNyuvesi yase-Erasmus kuphela. 
-        
-        Imininingwane igcinwa ngaphandle kwegama lakho ne-ID. Sizophawula ngalokho esikutholayo nabanye abacwaningi namajenali esiwatholayo, kodwa esiphawula ngakho kuzosuselwa kuma-avareji namathothali asuka eqenjini eligcwele labahlanganyeli benhlolovo.
+        Sizolugcina ngokuphepha njengoba kudingwa ngumthetho futhi luzosetshenziswa kuphela
+        yi-Stellenbosch University kanye nabacwaningi base-Erasmus University kanye neminyango 
+        yezempilo kazwelonke neyezifundazwe. Imininingwane igcinwa ngaphandle kwegama lakho 
+        nezinhlonzi siqu zakho. Sizokwabelana ngalokho esikutholayo nabanye abacwaningi 
+        namaphephabhuku. Esabelana ngakho kuzosuselwa kuma-averages kanye namanani avela 
+        eqenjini eligcwele labahlanganyeli bocwaningo.
 
   utter_research_consent_more_p3:
     - text: |
-        💭 *Kutheni uma ngifuna ukuyeka ngisaphakathi kwenhlolovo?*
+        💭 *Kuthiwani uma ngifuna ukuyeka phakathi kwenhlolovo?*
         
-        Kulungile. Ungayeka noma inini.
-        
-        💭 *Ingabe zikhona izindleko noma ubungozi kimi?*
-        
-        Azikho izindleko futhi azikho izingozi. Imininingwane yakho izogcinwa iyimfihlo futhi iphephile. Abacwaningi bazothola izimpendulo ngaphandle kwamagama noma izinombolo ze-ID.
-        
-        💭 *Ngenzenjani uma ngingajabulanga?*
-        
-        Uma unemibuzo noma ukungabaza ngalesi simemo, sicela uthinte uRonelle Burger ku-0838863016 noma ku-rburger@sun.ac.za. 
-        
-        I-TB HealthCheck igunyazwe yiKomidi Lezimilo Lokucwaninga Ngezempilo. Ungaxhumana nabo ngokushayela u-021 938 9677 noma u-021 938 9819.
+        Kulungile. Ungama nganoma yisiphi isikhathi.
 
-# claim: revert will ignore the message text, and reevaluate this message using
+        💭 *Ngabe kukhona izindleko noma ubungozi kimi?*
+        
+        Azikho izindleko futhi azikho izingozi. Imininingwane yakho izogcinwa iyimfihlo futhi iphephile.
+        Abacwaningi bazothola izimpendulo ngaphandle kwamagama noma okokuhlonza komuntu.
+
+        💭 *Yini engingayenza uma ngingeneme?*
+        
+        Uma unemibuzo noma ungabaza ngalesi simemo, sicela uxhumane noRonelle Burger
+        ku-0838863016 noma ku-rburger@sun.ac.za.
+        I-TB HealthCheck ivunyelwe yiKomidi Lezimiso Zokuziphatha Locwaningo Lwezempilo.
+        Ungaxhumana nabo ngokushayela u-021 938 9677 noma u-021 938 9819.  
+
+  # claim: revert will ignore the message text, and reevaluate this message using
 # turn automation
   utter_exit:
     - text: "Ungayihlola i-TB yakho noma yinini ngokuthayipha igama elithi *TB*."

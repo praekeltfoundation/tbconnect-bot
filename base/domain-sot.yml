@@ -473,43 +473,51 @@ responses:
     - text: |
         💭 *O ka mpolella haholwanyane ka dipatlisiso?*
         
-        Re etsa boithuto mabapi le sesebediswa sa TB HealthCheck. Re tla o botsa ka dikgetho tsa hao mabapi le sesebediswa.
+        Re ntse re etsa boithuto ka sesebediswa sa TB HealthCheck. Re tla o botsa ka
+        dikgetho tsa hao mabapi le sesebediswa.
         
-        💭 *O tla mpotsa dintlha dife?*
+        💭 *Ke dintlha di feng tseo o tla nkopa tsona?*
         
-        Ha ho mohla re tla botsa lebitso la hao, empa re ka kopa nomoro ya hao ya ID e le hore re tle re thuse ka ho o hokahanya le setsi sa ho etsa tlhahlobo. Ho fana ka ID ya hao ho ho wena ka ho feletseng. Re ne re tla e sebedisa molemong wa hao feela.
+        Ha ho mohla re tla botsa lebitso la hao, empa re ka kopa dintlha tsa botho 
+        tse tsebahatsang tsa hao. Ho fana ka dintlha tsena tse tsebahatsang ho ho wena. 
+        Re tla e sebedisa ho leka ho fana ka tshebetso e hantle ho wena.
         
-        💭 *Hobaneng ke fumane SMS ee?*
+        💭 *Hobaneng ke fumane li-sms ee?*
         
-        Re o kgethile ka tshohanyetso ho tswa polokelong ya boitsebiso e tsamaiswang ke Lefapha la Bophelo bo Botle la Western Cape.
+        Makala a Bophelo a naha le a porofense a kgothaletsa baahi ho itlhatlhobela TB.
 
   utter_research_consent_more_p2:
-    - text: |
-        💭 *Ke tla hloka ho etsa eng?*
+    - text: |        
+        💭 *Ke hloka ho etsa eng?*
         
-        Re tla o botsa dipotso tse mmalwa mme ho tla nka metsotso e ka bang 6 ya nako ya hao.
+        Re tla o botsa dipotso tse mmalwa mme ho tla nka metsotso e 6 ya nako ya hao.
         
-        💭 *Ho tla etsahalang ka dintlha tseo?*
+        💭 *Ho tla etsahala jwang ka tlhahisoleseding?*
         
-        Re tla e boloka ka polokeho ho ya kamoo molao o laelang kateng mme e tla sebediswa feela ke bafuputsi ba Junifesithi ya Stellenbosch le Junifesithi ya Erasmus. 
-        
-        Dintlha di bolokilwe di se na lebitso la hao le ID. Re tla arolelana seo re se fumanang le bafuputsi le batlalehi ba bang, empa seo re se arolelanang se tla ipapisa le kakaretso le dipalo-palo tse tswang sehlopheng se felletseng sa ba nkileng karolo diphuputsong.
+        Re tla e boloka e sireletsehile ka moo ho hlokahalang ka molao mme e tla sebediswa 
+        feela ke bafuputsi ba dijunivesithi tsa Stellenbosch le Erasmus mmoho le Lekala la 
+        Bophelo la porofense le naha. Tlhahisoleseding ena e tla bolokwa e sena lebitso le 
+        dintlha tse tsebahatsang tsa motho tsa hao. Re tla arolelana seo re se fumanang le 
+        bafuputsi ba bang le di-journal. Seo re se arolelanang se tla be se ipapisitse ho 
+        dipalo-palo le kakaretso ho tswa ho sehlopha se felletseng sa banka-karolo ba phuputso.        
 
   utter_research_consent_more_p3:
     - text: |
-        💭 *Ho thweng haeba ke batla ho emisa bohareng ba diphuputso?*
+        💭 *Ho thwe'ng haeba ke batla ho emisa bohareng ba dipatlisiso?*
         
-        Ho lokile. O ka emisa neng kapa neng.
+        Hoo ho lokile. O ka emisa ntlheng e feng kapa e feng.
+
+        💭 *Na ho na le ditjeho kapa dikotsi ho nna?*
         
-        💭 *Na ho na le ditshenyehelo kapa dikotsi ho nna?*
+        Ha ho ditjeho le dikotsi. DIntlha tsa hao di tla bolokwa lekunutu ebile di bolokehile.
+        Bafuputsi ba tla amohela dikarabo tse se nang mabitso kapa dintlha tse tsebahatsang motho.
+
+        💭 *Nka etsa eng haeba ke sa thaba?*
         
-        Akukho zindleko kwaye akukho zingozi. Ulwazi lwakho luya kugcinwa bucala kwaye lukhuselekile. Abaphandi baya kufumana iimpendulo ngaphandle kwamagama okanye iinombolo zezazisi.
-        
-        💭 *Nka etsang ha ke sa thaba?*
-        
-        Haeba o na le dipotso kapa dipelaelo ka memo ena, ka kopo ikopanye le Ronelle Burger ho 0838863016 kapa ho rburger@sun.ac.za. 
-        
-        TB HealthCheck e amohetswe ke Komiti ya Boitshwaro ba Dipatlisiso tsa Bophelo bo Botle. O ka ikopanya le bona ka ho letsetsa 021 938 9677 kapa 021 938 9819.
+        Haeba o na le dipotso kapa dipelaelo mabapi le memo ena, ka kopo ikopanye le Ronelle Burger 
+        ho 0838863016 kapa rburger@sun.ac.za.
+        TB HealthCheck e amohetswe ke Komiti ya Boitshwaro Ba Difuputso tsa Bophelo.
+        O ka ikopanya le bona ka ho letsetsa 021 938 9677 kapa 021 938 9819.
 
 # claim: revert will ignore the message text, and reevaluate this message using
 # turn automation
