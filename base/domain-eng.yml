@@ -461,9 +461,9 @@ responses:
 
   utter_study_completed:
     - text: |
-        ⚠️ Unfortunately, you cannot participate in the study more than once.
-        You can still continue with a TB Check but you will not be included
-        in the study.
+        ⚠️ Unfortunately, you cannot participate in the study more than once. 
+        You can still continue with a TB Check, but you will not be included 
+        in the study again.
 
   utter_study_minor_error:
     - text: |
@@ -485,14 +485,14 @@ responses:
         
         💭 *What information will you ask me for?*
         
-        We'll never ask your name, but may ask your for personal identifiers. 
-        Providing these identifiers is completely up to you. We will use it 
-        to try and provide a better service to you. 
+        We'll never ask your name, but may ask you for personal identifiers. 
+        Providing these identifiers is completely up to you. 
+        We will use it to try and provide a better service to you.  
         
         💭 *Why did I get this SMS?*
         
-        The national and provincial Departments of Health are encouraging citizens 
-        to screen themselves for TB.
+        The national and provincial Departments of Health are encouraging 
+        citizens to screen themselves for TB.
 
 
 
@@ -504,11 +504,12 @@ responses:
         
         💭 *What will happen to the information?*
         
-        We will store it safely as required by law and it will only be used by the Stellenbosch 
-        University and Erasmus University researchers and the national and provincial Departments 
-        of Health. We will compare the TBCheck information and survey data with health dept data 
-        on testing and health visits. The information is stored without your name and personal 
-        identifiers. We will share what we find with other researchers and journals. 
+        We will store it safely as required by law and it will only be used by the 
+        Stellenbosch University and Erasmus University researchers and the national and 
+        provincial Departments of Health. We will compare the TBCheck information and survey 
+        data with health dept data on testing and health visits. The information is stored 
+        without your name and personal identifiers. We will share what we find with other 
+        researchers and journals. 
 
   utter_research_consent_more_p3:
     - text: |

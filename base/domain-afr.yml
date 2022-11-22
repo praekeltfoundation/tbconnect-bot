@@ -459,9 +459,9 @@ responses:
 
   utter_study_completed:
     - text: |
-        ⚠️Ongelukkig kan jy nie deelneem aan die studie meer as een keer.
-        Jy kan wel voortgaan met 'n TB Check wat nie by die studie ingesluit 
-        sal word nie.
+        ⚠️ Ongelukkig kan jy nie meer as een keer aan die studie deelneem nie. 
+        Jy kan wel voortgaan met nog 'n TB Check wat nie by die studie 
+        ingesluit sal word nie.
 
   utter_study_minor_error:
     - text: |
@@ -471,24 +471,24 @@ responses:
   utter_research_consent_no:
     - text: |
         Geen probleem nie. Jy sal nie ingesluit word in die navorsing nie, 
-        maar jy kan nogsteeds voortgaan om te bepaal of jy 'n TB- toets moet laat doen. 
+        maar jy kan nogsteeds voortgaan om te bepaal of jy 'n TB-toets moet laat doen.  
 
   utter_research_consent_more_p1:
     - text: |
         💭 *Kan jy my meer van die navorsing vertel?*
         
-        Ons is besig met 'n studie oor die TB HealthCheck -instrument. Ons sal jou vra oor 
-        jou keuses met betrekking tot die instrument.
+        Ons is besig met 'n studie oor die TB HealthCheck -instrument. 
+        Ons sal jou vra oor jou keuses.
         
         💭 *Vir watter inligting sal julle my vra?*
         
-        Ons sal nooit jou naam vra nie, maar ons kan jou vra vir persoonlike besonderhede. 
-        Dit is jou keuse om hierdie besonderhede te deel. Ons sal dite inligting gebruik 
+        Ons sal nooit jou naam vra nie, maar ons mag vra vir jou persoonlike besonderhede. 
+        Jy kan besluit of jy hierdie besonderhede wil deel. Ons sal die inligting gebruik 
         om ons dienslewering aan jou te probeer verbeter. 
         
         💭 *Waarom het ek hierdie SMS gekry?*
         
-        Die nasionale en provinsiale departemente van gesondheid moedig mense aan om TBCheck
+        Die nasionale en provinsiale departemente van gesondheid moedig mense aan om TBCheck 
         te gebruik om te kyk of hulle 'n TB toets nodig het.
 
 
@@ -496,34 +496,34 @@ responses:
     - text: |
         💭 *Wat moet ek doen?*
         
-        Ons sal vir jou 'n paar vrae vra en dit sal ongeveer 6 minute van jou tyd vat. 
+        Ons sal vir jou 'n paar vrae vra en dit sal so 6 minute van jou tyd vat.  
         
         💭 *Wat sal met die inligting gebeur?*
         
-        Ons sal dit veilig stoor soos deur die wet vereis, en dit sal slegs deur die 
-        Universiteit van Stellenbosch en die Erasmus Universiteit  se navorsers en die 
-        nasionale en provinsiale departemente van gesondheid gebruik word. Die inligting
-        word gestoor sonder jou naam en persoonlike besonderhede. Ons sal ons bevindings
-        deel met ander navorsers en joernale. Wat ons deel, sal gebaseer wees op gemiddeldes
-        en totale van die volledige groep deelnemers.
+        Ons sal dit veilig stoor soos deur die wet vereis, en dit sal slegs deur 
+        Stellenbosch Universiteit en die Erasmus Universiteit se navorsers en die 
+        nasionale en provinsiale departemente van gesondheid gebruik word. Ons sal 
+        die TBCheck informasie en die opname data vergelyk met gesondheidsdepartement 
+        informasie oor toetse en kliniekbesoeke. Die inligting word gestoor sonder jou 
+        naam en persoonlike besonderhede. Ons sal ons bevindinge deel met ander 
+        navorsers en joernale.
 
   utter_research_consent_more_p3:
     - text: |        
         💭 *Wat as ek halfpad deur die opname wil stop?*
         
-        Dit is ok. Jy kan op enige punt stop.
+        Dit is ok. Jy kan enige tyd stop.
         
         💭 *Is daar koste of risiko's vir my?*
         
         Daar is geen koste en geen risiko's nie. Jou inligting sal privaat en veilig gehou word.
-        Die navorsers sal die antwoorde sonder name of persoonlike besonderhede ontvang.
+        Die navorsers se weergawe van die data sal geen name of persoonlike besonderhede bevat nie.
         
         💭 *Wat kan ek doen as ek ongelukkig is?*
         
-        As jy vrae het oor hierdie uitnodiging of oor enige iets twyfel, kontak Ronelle Burger op
-        0838863016 of by rburger@sun.ac.za.
-        TB HealthCheck is goedgekeur deur die Komitee vir Gesondheidsnavorsing Etiek. 
-        Jy kan hulle kontak deur 021 938 9677 of 021 938 9819 te skakel.
+        As jy vrae het oor hierdie uitnodiging of oor enige iets twyfel, kontak Ronelle Burger op 
+        0838863016 of by rburger@sun.ac.za. TB HealthCheck is goedgekeur deur die Komitee vir 
+        Gesondheidsnavorsing Etiek. Jy kan hulle kontak deur 021 938 9677 of 021 938 9819 te skakel.
 
 
   # claim: revert will ignore the message text, and reevaluate this message using

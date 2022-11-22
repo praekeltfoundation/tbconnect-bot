@@ -463,7 +463,7 @@ responses:
 
   utter_study_completed:
     - text: |
-        ⚠️Ngeshwa, awukwazi ukubamba iqhaza ocwaningweni ngaphezu kokukodwa. 
+        ⚠ ️Ngeshwa, awukwazi ukubamba iqhaza ocwaningweni ngaphezu kokukodwa. 
         Ungaqhubeka nge TB Check kodwa ngeke ufakwe ocwaningweni.
 
   utter_study_minor_error:
@@ -479,52 +479,49 @@ responses:
     - text: |
         💭 *Ungangitshela kabanzi ngocwaningo?*
         
-        Siqhuba isifundo ngethuluzi le-TB HealthCheck. Sizokubuza ngezinketho zakho 
-        maqondana nethuluzi.
+        Siqhuba isifundo ngethuluzi le-TB HealthCheck. Sizokubuza ngezinketho zakho maqondana nethuluzi.
         
         💭 *Yiluphi ulwazi ozongibuza lona?*
         
-        Asoze sikubuze igama lakho, kodwa singakubuza izinhlonzi siqu zakho. 
-        Ukunikeza lezi zinhlonzi siqu kukuwe ngokuphelele. Sizozisebenzisela ukuzama 
-        ukuhlinzeka insiza engcono kuwe.
+        Asisoze sabuza igama lakho, kodwa singakubuza izinhlonzi zakho siqu.Ukunikeza lezi zinhlonzi 
+        siqu kukuwe ngokuphelele. Sizozisebenzisela ukuzama ukuhlinzeka usizo olungcono kuwe.
         
-        💭 *Kungani ngithole le-SMS?*
+        💭 *Kungani ngithole lomyalezo?*
         
-        Iminyango kazwelonke neyezifundazwe yezempilo ikhuthaza izakhamizi ukuba 
-        zizihlolele i-TB.
+        Umnyango kazwelonke kanye nowezifundaze wezempilo ukuthaza izakhamuzi ukuba zizihlolele i-TB.
 
   utter_research_consent_more_p2:
     - text: |
         💭 *Yini okuzodingeka ngiyenze?*
         
-        Sizokubuza imibuzo embalwa futhi kuzothatha imizuzu eyi-6 yesikhathi sakho.
+        Sizodinga imizuzu eyisithupha ukubuza imibuzo embalwa.
 
-        💭 *Kuzokwenzekani ngolwazi?*
+        💭 *Kuzokwenzekani ngolwazi olucokelelwe?*
         
-        Sizolugcina ngokuphepha njengoba kudingwa ngumthetho futhi luzosetshenziswa kuphela
-        yi-Stellenbosch University kanye nabacwaningi base-Erasmus University kanye neminyango 
-        yezempilo kazwelonke neyezifundazwe. Imininingwane igcinwa ngaphandle kwegama lakho 
-        nezinhlonzi siqu zakho. Sizokwabelana ngalokho esikutholayo nabanye abacwaningi 
-        namaphephabhuku. Esabelana ngakho kuzosuselwa kuma-averages kanye namanani avela 
-        eqenjini eligcwele labahlanganyeli bocwaningo.
+        Sizolugcina luphephile njengo kusho komthetho futhi luzosetshenziswa kuphela 
+        yi-Stellenbosch University kanye nabacwaningi base-Erasmus University kanye 
+        nomnyango wezempilo kazwelonke nowezifundazwe.Sizoqhathanisa ulwazi lwe-TBCheck 
+        kanye nedatha yenhlolovo nedatha yomnyango wezempilo ekuhlolweni nokuvakasha 
+        kwezempilo. Imininingwane igcinwa ngaphandle kwegama lakho nezinhlonzi zakho siqu. 
+        Sizokwabelana ngemiphumela esiyitholayo nabanye abacwaningi namaphephabhuku.
 
   utter_research_consent_more_p3:
     - text: |
-        💭 *Kuthiwani uma ngifuna ukuyeka phakathi kwenhlolovo?*
+        💭 *Kuzokwenzakalani uma ngifisa ukuyeka phakathi kwenhlolovo?*
         
-        Kulungile. Ungama nganoma yisiphi isikhathi.
+        Kulungile. Ungayeka nanini na.
 
         💭 *Ngabe kukhona izindleko noma ubungozi kimi?*
         
-        Azikho izindleko futhi azikho izingozi. Imininingwane yakho izogcinwa iyimfihlo futhi iphephile.
+        Azikho izindleko noma ubungozi. Imininingwane yakho izogcinwa iyimfihlo futhi iphephile.
         Abacwaningi bazothola izimpendulo ngaphandle kwamagama noma okokuhlonza komuntu.
 
         💭 *Yini engingayenza uma ngingeneme?*
         
         Uma unemibuzo noma ungabaza ngalesi simemo, sicela uxhumane noRonelle Burger
-        ku-0838863016 noma ku-rburger@sun.ac.za.
-        I-TB HealthCheck ivunyelwe yiKomidi Lezimiso Zokuziphatha Locwaningo Lwezempilo.
-        Ungaxhumana nabo ngokushayela u-021 938 9677 noma u-021 938 9819.  
+        ku-0838863016 noma ku-rburger@sun.ac.za. I-TB HealthCheck ivunyelwe yiKomidi 
+        Lezimiso Zokuziphatha Locwaningo Lwezempilo. Ungaxhumana nabo ngokushayela 
+        u-021 938 9677 noma u-021 938 9819.  
 
   # claim: revert will ignore the message text, and reevaluate this message using
 # turn automation
