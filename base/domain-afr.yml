@@ -459,9 +459,9 @@ responses:
 
   utter_study_completed:
     - text: |
-        ⚠️Ongelukkig kan jy nie meer as een keer aan die studie deelneem nie. 
+        ⚠️ Ongelukkig kan jy nie meer as een keer aan die studie deelneem nie. 
         Jy kan wel voortgaan met nog 'n TB Check wat nie by die studie 
-        ingesluit sal word nie
+        ingesluit sal word nie.
 
   utter_study_minor_error:
     - text: |
