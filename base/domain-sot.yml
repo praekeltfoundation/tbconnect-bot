@@ -473,16 +473,16 @@ responses:
     - text: |
         💭 *O ka mpolella haholwanyane ka dipatlisiso?*
         
-        Re ntse re etsa boithuto ka sesebediswa sa TB HealthCheck. Re tla o botsa ka
-        dikgetho tsa hao mabapi le sesebediswa.
+        Re ntse re etsa boithuto ka sesebediswa sa TB HealthCheck. Re tla o botsa ka dikgetho 
+        tsa hao mabapi le sesebediswa.
         
         💭 *Ke dintlha di feng tseo o tla nkopa tsona?*
         
-        Ha ho mohla re tla botsa lebitso la hao, empa re ka kopa dintlha tsa botho 
-        tse tsebahatsang tsa hao. Ho fana ka dintlha tsena tse tsebahatsang ho ho wena. 
-        Re tla e sebedisa ho leka ho fana ka tshebetso e hantle ho wena.
+        Ha ho mohla re tla botsa lebitso la hao, empa re ka kopa dintlha tsa botho tse 
+        tsebahatsang tsa hao. Ho fana ka dintlha tsena tse tsebahatsang ho ho wena. Re tla 
+        li sebedisa ho leka ho fana ka tshebetso e hantle ho wena.
         
-        💭 *Hobaneng ke fumane li-sms ee?*
+        💭 *Hobaneng ke fumane SMS ee?*
         
         Makala a Bophelo a naha le a porofense a kgothaletsa baahi ho itlhatlhobela TB.
 
@@ -490,20 +490,20 @@ responses:
     - text: |        
         💭 *Ke hloka ho etsa eng?*
         
-        Re tla o botsa dipotso tse mmalwa mme ho tla nka metsotso e 6 ya nako ya hao.
+        Re tla o botsa dipotso tse mmalwa mme ho tla nka metsotso e ka bang 6 ya nako ya hao.
         
         💭 *Ho tla etsahala jwang ka tlhahisoleseding?*
         
-        Re tla e boloka e sireletsehile ka moo ho hlokahalang ka molao mme e tla sebediswa 
-        feela ke bafuputsi ba dijunivesithi tsa Stellenbosch le Erasmus mmoho le Lekala la 
-        Bophelo la porofense le naha. Tlhahisoleseding ena e tla bolokwa e sena lebitso le 
-        dintlha tse tsebahatsang tsa motho tsa hao. Re tla arolelana seo re se fumanang le 
-        bafuputsi ba bang le di-journal. Seo re se arolelanang se tla be se ipapisitse ho 
-        dipalo-palo le kakaretso ho tswa ho sehlopha se felletseng sa banka-karolo ba phuputso.        
+        Re tla e boloka e sireletsehile ka moo ho hlokahalang ka molao mme e tla sebediswa feela 
+        ke bafuputsi ba dijunivesithi tsa Stellenbosch le Erasmus mmoho le Lekala la Bophelo la 
+        porofense le naha. Re tla bapisa tlhahisoleseding ea TBCheck le lipatlisiso tsa lekala la 
+        bophelo litabeng tsa tlhatlhobo le ketelo ea mafapha a bophelo. Tlhahisoleseding ena e tla 
+        bolokwa e sena lebitso le dintlha tse tsebahatsang tsa motho tsa hao. Re tla arolelana seo 
+        re se fumanang le bafuputsi ba bang le di-journal.        
 
   utter_research_consent_more_p3:
     - text: |
-        💭 *Ho thwe'ng haeba ke batla ho emisa bohareng ba dipatlisiso?*
+        💭 *Ho thwe ng haeba ke batla ho emisa bohareng?*
         
         Hoo ho lokile. O ka emisa ntlheng e feng kapa e feng.
 
