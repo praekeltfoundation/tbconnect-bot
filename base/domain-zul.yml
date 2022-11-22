@@ -463,7 +463,7 @@ responses:
 
   utter_study_completed:
     - text: |
-        ⚠️Ngeshwa, awukwazi ukubamba iqhaza ocwaningweni ngaphezu kokukodwa. 
+        ⚠ ️Ngeshwa, awukwazi ukubamba iqhaza ocwaningweni ngaphezu kokukodwa. 
         Ungaqhubeka nge TB Check kodwa ngeke ufakwe ocwaningweni.
 
   utter_study_minor_error:

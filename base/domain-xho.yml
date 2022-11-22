@@ -461,12 +461,12 @@ responses:
 
   utter_study_completed:
     - text: |
-        ⚠️Ngelishwa, awukwazi ukuthatha inxaxheba kuphononongo ngaphezu kwexesha elinye. 
+        ⚠️ Ngelishwa, awukwazi ukuthatha inxaxheba kuphononongo ngaphezu kwexesha elinye. 
         Usenako ukuqhubeka noHlolo lwe-TB kodwa awuzukuqukwa kuphononongo.
 
   utter_study_minor_error:
     - text: |
-        ⚠️Ngelishwa awunakuthatha inxaxheba kuphononongo ukuba ungaphantsi kweminyaka eyi-18. 
+        ⚠️ Ngelishwa awunakuthatha inxaxheba kuphononongo ukuba ungaphantsi kweminyaka eyi-18. 
         Usenako ukuqhubeka nokuhlolwa kwe-TB kodwa awuzukuqukwa kuphononongo.
 
   utter_research_consent_no:
@@ -475,7 +475,7 @@ responses:
 
   utter_research_consent_more_p1:
     - text: |
-        💭  *Ingaba ungandixelela ngakumbi malunga nophando?*
+        💭 *Ingaba ungandixelela ngakumbi malunga nophando?*
         
         Senza uphononongo malunga nesixhobo se-TB HealthCheck. Siza kukubuza malunga nokhetho 
         lwakho ngokunxulumene nesixhobo.
@@ -492,10 +492,12 @@ responses:
 
   utter_research_consent_more_p2:
     - text: |
-        💭Kuza kufuneka ndenze ntoni?
+        💭 *Kuza kufuneka ndenze ntoni?*
+        
         Siza kubuza imibuzo embalwa kwaye kuya kuthatha malunga nemizuzu emi-6 yexesha lakho. 
 
-        💭 Kuza kwenzeka ntoni kulwazi?
+        💭 *Kuza kwenzeka ntoni kulwazi?*
+        
         Siya kuyigcina ngokukhuselekileyo njengoko kufunwa ngumthetho kwaye iya kusetyenziswa 
         kuphela ngabaphandi beDyunivesithi yase Stellenbosch kunye ne Yunivesithi yase-Erasmus 
         kunye neSebe ezeMpilo kuzwelonke nakwiphondo. Sizokuthelekisa ulwazi lwe-TBCheck kunye 
