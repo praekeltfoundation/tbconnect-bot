@@ -309,6 +309,7 @@ class TestTBCheckForm:
         """
         base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
         base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
+        base.actions.actions.config.LANGUAGE = "eng"
 
         request = respx.post(
             "https://healthconnect/v2/tbcheck/",
@@ -364,10 +365,12 @@ class TestTBCheckForm:
             "location": "+03.4-001.2",
             "city_location": "+01.2-003.4",
             "research_consent": False,
+            "language": "eng"
         }
 
         base.actions.actions.config.HEALTHCONNECT_URL = None
         base.actions.actions.config.HEALTHCONNECT_TOKEN = None
+        base.actions.actions.config.LANGUAGE = None
 
     @respx.mock
     @pytest.mark.asyncio
@@ -377,6 +380,7 @@ class TestTBCheckForm:
         """
         base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
         base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
+        base.actions.actions.config.LANGUAGE = "afr"
 
         request = respx.post(
             "https://healthconnect/v2/tbcheck/",
@@ -436,10 +440,12 @@ class TestTBCheckForm:
             "research_consent": False,
             "originating_msisdn": "+default",
             "activation": "foo_agent",
+            "language": "afr",
         }
 
         base.actions.actions.config.HEALTHCONNECT_URL = None
         base.actions.actions.config.HEALTHCONNECT_TOKEN = None
+        base.actions.actions.config.LANGUAGE = None
 
     @respx.mock
     @pytest.mark.asyncio
@@ -449,6 +455,7 @@ class TestTBCheckForm:
         """
         base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
         base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
+        base.actions.actions.config.LANGUAGE = "zul"
 
         request = respx.post(
             "https://healthconnect/v2/tbcheck/",
@@ -501,10 +508,12 @@ class TestTBCheckForm:
             "tracing": True,
             "risk": "moderate",
             "research_consent": True,
+            "language": "zul",
         }
 
         base.actions.actions.config.HEALTHCONNECT_URL = None
         base.actions.actions.config.HEALTHCONNECT_TOKEN = None
+        base.actions.actions.config.LANGUAGE = None
 
     @respx.mock
     @pytest.mark.asyncio
@@ -514,6 +523,7 @@ class TestTBCheckForm:
         """
         base.actions.actions.config.HEALTHCONNECT_URL = "https://healthconnect"
         base.actions.actions.config.HEALTHCONNECT_TOKEN = "token"
+        base.actions.actions.config.LANGUAGE = "afr"
 
         request = respx.post(
             "https://healthconnect/v2/tbcheck/",
@@ -569,10 +579,12 @@ class TestTBCheckForm:
             "location": "+03.4-001.2",
             "city_location": "+01.2-003.4",
             "research_consent": True,
+            "language": "afr",
         }
 
         base.actions.actions.config.HEALTHCONNECT_URL = None
         base.actions.actions.config.HEALTHCONNECT_TOKEN = None
+        base.actions.actions.config.LANGUAGE = None
 
     @respx.mock
     @pytest.mark.asyncio

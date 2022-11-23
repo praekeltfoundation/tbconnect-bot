@@ -699,6 +699,7 @@ class TBCheckForm(BaseFormAction):
             ]
             if research_consent != "more" and research_consent is not None
             else None,
+            "language": config.LANGUAGE,
         }
 
         if self.AGE_MAPPING[tracker.get_slot("age")] != "<18":
