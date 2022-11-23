@@ -400,7 +400,7 @@ responses:
 
   utter_planning_to_test:
     - text: |
-        Rea o thoholetsa ka ho rera ho fumana teko ya hao! 👏
+        U entse hantle ka ho rera ho nka tlhahlobo ea lefuba! 👏
       claim: release
 
   utter_soft_commitment_no:

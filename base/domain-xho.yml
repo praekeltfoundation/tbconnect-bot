@@ -400,7 +400,7 @@ responses:
 
   utter_planning_to_test:
     - text: |
-        Wenze kakuhle ngokucwangcisa ukwenza uvavanyo lwakho! 👏
+        Wenze kakuhle ngokucwangcisa ukufumana uvavanyo lwe-TB! 👏
       claim: release
 
   utter_soft_commitment_no:

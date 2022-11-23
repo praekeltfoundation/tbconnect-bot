@@ -399,7 +399,7 @@ responses:
 
   utter_planning_to_test:
     - text: |
-        Welgedaan dat jy beplan om jou toets te laat doen! 👏
+        Welgedaan omdat jy beplan om te gaan vir 'n TB toets! 👏
       claim: release
 
   utter_soft_commitment_no:

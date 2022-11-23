@@ -403,7 +403,7 @@ responses:
 
   utter_planning_to_test:
     - text: |
-        Wenze kahle ngokuhlosa ukuthola ukuhlolwa kwakho! 👏
+        Wenze kahle ngokukhetha usuku lokuyohlolelwa isifo sofuba (i-TB) 👏
       claim: release
 
   utter_soft_commitment_no:
