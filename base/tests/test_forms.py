@@ -365,7 +365,7 @@ class TestTBCheckForm:
             "location": "+03.4-001.2",
             "city_location": "+01.2-003.4",
             "research_consent": False,
-            "language": "eng"
+            "language": "eng",
         }
 
         base.actions.actions.config.HEALTHCONNECT_URL = None
