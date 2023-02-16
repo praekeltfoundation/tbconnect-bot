@@ -292,16 +292,18 @@ responses:
     - text: |
         ⬛⬛⬛⬛⬛⬜
 
-        Het jy 'n hoë risiko vir TB?
+        Is daar ‘n hoë risiko dat jy TB het?
 
-        Die kanse dat jy TB het is hoog indien:
-        _- Jy saam met iemand woon wat TB het/gehad het die afgelope jaar_
-        _- As jy TB gehad die afgelope 2 jaar_
-        _- As jy MIV-positief is._
+        Daar is ‘n hoë risiko dat jy TB het indien jy:
+        _- Bly saam met iemand wat TB het of gehad het in die laaste jaar_
+        _- As jy self TB gehad het in die laaste twee jaar_
+        _- As jy MIV het._
 
-        *1.* My risiko om TB te hê, is hoog
-        *2.* My risiko om TB te hê, is nie hoog nie
-        *3.* Ek weet nie of my risiko hoog is nie
+        My risiko om TB te hê is
+
+        *1.* Hoog
+        *2.* Laag
+        *3.* Onseker
 
   utter_ask_tracing:
     - text: |
