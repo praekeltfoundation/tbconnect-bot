@@ -1,4 +1,4 @@
-sentry-sdk==0.15.1
+sentry-sdk==1.14.0
 aiocontextvars==0.2.2
 Whoosh==2.7.4
 iso6709==0.1.5
