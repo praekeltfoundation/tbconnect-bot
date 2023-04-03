@@ -477,27 +477,22 @@ responses:
 
   utter_research_consent_more_p1:
     - text: |
-        💭 *Ungangitshela kabanzi ngocwaningo?*
-        
+        💭 *Ungangitshela kabanzi ngocwaningo?*        
         Siqhuba isifundo ngethuluzi le-TB HealthCheck. Sizokubuza ngezinketho zakho maqondana nethuluzi.
         
-        💭 *Yiluphi ulwazi ozongibuza lona?*
-        
+        💭 *Yiluphi ulwazi ozongibuza lona?*        
         Asisoze sabuza igama lakho, kodwa singakubuza izinhlonzi zakho siqu.Ukunikeza lezi zinhlonzi 
         siqu kukuwe ngokuphelele. Sizozisebenzisela ukuzama ukuhlinzeka usizo olungcono kuwe.
         
-        💭 *Kungani ngithole lomyalezo?*
-        
+        💭 *Kungani ngithole lomyalezo?*        
         Umnyango kazwelonke kanye nowezifundaze wezempilo ukuthaza izakhamuzi ukuba zizihlolele i-TB.
 
   utter_research_consent_more_p2:
     - text: |
-        💭 *Yini okuzodingeka ngiyenze?*
-        
+        💭 *Yini okuzodingeka ngiyenze?*        
         Sizodinga imizuzu eyisithupha ukubuza imibuzo embalwa.
 
-        💭 *Kuzokwenzekani ngolwazi olucokelelwe?*
-        
+        💭 *Kuzokwenzekani ngolwazi olucokelelwe?*        
         Sizolugcina luphephile njengo kusho komthetho futhi luzosetshenziswa kuphela 
         yi-Stellenbosch University kanye nabacwaningi base-Erasmus University kanye 
         nomnyango wezempilo kazwelonke nowezifundazwe.Sizoqhathanisa ulwazi lwe-TBCheck 
@@ -507,21 +502,19 @@ responses:
 
   utter_research_consent_more_p3:
     - text: |
-        💭 *Kuzokwenzakalani uma ngifisa ukuyeka phakathi kwenhlolovo?*
-        
+        💭 *Kuzokwenzakalani uma ngifisa ukuyeka phakathi kwenhlolovo?*        
         Kulungile. Ungayeka nanini na.
 
-        💭 *Ngabe kukhona izindleko noma ubungozi kimi?*
-        
+        💭 *Ngabe kukhona izindleko noma ubungozi kimi?*        
         Azikho izindleko noma ubungozi. Imininingwane yakho izogcinwa iyimfihlo futhi iphephile.
         Abacwaningi bazothola izimpendulo ngaphandle kwamagama noma okokuhlonza komuntu.
 
-        💭 *Yini engingayenza uma ngingeneme?*
-        
+        💭 *Yini engingayenza uma ngingeneme?*        
         Uma unemibuzo noma ungabaza ngalesi simemo, sicela uxhumane noRonelle Burger
-        ku-0838863016 noma ku-rburger@sun.ac.za. I-TB HealthCheck ivunyelwe yiKomidi 
-        Lezimiso Zokuziphatha Locwaningo Lwezempilo. Ungaxhumana nabo ngokushayela 
-        u-021 938 9677 noma u-021 938 9819.  
+        ku-0838863016 noma ku-rburger@sun.ac.za. 
+        
+        I-TB HealthCheck ivunyelwe yiKomidi Lezimiso Zokuziphatha Locwaningo Lwezempilo. 
+        Ungaxhumana nabo ngokushayela u-021 938 9677 noma u-021 938 9819.  
 
   # claim: revert will ignore the message text, and reevaluate this message using
 # turn automation

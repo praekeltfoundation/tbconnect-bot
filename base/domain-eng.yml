@@ -478,32 +478,25 @@ responses:
 
   utter_research_consent_more_p1:
     - text: |
-        💭 *Can you tell me more about the research?*
-        
+        💭 *Can you tell me more about the research?*        
         We are conducting a study about the TB HealthCheck tool. 
         We will ask you about your choices in relation to the tool.
         
-        💭 *What information will you ask me for?*
-        
+        💭 *What information will you ask me for?*        
         We'll never ask your name, but may ask you for personal identifiers. 
         Providing these identifiers is completely up to you. 
         We will use it to try and provide a better service to you.  
         
-        💭 *Why did I get this SMS?*
-        
+        💭 *Why did I get this SMS?*        
         The national and provincial Departments of Health are encouraging 
         citizens to screen themselves for TB.
 
-
-
   utter_research_consent_more_p2:
     - text: |
-        💭 *What will I need to do?*
-        
+        💭 *What will I need to do?*        
         We will ask you a few questions and it will take about 6 minutes of your time.
         
-        💭 *What will happen to the information?*
-        
+        💭 *What will happen to the information?*        
         We will store it safely as required by law and it will only be used by the 
         Stellenbosch University and Erasmus University researchers and the national and 
         provincial Departments of Health. We will compare the TBCheck information and survey 
@@ -513,19 +506,17 @@ responses:
 
   utter_research_consent_more_p3:
     - text: |
-        💭 *What if I want to stop halfway through?*
-        
+        💭 *What if I want to stop halfway through?*        
         That's OK. You can stop at any point. 
         
-        💭 *Are there any costs or risks to me?*
-        
+        💭 *Are there any costs or risks to me?*        
         There are no costs and no risks. Your information will be kept private and safe. 
         The researchers will receive the answers without names or personal identifiers.
         
-        💭 *What can I do if I am unhappy?*
-        
+        💭 *What can I do if I am unhappy?*        
         If you have questions or doubts about this invitation, please contact Ronelle Burger on 
         0838863016 or at rburger@sun.ac.za.
+        
         TB HealthCheck has been approved by the Health Research Ethics Committee. 
         You can contact them by calling 021 938 9677 or 021 938 9819.
 
