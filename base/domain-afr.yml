@@ -191,7 +191,7 @@ responses:
           *3. FAQ*, vir meer oor TB HealthCheck asook die navorsing daaroor
 
   utter_more_terms_doc:
-    - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH_WhatsApp_TB_Privacy_Policy_September2021.pdf"
+    - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH-ContactNDOH-WhatsApp-Helpline-HealthCheck-FULLPrivacy-Policy-Updated20April2023.pdf"
       text: Bepalings en Voorwaardes
 
   utter_ask_province:
