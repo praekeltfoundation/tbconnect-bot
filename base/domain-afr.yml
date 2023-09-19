@@ -169,8 +169,8 @@ responses:
       - text: |
           Antwoord met een van die VETGEDRUKTE woorde om voort te gaan
 
-          *AANVAAR* ✅ - _om die bepalings en voorwaardes te aanvaar_
-          *LEES* 📄 - _om die bepalings en voorwaardes te lees_
+          *AANVAAR* ✅ - _om die privaatheidsbeleid te aanvaar_
+          *LEES* 📄 - _om die privaatheidsbeleid te lees_
 
           (of Kies KIESLYS 📌 _om terug te gaan na die hoof-kieslys_)
 
@@ -192,7 +192,7 @@ responses:
 
   utter_more_terms_doc:
     - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH-ContactNDOH-WhatsApp-Helpline-HealthCheck-FULLPrivacy-Policy-Updated20April2023.pdf"
-      text: Bepalings en Voorwaardes
+      text: Privaatheidsbeleid
 
   utter_ask_province:
     - text: |

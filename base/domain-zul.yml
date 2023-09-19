@@ -169,8 +169,8 @@ responses:
       - text: |
           Phendula ngegama elilodwa kulawa AGQAMILE ukuze uqhubeke
 
-          *YAMUKELA* ✅ -_ukwamukela imigomo nemibandela_
-          *FUNDA* 📄 - _ukufunda imigomo nemibandela_
+          *YAMUKELA* ✅ -_ukwamukela inqubomgomo yemfihlo_
+          *FUNDA* 📄 - _ukufunda inqubomgomo yemfihlo_
 
           (noma Phendula UHLU 📌 _ukubuyela kuhlu lokuqala_)
 
@@ -192,7 +192,7 @@ responses:
 
   utter_more_terms_doc:
     - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH-ContactNDOH-WhatsApp-Helpline-HealthCheck-FULLPrivacy-Policy-Updated20April2023.pdf"
-      text: Imigomo Nemibandela
+      text: Inqubomgomo Yemfihlo
 
   utter_ask_province:
     - text: |

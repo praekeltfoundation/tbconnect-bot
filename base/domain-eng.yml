@@ -169,8 +169,8 @@ responses:
       - text: |
           Reply with one of the words in BOLD to continue
 
-          *ACCEPT* ✅ - _to accept the terms and conditions_
-          *MORE* 📄 - _to read the terms and conditions_
+          *ACCEPT* ✅ - _to accept the privacy policy_
+          *MORE* 📄 - _to read the privacy policy_
 
           (or Reply MENU 📌 _to return to the main menu_)
 
@@ -192,7 +192,7 @@ responses:
 
   utter_more_terms_doc:
     - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH-ContactNDOH-WhatsApp-Helpline-HealthCheck-FULLPrivacy-Policy-Updated20April2023.pdf"
-      text: Terms and Conditions
+      text: Privacy Policy
 
   utter_ask_province:
     - text: |

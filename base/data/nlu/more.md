@@ -19,3 +19,4 @@
 - lees
 - funda
 - bala
+- privacy policy
