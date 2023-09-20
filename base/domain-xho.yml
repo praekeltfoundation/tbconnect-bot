@@ -169,8 +169,8 @@ responses:
       - text: |
           Phendula ngegama elinye ELINGQINDILILI ukuqhubeka
 
-          *YAMKELA* ✅ -_ ukwamkela imigaqo kunye nemiqathango_
-          *FUNDA* 📄 - _ukufunda imigaqo kunye nemiqathango_
+          *YAMKELA* ✅ -_ ukwamkela umthetho wabucala_
+          *FUNDA* 📄 - _ukufunda umthetho wabucala_
 
           (okanye Phendula IMENYU 📌 _ukubuyela kwimenyu yakuqala_)
 
@@ -192,7 +192,7 @@ responses:
 
   utter_more_terms_doc:
     - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH-ContactNDOH-WhatsApp-Helpline-HealthCheck-FULLPrivacy-Policy-Updated20April2023.pdf"
-      text: Imigaqo kunye Nemiqathango
+      text: Umthetho Wabucala
 
   utter_ask_province:
     - text: |

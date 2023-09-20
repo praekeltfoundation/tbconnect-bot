@@ -169,8 +169,8 @@ responses:
       - text: |
           Araba ka le leng la mantswe a MATENYA ho tswela pele
 
-          *AMOHELA* ✅ - _ho amohela dipallo le dipehelo_
-          *BALA* 📄 - _ho bala dipallo le dipehelo_
+          *AMOHELA* ✅ - _ho amohela leano la lekunutu_
+          *BALA* 📄 - _ho bala leano la lekunutu_
 
           (kapa Araba MENU 📌 _ho kgutlela ho lenaneho la mantlha_)
 
@@ -192,7 +192,7 @@ responses:
 
   utter_more_terms_doc:
     - document: "https://healthcheck-rasa-images.s3.af-south-1.amazonaws.com/NDOH-ContactNDOH-WhatsApp-Helpline-HealthCheck-FULLPrivacy-Policy-Updated20April2023.pdf"
-      text: Dipallo le Dipehelo
+      text: Leano La Lekunutu
 
   utter_ask_province:
     - text: |
