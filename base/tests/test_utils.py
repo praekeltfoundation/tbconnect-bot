@@ -102,4 +102,3 @@ def test_extract_location_lng_lat():
     long, lat = utils.extract_location_long_lat(location)
     assert long == 40.2
     assert lat == -29.3
-
