@@ -38,12 +38,7 @@ actions:
   - utter_risk_moderate
   - utter_risk_low
   - utter_control
-  - utter_health_consequence
-  - utter_planning_prompt
-  - utter_ask_soft_commitment
   - utter_commitment_yes
-  - utter_planning_to_test
-  - utter_soft_commitment_no
   - utter_ask_soft_commitment_plus
   - utter_soft_commitment_plus_no
   - utter_risk_low_unknown_exposure
@@ -53,7 +48,6 @@ actions:
   - utter_do_tb_screening
   - utter_ask_research_consent
   - utter_invalid_mobile_no
-  - utter_ask_clinic_list
   - utter_ask_clinic_visit_day
 
 slots:
@@ -115,9 +109,6 @@ slots:
   research_consent:
     type: unfeaturized
     auto_fill: false
-  soft_commitment:
-    type: unfeaturized
-    auto_fill: false
   soft_commitment_plus:
     type: unfeaturized
     auto_fill: false
@@ -125,16 +116,7 @@ slots:
     type: unfeaturized
   tbcheck_id:
     type: unfeaturized
-  clinic_list:
-    type: unfeaturized
-    auto_fill: false
   clinic_visit_day:
-    type: unfeaturized
-    auto_fill: false
-  nearest_clinic:
-    type: unfeaturized
-    auto_fill: false
-  original_clinic_list:
     type: unfeaturized
     auto_fill: false
 
@@ -347,74 +329,34 @@ responses:
 
         🩸 Visit your local clinic for a free TB test.
 
-  utter_health_consequence:
-    - text: |
-        ⚠ *Your replies to the questions show that you need a TB test this week.* 
-
-        With early diagnosis, TB can be cured. Don’t delay, test today!   
- 
-        🩸 Visit your local clinic for a free TB test.
-        
-
-  utter_planning_prompt:
-    - text: |
-        ⚠ *Your replies to the questions show that you need a TB test this week.*  
-
-        Here are some tips to help you plan:   
-        
-        🟢  Make the time. Your health is a priority! 
-        🟢  Pick the most convenient clinic for your test. Below are the 5 clinics nearest to you.   
-        🟢  Get there early! Clinics are open for TB testing Monday to Friday mornings.
-
-  utter_ask_clinic_list:
-    - text: |
-        Here is a list of clinics that offer TB tests near you.
-
-        *Where will you go?*
-        
-        {nearest_clinic}
-
   utter_ask_clinic_visit_day:
     - text: |
-        *When will you go?*
+        *Do you know which facility you will visit? * 
+        *If not you can look up the facilities in your community using this link:*
+        www.westerncape.gov.za/static/health-facilities/
+         
+        - ℹ️ Get there early! Clinics are open for TB testing Monday to Friday mornings.
         
+        Many people find it helpful to make a plan for when to go and get tested. Plan when you will go and get tested by selecting a day below:
+                
         *1.* MONDAY
         *2.* TUESDAY
         *3.* WEDNESDAY
         *4.* THURSDAY
         *5.* FRIDAY
 
-  utter_ask_soft_commitment:
-    - text: |
-        ⚠️ *Your replies to the questions show that you need a TB test this week.*  
-
-        🩸 Go to your local clinic for a free TB test. 
-        
-        *Do you commit to getting tested?*  
-       
-        *1. YES* 
-        *2. NO*
-
   utter_commitment_yes:
     - text: |
         Well done for committing to your health! 👏
       claim: release
 
-  utter_planning_to_test:
-    - text: |
-        Well done for planning to get your test! 👏
-      claim: release
-
-  utter_soft_commitment_no:
-    - text: |
-        ⚠️ Even if you can’t commit now, it is still important to get tested.
-      claim: release
-
   utter_ask_soft_commitment_plus:
     - text: |
         ⚠️ *Your replies to the questions show that you need a TB test this week.*  
+        
+        With early diagnosis, TB can be cured. Don’t delay, test today!
 
-        🩸 Go to your local clinic for a free TB test. 
+        🩸 Visit your local clinic for a free TB test. 
         📲 You will get R15 airtime if you commit to get tested. Airtime will be sent to you within 1 hour. 
         
         *Do you commit to getting tested?*  
@@ -464,12 +406,6 @@ responses:
         ⚠️ Unfortunately, you cannot participate in the study more than once. 
         You can still continue with a TB Check, but you will not be included 
         in the study again.
-
-  utter_study_minor_error:
-    - text: |
-        ⚠️ Unfortunately you cant participate in the study if you are younger
-        than 18. You can still continue with a TB Check but you will not be 
-        included in the study.
 
   utter_research_consent_no:
     - text: |

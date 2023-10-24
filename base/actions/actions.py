@@ -183,6 +183,8 @@ class TBCheckProfileForm(BaseFormAction):
 
     MINOR_SKIP_SLOTS = ["location", "location_confirm", "research_consent"]
 
+    STUDY_SKIP_SLOTS = ["province", "location", "location_confirm"]
+
     def name(self) -> Text:
         """Unique identifier of the form"""
 
@@ -199,8 +201,20 @@ class TBCheckProfileForm(BaseFormAction):
         # slot that hasn't been filled yet.
         activation = tracker.get_slot("activation")
 
-        if activation != "tb_study_a":
+        if activation:
+            if not activation.startswith("tb_study"):
+                slots.remove("research_consent")
+        else:
             slots.remove("research_consent")
+
+        if (
+            activation == "tb_study_a"
+            or activation == "tb_study_b"
+            or activation == "tb_study_c"
+        ):
+            for slot in cls.STUDY_SKIP_SLOTS:
+                if slot in slots:
+                    slots.remove(slot)
 
         if tracker.get_slot("age") == "<18":
             for slot in cls.MINOR_SKIP_SLOTS:
@@ -541,12 +555,13 @@ class TBCheckForm(BaseFormAction):
         activation = tracker.get_slot("activation")
 
         for slot in cls.SLOTS:
-            if activation == "tb_study_a":
-                if slot == "tracing":
-                    continue
-            else:
-                if slot == "study_tracing":
-                    continue
+            if activation:
+                if activation.startswith("tb_study"):
+                    if slot == "tracing":
+                        continue
+                else:
+                    if slot == "study_tracing":
+                        continue
 
             if not tracker.get_slot(slot):
                 return [slot]
@@ -684,8 +699,12 @@ class TBCheckForm(BaseFormAction):
             "deduplication_id": uuid.uuid4().hex,
             "msisdn": f'+{tracker.sender_id.lstrip("+")}',
             "source": "WhatsApp",
-            "province": f'ZA-{tracker.get_slot("province").upper()}',
-            "city": tracker.get_slot("location"),
+            "province": f'ZA-{tracker.get_slot("province").upper()}'
+            if tracker.get_slot("province") is not None
+            else "",
+            "city": tracker.get_slot("location")
+            if tracker.get_slot("location") is not None
+            else None,
             "age": self.AGE_MAPPING[tracker.get_slot("age")],
             "gender": self.GENDER_MAPPING[tracker.get_slot("gender")],
             "cough": self.YES_NO_MAPPING[tracker.get_slot("symptoms_cough")],
@@ -713,8 +732,11 @@ class TBCheckForm(BaseFormAction):
                 data["location"] = location
         activation = tracker.get_slot("activation")
 
-        if activation == "tb_study_a":
-            data["tracing"] = self.YES_NO_MAPPING[tracker.get_slot("study_tracing")]
+        if activation:
+            if activation.startswith("tb_study"):
+                data["tracing"] = self.YES_NO_MAPPING[tracker.get_slot("study_tracing")]
+            else:
+                data["tracing"] = self.YES_NO_MAPPING[tracker.get_slot("tracing")]
         else:
             data["tracing"] = self.YES_NO_MAPPING[tracker.get_slot("tracing")]
 
@@ -778,72 +800,19 @@ class TBCheckForm(BaseFormAction):
                         consent = json_resp.get("research_consent")
                         activation = tracker.get_slot("activation")
 
-                        if not consent:
-                            templates = utils.get_risk_templates(risk, data, activation)
+                        if activation:
+                            if not consent or (consent and activation == "tb_study_a"):
+                                templates = utils.get_risk_templates(
+                                    risk, data, activation
+                                )
+                            else:
+                                # Get template and user group arm
+                                (
+                                    templates,
+                                    group_arm,
+                                ) = utils.get_display_message_template(json_resp)
                         else:
-                            # Get template and user group arm
-                            templates, group_arm = utils.get_display_message_template(
-                                json_resp
-                            )
-
-                            # Get clinic list for
-                            if group_arm == "planning_prompt":
-                                location = None
-                                try:
-                                    location = json_resp["location"]
-                                except KeyError:
-                                    location = json_resp["city_location"]
-
-                                if location:
-                                    (
-                                        latitude,
-                                        longitude,
-                                    ) = utils.extract_location_long_lat(location, 2)
-
-                                    if longitude and latitude:
-                                        querystring = urlencode(
-                                            {
-                                                "longitude": longitude,
-                                                "latitude": latitude,
-                                            }
-                                        )
-
-                                        clinic_url = urljoin(
-                                            config.HEALTHCONNECT_URL,
-                                            f"/v1/clinic_finder?{querystring}",
-                                        )
-
-                                        nearest_clinic = await client.get(
-                                            clinic_url, headers=headers
-                                        )
-
-                                        if (
-                                            nearest_clinic
-                                            and nearest_clinic.status_code == 200
-                                        ):
-                                            (
-                                                clinic_list,
-                                                original_clinic,
-                                            ) = utils.build_clinic_list(
-                                                nearest_clinic.json()
-                                            )
-
-                                            for template in templates:
-                                                dispatcher.utter_message(
-                                                    template=template
-                                                )
-                                            return [
-                                                SlotSet(
-                                                    "nearest_clinic",
-                                                    clinic_list.strip("\n"),
-                                                ),
-                                                SlotSet(
-                                                    "original_clinic_list",
-                                                    original_clinic,
-                                                ),
-                                                SlotSet("group_arm", group_arm),
-                                                SlotSet("tbcheck_id", tbcheck_id),
-                                            ]
+                            templates = utils.get_risk_templates(risk, data, activation)
 
                         if not utils.is_duplicate_error(resp):
                             resp.raise_for_status()
@@ -853,7 +822,6 @@ class TBCheckForm(BaseFormAction):
                     print(e)
                     if i == config.HTTP_RETRIES - 1:
                         raise e
-
         if group_arm:
             if group_arm.startswith("soft_"):
                 return [
@@ -871,9 +839,9 @@ class TBCheckForm(BaseFormAction):
 
 
 class GroupArmForm(BaseFormAction):
-    SLOTS = ["soft_commitment", "soft_commitment_plus"]
+    SLOTS = ["soft_commitment_plus"]
 
-    CLINIC_SLOTS = ["clinic_list", "clinic_visit_day"]
+    CLINIC_SLOTS = ["clinic_visit_day"]
 
     DAYS_MAPPING = {
         "MONDAY": "mon",
@@ -890,7 +858,7 @@ class GroupArmForm(BaseFormAction):
     def required_slots(cls, tracker: Tracker) -> List[Text]:
         arm = tracker.get_slot("group_arm")
         if arm:
-            if arm == "planning_prompt":
+            if arm == "soft_commit_plus":
                 for slot in cls.CLINIC_SLOTS:
                     if not tracker.get_slot(slot):
                         return [slot]
@@ -902,18 +870,9 @@ class GroupArmForm(BaseFormAction):
 
     def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
         return {
-            "soft_commitment": [
-                self.from_intent(intent="affirm", value="yes"),
-                self.from_intent(intent="deny", value="no"),
-                self.from_text(),
-            ],
             "soft_commitment_plus": [
                 self.from_intent(intent="affirm", value="yes"),
                 self.from_intent(intent="deny", value="no"),
-                self.from_text(),
-            ],
-            "clinic_list": [
-                self.from_entity(entity="number"),
                 self.from_text(),
             ],
             "clinic_visit_day": [
@@ -921,17 +880,6 @@ class GroupArmForm(BaseFormAction):
                 self.from_text(),
             ],
         }
-
-    def validate_soft_commitment(
-        self,
-        value: Text,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[Text, Any],
-    ) -> Dict[Text, Optional[Text]]:
-        return self.validate_generic(
-            "soft_commitment", dispatcher, value, self.yes_no_data
-        )
 
     def validate_soft_commitment_plus(
         self,
@@ -942,21 +890,6 @@ class GroupArmForm(BaseFormAction):
     ) -> Dict[Text, Optional[Text]]:
         return self.validate_generic(
             "soft_commitment_plus", dispatcher, value, self.yes_no_data
-        )
-
-    def validate_clinic_list(
-        self,
-        value: Text,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[Text, Any],
-    ) -> Dict[Text, Optional[Text]]:
-        clinic_list = tracker.get_slot("original_clinic_list")
-        return self.validate_generic(
-            "clinic_list",
-            dispatcher,
-            value,
-            {x + 1: y for x, y in enumerate(clinic_list)},
         )
 
     def validate_clinic_visit_day(
@@ -992,14 +925,12 @@ class GroupArmForm(BaseFormAction):
                     "User-Agent": "rasa/tbconnect-bot",
                 }
 
-                soft_commit = tracker.get_slot("soft_commitment")
                 soft_commit_plus = tracker.get_slot("soft_commitment_plus")
 
                 data = {
-                    "commit_get_tested": soft_commit
-                    if soft_commit is not None
-                    else soft_commit_plus,
-                    "clinic_to_visit": tracker.get_slot("clinic_list"),
+                    "commit_get_tested": soft_commit_plus
+                    if soft_commit_plus is not None
+                    else False,
                     "clinic_visit_day": self.DAYS_MAPPING.get(
                         tracker.get_slot("clinic_visit_day")
                     ),
@@ -1025,14 +956,11 @@ class GroupArmForm(BaseFormAction):
                         if i == config.HTTP_RETRIES - 1:
                             raise e
 
-                if soft_commit == "yes" or soft_commit_plus == "yes":
+                if soft_commit_plus == "yes":
                     dispatcher.utter_message(template="utter_commitment_yes")
-                elif soft_commit == "no":
-                    dispatcher.utter_message(template="utter_soft_commitment_no")
                 elif soft_commit_plus == "no":
                     dispatcher.utter_message(template="utter_soft_commitment_plus_no")
-                elif group_arm == "planning_prompt":
-                    dispatcher.utter_message(template="utter_planning_to_test")
+
         return []
 
 
@@ -1181,9 +1109,12 @@ class StudyRestriction(Action):
         if config.HEALTHCONNECT_URL and config.HEALTHCONNECT_TOKEN:
             activation = tracker.get_slot("activation")
 
-            if activation == "tb_study_a":
+            if (
+                activation == "tb_study_a"
+                or activation == "tb_study_b"
+                or activation == "tb_study_c"
+            ):
                 msisdn = f'+{tracker.sender_id.lstrip("+")}'
-
                 url = urljoin(
                     config.HEALTHCONNECT_URL, f"/v2/healthcheckuserprofile/{msisdn}/"
                 )
@@ -1206,7 +1137,12 @@ class StudyRestriction(Action):
 
                             if resp:
                                 data = resp.json()
-                                if data.get("activation") == "tb_study_a":
+                                activation = data.get("activation")
+                                if (
+                                    activation == "tb_study_a"
+                                    or activation == "tb_study_b"
+                                    or activation == "tb_study_c"
+                                ):
                                     dispatcher.utter_message(
                                         template="utter_study_completed"
                                     )
