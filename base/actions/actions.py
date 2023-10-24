@@ -207,7 +207,11 @@ class TBCheckProfileForm(BaseFormAction):
         else:
             slots.remove("research_consent")
 
-        if activation == "tb_study_a" or activation == "tb_study_b" or activation == "tb_study_c":
+        if (
+            activation == "tb_study_a"
+            or activation == "tb_study_b"
+            or activation == "tb_study_c"
+        ):
             for slot in cls.STUDY_SKIP_SLOTS:
                 if slot in slots:
                     slots.remove(slot)
@@ -695,8 +699,12 @@ class TBCheckForm(BaseFormAction):
             "deduplication_id": uuid.uuid4().hex,
             "msisdn": f'+{tracker.sender_id.lstrip("+")}',
             "source": "WhatsApp",
-            "province": f'ZA-{tracker.get_slot("province").upper()}' if tracker.get_slot("province") is not None else "",
-            "city": tracker.get_slot("location") if tracker.get_slot("location") is not None else None,
+            "province": f'ZA-{tracker.get_slot("province").upper()}'
+            if tracker.get_slot("province") is not None
+            else "",
+            "city": tracker.get_slot("location")
+            if tracker.get_slot("location") is not None
+            else None,
             "age": self.AGE_MAPPING[tracker.get_slot("age")],
             "gender": self.GENDER_MAPPING[tracker.get_slot("gender")],
             "cough": self.YES_NO_MAPPING[tracker.get_slot("symptoms_cough")],
@@ -794,12 +802,15 @@ class TBCheckForm(BaseFormAction):
 
                         if activation:
                             if not consent or (consent and activation == "tb_study_a"):
-                                templates = utils.get_risk_templates(risk, data, activation)
+                                templates = utils.get_risk_templates(
+                                    risk, data, activation
+                                )
                             else:
                                 # Get template and user group arm
-                                templates, group_arm = utils.get_display_message_template(
-                                    json_resp
-                                )
+                                (
+                                    templates,
+                                    group_arm,
+                                ) = utils.get_display_message_template(json_resp)
                         else:
                             templates = utils.get_risk_templates(risk, data, activation)
 
@@ -864,7 +875,6 @@ class GroupArmForm(BaseFormAction):
                 self.from_intent(intent="deny", value="no"),
                 self.from_text(),
             ],
-
             "clinic_visit_day": [
                 self.from_entity(entity="number"),
                 self.from_text(),
@@ -1099,7 +1109,11 @@ class StudyRestriction(Action):
         if config.HEALTHCONNECT_URL and config.HEALTHCONNECT_TOKEN:
             activation = tracker.get_slot("activation")
 
-            if activation == "tb_study_a" or activation == "tb_study_b" or activation == "tb_study_c":
+            if (
+                activation == "tb_study_a"
+                or activation == "tb_study_b"
+                or activation == "tb_study_c"
+            ):
                 msisdn = f'+{tracker.sender_id.lstrip("+")}'
                 url = urljoin(
                     config.HEALTHCONNECT_URL, f"/v2/healthcheckuserprofile/{msisdn}/"
@@ -1124,7 +1138,11 @@ class StudyRestriction(Action):
                             if resp:
                                 data = resp.json()
                                 activation = data.get("activation")
-                                if activation == "tb_study_a" or activation == "tb_study_b" or activation == "tb_study_c":
+                                if (
+                                    activation == "tb_study_a"
+                                    or activation == "tb_study_b"
+                                    or activation == "tb_study_c"
+                                ):
                                     dispatcher.utter_message(
                                         template="utter_study_completed"
                                     )
