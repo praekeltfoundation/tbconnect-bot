@@ -33,7 +33,7 @@ def get_risk_templates(risk: Text, data: Dict[Any, Any], activation=None) -> Lis
 
     templates.append("utter_keywords")
 
-    if risk != "low" and activation != "tb_study_a":
+    if risk != "low" and (activation != "tb_study_a" or activation != "tb_study_b" or activation != "tb_study_c"):
         templates.append("utter_follow_up_request")
 
     return templates
@@ -57,7 +57,7 @@ def get_display_message_template(response):
         if group_arm:
             templates.append(f"utter_{group_arm}")
 
-            if group_arm == "control" or group_arm == "health_consequence":
+            if group_arm == "control":
                 templates.append("utter_keywords")
     return templates, group_arm
 
@@ -70,17 +70,3 @@ def extract_location_long_lat(location, resolution=1):
         return lat, long
     else:
         return None, None
-
-
-def build_clinic_list(nearest_clinic):
-    clinic_list = ""
-    original_clinic = []
-    list_num = 0
-
-    for clinic in nearest_clinic.get("locations"):
-        name = clinic.get("short_name")
-        list_num += 1
-        clinic_list += f"*{str(list_num)}.* {name}\n"
-        original_clinic.append(name)
-
-    return clinic_list, original_clinic

@@ -67,7 +67,7 @@ def test_group_arm_templates():
         "id": 12,
         "profile": {
             "location": "+40.20361+40.20361",
-            "tbconnect_group_arm": "planning_prompt",
+            "tbconnect_group_arm": "soft_commit_plus",
             "research_consent": None,
         },
         "created_by": "test",
@@ -77,6 +77,23 @@ def test_group_arm_templates():
 
     assert templates == ["utter_planning_prompt"]
     assert group_arm == "planning_prompt"
+
+
+def test_control_group_arm_templates():
+    response = {
+        "id": 12,
+        "profile": {
+            "location": None,
+            "tbconnect_group_arm": "control",
+            "research_consent": None,
+        },
+        "created_by": "test",
+        "msisdn": "27856454612",
+    }
+    templates, group_arm = utils.get_display_message_template(response)
+
+    assert templates == ["utter_control"]
+    assert group_arm == "control"
 
 
 def test_extract_location_lng_lat():
