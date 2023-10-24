@@ -75,8 +75,8 @@ def test_group_arm_templates():
     }
     templates, group_arm = utils.get_display_message_template(response)
 
-    assert templates == ["utter_planning_prompt"]
-    assert group_arm == "planning_prompt"
+    assert templates == ["utter_soft_commit_plus"]
+    assert group_arm == "soft_commit_plus"
 
 
 def test_control_group_arm_templates():
@@ -92,7 +92,7 @@ def test_control_group_arm_templates():
     }
     templates, group_arm = utils.get_display_message_template(response)
 
-    assert templates == ["utter_control"]
+    assert templates == ["utter_control", "utter_keywords"]
     assert group_arm == "control"
 
 
