@@ -67,7 +67,7 @@ def test_group_arm_templates():
         "id": 12,
         "profile": {
             "location": "+40.20361+40.20361",
-            "tbconnect_group_arm": "soft_commit_plus",
+            "tbconnect_group_arm": "soft_commitment_plus",
             "research_consent": None,
         },
         "created_by": "test",
@@ -75,8 +75,8 @@ def test_group_arm_templates():
     }
     templates, group_arm = utils.get_display_message_template(response)
 
-    assert templates == ["utter_soft_commit_plus"]
-    assert group_arm == "soft_commit_plus"
+    assert templates == ["utter_soft_commitment_plus"]
+    assert group_arm == "soft_commitment_plus"
 
 
 def test_control_group_arm_templates():
