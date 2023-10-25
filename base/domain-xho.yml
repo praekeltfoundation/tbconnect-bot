@@ -339,6 +339,11 @@ responses:
         *4.* LWESINE
         *5.* LWESIHLANU
 
+  utter_commitment_yes:
+    - text: |
+        Wenze kakuhle ngokuzibophelela ekunakekeleni impilo yakho! 👏
+      claim: release
+
   utter_ask_soft_commitment_plus:
     - text: |
         ⚠️ *Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki.*
