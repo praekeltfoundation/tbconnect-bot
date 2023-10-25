@@ -934,7 +934,7 @@ class GroupArmForm(BaseFormAction):
                     ),
                     "location": tracker.get_slot("location_coords"),
                     "city_location": tracker.get_slot("city_location_coords"),
-                    "activation": tracker.get_slot("activation")
+                    "activation": tracker.get_slot("activation"),
                 }
 
                 if hasattr(httpx, "AsyncClient"):
