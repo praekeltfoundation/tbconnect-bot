@@ -357,6 +357,7 @@ responses:
         With early diagnosis, TB can be cured. Don’t delay, test today!
 
         🩸 Visit your local clinic for a free TB test. 
+        
         📲 You will get R15 airtime if you commit to get tested. Airtime will be sent to you within 1 hour. 
         
         *Do you commit to getting tested?*  
@@ -455,8 +456,6 @@ responses:
         
         TB HealthCheck has been approved by the Health Research Ethics Committee. 
         You can contact them by calling 021 938 9677 or 021 938 9819.
-
-
 
 # claim: revert will ignore the message text, and reevaluate this message using
 # turn automation
