@@ -839,9 +839,7 @@ class TBCheckForm(BaseFormAction):
 
 
 class GroupArmForm(BaseFormAction):
-    SLOTS = ["soft_commitment_plus"]
-
-    CLINIC_SLOTS = ["clinic_visit_day"]
+    SLOTS = ["soft_commitment_plus", "clinic_visit_day"]
 
     DAYS_MAPPING = {
         "MONDAY": "mon",
@@ -858,8 +856,8 @@ class GroupArmForm(BaseFormAction):
     def required_slots(cls, tracker: Tracker) -> List[Text]:
         arm = tracker.get_slot("group_arm")
         if arm:
-            if arm == "soft_commit_plus":
-                for slot in cls.CLINIC_SLOTS:
+            if arm == "soft_commitment_plus":
+                for slot in cls.SLOTS:
                     if not tracker.get_slot(slot):
                         return [slot]
                 return []
@@ -936,6 +934,7 @@ class GroupArmForm(BaseFormAction):
                     ),
                     "location": tracker.get_slot("location_coords"),
                     "city_location": tracker.get_slot("city_location_coords"),
+                    "activation": tracker.get_slot("activation")
                 }
 
                 if hasattr(httpx, "AsyncClient"):
