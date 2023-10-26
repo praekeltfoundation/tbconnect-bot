@@ -331,7 +331,7 @@ responses:
 
   utter_ask_clinic_visit_day:
     - text: |
-        *Uyayazi ukuba uzondwendwela eyiphi indawo? Ungasebenzisa le linki ukukhangela iindawo ezisengingqini: *
+        *Uyayazi ukuba uzondwendwela eyiphi indawo? Ungasebenzisa le linki ukukhangela iindawo ezisengingqini:*
         https://www.westerncape.gov.za/static/health-facilities/
         
         ℹ️ Fika kwangoko! Iiklinikhi zivuliwe ukuze kwenziwe uvavanyo lweTB qho kusasa ngoMvulo ukuya kutsho ngoLwesihlanu. 

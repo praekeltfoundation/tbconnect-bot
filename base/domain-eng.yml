@@ -331,7 +331,7 @@ responses:
 
   utter_ask_clinic_visit_day:
     - text: |
-        *Do you know which facility you will visit? * 
+        *Do you know which facility you will visit?* 
         *If not you can look up the facilities in your community using this link:*
         www.westerncape.gov.za/static/health-facilities/
          

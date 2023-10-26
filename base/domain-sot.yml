@@ -339,7 +339,7 @@ responses:
 
   utter_ask_clinic_visit_day:
     - text: |
-        *O tseba setsha seo o tla se etela? O ka sheba ditsha  motseng wa heno ka linki ena: *
+        *O tseba setsha seo o tla se etela? O ka sheba ditsha  motseng wa heno ka linki ena:*
         www.westerncape.gov.za/static/health-facilities/
         
         ℹ️ Fihla ka nako! Ditleliniki di butswe bakeng sa diteko tsa TB Mantaha ho isa Labohlano hoseng. 
