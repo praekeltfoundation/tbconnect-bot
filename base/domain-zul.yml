@@ -38,12 +38,7 @@ actions:
   - utter_risk_moderate
   - utter_risk_low
   - utter_control
-  - utter_health_consequence
-  - utter_planning_prompt
-  - utter_ask_soft_commitment
   - utter_commitment_yes
-  - utter_planning_to_test
-  - utter_soft_commitment_no
   - utter_ask_soft_commitment_plus
   - utter_soft_commitment_plus_no
   - utter_risk_low_unknown_exposure
@@ -52,7 +47,6 @@ actions:
   - utter_opt_in_yes
   - utter_do_tb_screening
   - utter_ask_research_consent
-  - utter_ask_clinic_list
   - utter_ask_clinic_visit_day
 
 slots:
@@ -124,16 +118,7 @@ slots:
     type: unfeaturized
   tbcheck_id:
     type: unfeaturized
-  clinic_list:
-    type: unfeaturized
-    auto_fill: false
   clinic_visit_day:
-    type: unfeaturized
-    auto_fill: false
-  nearest_clinic:
-    type: unfeaturized
-    auto_fill: false
-  original_clinic_list:
     type: unfeaturized
     auto_fill: false
 
@@ -349,34 +334,14 @@ responses:
 
         🩸 Vakashela umtholampilo wangakini ukuze uyohlola i-TB mahhala.
 
-  utter_health_consequence:
-    - text: |
-        ⚠ *Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki.* 
-
-        Ngokuxilonga kusenesikhathi, i-TB ingelapheka. Mus'ukubambezela, hlola namuhlanje!
-        
-        🩸 Vakashela umtholampilo wangakini ukuze uyohlola i-TB mahhala.
-
-
-  utter_planning_prompt:
-    - text: |
-        ⚠ *Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki.*
-
-        Nawa amathiphu angakusiza ukuthi uhlele:
-        
-        🟢 Yenza isikhathi. Impilo yakho ibalulekile!
-        🟢 Khetha umtholampilo olungele kakhulu ukuhlolwa kwakho. Ngezansi kukhona imitholampilo emihlanu eseduze nawe.
-        🟢 Fika lapho kusenesikhathi! Imitholampilo ivuliwe ukuze uyohlola i-TB ngoMsombuluko kuya ngoLwesihlanu ekuseni.
-
-  utter_ask_clinic_list:
-    - text: |
-        *Uzoya kuphi lapho uhlolwa?* 
-        
-        {nearest_clinic}
-
   utter_ask_clinic_visit_day:
     - text: |
-        *Uzoya nini ukuyohlolwa kwakho?* 
+        *Ingabe uyasazi yisiphi isikhungo ozosivakashela? Ungacinga izikhungo ezikhona ngakini usebenzisa lelinki: * 
+        *www.westerncape.gov.za/static/health-facilities/
+        
+        ℹ️ Fika lapho kusenesikhathi! Imitholampilo ivuliwe ukuhlolelwa i-TB ngoMsombuluko kuya kuLwesihlanu njalo ekuseni.
+        
+        Abantu abaningi bakuthola kuwusizo ukwenza izinhlelo zokuyohlola. Hlela ukuthi uzoya nini uyohlola ngokukhetha usuku ngezansi:
         
         *1.* MSOMBULUKO
         *2.* LWESIBILI
@@ -384,39 +349,19 @@ responses:
         *4.* LWESINE
         *5.* LWESIHLANU
 
-  utter_ask_soft_commitment:
-    - text: |
-        ⚠️ *Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki.*
-
-        🩸 Hamba emtholampilo wangakini uyohlola i-TB mahhala.
-        📲 Uzothola i-airtime ye-R15 uma uzibophezela ukuthi uzohlola. I-airtime izothunyelelwa kuwe phakathi nehora elinye.
-        
-        Ingabe uyazibophezela ukuthi uhlole?
-        
-        *1. YEBO* 
-        *2. CHA*
-
   utter_commitment_yes:
     - text: |
         Wenze kahle ngokubophezela impilo yakho! 👏
-      claim: release
-
-  utter_planning_to_test:
-    - text: |
-        Wenze kahle ngokukhetha usuku lokuyohlolelwa isifo sofuba (i-TB) 👏
-      claim: release
-
-  utter_soft_commitment_no:
-    - text: |
-        ⚠️ Khumbula: uzibophezele ukuhlola i-TB. 
-        Thola ukuhlolwa kwakho ngokushesha uma ungakenzi!
       claim: release
 
   utter_ask_soft_commitment_plus:
     - text: |
         ⚠️ Izimpendulo zakho zemibuzo zibonisa ukuthi udinga ukuhlolwa kwe-TB kuleli viki.
 
+        Ngokuxilonga kusenesikhathi, i-TB ingelapheka. Mus'ukubambezela, hlola namuhlanje!
+
         🩸 Hamba emtholampilo wangakini uyohlola i-TB mahhala.
+        
         📲 Uzothola i-airtime ye-R15 uma uzibophezela ukuthi uzohlola. I-airtime izothunyelelwa kuwe phakathi nehora elinye.
         
         Ingabe uyazibophezela ukuthi uhlole?
@@ -464,11 +409,6 @@ responses:
   utter_study_completed:
     - text: |
         ⚠ ️Ngeshwa, awukwazi ukubamba iqhaza ocwaningweni ngaphezu kokukodwa. 
-        Ungaqhubeka nge TB Check kodwa ngeke ufakwe ocwaningweni.
-
-  utter_study_minor_error:
-    - text: |
-        ⚠️ Ngeshwa awukwazi ukubamba iqhaza ocwaningweni uma ungaphansi kweminyaka engu-18. 
         Ungaqhubeka nge TB Check kodwa ngeke ufakwe ocwaningweni.
 
   utter_research_consent_no:

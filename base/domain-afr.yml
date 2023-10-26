@@ -38,12 +38,7 @@ actions:
   - utter_risk_moderate
   - utter_risk_low
   - utter_control
-  - utter_health_consequence
-  - utter_planning_prompt
-  - utter_ask_soft_commitment
   - utter_commitment_yes
-  - utter_planning_to_test
-  - utter_soft_commitment_no
   - utter_ask_soft_commitment_plus
   - utter_soft_commitment_plus_no
   - utter_risk_low_unknown_exposure
@@ -52,7 +47,6 @@ actions:
   - utter_opt_in_yes
   - utter_do_tb_screening
   - utter_ask_research_consent
-  - utter_ask_clinic_list
   - utter_ask_clinic_visit_day
 
 slots:
@@ -124,16 +118,7 @@ slots:
     type: unfeaturized
   tbcheck_id:
     type: unfeaturized
-  clinic_list:
-    type: unfeaturized
-    auto_fill: false
   clinic_visit_day:
-    type: unfeaturized
-    auto_fill: false
-  nearest_clinic:
-    type: unfeaturized
-    auto_fill: false
-  original_clinic_list:
     type: unfeaturized
     auto_fill: false
 
@@ -357,25 +342,16 @@ responses:
         
         🩸 Besoek jou plaaslike kliniek vir 'n gratis TB-toets.
 
-  utter_planning_prompt:
-    - text: |
-        ⚠ *Jou antwoorde op die vrae dui aan dat jy hierdie week 'n TB-toets moet laat doen.* 
-
-        Hier is 'n paar wenke om jou te help beplan:
-        
-        🟢 Maak tyd. Jou gesondheid is belangrik!
-        🟢 Kies die gerieflikste kliniek vir jou toets. Hieronder is die 5 klinieke naaste aan jou.
-        🟢 Wees vroeg daar! Klinieke is van Maandag- tot Vrydagoggend oop vir TB-toetse.
-
-  utter_ask_clinic_list:
-    - text: |
-        *Waar sal jy gaan vir jou toets?*
-      
-        {nearest_clinic}
-
   utter_ask_clinic_visit_day:
     - text: |
-        *Wanneer sal jy gaan vir jou toets?*
+        *Weet jy watter fasiliteit jy sal besoek? *
+        *Jy kan na fasiliteite in jou gemeenskap soek met hierdie skakel: *
+        www.westerncape.gov.za/static/health-facilities/
+        
+        ℹ️ Sorg dat jy vroeg daar is! Klinieke is Maandag- tot Vrydagoggende oop vir TB-toetsing.
+        
+        Baie mense vind dit nuttig om te beplan wanneer om te gaan om getoets te word. 
+        Beplan wanneer jy wil gaan om getoets te word deur hier onder 'n dag te kies:
 
         *1.* MAANDAG
         *2.* DINSDAG
@@ -383,38 +359,19 @@ responses:
         *4.* DONDERDAG
         *5.* VRYDAG
 
-  utter_ask_soft_commitment:
-    - text: |
-        ⚠️ *Jou antwoorde op die vrae dui aan dat jy hierdie week 'n TB-toets moet laat doen.* 
-
-        🩸 Gaan na jou plaaslike kliniek vir 'n gratis TB-toets.
-        
-        Neem jy voor om jou te laat toets?
-        
-        *1. JA* 
-        *2. NEE*
-
   utter_commitment_yes:
     - text: |
         Geluk omdat jy jou gesondheid eerste stel! 👏
-      claim: release
-
-  utter_planning_to_test:
-    - text: |
-        Welgedaan omdat jy beplan om te gaan vir 'n TB toets! 👏
-      claim: release
-
-  utter_soft_commitment_no:
-    - text: |
-        ⚠️ *Onthou: dit is belangrik om vir TB getoets te word*
-        Laat toets jou gou as jy nog nie het nie!
       claim: release
 
   utter_ask_soft_commitment_plus:
     - text: |
         ⚠️ *Jou antwoorde op die vrae dui aan dat jy hierdie week 'n TB-toets moet laat doen.*
 
+        As TB vroeg gediagnoseer word, kan dit genees word. Hoekom wag? Laat toets jou vandag!
+
         🩸 Gaan na jou plaaslike kliniek vir 'n gratis TB-toets.
+        
         📲 Jy sal R15 lugtyd kry as jy onderneem om jou te laat toets. Lugtyd sal binne 1 uur aan jou gestuur word.
         
         Neem jy voor om jou te laat toets? 
@@ -464,11 +421,6 @@ responses:
         ⚠️ Ongelukkig kan jy nie meer as een keer aan die studie deelneem nie. 
         Jy kan wel voortgaan met nog 'n TB Check wat nie by die studie 
         ingesluit sal word nie.
-
-  utter_study_minor_error:
-    - text: |
-        ⚠️ Ongelukkig kan jy nie deelneem aan die studie as jy jonger as 18 is nie.
-        Jy kan wel voortgaan met 'n TB Check wat nie by die studie ingesluit sal word nie.
 
   utter_research_consent_no:
     - text: |

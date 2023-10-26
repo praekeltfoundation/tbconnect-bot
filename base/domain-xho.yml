@@ -38,12 +38,7 @@ actions:
   - utter_risk_moderate
   - utter_risk_low
   - utter_control
-  - utter_health_consequence
-  - utter_planning_prompt
-  - utter_ask_soft_commitment
   - utter_commitment_yes
-  - utter_planning_to_test
-  - utter_soft_commitment_no
   - utter_ask_soft_commitment_plus
   - utter_soft_commitment_plus_no
   - utter_risk_low_unknown_exposure
@@ -52,7 +47,6 @@ actions:
   - utter_opt_in_yes
   - utter_do_tb_screening
   - utter_ask_research_consent
-  - utter_ask_clinic_list
   - utter_ask_clinic_visit_day
 
 slots:
@@ -114,9 +108,6 @@ slots:
   research_consent:
     type: unfeaturized
     auto_fill: false
-  soft_commitment:
-    type: unfeaturized
-    auto_fill: false
   soft_commitment_plus:
     type: unfeaturized
     auto_fill: false
@@ -124,16 +115,7 @@ slots:
     type: unfeaturized
   tbcheck_id:
     type: unfeaturized
-  clinic_list:
-    type: unfeaturized
-    auto_fill: false
   clinic_visit_day:
-    type: unfeaturized
-    auto_fill: false
-  nearest_clinic:
-    type: unfeaturized
-    auto_fill: false
-  original_clinic_list:
     type: unfeaturized
     auto_fill: false
 
@@ -347,33 +329,15 @@ responses:
 
         🩸 Ndwendwela ikliniki yengingqi yakho ukwenza uvavanyo lwe-TB lwamahala.
 
-  utter_health_consequence:
-    - text: |
-        ⚠ *Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki.* 
-
-        Ukufunywanwa ngethuba, i-TB inokunyangeka. Ungalibazisi, vavanya namhlanje!
-        
-        🩸 Ndwendwela ikliniki yengingqi yakho ukwenza uvavanyo lwe-TB lwamahala.
-
-  utter_planning_prompt:
-    - text: |
-        ⚠ *Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki.*
-
-        Nazi ezinye zeengcebiso zokukunceda ucwangcise:
-        
-        🟢 Yenza ixesha. Impilo yakho ibalulekile!
-        🟢 Khetha eyona klinikhi elula kakhulu kuwe ukwenza uvavanyo lwakho. Ngezantsi ziikliniki ezi-5 ezikufutshane kuwe.
-        🟢 Fika kwangexesha! iiKlinikhi zivulwa ukuba ufumane uvavanyo lweTB ngoMvulo ukuya ngoLwesihlanu kusasa.
-
-  utter_ask_clinic_list:
-    - text: |
-        *Uza kuvavanywa phi?* 
-        
-        {nearest_clinic}
-
   utter_ask_clinic_visit_day:
     - text: |
-        *Uza kuvavanywa nini?*
+        *Uyayazi ukuba uzondwendwela eyiphi indawo? Ungasebenzisa le linki ukukhangela iindawo ezisengingqini: *
+        https://www.westerncape.gov.za/static/health-facilities/
+        
+        ℹ️ Fika kwangoko! Iiklinikhi zivuliwe ukuze kwenziwe uvavanyo lweTB qho kusasa ngoMvulo ukuya kutsho ngoLwesihlanu. 
+        
+        Abantu abaninzi bakufumanisa kuluncedo ukwenza isicwangciso sexesha lokuya kuvavanywa. 
+        Cwangcisa ukuba uza kuya nini ukuyovavanywa ngokuthi ukhethe usuku apha ngezantsi:
         
         *1.* MVULO
         *2.* LWESIBINI
@@ -381,40 +345,19 @@ responses:
         *4.* LWESINE
         *5.* LWESIHLANU
 
-  utter_ask_soft_commitment:
-    - text: |
-        ⚠️ *Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki.*
-
-        🩸 Yiya kwiklinikhi yengingqi yakho ukufumana uvavanyo lwamahala lwe-TB.
-        😷 Nceda unxibe imaski ngaphambi kokuba ungene ekliniki.
-        
-        Ingaba uyazibophelela ukuba uzakuvavanya?
-        
-        *1. EWE* 
-        *2. HAYI*
-
   utter_commitment_yes:
     - text: |
         Wenze kakuhle ngokuzibophelela ekunakekeleni impilo yakho! 👏
       claim: release
 
-  utter_planning_to_test:
-    - text: |
-        Wenze kakuhle ngokucwangcisa ukufumana uvavanyo lwe-TB! 👏
-      claim: release
-
-  utter_soft_commitment_no:
-    - text: |
-        ⚠️ *Khumbula: kubalulekile ukuba uvavanyelwe i-TB*
-        Fumana uvavanyo lwakho kungekudala ukuba awukalenzi!
-      claim: release
-
   utter_ask_soft_commitment_plus:
     - text: |
-        ⚠️ *⚠️ Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki.*
+        ⚠️ *Iimpendulo zakho kwimibuzo zibonisa ukuba udinga uvavanyo lwe-TB kule veki.*
+
+        Ukufunywanwa ngethuba, i-TB inokunyangeka. Ungalibazisi, vavanya namhlanje!
 
         🩸 Yiya kwiklinikhi yengingqi yakho ukufumana uvavanyo lwamahala lwe-TB.
-        😷 Nceda unxibe imaski ngaphambi kokuba ungene ekliniki.
+        
         📲 Uya kufumana i-airtime ye-R15 ukuba uyazibophelela ukuba uvavanywe. I-Airtime iya kuthunyelwa kuwe phambi kokudlula kweyure enye.
         
         Ingaba uyazibophelela ukuba uzakuvavanya?
@@ -463,11 +406,6 @@ responses:
     - text: |
         ⚠️ Ngelishwa, awukwazi ukuthatha inxaxheba kuphononongo ngaphezu kwexesha elinye. 
         Usenako ukuqhubeka noHlolo lwe-TB kodwa awuzukuqukwa kuphononongo.
-
-  utter_study_minor_error:
-    - text: |
-        ⚠️ Ngelishwa awunakuthatha inxaxheba kuphononongo ukuba ungaphantsi kweminyaka eyi-18. 
-        Usenako ukuqhubeka nokuhlolwa kwe-TB kodwa awuzukuqukwa kuphononongo.
 
   utter_research_consent_no:
     - text: |

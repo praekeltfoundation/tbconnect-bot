@@ -38,12 +38,7 @@ actions:
   - utter_risk_moderate
   - utter_risk_low
   - utter_control
-  - utter_health_consequence
-  - utter_planning_prompt
-  - utter_ask_soft_commitment
   - utter_commitment_yes
-  - utter_planning_to_test
-  - utter_soft_commitment_no
   - utter_ask_soft_commitment_plus
   - utter_soft_commitment_plus_no
   - utter_risk_low_unknown_exposure
@@ -52,7 +47,6 @@ actions:
   - utter_opt_in_yes
   - utter_do_tb_screening
   - utter_ask_research_consent
-  - utter_ask_clinic_list
   - utter_ask_clinic_visit_day
 
 slots:
@@ -114,9 +108,6 @@ slots:
   research_consent:
     type: unfeaturized
     auto_fill: false
-  soft_commitment:
-    type: unfeaturized
-    auto_fill: false
   soft_commitment_plus:
     type: unfeaturized
     auto_fill: false
@@ -124,16 +115,7 @@ slots:
     type: unfeaturized
   tbcheck_id:
     type: unfeaturized
-  clinic_list:
-    type: unfeaturized
-    auto_fill: false
   clinic_visit_day:
-    type: unfeaturized
-    auto_fill: false
-  nearest_clinic:
-    type: unfeaturized
-    auto_fill: false
-  original_clinic_list:
     type: unfeaturized
     auto_fill: false
 
@@ -355,26 +337,15 @@ responses:
         
         🩸 Etela tleliniki ya heno ho etsa tlhahlobo ya mahala ya LEFUBA.
 
-  utter_planning_prompt:
-    - text: |
-        
-        ⚠ *Dikarabo tsa hao ho dipotso di bontsha hore o hloka tlhahlobo ea LEFUBA bekeng ena.*
-
-        Malebela ke ana a tla o thusa ho rala:
-        
-        🟢  Etsa nako. Bophelo ba hao bo tla pele!
-        🟢  Kgetha tleliniki e loketseng tlhahlobo ya hao. Ka tlase ke ditleliniki tse 5 tse haufi le wena.
-        🟢  Fihla mono kapele! Ditleliniki di butswe bakeng sa tlhahlobo ya LEFUBA hoseng hwa Mantaha ho isa ho Labohlano.
-
-  utter_ask_clinic_list:
-    - text: |
-        *O tla ya hokae bakeng sa tlhahlobo ya hao?* 
-        
-        {nearest_clinic}
-
   utter_ask_clinic_visit_day:
     - text: |
-        *O tla ya tlhatlhobong ya hao neng?*
+        *O tseba setsha seo o tla se etela? O ka sheba ditsha  motseng wa heno ka linki ena: *
+        www.westerncape.gov.za/static/health-facilities/
+        
+        ℹ️ Fihla ka nako! Ditleliniki di butswe bakeng sa diteko tsa TB Mantaha ho isa Labohlano hoseng. 
+        
+        Batho ba bangata ba bona hore ho a thusa ho rala hore na ba ka ya neng bakeng sa diteko. 
+        Rala hore na o tla ya neng bakeng sa diteko ka ho kgetha letsatsi ka tlase mona:
         
         *1.* MANTAHA
         *2.* LABOBELI
@@ -382,38 +353,19 @@ responses:
         *4.* LABONE
         *5.* LABOHLANO
 
-  utter_ask_soft_commitment:
-    - text: |
-        ⚠️ *Dikarabo tsa hao ho dipotso di bontsha hore o hloka tlhahlobo ea LEFUBA bekeng ena.*
-
-        🩸 Eya tleliniking ya heno ho etsa tlhahlobo ya mahala ya LEFUBA.
-        
-        *Na o itlama ho hlahloba?*
-        
-        *1. EE* 
-        *2. TJHE*
-
   utter_commitment_yes:
     - text: |
         O entse hantle ka ho itlamo ka bophelo bo botle ba hao! 👏
       claim: release
 
-  utter_planning_to_test:
-    - text: |
-        U entse hantle ka ho rera ho nka tlhahlobo ea lefuba! 👏
-      claim: release
-
-  utter_soft_commitment_no:
-    - text: |
-        ⚠️ *Hopola: ho bohlokwa ho hlahlobela LEFUBA*
-        Fumana tlhahlobo ya hao kapele haeba ha o so etse jwalo!
-      claim: release
-
   utter_ask_soft_commitment_plus:
     - text: |
         ⚠️ *Dikarabo tsa hao ho dipotso di bontsha hore o hloka tlhahlobo ea LEFUBA bekeng ena.*
+        
+        Ka tlhatlhobo ya kapele, LEFUBA le ka phekoleha. Se ke wa dieha, hlahloba kajeno!
 
         🩸 Eya tleliniking ya heno ho etsa tlhahlobo ya mahala ya LEFUBA.
+        
         📲 O tla fumana airtime ya R15 ha o itlama ho hlahloba. O tla romellwa airtime nakong ya hora e le 1.
         
         Na o itlama ho hlahloba?
@@ -460,10 +412,6 @@ responses:
   utter_study_completed:
     - text: |
         ⚠️ Ka bomalimabe, u ke ke ua nka karolo phuputsong ho feta hang. O ntse o ka tswela pele ka TB CHECK empa o ke ke wa kenyelletswa diphuputsong.
-
-  utter_study_minor_error:
-    - text: |
-        ⚠️ Ka bomadimabe o ke ke wa nka karolo phuputsong haeba o le ka tlase ho dilemo tse 18. O ntse o ka tswela pele ka TB CHECK empa o ke ke wa kenyelletswa diphuputsong.
 
   utter_research_consent_no:
     - text: |
