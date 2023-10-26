@@ -336,7 +336,7 @@ responses:
 
   utter_ask_clinic_visit_day:
     - text: |
-        *Ingabe uyasazi yisiphi isikhungo ozosivakashela? Ungacinga izikhungo ezikhona ngakini usebenzisa lelinki: * 
+        *Ingabe uyasazi yisiphi isikhungo ozosivakashela? Ungacinga izikhungo ezikhona ngakini usebenzisa lelinki:* 
         *www.westerncape.gov.za/static/health-facilities/
         
         ℹ️ Fika lapho kusenesikhathi! Imitholampilo ivuliwe ukuhlolelwa i-TB ngoMsombuluko kuya kuLwesihlanu njalo ekuseni.

@@ -345,7 +345,7 @@ responses:
   utter_ask_clinic_visit_day:
     - text: |
         *Weet jy watter fasiliteit jy sal besoek? *
-        *Jy kan na fasiliteite in jou gemeenskap soek met hierdie skakel: *
+        *Jy kan na fasiliteite in jou gemeenskap soek met hierdie skakel:*
         www.westerncape.gov.za/static/health-facilities/
         
         ℹ️ Sorg dat jy vroeg daar is! Klinieke is Maandag- tot Vrydagoggende oop vir TB-toetsing.
