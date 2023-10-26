@@ -339,7 +339,13 @@ responses:
 
   utter_ask_clinic_visit_day:
     - text: |
-        *O tla ya tlhatlhobong ya hao neng?*
+        *O tseba setsha seo o tla se etela? O ka sheba ditsha  motseng wa heno ka linki ena: *
+        www.westerncape.gov.za/static/health-facilities/
+        
+        ℹ️ Fihla ka nako! Ditleliniki di butswe bakeng sa diteko tsa TB Mantaha ho isa Labohlano hoseng. 
+        
+        Batho ba bangata ba bona hore ho a thusa ho rala hore na ba ka ya neng bakeng sa diteko. 
+        Rala hore na o tla ya neng bakeng sa diteko ka ho kgetha letsatsi ka tlase mona:
         
         *1.* MANTAHA
         *2.* LABOBELI

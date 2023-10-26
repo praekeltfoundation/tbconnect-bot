@@ -336,7 +336,12 @@ responses:
 
   utter_ask_clinic_visit_day:
     - text: |
-        *Uzoya nini ukuyohlolwa kwakho?* 
+        *Ingabe uyasazi yisiphi isikhungo ozosivakashela? Ungacinga izikhungo ezikhona ngakini usebenzisa lelinki: * 
+        *www.westerncape.gov.za/static/health-facilities/
+        
+        ℹ️ Fika lapho kusenesikhathi! Imitholampilo ivuliwe ukuhlolelwa i-TB ngoMsombuluko kuya kuLwesihlanu njalo ekuseni.
+        
+        Abantu abaningi bakuthola kuwusizo ukwenza izinhlelo zokuyohlola. Hlela ukuthi uzoya nini uyohlola ngokukhetha usuku ngezansi:
         
         *1.* MSOMBULUKO
         *2.* LWESIBILI

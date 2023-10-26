@@ -331,7 +331,13 @@ responses:
 
   utter_ask_clinic_visit_day:
     - text: |
-        *Uza kuvavanywa nini?*
+        *Uyayazi ukuba uzondwendwela eyiphi indawo? Ungasebenzisa le linki ukukhangela iindawo ezisengingqini: *
+        https://www.westerncape.gov.za/static/health-facilities/
+        
+        ℹ️ Fika kwangoko! Iiklinikhi zivuliwe ukuze kwenziwe uvavanyo lweTB qho kusasa ngoMvulo ukuya kutsho ngoLwesihlanu. 
+        
+        Abantu abaninzi bakufumanisa kuluncedo ukwenza isicwangciso sexesha lokuya kuvavanywa. 
+        Cwangcisa ukuba uza kuya nini ukuyovavanywa ngokuthi ukhethe usuku apha ngezantsi:
         
         *1.* MVULO
         *2.* LWESIBINI
