@@ -839,7 +839,7 @@ class TBCheckForm(BaseFormAction):
 
 
 class GroupArmForm(BaseFormAction):
-    SLOTS = ["soft_commitment_plus", "clinic_visit_day"]
+    SLOTS = ["soft_commitment_plus"]
 
     DAYS_MAPPING = {
         "MONDAY": "mon",
@@ -855,6 +855,13 @@ class GroupArmForm(BaseFormAction):
     @classmethod
     def required_slots(cls, tracker: Tracker) -> List[Text]:
         arm = tracker.get_slot("group_arm")
+
+        if (
+            tracker.get_slot("soft_commitment_plus") == "yes"
+            and "clinic_visit_day" not in cls.SLOTS
+        ):
+            cls.SLOTS.append("clinic_visit_day")
+
         if arm:
             if arm == "soft_commitment_plus":
                 for slot in cls.SLOTS:
@@ -886,6 +893,8 @@ class GroupArmForm(BaseFormAction):
         tracker: Tracker,
         domain: Dict[Text, Any],
     ) -> Dict[Text, Optional[Text]]:
+        if value == "2":
+            dispatcher.utter_message(template="utter_soft_commitment_plus_no")
         return self.validate_generic(
             "soft_commitment_plus", dispatcher, value, self.yes_no_data
         )
@@ -957,8 +966,6 @@ class GroupArmForm(BaseFormAction):
 
                 if soft_commit_plus == "yes":
                     dispatcher.utter_message(template="utter_commitment_yes")
-                elif soft_commit_plus == "no":
-                    dispatcher.utter_message(template="utter_soft_commitment_plus_no")
 
         return []
 
