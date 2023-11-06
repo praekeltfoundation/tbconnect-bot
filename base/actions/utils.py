@@ -33,7 +33,7 @@ def get_risk_templates(risk: Text, data: Dict[Any, Any], activation=None) -> Lis
 
     templates.append("utter_keywords")
 
-    if risk != "low" or (
+    if risk != "low" and (
         activation != "tb_study_a"
         or activation != "tb_study_b"
         or activation != "tb_study_c"
