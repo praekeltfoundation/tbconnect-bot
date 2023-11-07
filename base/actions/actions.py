@@ -747,6 +747,11 @@ class TBCheckForm(BaseFormAction):
                 data["msisdn"] = f'+27{tracker.get_slot("mobile_no").lstrip("0")}'
             data["activation"] = activation
 
+        # For tb study defaults it to true to receive follow-up messages
+        if activation:
+            if activation.startswith("tb_study"):
+                data["follow_up_optin"] = True
+
         return data
 
     async def submit(
