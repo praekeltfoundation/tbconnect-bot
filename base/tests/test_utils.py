@@ -61,6 +61,10 @@ def test_risk_template():
     templates = utils.get_risk_templates("high", data)
     assert templates == ["utter_risk_high", "utter_keywords", "utter_follow_up_request"]
 
+    data = {"exposure": "no"}
+    templates = utils.get_risk_templates("low", data, activation="tb_study_a")
+    assert templates == ["utter_risk_low", "utter_keywords"]
+
 
 def test_group_arm_templates():
     response = {
