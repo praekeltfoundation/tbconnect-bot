@@ -871,7 +871,7 @@ class GroupArmForm(BaseFormAction):
     @classmethod
     def required_slots(cls, tracker: Tracker) -> List[Text]:
         arm = tracker.get_slot("group_arm")
-        slots = cls.SLOTS
+        slots = cls.SLOTS.copy()
 
         logging.info("Soft_commit response: ", tracker.get_slot("soft_commitment_plus"))
         logging.info(
