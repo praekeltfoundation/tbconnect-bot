@@ -808,9 +808,14 @@ class TBCheckForm(BaseFormAction):
                         tbcheck_id = json_resp.get("id")
                         consent = json_resp.get("research_consent")
                         activation = tracker.get_slot("activation")
-
+                        group_arm = json_resp.get("profile", {}).get("tbconnect_group_arm")
+                        
                         if activation:
                             if not consent or (consent and activation == "tb_study_a"):
+                                templates = utils.get_risk_templates(
+                                    risk, data, activation
+                                )
+                            elif not group_arm:
                                 templates = utils.get_risk_templates(
                                     risk, data, activation
                                 )
