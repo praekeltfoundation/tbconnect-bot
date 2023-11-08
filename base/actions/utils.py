@@ -33,11 +33,10 @@ def get_risk_templates(risk: Text, data: Dict[Any, Any], activation=None) -> Lis
 
     templates.append("utter_keywords")
 
-    if risk != "low" and (
-        activation != "tb_study_a"
-        or activation != "tb_study_b"
-        or activation != "tb_study_c"
-    ):
+    if activation:
+        if not activation.startswith("tb_study"):
+            templates.append("utter_follow_up_request")
+    elif risk != "low":
         templates.append("utter_follow_up_request")
 
     return templates
