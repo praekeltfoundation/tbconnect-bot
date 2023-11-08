@@ -872,8 +872,11 @@ class GroupArmForm(BaseFormAction):
     def required_slots(cls, tracker: Tracker) -> List[Text]:
         arm = tracker.get_slot("group_arm")
         logging.info("Soft_commit response: ", tracker.get_slot("soft_commitment_plus"))
-        logging.info("Condition: ", tracker.get_slot("soft_commitment_plus") == "yes"
-        and "clinic_visit_day" not in cls.SLOTS)
+        logging.info(
+            "Condition: ",
+            tracker.get_slot("soft_commitment_plus") == "yes"
+            and "clinic_visit_day" not in cls.SLOTS,
+        )
         if (
             tracker.get_slot("soft_commitment_plus") == "yes"
             and "clinic_visit_day" not in cls.SLOTS
