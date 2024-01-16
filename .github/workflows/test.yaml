@@ -11,11 +11,15 @@ jobs:
         lang: ['eng', 'afr', 'xho', 'sot', 'zul']
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v5.0.0
         with:
           python-version: 3.7.15
       - name: Install dependencies
         run: |
+          sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+          wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc 2>/dev/null | sudo apt-key add -
+          sudo apt-get update
+          sudo apt-get -y install postgresql-14
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install -r requirements-dev.txt
